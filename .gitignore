@@ -62,6 +62,10 @@ Aniyomi Extension/
 builds/
 Broken/
 
+# === Local Documentation Files ===
+walkthrough_pornhub.md
+extension_creation_guide.md
+
 # === Nested .git directories (from cloned repos) ===
 anime-extensions-community/.git/
 manga-extensions-source/.git/
