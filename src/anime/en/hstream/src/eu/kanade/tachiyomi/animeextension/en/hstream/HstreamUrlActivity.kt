@@ -5,32 +5,22 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import kotlin.system.exitProcess
 
-/**
- * Springboard that accepts https://hstream.moe/hentai/<item> intents
- * and redirects them to the main Aniyomi process.
- */
 class HstreamUrlActivity : Activity() {
-
-    private val tag = javaClass.simpleName
+    private val tag = HstreamUrlActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val mainIntent = Intent().apply {
+        super.onCreate(savedInstanceState);
+        val intent = Intent().apply {
             action = "eu.kanade.tachiyomi.ANIMESEARCH"
-            putExtra("query", intent.data.toString())
+            putExtra("query", getIntent().data.toString())
             putExtra("filter", packageName)
         }
-
         try {
-            startActivity(mainIntent)
+            startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             Log.e(tag, "Unable to launch activity", e)
         }
-
         finish()
-        exitProcess(0)
     }
 }

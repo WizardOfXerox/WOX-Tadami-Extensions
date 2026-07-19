@@ -1,8 +1,8 @@
 ext {
     extName = 'Hstream'
     extClass = '.Hstream'
-    extVersionCode = 11
+    extVersionCode = 12
     isNsfw = true
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
