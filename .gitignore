@@ -58,7 +58,7 @@ novel_dead_domains.txt
 .agents/
 
 # === Excluded Local Working Directories ===
-Aniyomi Extension/
+aniyomi-extensions/
 builds/
 Broken/
 
