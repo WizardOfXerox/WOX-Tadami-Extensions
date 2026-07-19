@@ -1,6 +1,6 @@
 # WOX Tadami Extensions 🚀
 
-Welcome to the **Wizard Of Xerox Tadami Extensions** repository! This is a self-hosted custom extension repository for **Tadami**, **Aniyomi**, **Mihon**, and compatible forks. It contains compiled extension APKs (Anime & Manga) and their respective source codes.
+Welcome to the **Wizard Of Xerox Tadami Extensions** repository! This is a self-hosted custom extension repository for **Tadami**, **Aniyomi**, **Mihon**, and compatible forks. It contains compiled extension APKs/plugins (Anime, Manga, and Novels) and their respective source codes.
 
 ---
 
@@ -20,16 +20,29 @@ Copy this link:
 https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/index.min.json
 ```
 
+### 3. Novel Plugins Repo (Tadami / LNReader)
+Copy this link:
+```text
+https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/plugins.min.json
+```
+
 ---
 
 ## ⚙️ Steps to Add the Repo In-App
 
-1. Open **Tadami** or **Aniyomi**.
+### For Tadami / Aniyomi / Mihon (Anime & Manga):
+1. Open your app.
 2. Navigate to the **Browse** tab.
 3. Click on **Extensions** and select **Extension repos** (or **Manage repositories** in settings).
 4. Select **Add repository**.
-5. Paste the copied URL and click **Add**.
-6. The extensions from this repository will now appear in your extension list, ready to install or update!
+5. Paste the copied URL (Anime or Manga) and click **Add**.
+
+### For Tadami / LNReader (Novels):
+1. Open your app.
+2. Navigate to **Settings** -> **Plugins** (or **Repos**).
+3. Select **Add repository** (or click the **+** icon).
+4. Paste the copied **Novel Plugins Repo** URL and click **Add**.
+5. Refresh the list to view all available novel plugins.
 
 ---
 
@@ -52,7 +65,7 @@ This repository includes our custom-built, fully-working versions of extensions 
   - `/anime`: Source code for all anime extensions.
   - `/manga`: Source code for all manga extensions.
   - `/novel`: Source code for all novel extensions.
-- **`/apks`**: Prebuilt and custom distribution APKs + JSON indexes.
+- **`/apks`**: Prebuilt and custom distribution APKs/JS files + JSON indexes.
   - `/anime`: Custom and official anime APK files.
   - `/manga`: Official manga APK files.
-  - `/novel`: Novel plugin build folder.
+  - `/novel`: Self-hosted novel `.js` plugins and manifest.
