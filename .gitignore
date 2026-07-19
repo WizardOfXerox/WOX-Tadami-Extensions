@@ -1,5 +1,5 @@
 # ===========================
-# WOX Aniyomi Extensions
+# WOX Tadami Extensions
 # ===========================
 
 # === IDE / Editor ===
@@ -20,7 +20,6 @@ Desktop.ini
 # === Java / Kotlin / Gradle Build Artifacts ===
 .gradle/
 **/build/
-!builds/
 local.properties
 *.class
 *.dex
@@ -41,15 +40,10 @@ __pycache__/
 .venv/
 venv/
 
-# === Downloaded / Extracted / Temp ===
-Aniyomi Extension/download/
-Aniyomi Extension/aniyomi-extensions/lib/unpacker/build/
-
-# === Nested .git directories (from cloned repos) ===
-anime-extensions-community/.git/
-manga-extensions-source/.git/
-novel-extensions/.git/
-manga-extensions/.git/
+# === Large binary files we don't need in git ===
+*.zip
+*.tar.gz
+*.rar
 
 # === Domain filter scan outputs (temp analysis files) ===
 alive_domains.txt
@@ -63,13 +57,16 @@ novel_dead_domains.txt
 .gemini/
 .agents/
 
-# === Large binary files we don't need in git ===
-*.zip
-*.tar.gz
-*.rar
+# === Excluded Local Working Directories ===
+Aniyomi Extension/
+builds/
+Broken/
+
+# === Nested .git directories (from cloned repos) ===
+anime-extensions-community/.git/
+manga-extensions-source/.git/
+novel-extensions/.git/
+manga-extensions/.git/
 
 # === Manga APK repo JAR files (we have source now) ===
 manga-extensions/**/*.jar
-
-# === Broken folder (dead extensions) ===
-Broken/
