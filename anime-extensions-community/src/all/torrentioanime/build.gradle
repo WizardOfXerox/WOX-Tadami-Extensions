@@ -1,0 +1,8 @@
+ext {
+    extName = 'Torrentio Anime (Torrent / Debrid)'
+    extClass = '.Torrentio'
+    extVersionCode = 19
+    isNsfw = false
+}
+
+apply plugin: "kei.plugins.extension.legacy"

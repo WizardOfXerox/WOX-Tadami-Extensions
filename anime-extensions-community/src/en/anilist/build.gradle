@@ -1,0 +1,7 @@
+ext {
+    extName = 'AniList'
+    extClass = '.AniList'
+    extVersionCode = 12
+}
+
+apply plugin: "kei.plugins.extension.legacy"

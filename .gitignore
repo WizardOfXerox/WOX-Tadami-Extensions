@@ -1,0 +1,75 @@
+# ===========================
+# WOX Aniyomi Extensions
+# ===========================
+
+# === IDE / Editor ===
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# === OS files ===
+Thumbs.db
+Desktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# === Java / Kotlin / Gradle Build Artifacts ===
+.gradle/
+**/build/
+!builds/
+local.properties
+*.class
+*.dex
+*.jar
+!lib/**/*.jar
+
+# === Node / NPM (novel extensions) ===
+node_modules/
+.npm
+.yarn
+package-lock.json
+yarn.lock
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# === Downloaded / Extracted / Temp ===
+Aniyomi Extension/download/
+Aniyomi Extension/aniyomi-extensions/lib/unpacker/build/
+
+# === Nested .git directories (from cloned repos) ===
+anime-extensions-community/.git/
+manga-extensions-source/.git/
+novel-extensions/.git/
+manga-extensions/.git/
+
+# === Domain filter scan outputs (temp analysis files) ===
+alive_domains.txt
+dead_domains.txt
+anime_alive_domains.txt
+anime_dead_domains.txt
+novel_alive_domains.txt
+novel_dead_domains.txt
+
+# === Gemini/Agent working files ===
+.gemini/
+.agents/
+
+# === Large binary files we don't need in git ===
+*.zip
+*.tar.gz
+*.rar
+
+# === Manga APK repo JAR files (we have source now) ===
+manga-extensions/**/*.jar
+
+# === Broken folder (dead extensions) ===
+Broken/

@@ -1,0 +1,8 @@
+ext {
+    extName = 'Loklok'
+    extClass = '.Loklok'
+    extVersionCode = 1
+    isNsfw = false
+}
+
+apply from: "$rootDir/common.gradle"

@@ -1,0 +1,10 @@
+Add launcher icons here:
+- mipmap-hdpi/ic_launcher.png
+- mipmap-mdpi/ic_launcher.png
+- mipmap-xhdpi/ic_launcher.png
+- mipmap-xxhdpi/ic_launcher.png
+- mipmap-xxxhdpi/ic_launcher.png
+- web_hi_res_512.png
+
+Generate with: https://as280093.github.io/AndroidAssetStudio/icons-launcher.html
+Or copy from another extension in aniyomi-extensions (e.g. src/all/<other>/res).

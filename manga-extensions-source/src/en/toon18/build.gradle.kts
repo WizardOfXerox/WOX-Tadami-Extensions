@@ -1,0 +1,18 @@
+import io.github.keiyoushi.gradle.api.ContentWarning
+
+plugins {
+    alias(kei.plugins.extension)
+}
+
+keiyoushi {
+    name = "Toon18"
+    versionCode = 0
+    contentWarning = ContentWarning.NSFW // or MIXED, please confirm
+    libVersion = "1.4"
+    theme = "madara"
+
+    source {
+        lang = "en"
+        baseUrl = "https://toon18.to"
+    }
+}
