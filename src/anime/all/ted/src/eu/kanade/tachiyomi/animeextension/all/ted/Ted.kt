@@ -12,8 +12,10 @@ import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Track
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
+import keiyoushi.utils.LazyMutable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonArray
@@ -45,6 +47,10 @@ class Ted : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
     private val preferences: SharedPreferences by lazy {
         Injekt.get<Application>().getSharedPreferences("source_$id", 0x0000)
+    }
+
+    private var playlistExtractor by LazyMutable {
+        PlaylistUtils(client, headers)
     }
 
     // ============================== Popular ==============================
@@ -239,37 +245,42 @@ class Ted : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
     // ============================== Video List ==============================
 
     override fun videoListParse(response: Response): List<Video> {
-        val bodyStr = response.asJsoup().select("script[type=application/json]").toString()
-        val videoUrl = bodyStr.substringAfter(",\\\"file\\\":\\\"", "").substringBefore("\\\"}],", "")
+        val document = response.asJsoup()
+        val nextDataScript = document.selectFirst("script#__NEXT_DATA__")?.data()
 
-        if (videoUrl.isBlank()) {
-            throw Exception("Failed to extract video stream URL for TED Talk")
-        }
+        var hlsUrl = ""
 
-        val subtitleList = mutableListOf<Track>()
-        try {
-            val trackJsonUrl = bodyStr.substringAfter("\\\",\\\"metadata\\\":\\\"", "").substringBefore("\\\"}}", "")
-            if (trackJsonUrl.isNotBlank()) {
-                val trackResponse = client.newCall(GET(trackJsonUrl, headers)).execute()
-                if (trackResponse.isSuccessful) {
-                    val jsonStr = trackResponse.body.string()
-                    val jsonObj = json.decodeFromString<JsonObject>(jsonStr)
-                    jsonObj["subtitles"]?.jsonArray?.forEach { item ->
-                        val subUrl = item.jsonObject["webvtt"]?.jsonPrimitive?.content ?: ""
-                        val subLang = item.jsonObject["name"]?.jsonPrimitive?.content ?: "Subtitle"
-                        if (subUrl.isNotBlank()) {
-                            subtitleList.add(Track(subUrl, subLang))
-                        }
+        if (!nextDataScript.isNullOrBlank()) {
+            try {
+                val root = json.parseToJsonElement(nextDataScript).jsonObject
+                val pageProps = root["props"]?.jsonObject?.get("pageProps")?.jsonObject
+                val videoData = pageProps?.get("videoData")?.jsonObject
+                hlsUrl = videoData?.get("hlsUrl")?.jsonPrimitive?.content ?: ""
+
+                if (hlsUrl.isBlank()) {
+                    val playerDataStr = pageProps?.get("playerData")?.toString() ?: pageProps?.toString() ?: ""
+                    val hlsMatch = Regex("""https?://hls\.ted\.com/[^\s"'\\]+""").find(playerDataStr)
+                    if (hlsMatch != null) {
+                        hlsUrl = hlsMatch.value
                     }
                 }
-                trackResponse.close()
-            }
-        } catch (_: Exception) {}
+            } catch (_: Exception) {}
+        }
 
-        val sortedSubs = sortSubtitles(subtitleList)
-        return listOf(
-            Video(videoUrl, "TED Quality Video", videoUrl, subtitleTracks = sortedSubs)
-        )
+        if (hlsUrl.isBlank()) {
+            val htmlStr = document.outerHtml()
+            val match = Regex("""https?://hls\.ted\.com/[^\s"'<>\\]+""").find(htmlStr)
+                ?: Regex("""https?://[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*""").find(htmlStr)
+            hlsUrl = match?.value ?: ""
+        }
+
+        if (hlsUrl.isBlank()) {
+            throw Exception("Failed to extract TED HLS video stream URL")
+        }
+
+        hlsUrl = hlsUrl.replace("\\u0026", "&").replace("\\", "")
+
+        return playlistExtractor.extractFromHls(hlsUrl, referer = "$baseUrl/")
     }
 
     private fun sortSubtitles(tracks: List<Track>): List<Track> {
