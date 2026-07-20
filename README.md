@@ -6,21 +6,21 @@ Welcome to the **Wizard Of Xerox Tadami Extensions** repository! This is a self-
 
 ## 📺 How to Add to Your App
 
-To install extensions from this repository directly inside your app, copy the appropriate repository URL below and add it to your app's extension repository list:
+To install extensions from this repository directly inside your app, copy the appropriate store/repository URL below:
 
-### 1. Anime Extensions Repo (Tadami / Aniyomi)
+### 1. Anime Extensions Store (Tadami / Aniyomi)
 Copy this link:
 ```text
 https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/index.min.json
 ```
 
-### 2. Manga Extensions Repo (Tadami / Mihon / Tachiyomi)
+### 2. Manga Extensions Store (Tadami / Mihon / Tachiyomi)
 Copy this link:
 ```text
 https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/index.min.json
 ```
 
-### 3. Novel Plugins Repo (Tadami / LNReader)
+### 3. Novel Plugins Store (Tadami / LNReader)
 Copy this link:
 ```text
 https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/plugins.min.json
@@ -28,21 +28,18 @@ https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/
 
 ---
 
-## ⚙️ Steps to Add the Repo In-App
+## ⚙️ Steps to Add in Tadami (v0.56.1+ "Extension Stores")
 
-### For Tadami / Aniyomi / Mihon (Anime & Manga):
-1. Open your app.
-2. Navigate to the **Browse** tab.
-3. Click on **Extensions** and select **Extension repos** (or **Manage repositories** in settings).
-4. Select **Add repository**.
-5. Paste the copied URL (Anime or Manga) and click **Add**.
+1. Open **Tadami** and navigate to the **Browse** -> **Extensions** tab.
+2. Select the media type (**Anime**, **Manga**, or **Novel**) at the top.
+3. Click on **Extension stores** (or click the gear icon/settings to manage stores).
+4. Under the **Custom stores** section, tap **Add**.
+5. Paste the copied URL matching the media type and tap **OK**.
+6. Refresh the list to view and install available extensions.
 
-### For Tadami / LNReader (Novels):
-1. Open your app.
-2. Navigate to **Settings** -> **Plugins** (or **Repos**).
-3. Select **Add repository** (or click the **+** icon).
-4. Paste the copied **Novel Plugins Repo** URL and click **Add**.
-5. Refresh the list to view all available novel plugins.
+### For Older Versions / Aniyomi / Mihon / LNReader:
+* **Anime & Manga:** Go to `Settings -> Browse -> Extension repos` (or `Manage repositories`), tap **Add**, and paste the URL.
+* **Novels:** Go to `Settings -> Plugins` (or `Repos`), tap the **+** icon, paste the URL, and click **Add`.
 
 ---
 
