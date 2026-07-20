@@ -69,7 +69,7 @@ foreach ($apk in $compiledApks) {
             }
             $zip.Dispose()
         } catch {
-            Write-Host "Failed to extract icon for $destName: $_" -ForegroundColor Yellow
+            Write-Host "Failed to extract icon for ${destName}: $_" -ForegroundColor Yellow
         }
     }
     
