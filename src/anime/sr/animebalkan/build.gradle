@@ -6,9 +6,10 @@ ext {
     overrideVersionCode = 8
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:okruextractor"))
     implementation(project(":lib:googledriveextractor"))
 }
+

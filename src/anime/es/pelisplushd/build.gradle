@@ -6,8 +6,9 @@ ext {
     overrideVersionCode = 82
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:cryptoaes'))
 }
+

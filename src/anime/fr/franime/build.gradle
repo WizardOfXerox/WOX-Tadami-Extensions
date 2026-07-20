@@ -4,7 +4,7 @@ ext {
     extVersionCode = 27
     isNsfw = true
 }
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:vidoextractor'))
@@ -13,3 +13,4 @@ dependencies {
     implementation(project(':lib:sibnetextractor'))
     implementation(project(':lib:vidmolyextractor'))
 }
+

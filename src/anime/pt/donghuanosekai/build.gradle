@@ -4,4 +4,5 @@ ext {
     extVersionCode = 4
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
+

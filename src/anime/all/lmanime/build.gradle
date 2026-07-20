@@ -6,10 +6,11 @@ ext {
     overrideVersionCode = 19
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:dailymotionextractor"))
     implementation(project(":lib:mp4uploadextractor"))
     implementation(project(":lib:streamwishextractor"))
 }
+

@@ -4,7 +4,7 @@ ext {
     extVersionCode = 35
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:filemoonextractor"))
@@ -18,3 +18,4 @@ dependencies {
     implementation(project(":lib:vudeoextractor"))
     implementation(project(":lib:youruploadextractor"))
 }
+

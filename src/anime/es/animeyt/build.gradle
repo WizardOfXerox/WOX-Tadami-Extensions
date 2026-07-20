@@ -3,8 +3,9 @@ ext {
     extClass = '.Animeyt'
     extVersionCode = 18
 }
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:fastreamextractor'))
 }
+

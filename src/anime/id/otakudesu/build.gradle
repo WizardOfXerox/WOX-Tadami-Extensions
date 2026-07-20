@@ -4,10 +4,11 @@ ext {
     extVersionCode = 42
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:youruploadextractor"))
     implementation(project(":lib:streamwishextractor"))
     implementation(project(":lib:vidhideextractor"))
 }
+

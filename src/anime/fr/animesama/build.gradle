@@ -4,7 +4,7 @@ ext {
     extVersionCode = 29
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:sibnetextractor'))
@@ -12,3 +12,4 @@ dependencies {
     implementation(project(':lib:sendvidextractor'))
     implementation(project(':lib:vidmolyextractor'))
 }
+

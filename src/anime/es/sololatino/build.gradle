@@ -6,7 +6,7 @@ ext {
     overrideVersionCode = 22
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:streamwishextractor"))
@@ -18,3 +18,4 @@ dependencies {
     implementation(project(":lib:filemoonextractor"))
     implementation(project(':lib:cryptoaes'))
 }
+

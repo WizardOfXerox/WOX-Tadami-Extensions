@@ -5,7 +5,7 @@ ext {
     isNsfw = true
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:burstcloudextractor'))
@@ -17,3 +17,4 @@ dependencies {
     implementation(project(':lib:universalextractor'))
     implementation(project(':lib:vidhideextractor'))
 }
+

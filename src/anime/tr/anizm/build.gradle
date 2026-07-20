@@ -4,7 +4,7 @@ ext {
     extVersionCode = 43
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:playlistutils"))
@@ -20,3 +20,4 @@ dependencies {
     implementation(project(":lib:voeextractor"))
     implementation(project(":lib:youruploadextractor"))
 }
+

@@ -4,7 +4,7 @@ ext {
     extVersionCode = 22
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:streamwishextractor'))
@@ -18,3 +18,4 @@ dependencies {
     implementation(project(":lib:unpacker"))
     implementation(project(":lib:cryptoaes"))
 }
+

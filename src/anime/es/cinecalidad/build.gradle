@@ -4,7 +4,7 @@ ext {
     extVersionCode = 34
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:vudeoextractor'))
@@ -26,3 +26,4 @@ dependencies {
     implementation(project(':lib:goodstreamextractor'))
     implementation(project(':lib:universalextractor'))
 }
+

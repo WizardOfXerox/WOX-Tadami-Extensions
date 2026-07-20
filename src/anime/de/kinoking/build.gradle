@@ -6,9 +6,10 @@ ext {
     overrideVersionCode = 31
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:voeextractor'))
     implementation(project(':lib:doodextractor'))
 }
+

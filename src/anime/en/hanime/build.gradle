@@ -5,7 +5,7 @@ ext {
     isNsfw = true
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 android {
     // Chicory WASM runtime uses MethodHandle.invoke/invokeExact which requires API 26+;
@@ -20,3 +20,4 @@ dependencies {
     //noinspection UseTomlInstead
     implementation("com.dylibso.chicory:runtime:1.7.5")
 }
+

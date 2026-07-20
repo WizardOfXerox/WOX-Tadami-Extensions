@@ -4,7 +4,7 @@ ext {
     extVersionCode = 74
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:mp4uploadextractor'))
@@ -24,3 +24,4 @@ dependencies {
     implementation(project(':lib:amazonextractor'))
     implementation(project(':lib:vidguardextractor'))
 }
+

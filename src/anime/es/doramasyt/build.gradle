@@ -4,7 +4,7 @@ ext {
     extVersionCode = 37
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:uqloadextractor'))
@@ -17,3 +17,4 @@ dependencies {
     implementation(project(':lib:mixdropextractor'))
     implementation(project(':lib:universalextractor'))
 }
+

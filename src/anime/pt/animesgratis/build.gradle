@@ -6,7 +6,7 @@ ext {
     overrideVersionCode = 33
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:bloggerextractor"))
@@ -16,3 +16,4 @@ dependencies {
     implementation(project(":lib:streamtapeextractor"))
     implementation(project(":lib:streamwishextractor"))
 }
+

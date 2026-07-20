@@ -6,7 +6,7 @@ ext {
     overrideVersionCode = 9
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(":lib:okruextractor"))
@@ -14,3 +14,4 @@ dependencies {
     implementation(project(":lib:doodextractor"))
     implementation(project(":lib:vudeoextractor"))
 }
+

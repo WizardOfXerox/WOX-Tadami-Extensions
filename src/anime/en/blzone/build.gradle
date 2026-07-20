@@ -5,7 +5,7 @@ ext {
     isNsfw = true
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:filemoonextractor'))
@@ -13,3 +13,4 @@ dependencies {
     implementation(project(':lib:mixdropextractor'))
     implementation(project(':lib:vidguardextractor'))
 }
+

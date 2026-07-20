@@ -4,7 +4,7 @@ ext {
     extVersionCode = 77
 }
 
-apply plugin: "kei.plugins.extension.legacy"
+apply from: "$rootDir/common.gradle"
 
 dependencies {
     implementation(project(':lib:doodextractor'))
@@ -16,3 +16,4 @@ dependencies {
     implementation(project(':lib:vidbomextractor'))
     implementation(project(':lib:voeextractor'))
 }
+
