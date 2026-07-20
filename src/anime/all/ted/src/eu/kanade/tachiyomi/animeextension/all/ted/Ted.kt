@@ -127,6 +127,66 @@ class Ted : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
         return GET(url.build().toString(), headers)
     }
 
+    // ============================== Parse Overrides ==============================
+
+    private fun parseTalksPage(response: Response): eu.kanade.tachiyomi.animesource.model.AnimesPage {
+        val document = response.asJsoup()
+        val nextDataScript = document.selectFirst("script#__NEXT_DATA__")?.data()
+
+        if (!nextDataScript.isNullOrBlank()) {
+            try {
+                val root = json.parseToJsonElement(nextDataScript).jsonObject
+                val pageProps = root["props"]?.jsonObject?.get("pageProps")?.jsonObject
+                val talksArray = pageProps?.get("talks")?.jsonArray
+                    ?: pageProps?.get("results")?.jsonArray
+
+                if (talksArray != null && talksArray.isNotEmpty()) {
+                    val list = talksArray.mapNotNull { element ->
+                        try {
+                            val obj = element.jsonObject
+                            val slug = obj["slug"]?.jsonPrimitive?.content ?: return@mapNotNull null
+                            val talkTitle = obj["title"]?.jsonPrimitive?.content ?: "TED Talk"
+                            val presenter = obj["presenterDisplayName"]?.jsonPrimitive?.content ?: ""
+                            val fullTitle = if (presenter.isNotBlank()) "$presenter: $talkTitle" else talkTitle
+
+                            val imgUrl = obj["primaryImageSet"]?.jsonArray?.firstOrNull()?.jsonObject?.get("url")?.jsonPrimitive?.content
+                                ?: ""
+
+                            SAnime.create().apply {
+                                setUrlWithoutDomain("/talks/$slug")
+                                title = fullTitle
+                                thumbnail_url = imgUrl
+                            }
+                        } catch (_: Exception) { null }
+                    }
+
+                    val hasNext = list.size >= 24
+                    return eu.kanade.tachiyomi.animesource.model.AnimesPage(list, hasNext)
+                }
+            } catch (_: Exception) {}
+        }
+
+        val items = document.select("a[href^=/talks/]").mapNotNull { el ->
+            val href = el.attr("href")
+            if (!href.contains("/talks/") || href.endsWith("/talks")) return@mapNotNull null
+            val titleText = el.selectFirst("h4, span.font-bold, div")?.text()?.takeIf { it.isNotBlank() }
+                ?: el.text().takeIf { it.isNotBlank() }
+                ?: return@mapNotNull null
+            SAnime.create().apply {
+                setUrlWithoutDomain(href)
+                title = titleText.trim()
+                thumbnail_url = el.selectFirst("img")?.attr("abs:src") ?: ""
+            }
+        }.distinctBy { it.url }
+
+        val hasNext = document.selectFirst("a[rel=next]") != null
+        return eu.kanade.tachiyomi.animesource.model.AnimesPage(items, hasNext)
+    }
+
+    override fun popularAnimeParse(response: Response): eu.kanade.tachiyomi.animesource.model.AnimesPage = parseTalksPage(response)
+    override fun latestUpdatesParse(response: Response): eu.kanade.tachiyomi.animesource.model.AnimesPage = parseTalksPage(response)
+    override fun searchAnimeParse(response: Response): eu.kanade.tachiyomi.animesource.model.AnimesPage = parseTalksPage(response)
+
     // ============================== Details ==============================
 
     override fun animeDetailsParse(document: Document): SAnime {

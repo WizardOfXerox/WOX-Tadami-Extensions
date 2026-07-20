@@ -2,6 +2,7 @@ package eu.kanade.tachiyomi.animeextension.all.twitch
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.preference.PreferenceScreen
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
@@ -11,13 +12,19 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
+import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.util.asJsoup
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import keiyoushi.utils.LazyMutable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import okhttp3.Headers
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -43,6 +50,10 @@ class Twitch : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
         Injekt.get<Application>().getSharedPreferences("source_$id", 0x0000)
     }
 
+    private var playlistExtractor by LazyMutable {
+        PlaylistUtils(client, headers)
+    }
+
     // ============================== Popular ==============================
 
     override fun popularAnimeSelector(): String = "table tbody tr, tbody tr"
@@ -51,19 +62,22 @@ class Twitch : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
     override fun popularAnimeFromElement(element: Element): SAnime {
         return SAnime.create().apply {
-            val link = element.selectFirst("td a[href*=/channels/]") ?: element.selectFirst("td a")
-            val href = link?.attr("href") ?: ""
-            if (href.isNotBlank()) {
-                setUrlWithoutDomain(href)
-            } else {
-                setUrlWithoutDomain("/channels/ranking")
-            }
+            val href = element.selectFirst("a[href^=/]")?.attr("href") ?: ""
+            val channelName = href.removePrefix("/").substringBefore("/").substringBefore("?").trim()
 
-            title = element.selectFirst("td a.item-title")?.text()?.takeIf { it.isNotBlank() }
-                ?: link?.text()?.takeIf { it.isNotBlank() }
+            val nameText = element.selectFirst("td.name, td a, div.name")?.text()?.takeIf { it.isNotBlank() }
+                ?: channelName.takeIf { it.isNotBlank() }
                 ?: "Twitch Streamer"
 
-            val img = element.selectFirst("td img")
+            if (channelName.isNotBlank() && channelName != "channels") {
+                setUrlWithoutDomain("/$channelName")
+                title = channelName
+            } else {
+                setUrlWithoutDomain("/channels/ranking")
+                title = nameText
+            }
+
+            val img = element.selectFirst("td img, img")
             thumbnail_url = img?.attr("abs:src")?.takeIf { it.isNotBlank() }
                 ?: img?.attr("src")
                 ?: ""
@@ -119,34 +133,24 @@ class Twitch : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
         }
     }
 
-    override fun searchAnimeFromElement(element: Element): SAnime = SAnime.create().apply {
-        val link = element.selectFirst("td a.item-title, td a")
-        val href = link?.attr("href") ?: ""
-        if (href.isNotBlank()) {
-            setUrlWithoutDomain(href)
-        } else {
-            setUrlWithoutDomain("/channels/ranking")
-        }
-
-        title = link?.text()?.takeIf { it.isNotBlank() } ?: "Twitch Streamer"
-
-        val img = element.selectFirst("td.image-cell img, td img")
-        thumbnail_url = img?.attr("abs:src")?.takeIf { it.isNotBlank() }
-            ?: img?.attr("src")
-            ?: ""
-    }
+    override fun searchAnimeFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
     override fun searchAnimeNextPageSelector(): String = popularAnimeNextPageSelector()
 
     // ============================== Details ==============================
 
     override fun animeDetailsParse(document: Document): SAnime {
+        val channelName = document.location().substringAfterLast("/").substringBefore("?").trim()
+        val titleText = document.selectFirst("div#app-conception div#app-title, h1, div.name")?.text()?.takeIf { it.isNotBlank() }
+            ?: channelName.takeIf { it.isNotBlank() }
+            ?: "Twitch Streamer"
+
         return SAnime.create().apply {
-            title = document.selectFirst("div#app-conception div#app-title, h1")?.text() ?: "Twitch Streamer"
+            title = titleText
             genre = document.select("ul.list-group li div a.label").joinToString { it.text() }
             status = SAnime.ONGOING
-            description = document.selectFirst("div.row div.col-md-4.text-center, div.channel-description")?.text() ?: "Twitch Stream"
-            thumbnail_url = document.selectFirst("img.channel-avatar, img[src*=/profile_images/]")?.attr("abs:src") ?: ""
+            description = document.selectFirst("div.row div.col-md-4.text-center, div.channel-description")?.text() ?: "Twitch Live Stream"
+            thumbnail_url = document.selectFirst("img.channel-avatar, img[src*=/profile_images/], img[src*=/jtv_user_pictures/]")?.attr("abs:src") ?: ""
         }
     }
 
@@ -158,8 +162,8 @@ class Twitch : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
         val episode = SEpisode.create().apply {
             setUrlWithoutDomain(response.request.url.toString())
-            name = if (isLive) "Streaming Now (Refresh to update state)" else "Offline (Refresh to update state)"
-            episode_number = if (isLive) 1F else 0F
+            name = if (isLive) "Streaming Now (Live)" else "Live Stream"
+            episode_number = 1F
         }
         return listOf(episode)
     }
@@ -170,56 +174,47 @@ class Twitch : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
     // ============================== Video List ==============================
 
-    @Serializable
-    private data class ApiResponse(
-        val success: Boolean? = null,
-        val urls: UrlsDto? = null
-    )
-
-    @Serializable
-    private data class UrlsDto(
-        val audio_only: String? = null,
-        @SerialName("160p") val veryLow: String? = null,
-        @SerialName("360p") val low: String? = null,
-        @SerialName("480p") val sd: String? = null,
-        @SerialName("720p") val hd: String? = null,
-        @SerialName("1080p") val fhd: String? = null
-    )
-
     override fun videoListParse(response: Response): List<Video> {
         val pageUrl = response.request.url.toString()
-        val channelName = pageUrl.substringAfterLast("/").trim()
+        val channelName = pageUrl.substringAfterLast("/").substringBefore("?").substringBefore("#").trim()
 
         if (channelName.isBlank()) {
             throw Exception("Invalid Twitch channel URL")
         }
 
-        val videos = mutableListOf<Video>()
         try {
-            val twitchUrl = "https://www.twitch.tv/$channelName"
-            val apiUrl = "https://pwn.sh/tools/streamapi.py?url=$twitchUrl"
-            val apiResponse = client.newCall(GET(apiUrl, headers)).execute()
-            if (apiResponse.isSuccessful) {
-                val jsonStr = apiResponse.body.string()
-                val apiData = json.decodeFromString<ApiResponse>(jsonStr)
-                apiData.urls?.let { u ->
-                    u.fhd?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "1080p (FHD)", it)) }
-                    u.hd?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "720p (HD)", it)) }
-                    u.sd?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "480p (SD)", it)) }
-                    u.low?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "360p (Low)", it)) }
-                    u.veryLow?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "160p (Very Low)", it)) }
-                    u.audio_only?.takeIf { it.isNotBlank() && it != "null" }?.let { videos.add(Video(it, "Audio Only", it)) }
+            val gqlUrl = "https://gql.twitch.tv/gql"
+            val bodyStr = """{"query":"query PlaybackAccessToken(${'$'}login: String!) { streamPlaybackAccessToken(channelName: ${'$'}login, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: \"embed\"}) { value signature } }","variables":{"login":"$channelName"}}"""
+
+            val reqHeaders = Headers.headersOf(
+                "Client-ID", "kimne78kx3ncx6brgo4mv6wki5h1ko",
+                "Content-Type", "application/json",
+                "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+            )
+
+            val gqlRequest = POST(gqlUrl, reqHeaders, bodyStr.toRequestBody("application/json".toMediaType()))
+            client.newCall(gqlRequest).execute().use { gqlResponse ->
+                if (gqlResponse.isSuccessful) {
+                    val jsonStr = gqlResponse.body.string()
+                    val root = json.parseToJsonElement(jsonStr).jsonObject
+                    val tokObj = root["data"]?.jsonObject?.get("streamPlaybackAccessToken")?.jsonObject
+                    val sig = tokObj?.get("signature")?.jsonPrimitive?.content
+                    val token = tokObj?.get("value")?.jsonPrimitive?.content
+
+                    if (!sig.isNullOrBlank() && !token.isNullOrBlank()) {
+                        val encodedToken = java.net.URLEncoder.encode(token, "UTF-8")
+                        val usherUrl = "https://usher.ttvnw.net/api/channel/hls/$channelName.m3u8?sig=$sig&token=$encodedToken&allow_source=true&allow_audio_only=true&fast_bread=true"
+                        val videos = playlistExtractor.extractFromHls(usherUrl, referer = "https://www.twitch.tv/")
+                        if (videos.isNotEmpty()) return videos
+                    }
                 }
             }
-            apiResponse.close()
-        } catch (_: Exception) {}
-
-        if (videos.isEmpty()) {
-            val offlineVideoUrl = "https://cdn.discordapp.com/attachments/909242748283006996/1014362630456090654/amogus.mp4"
-            return listOf(Video(offlineVideoUrl, "Stream Offline / Refresh when live", offlineVideoUrl))
+        } catch (e: Exception) {
+            Log.e("Twitch", "Failed to fetch Twitch live stream: ${e.message}")
         }
 
-        return videos
+        val offlineVideoUrl = "https://cdn.discordapp.com/attachments/909242748283006996/1014362630456090654/amogus.mp4"
+        return listOf(Video(offlineVideoUrl, "Stream Offline / Refresh when live", offlineVideoUrl))
     }
 
     override fun videoListSelector(): String = throw UnsupportedOperationException()

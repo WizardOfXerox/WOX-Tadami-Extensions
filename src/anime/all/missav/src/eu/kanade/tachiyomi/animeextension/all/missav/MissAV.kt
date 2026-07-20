@@ -15,6 +15,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.util.asJsoup
+import eu.kanade.tachiyomi.lib.m3u8server.M3u8Integration
 import eu.kanade.tachiyomi.lib.unpacker.Unpacker
 import keiyoushi.utils.LazyMutable
 import keiyoushi.utils.addListPreference
@@ -40,6 +41,10 @@ class MissAV :
     override val lang = "all"
 
     private val preferences by getPreferencesLazy()
+
+    private val m3u8Integration by lazy {
+        M3u8Integration(client)
+    }
 
     override var baseUrl: String
         by preferences.delegate(PREF_DOMAIN_KEY, PREF_DOMAIN_DEFAULT)
@@ -222,7 +227,8 @@ class MissAV :
 
         if (masterPlaylist.isBlank()) return emptyList()
 
-        return playlistExtractor.extractFromHls(masterPlaylist, referer = "$baseUrl/")
+        val videos = playlistExtractor.extractFromHls(masterPlaylist, referer = "$baseUrl/")
+        return m3u8Integration.processVideoList(videos)
     }
 
     override fun List<Video>.sort(): List<Video> {
