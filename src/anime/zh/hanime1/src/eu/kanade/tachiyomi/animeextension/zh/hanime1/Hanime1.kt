@@ -56,28 +56,34 @@ class Hanime1 :
 
     private var filterUpdateState = FilterUpdateState.NONE
 
+    private val uploadDateRegex = Regex("""\d{4}-\d{2}-\d{2}""")
+
     private val uploadDateFormat: SimpleDateFormat by lazy {
-        SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
+        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     }
 
     override fun animeDetailsParse(response: Response): SAnime {
         val doc = response.useAsJsoup()
         return SAnime.create().apply {
-            genre = doc.select(".single-video-tag").not("[data-toggle]").eachText().joinToString()
+            genre = doc.select(".single-video-tag").not("[data-toggle]").eachText()
+                .joinToString { it.replace(Regex("""^(# )?(.*?)( \(\d+\))?$"""), "$2") }
             author = doc.select("#video-artist-name").text()
-            val realTitle = doc.select("div.video-description-panel > div:nth-child(2)").text()
-            title = realTitle.appendInvisibleChar()
-            description = doc.select("div.video-description-panel > div:nth-child(3)").text()
-            thumbnail_url = doc.select("video[poster]").attr("poster")
+            title = doc.select("#shareBtn-title").text()
+                .takeIf { it.isNotBlank() }
+                ?: doc.select("meta[property=og:title]").attr("content")
+                    .takeIf { it.isNotBlank() }
+                    ?: ""
+            description = doc.select("meta[property=og:description]").attr("content")
+            thumbnail_url = doc.select("meta[property=og:image]").attr("content")
             val type = doc.select("a#video-artist-name + a").text().trim()
-            if (type == "裏番" || type == "泡麵番") {
+            if ((type == "裏番" || type == "泡麵番") && title.isNotEmpty()) {
                 // Use the series cover image for bangumi entries instead of the episode image.
                 runBlocking {
                     try {
                         val animesPage =
                             getSearchAnime(
                                 1,
-                                realTitle,
+                                title,
                                 AnimeFilterList(GenreFilter(arrayOf("", type)).apply { state = 1 }),
                             )
                         thumbnail_url = animesPage.animes.firstOrNull()?.thumbnail_url
@@ -94,16 +100,15 @@ class Hanime1 :
         val nodes = jsoup.select("#playlist-scroll").first()!!.select(">div")
         return nodes.mapIndexed { index, element ->
             SEpisode.create().apply {
-                val href = element.select("a.overlay").attr("href")
+                val href = element.select(".thumb-container a").attr("href")
                 setUrlWithoutDomain(href)
                 episode_number = (nodes.size - index).toFloat()
-                name = element.select("div.card-mobile-title").text()
+                name = element.select(".video-title").text()
                 if (href == response.request.url.toString()) {
-                    // current video
-                    val timeStr =
-                        jsoup.select("div.video-description-panel > div:first-child").text()
-                            .split(" ").last()
-                    date_upload = uploadDateFormat.tryParse(timeStr)
+                    // current video, parse `觀看次數：362.5萬次 2025-12-26` to upload date
+                    uploadDateRegex.find(jsoup.select("#shareBtn-title + div").text())?.value?.let {
+                        date_upload = runCatching { uploadDateFormat.parse(it)?.time }.getOrNull() ?: 0L
+                    }
                 }
             }
         }
@@ -117,12 +122,14 @@ class Hanime1 :
             val quality = it.attr("size")
             val url = it.attr("src")
             Video(url, "${quality}P", videoUrl = url)
-        }.sortedByDescending { preferQuality == it.quality }
+        }.filterNot { it.videoUrl?.startsWith("blob") == true }
+            .sortedByDescending { preferQuality == it.quality }
             .ifEmpty {
-                // Try to find the source from the script content.
-                val videoUrl = doc.select("script:containsData(source)").first()!!.data()
-                    .substringAfter("source = '").substringBefore("'")
-                listOf(Video(videoUrl, "Raw", videoUrl = videoUrl))
+                // Try to find the source from metadata
+                doc.select("link[as=video][href]").attr("href")
+                    .takeIf { it.isNotEmpty() }
+                    ?.let { videoUrl -> listOf(Video(videoUrl, "Raw", videoUrl = videoUrl)) }
+                    ?: emptyList()
             }
     }
 
@@ -142,25 +149,36 @@ class Hanime1 :
 
     override fun searchAnimeParse(response: Response): AnimesPage {
         val jsoup = response.useAsJsoup()
-        val nodes = jsoup.select(".horizontal-row .video-item-container:not(:has(a.video-link[target]))")
-        val list = if (nodes.isNotEmpty()) {
-            nodes.map {
+        val list = jsoup.select("div.search-doujin-videos.hidden-xs:not(:has(a[target=_blank]))")
+            .takeIf { it.isNotEmpty() }
+            ?.map {
                 SAnime.create().apply {
-                    setUrlWithoutDomain(it.select("a.video-link").attr("href"))
-                    thumbnail_url = it.select(".main-thumb").attr("abs:src")
-                    title = it.select(".title").text().appendInvisibleChar()
-                    author = it.select(".subtitle").text().split("•").getOrNull(0)?.trim()
+                    setUrlWithoutDomain(it.select("a[class=overlay]").attr("href"))
+                    thumbnail_url = it.select("img + img").attr("src")
+                    title = it.select(".card-mobile-title").text().appendInvisibleChar()
+                    author = it.select(".card-mobile-user").text()
                 }
             }
-        } else {
-            jsoup.select("a:not([target]) > .search-videos").map {
-                SAnime.create().apply {
-                    setUrlWithoutDomain(it.parent()!!.attr("href"))
-                    thumbnail_url = it.select("img").attr("src")
-                    title = it.select(".home-rows-videos-title").text().appendInvisibleChar()
+            ?: jsoup.select("a:not([target]) > .search-videos")
+                .takeIf { it.isNotEmpty() }
+                ?.map {
+                    SAnime.create().apply {
+                        setUrlWithoutDomain(it.parent()!!.attr("href"))
+                        thumbnail_url = it.select("img").attr("src")
+                        title = it.select(".home-rows-videos-title").text().appendInvisibleChar()
+                    }
                 }
-            }
-        }
+            ?: jsoup.select("div.video-item-container:not(:has(a[target=_blank]))")
+                .takeIf { it.isNotEmpty() }
+                ?.map {
+                    SAnime.create().apply {
+                        setUrlWithoutDomain(it.select("a.video-link").attr("href"))
+                        thumbnail_url = it.select("img.main-thumb").attr("src")
+                        title = it.select("div.title").text().appendInvisibleChar()
+                        author = it.select("div.subtitle").text().substringBefore(" • ").trim()
+                    }
+                }
+            ?: emptyList()
         val nextPage = jsoup.select("li.page-item a.page-link[rel=next]")
         return AnimesPage(list, nextPage.isNotEmpty())
     }
