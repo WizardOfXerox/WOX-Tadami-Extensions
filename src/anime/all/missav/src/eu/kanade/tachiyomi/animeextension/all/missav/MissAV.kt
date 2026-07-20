@@ -2,9 +2,9 @@ package eu.kanade.tachiyomi.animeextension.all.missav
 
 import android.util.Log
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.javcoverfetcher.JavCoverFetcher
-import aniyomi.lib.javcoverfetcher.JavCoverFetcher.fetchHDCovers
-import aniyomi.lib.playlistutils.PlaylistUtils
+import eu.kanade.tachiyomi.lib.javcoverfetcher.JavCoverFetcher
+import eu.kanade.tachiyomi.lib.javcoverfetcher.JavCoverFetcher.fetchHDCovers
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -15,7 +15,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.lib.unpacker.Unpacker
+import eu.kanade.tachiyomi.lib.unpacker.Unpacker
 import keiyoushi.utils.LazyMutable
 import keiyoushi.utils.addListPreference
 import keiyoushi.utils.delegate
@@ -156,28 +156,6 @@ class MissAV :
         }
     }
 
-    override fun relatedAnimeListRequest(anime: SAnime): Request {
-        val body = MissAvApi.relatedData(getUuid(), anime.url.substringAfterLast("/"))
-            .toJsonRequestBody()
-
-        return POST(MissAvApi.relatedURL(), docHeaders, body)
-    }
-
-    override fun relatedAnimeListParse(response: Response): List<SAnime> {
-        val data = response.body.string().parseAs<List<RelatedResponse>>()
-        return data.flatMap { it.toAnimeList() }
-    }
-
-    override fun String.stripKeywordForRelatedAnimes(): List<String> = replace(regexSpecialCharacters, " ")
-        .split(regexWhitespace)
-        .map {
-            // remove number only
-            it.replace(regexNumberOnly, "")
-                .lowercase()
-        }
-        // exclude single character
-        .filter { it.length > 1 }
-
     override fun getFilterList() = getFilters()
 
     override fun animeDetailsParse(response: Response): SAnime {
@@ -228,12 +206,21 @@ class MissAV :
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
 
-        val playlists = document.selectFirst("script:containsData(function(p,a,c,k,e,d))")
-            ?.data()
-            ?.let(Unpacker::unpack)?.ifEmpty { null }
-            ?: return emptyList()
+        val scripts = document.select("script:containsData(function(p,a,c,k,e,d))")
+        var masterPlaylist = ""
 
-        val masterPlaylist = playlists.substringAfter("source=\"").substringBefore("\";")
+        for (script in scripts) {
+            val unpacked = Unpacker.unpack(script.data())
+            if (unpacked.contains("source=")) {
+                masterPlaylist = unpacked.substringAfter("source='", "").substringBefore("';")
+                if (masterPlaylist.isBlank()) {
+                    masterPlaylist = unpacked.substringAfter("source=\"", "").substringBefore("\";")
+                }
+                if (masterPlaylist.isNotBlank()) break
+            }
+        }
+
+        if (masterPlaylist.isBlank()) return emptyList()
 
         return playlistExtractor.extractFromHls(masterPlaylist, referer = "$baseUrl/")
     }
@@ -288,8 +275,8 @@ class MissAV :
     companion object {
         private const val PREF_DOMAIN_KEY = "preferred_domain"
         private const val PREF_DOMAIN_TITLE = "Preferred domain (requires app restart)"
-        private val PREF_DOMAIN_ENTRIES = listOf("https://missav.live", "https://missav.ai", "https://missav.ws")
-        private val PREF_DOMAIN_DEFAULT = PREF_DOMAIN_ENTRIES.first()
+        private val PREF_DOMAIN_ENTRIES = listOf("https://missav.live", "https://missav.com", "https://missav.ws", "https://missav.ai")
+        private val PREF_DOMAIN_DEFAULT = "https://missav.live"
 
         private const val PREF_QUALITY = "preferred_quality"
         private const val PREF_QUALITY_TITLE = "Preferred quality"
