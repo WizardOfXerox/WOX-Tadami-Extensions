@@ -1,0 +1,83 @@
+# copy_and_clean_manga_apks.ps1
+# Syncs compiled manga extensions to the organized legacy repo format and extracts icons.
+
+$srcRoot = "H:\Ideas\Tadami-Extensions\manga-extensions-source\src"
+$distDir = "H:\Ideas\Tadami-Extensions\apks\manga"
+$apkDir = Join-Path $distDir "apk"
+$iconDir = Join-Path $distDir "icon"
+
+# Ensure directories exist
+if (-not (Test-Path $apkDir)) { New-Item -ItemType Directory -Path $apkDir -Force | Out-Null }
+if (-not (Test-Path $iconDir)) { New-Item -ItemType Directory -Path $iconDir -Force | Out-Null }
+
+# Load Zip assembly
+[System.Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem') | Out-Null
+
+# Get all compiled debug APKs
+$compiledApks = Get-ChildItem -Path $srcRoot -Recurse -Filter "*-debug.apk" | Where-Object { $_.FullName -like "*\build\outputs\apk\debug\*" }
+
+Write-Host "Syncing and cleaning Manga APKs..."
+
+# Load index to resolve package names for icons
+$indexFile = Join-Path $distDir "index.min.json"
+$entries = @()
+if (Test-Path $indexFile) {
+    $entries = ConvertFrom-Json (Get-Content $indexFile -Raw)
+}
+
+foreach ($apk in $compiledApks) {
+    $name = $apk.Name
+    # Example: tachiyomi-en.asurascans-v1.6.66-debug.apk -> tachiyomi-en.asurascans-v1.6.66.apk
+    $destName = $name -replace "-debug.apk", ".apk"
+    $destPath = Join-Path $apkDir $destName
+    
+    # Copy the file (overwriting existing)
+    Copy-Item -Path $apk.FullName -Destination $destPath -Force
+    Write-Host "Copied $name -> apk/$destName"
+    
+    # Extract icon
+    $pkgName = $null
+    if ($entries) {
+        # Find match by APK name or package suffix
+        $match = $entries | Where-Object { $_.apk -eq $destName -or $_.apk -eq ($destName -replace "-debug.apk", ".apk") }
+        if ($match) {
+            $pkgName = $match.pkg
+        }
+    }
+    
+    # If package name is found, extract launcher icon
+    if ($pkgName) {
+        $iconPath = Join-Path $iconDir "$pkgName.png"
+        try {
+            $zip = [System.IO.Compression.ZipFile]::OpenRead($destPath)
+            $candidates = $zip.Entries | Where-Object { 
+                $_.FullName -match 'ic_launcher\.png$' -or 
+                $_.FullName -match 'icon\.png$' 
+            }
+            
+            $best = $candidates | Sort-Object -Property Length -Descending | Select-Object -First 1
+            if ($best) {
+                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($best, $iconPath, $true)
+                Write-Host "Extracted icon to icon/$pkgName.png"
+            }
+            $zip.Dispose()
+        } catch {
+            Write-Host "Failed to extract icon for ${destName}: $_" -ForegroundColor Yellow
+        }
+    }
+    
+    # Extract package suffix, e.g., "tachiyomi-en.asurascans" from "tachiyomi-en.asurascans-v1.6.66.apk"
+    $baseName = $destName -replace "-v1\..*$", ""
+    
+    # Find all files in apk dir matching the same extension prefix
+    $existingFiles = Get-ChildItem -Path $apkDir -Filter "$baseName-v1.*"
+    
+    foreach ($file in $existingFiles) {
+        if ($file.Name -ne $destName) {
+            Remove-Item $file.FullName -Force
+            Write-Host "Cleaned up obsolete file: $($file.Name) (Replaced by $destName)"
+        }
+    }
+}
+
+Write-Host "Sync and cleanup completed successfully."
