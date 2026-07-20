@@ -56,12 +56,19 @@ class PinoyMoviePedia :
     }
 
     private fun extractVideos(url: String, lang: String): List<Video> = when {
-        "dood" in url -> doodExtractor.videosFromUrl(url, lang)
+        "dood" in url || "playmogo" in url -> doodExtractor.videosFromUrl(url, lang)
         "mixdrop" in url -> mixDropExtractor.videosFromUrl(url, lang)
         else -> null
     } ?: emptyList()
 
     private fun getPlayerUrl(player: Element): String? {
+        val nume = player.attr("data-nume")
+        val sourcePlayer = player.ownerDocument()?.selectFirst("div#source-player-$nume")
+        val iframeUrl = sourcePlayer?.selectFirst("iframe")?.attr("abs:src")
+        if (!iframeUrl.isNullOrBlank()) {
+            return iframeUrl
+        }
+
         val body = FormBody.Builder()
             .add("action", "doo_player_ajax")
             .add("post", player.attr("data-post"))
@@ -69,12 +76,14 @@ class PinoyMoviePedia :
             .add("type", player.attr("data-type"))
             .build()
 
-        return client.newCall(POST("$baseUrl/wp-admin/admin-ajax.php", headers, body))
-            .execute().body.string()
-            .substringAfter("\"embed_url\":\"")
-            .substringBefore("\",")
-            .replace("\\", "")
-            .takeIf(String::isNotBlank)
+        return runCatching {
+            client.newCall(POST("$baseUrl/wp-admin/admin-ajax.php", headers, body))
+                .execute().body.string()
+                .substringAfter("\"embed_url\":\"")
+                .substringBefore("\",")
+                .replace("\\", "")
+                .takeIf(String::isNotBlank)
+        }.getOrNull()
     }
 
     // ============================== Filters ===============================

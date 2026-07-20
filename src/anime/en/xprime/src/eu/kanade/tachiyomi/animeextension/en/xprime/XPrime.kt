@@ -340,6 +340,13 @@ class XPrime : ConfigurableAnimeSource, AnimeHttpSource() {
 
     // ============================== Video List (Multi-Server Resolver) ==============================
 
+    private data class VideoTag(
+        val tmdbId: String,
+        val season: String,
+        val episode: String,
+        val isMovie: Boolean
+    )
+
     override fun videoListRequest(episode: SEpisode): Request {
         val urlPath = episode.url
         val isMovie = urlPath.startsWith("/movie/")
@@ -349,31 +356,37 @@ class XPrime : ConfigurableAnimeSource, AnimeHttpSource() {
             set("Referer", "https://vidsrc.me/")
         }.build()
 
+        val tmdbId: String
+        val season: String
+        val epNum: String
+
         if (isMovie) {
-            val tmdbId = urlPath.substringAfter("/movie/")
-            return GET("https://vidsrc.me/embed/movie?tmdb=$tmdbId", videoHeaders)
+            tmdbId = urlPath.substringAfter("/movie/")
+            season = "1"
+            epNum = "1"
+        } else {
+            val parts = urlPath.split("/")
+            tmdbId = parts.getOrNull(2) ?: ""
+            season = parts.getOrNull(4) ?: "1"
+            epNum = parts.getOrNull(6) ?: "1"
         }
 
-        val parts = urlPath.split("/")
-        val tmdbId = parts.getOrNull(2) ?: ""
-        val season = parts.getOrNull(4) ?: "1"
-        val ep = parts.getOrNull(6) ?: "1"
+        val url = if (isMovie) {
+            "https://vidsrc.me/embed/movie?tmdb=$tmdbId"
+        } else {
+            "https://vidsrc.me/embed/tv?tmdb=$tmdbId&season=$season&episode=$epNum"
+        }
 
-        return GET("https://vidsrc.me/embed/tv?tmdb=$tmdbId&season=$season&episode=$ep", videoHeaders)
+        val tag = VideoTag(tmdbId, season, epNum, isMovie)
+        return GET(url, videoHeaders).newBuilder().tag(VideoTag::class.java, tag).build()
     }
 
     override fun videoListParse(response: Response): List<Video> {
-        val reqUrl = response.request.url.toString()
-        val isMovie = reqUrl.contains("/movie")
-
-        val tmdbId = if (isMovie) {
-            reqUrl.substringAfter("tmdb=").substringBefore("&")
-        } else {
-            reqUrl.substringAfter("tmdb=").substringBefore("&")
-        }
-
-        val season = if (!isMovie) reqUrl.substringAfter("season=").substringBefore("&") else "1"
-        val episode = if (!isMovie) reqUrl.substringAfter("episode=").substringBefore("&") else "1"
+        val tag = response.request.tag(VideoTag::class.java)
+        val tmdbId = tag?.tmdbId ?: ""
+        val season = tag?.season ?: "1"
+        val episode = tag?.episode ?: "1"
+        val isMovie = tag?.isMovie ?: response.request.url.toString().contains("/movie")
 
         val videoHeaders = headersBuilder().apply {
             set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
