@@ -43,19 +43,6 @@ https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/
 
 ---
 
-## 🛠️ Included Custom Builds (Pre-configured)
-
-This repository includes our custom-built, fully-working versions of extensions that resolve common crash/reflection bugs:
-
-| Custom Extension | Type | Version | Status | Key Fix |
-|------------------|------|---------|--------|---------|
-| **Pornhub** | Anime | `v14.1-debug` | ✅ Active | Fixed reflection reflection/Safe-call crashes in search |
-| **XNXX** | Anime | `v14.4-debug` | ✅ Active | Updated popular list queries and layout selectors |
-| **Hstream** | Anime | `v14.12-debug` | ✅ Active | Restored playback and queries |
-| **Loklok** | Anime | `v14.1-debug` | ✅ Active | Custom multi-source support |
-
----
-
 ## 📂 Repository Structure
 
 - **`/src`**: Full Kotlin and TypeScript source codes for all extensions.
