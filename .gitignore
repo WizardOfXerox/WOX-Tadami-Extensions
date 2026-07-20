@@ -62,15 +62,13 @@ aniyomi-extensions/
 builds/
 Broken/
 
-# === Local Documentation & Working Files (Ignored from GitHub) ===
-walkthrough_pornhub.md
-extension_creation_guide.md
-extension_upgrade_blueprint.md
-Bugs.md
-Bugs_To_Be_Fixed.md
-Bugs_to_be_fixed.md
-Anime_Bugs_and_Requests.md
-Tracked_Upstream_Issues.md
+# === Local Documentation & Helper Scripts (Ignored from GitHub) ===
+*.ps1
+*.md
+!README.md
+!**/README.md
+!**/CONTRIBUTING.md
+!**/CODE_OF_CONDUCT.md
 scratch*
 *.html
 live_github_issues.json
