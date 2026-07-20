@@ -60,6 +60,7 @@ novel_dead_domains.txt
 # === Excluded Local Working Directories ===
 aniyomi-extensions/
 manga-extensions-source/
+wox-extension-tester/
 builds/
 Broken/
 
