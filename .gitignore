@@ -62,9 +62,20 @@ aniyomi-extensions/
 builds/
 Broken/
 
-# === Local Documentation Files ===
+# === Local Documentation & Working Files (Ignored from GitHub) ===
 walkthrough_pornhub.md
 extension_creation_guide.md
+extension_upgrade_blueprint.md
+Bugs.md
+Bugs_To_Be_Fixed.md
+Bugs_to_be_fixed.md
+Anime_Bugs_and_Requests.md
+Tracked_Upstream_Issues.md
+scratch*
+*.html
+live_github_issues.json
+fetch_live_github_issues.py
+print_live_issues*.py
 
 # === Nested .git directories (from cloned repos) ===
 anime-extensions-community/.git/
