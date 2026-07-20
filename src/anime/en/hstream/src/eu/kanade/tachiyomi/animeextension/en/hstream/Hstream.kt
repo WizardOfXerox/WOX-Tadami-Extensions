@@ -189,21 +189,24 @@ class Hstream : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
         return SAnime.create().apply {
             status = SAnime.COMPLETED
             
-            val infoBlock = document.selectFirst("div.relative > div.justify-between > div")
-                ?: throw Exception("Info block not found")
+            val rawTitle = document.selectFirst("h1")?.text() ?: ""
+            title = if (rawTitle.contains(" - ")) rawTitle.substringBeforeLast(" - ") else rawTitle
             
-            val rawTitle = infoBlock.selectFirst("div > h1")?.text() ?: ""
-            title = rawTitle.substringBeforeLast(" - ")
-            artist = infoBlock.select("div > a:nth-of-type(3)").text()
+            val descEl = document.selectFirst("h2:contains(Description) + p, p.leading-relaxed, p.leading-tight")
+            val descText = descEl?.text()?.takeIf { it.isNotBlank() }
+                ?: document.selectFirst("meta[name=twitter:description]")?.attr("content")?.takeIf { it.isNotBlank() }
+                ?: document.selectFirst("meta[property=og:description]")?.attr("content")
+                ?: ""
+            description = descText.trim()
             
-            val img = document.selectFirst("div.float-left > img.object-cover")
-            thumbnail_url = img?.absUrl("src")
+            val img = document.selectFirst("img[src*=/cover-ep-], img[src*=/hentai/], div.float-left img, img.object-cover")
+            thumbnail_url = img?.attr("abs:src")?.takeIf { it.isNotBlank() } ?: img?.attr("src") ?: ""
             
-            val genreElements = document.select("ul.list-none > li > a")
-            genre = genreElements.eachText().joinToString(", ")
+            val genreElements = document.select("h2:contains(Genres) + div a, ul.list-none > li > a")
+            genre = genreElements.eachText().filter { it.isNotBlank() }.joinToString(", ")
             
-            val desc = document.selectFirst("div.relative > p.leading-tight")
-            description = desc?.text()
+            val studioEl = document.selectFirst("a[href*=/search?studios], a[href*=/search?tags]")
+            artist = studioEl?.text() ?: ""
         }
     }
 
