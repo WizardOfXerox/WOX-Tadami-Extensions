@@ -110,24 +110,21 @@ class Pornhub : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
     // ============================== Search ==============================
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
-        return try {
-            val orderFilter = filters.firstInstanceOrNull<OrderFilter>()
-            val order = orderFilter?.toUri() ?: "mv"
+        val orderFilter = filters.filterIsInstance<OrderFilter>().firstOrNull()
+        val order = orderFilter?.toUri() ?: "mv"
 
-            if (query.isNotBlank()) {
-                GET("$baseUrl/video/search?search=$query&o=$order" + if (page > 1) "&page=$page" else "", headers)
+        if (query.isNotBlank()) {
+            val encodedQuery = java.net.URLEncoder.encode(query.trim(), "UTF-8")
+            return GET("$baseUrl/video/search?search=$encodedQuery&o=$order" + if (page > 1) "&page=$page" else "", headers)
+        } else {
+            val categoryFilter = filters.filterIsInstance<CategoryFilter>().firstOrNull()
+            val category = categoryFilter?.toUri() ?: ""
+
+            if (category.isNotBlank()) {
+                return GET("$baseUrl/categories/$category?o=$order" + if (page > 1) "&page=$page" else "", headers)
             } else {
-                val categoryFilter = filters.firstInstanceOrNull<CategoryFilter>()
-                val category = categoryFilter?.toUri() ?: ""
-
-                if (category.isNotBlank()) {
-                    GET("$baseUrl/categories/$category?o=$order" + if (page > 1) "&page=$page" else "", headers)
-                } else {
-                    GET("$baseUrl/video?o=$order" + if (page > 1) "&page=$page" else "", headers)
-                }
+                return GET("$baseUrl/video?o=$order" + if (page > 1) "&page=$page" else "", headers)
             }
-        } catch (_: Throwable) {
-            GET("$baseUrl/video/search?search=$query&o=mv" + if (page > 1) "&page=$page" else "", headers)
         }
     }
 
@@ -136,6 +133,21 @@ class Pornhub : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
     override fun searchAnimeFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
     override fun searchAnimeNextPageSelector(): String = popularAnimeNextPageSelector()
+
+    override fun searchAnimeParse(response: Response): AnimesPage {
+        val document = response.asJsoup()
+        val animeList = document.select(searchAnimeSelector()).mapNotNull { element ->
+            try {
+                searchAnimeFromElement(element)
+            } catch (_: Exception) {
+                null
+            }
+        }
+        val hasNextPage = searchAnimeNextPageSelector().let { selector ->
+            document.selectFirst(selector) != null
+        }
+        return AnimesPage(animeList, hasNextPage)
+    }
 
     // ============================== Details ==============================
 
