@@ -55,43 +55,45 @@ class Pornhub : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
         return GET("$baseUrl/video?o=mv" + if (page > 1) "&page=$page" else "", headers)
     }
 
-    override fun popularAnimeSelector(): String = "li.pcVideoListItem[data-video-vkey], div.videoBox[data-video-vkey]"
+    override fun popularAnimeSelector(): String = "ul.videos li.pcVideoListItem, li.pcVideoListItem, div.videoBox"
 
     override fun popularAnimeFromElement(element: Element): SAnime {
         val anime = SAnime.create()
         
-        val titleEl = element.selectFirst("span.title a, a[title]")
-        if (titleEl != null) {
-            val attrTitle = titleEl.attr("title")
-            anime.title = if (attrTitle.isNotBlank()) attrTitle else titleEl.text()
+        val linkEl = element.selectFirst("div.wrap div.phimage a, a[href*=/view_video.php]")
+            ?: element.selectFirst("a[title]")
+            ?: element.selectFirst("a")
             
-            val href = titleEl.attr("href")
-            if (href.isNotBlank()) {
-                anime.setUrlWithoutDomain(href)
+        val href = linkEl?.attr("href") ?: ""
+        if (href.isNotBlank()) {
+            anime.setUrlWithoutDomain(href)
+        } else {
+            val vkey = element.attr("data-video-vkey")
+            if (vkey.isNotBlank()) {
+                anime.setUrlWithoutDomain("/view_video.php?viewkey=$vkey")
             } else {
                 anime.setUrlWithoutDomain("/view_video.php?viewkey=unknown")
             }
-        } else {
-            anime.title = "Video"
-            anime.setUrlWithoutDomain("/view_video.php?viewkey=unknown")
         }
         
-        val img = element.selectFirst("div.phimage img, img[data-src], img[src]")
-        if (img != null) {
-            val dataSrc = img.attr("abs:data-src")
-            if (dataSrc.isNotBlank()) {
-                anime.thumbnail_url = dataSrc
-            } else {
-                anime.thumbnail_url = img.attr("abs:src")
-            }
-        } else {
-            anime.thumbnail_url = ""
-        }
+        val titleText = linkEl?.attr("title")?.takeIf { it.isNotBlank() }
+            ?: element.selectFirst("span.title a")?.text()?.takeIf { it.isNotBlank() }
+            ?: element.selectFirst("a[title]")?.attr("title")?.takeIf { it.isNotBlank() }
+            ?: element.selectFirst("span.title")?.text()?.takeIf { it.isNotBlank() }
+            ?: "Video"
+        anime.title = titleText.trim()
+        
+        val img = element.selectFirst("div.phimage img, img[data-src], img[data-image], img[src]")
+        val imgSrc = img?.attr("abs:data-src")?.takeIf { it.isNotBlank() }
+            ?: img?.attr("abs:data-image")?.takeIf { it.isNotBlank() }
+            ?: img?.attr("abs:src")?.takeIf { it.isNotBlank() }
+            ?: ""
+        anime.thumbnail_url = imgSrc
         
         return anime
     }
 
-    override fun popularAnimeNextPageSelector(): String = "li.page-next a, li.page_next a, a.pageNext, li.next a"
+    override fun popularAnimeNextPageSelector(): String = "li.page-next a, li.page_next a, a.pageNext, li.next a, a[rel=next]"
 
     // ============================== Latest ==============================
 
