@@ -29,17 +29,19 @@ foreach ($apk in $compiledApks) {
     $name = $apk.Name
     $destName = $name -replace "-debug.apk", ".apk"
     
-    $destPath = Join-Path $apkDir $destName
+    $destSubPath = Join-Path $apkDir $destName
+    $destRootPath = Join-Path $distDir $destName
     
-    # Copy the file (overwriting existing)
-    Copy-Item -Path $apk.FullName -Destination $destPath -Force
-    Write-Host "Copied $name -> apk/$destName"
+    # Copy the file to both subfolder and root for 100% download URL compatibility
+    Copy-Item -Path $apk.FullName -Destination $destSubPath -Force
+    Copy-Item -Path $apk.FullName -Destination $destRootPath -Force
+    Write-Host "Copied $name -> apk/$destName and $destName"
     
     # Extract icon
     $pkgName = $null
     if ($entries) {
         # Find match by APK name
-        $match = $entries | Where-Object { $_.apk -eq $destName -or $_.apk -eq ($destName -replace "-debug.apk", ".apk") }
+        $match = $entries | Where-Object { $_.apk -eq $destName -or $_.apk -eq "apk/$destName" -or $_.apk -eq ($destName -replace "-debug.apk", ".apk") }
         if ($match) {
             $pkgName = $match.pkg
         }
@@ -49,7 +51,7 @@ foreach ($apk in $compiledApks) {
     if ($pkgName) {
         $iconPath = Join-Path $iconDir "$pkgName.png"
         try {
-            $zip = [System.IO.Compression.ZipFile]::OpenRead($destPath)
+            $zip = [System.IO.Compression.ZipFile]::OpenRead($destSubPath)
             $candidates = $zip.Entries | Where-Object { 
                 $_.FullName -match 'ic_launcher\.png$' -or 
                 $_.FullName -match 'icon\.png$' 
@@ -69,13 +71,20 @@ foreach ($apk in $compiledApks) {
     # Extract package suffix, e.g., "aniyomi-pt.animesdrive" from "aniyomi-pt.animesdrive-v14.8.apk"
     $baseName = $destName -replace "-v14\..*$", ""
     
-    # Find all files in apk dir matching the same extension prefix
-    $existingFiles = Get-ChildItem -Path $apkDir -Filter "$baseName-v14.*"
-    
-    foreach ($file in $existingFiles) {
+    # Find all files matching the same extension prefix
+    $existingSubFiles = Get-ChildItem -Path $apkDir -Filter "$baseName-v14.*"
+    foreach ($file in $existingSubFiles) {
         if ($file.Name -ne $destName) {
             Remove-Item $file.FullName -Force
-            Write-Host "Cleaned up obsolete file: $($file.Name) (Replaced by $destName)"
+            Write-Host "Cleaned up obsolete file: $($file.Name)"
+        }
+    }
+    
+    $existingRootFiles = Get-ChildItem -Path $distDir -Filter "$baseName-v14.*"
+    foreach ($file in $existingRootFiles) {
+        if ($file.Name -ne $destName) {
+            Remove-Item $file.FullName -Force
+            Write-Host "Cleaned up obsolete root file: $($file.Name)"
         }
     }
 }
