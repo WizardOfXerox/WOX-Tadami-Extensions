@@ -1411,23 +1411,6 @@
     ]
   },
   {
-    "name": "Aniyomi: ChineseAnime",
-    "pkg": "eu.kanade.tachiyomi.animeextension.all.chineseanime",
-    "apk": "aniyomi-all.chineseanime-v14.32.apk",
-    "lang": "all",
-    "code": 32,
-    "version": "14.32",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "ChineseAnime",
-        "lang": "all",
-        "id": "8639880285552928628",
-        "baseUrl": "https://www.chineseanime.vip"
-      }
-    ]
-  },
-  {
     "name": "Aniyomi: Cimaleek",
     "pkg": "eu.kanade.tachiyomi.animeextension.ar.cimaleek",
     "apk": "aniyomi-ar.cimaleek-v14.10.apk",
