@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.animeextension.all.animeonsen
 
 import eu.kanade.tachiyomi.network.GET
-import keiyoushi.utils.useAsJsoup
+import eu.kanade.tachiyomi.util.asJsoup
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -11,9 +11,10 @@ class SearchInterceptor(client: OkHttpClient, baseUrl: String, searchUrl: String
 
     private val token: String by lazy {
         runCatching {
-            val document = client.newCall(
+            val response = client.newCall(
                 GET(baseUrl),
-            ).execute().useAsJsoup()
+            ).execute()
+            val document = response.asJsoup()
 
             document.selectFirst("meta[name=ao-search-token]")?.attr("content") ?: ""
         }.getOrElse { "" }

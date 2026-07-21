@@ -1,5 +1,7 @@
 package eu.kanade.tachiyomi.animeextension.all.animeonsen
 
+import android.app.Application
+import android.content.SharedPreferences
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
 import eu.kanade.tachiyomi.animeextension.all.animeonsen.dto.AnimeDetails
@@ -19,17 +21,18 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
-import keiyoushi.utils.firstInstanceOrNull
-import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.parseAs
-import keiyoushi.utils.toJsonRequestBody
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import okhttp3.Headers
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import kotlin.math.roundToInt
 
 class AnimeOnsen :
@@ -48,6 +51,11 @@ class AnimeOnsen :
 
     override val supportsLatest = false
 
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
     override val client by lazy {
         network.client.newBuilder()
             .addInterceptor(AOAPIInterceptor(network.client, apiUrl))
@@ -55,7 +63,9 @@ class AnimeOnsen :
             .build()
     }
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
 
     override fun headersBuilder() = Headers.Builder()
         .add("User-Agent", AO_USER_AGENT)
@@ -74,7 +84,7 @@ class AnimeOnsen :
     override fun popularAnimeRequest(page: Int) = GET("$apiUrl/content/index?start=${(page - 1) * 30}&limit=30", headers)
 
     override fun popularAnimeParse(response: Response): AnimesPage {
-        val responseJson = response.parseAs<AnimeListResponse>()
+        val responseJson = json.decodeFromString<AnimeListResponse>(response.body.string())
         val animes = responseJson.content.map { it.toSAnime() }
         val hasNextPage = responseJson.cursor.next.firstOrNull()?.jsonPrimitive?.boolean == true
         return AnimesPage(animes, hasNextPage)
@@ -91,12 +101,12 @@ class AnimeOnsen :
         if (query.isNotBlank()) {
             val postBody = buildJsonObject {
                 put("q", query)
-            }.toJsonRequestBody()
+            }.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
 
             return POST("$searchUrl/indexes/content/search", headers, postBody)
         }
 
-        val genre = filters.firstInstanceOrNull<AnimeOnsenFilters.GenreFilter>()?.getValue()
+        val genre = filters.filterIsInstance<AnimeOnsenFilters.GenreFilter>().firstOrNull()?.getValue()
 
         return if (!genre.isNullOrBlank()) {
             GET("$apiUrl/content/index/genre/$genre", headers)
@@ -108,17 +118,18 @@ class AnimeOnsen :
 
     override fun searchAnimeParse(response: Response): AnimesPage {
         val requestUrl = response.request.url.toString()
+        val responseBody = response.body.string()
 
         return if (requestUrl.contains("indexes/content/search")) {
-            val searchResult = response.parseAs<MeilisearchResponse>().hits
+            val searchResult = json.decodeFromString<MeilisearchResponse>(responseBody).hits
             val results = searchResult.map { it.toSAnime() }
             AnimesPage(results, false)
         } else if (requestUrl.contains("/genre/")) {
-            val searchResult = response.parseAs<SearchResponse>().result
+            val searchResult = json.decodeFromString<SearchResponse>(responseBody).result
             val results = searchResult.map { it.toSAnime() }
             AnimesPage(results, false)
         } else {
-            val responseJson = response.parseAs<AnimeListResponse>()
+            val responseJson = json.decodeFromString<AnimeListResponse>(responseBody)
             val animes = responseJson.content.map { it.toSAnime() }
             val hasNextPage = responseJson.cursor.next.firstOrNull()?.jsonPrimitive?.boolean == true
             AnimesPage(animes, hasNextPage)
@@ -131,7 +142,7 @@ class AnimeOnsen :
     override fun getAnimeUrl(anime: SAnime) = "$baseUrl/details/${anime.url}"
 
     override fun animeDetailsParse(response: Response) = SAnime.create().apply {
-        val details = response.parseAs<AnimeDetails>()
+        val details = json.decodeFromString<AnimeDetails>(response.body.string())
         url = details.content_id
         title = when (preferredTitle) {
             "english" -> details.content_title_en ?: details.content_title!!
@@ -155,12 +166,12 @@ class AnimeOnsen :
 
         val subsList = try {
             val epsResponse = client.newCall(GET("$apiUrl/content/${details.content_id}/episodes", headers)).execute()
-            val epsJson = epsResponse.parseAs<Map<String, EpisodeDto>>()
+            val epsJson = json.decodeFromString<Map<String, EpisodeDto>>(epsResponse.body.string())
 
             val firstEpNum = epsJson.keys.firstOrNull()
             if (firstEpNum != null) {
                 val videoResponse = client.newCall(GET("$apiUrl/content/${details.content_id}/video/$firstEpNum", headers)).execute()
-                val videoData = videoResponse.parseAs<VideoData>()
+                val videoData = json.decodeFromString<VideoData>(videoResponse.body.string())
                 videoData.metadata.subtitles.values
             } else {
                 emptyList()
@@ -195,7 +206,7 @@ class AnimeOnsen :
         val contentId = response.request.url.toString().removeSuffix("/")
             .substringBeforeLast("/episodes")
             .substringAfterLast("/")
-        val responseJson = response.parseAs<Map<String, EpisodeDto>>()
+        val responseJson = json.decodeFromString<Map<String, EpisodeDto>>(response.body.string())
         return responseJson.map { (epNum, item) ->
             SEpisode.create().apply {
                 url = "$contentId/video/$epNum"
@@ -210,7 +221,7 @@ class AnimeOnsen :
 
     // ============================ Video Links =============================
     override fun videoListParse(response: Response): List<Video> {
-        val videoData = response.parseAs<VideoData>()
+        val videoData = json.decodeFromString<VideoData>(response.body.string())
         val videoUrl = videoData.uri.stream
         val subtitleLangs = videoData.metadata.subtitles
 
@@ -268,8 +279,8 @@ class AnimeOnsen :
         val sub = preferences.getString(PREF_SUB_KEY, PREF_SUB_DEFAULT)!!
 
         return entries.sortedWith(
-            compareBy { it.key.contains(sub) },
-        ).reversed()
+            compareByDescending<Map.Entry<String, String>> { it.key.contains(sub) },
+        )
     }
 
     companion object {
