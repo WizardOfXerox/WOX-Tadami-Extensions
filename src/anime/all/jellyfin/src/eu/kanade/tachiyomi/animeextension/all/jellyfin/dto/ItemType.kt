@@ -19,7 +19,9 @@ enum class ItemType {
     ;
 
     companion object {
-        fun fromString(value: String): ItemType = ItemType.entries.find { it.name.equals(value, ignoreCase = true) } ?: Other
+        fun fromString(value: String): ItemType {
+            return ItemType.entries.find { it.name.equals(value, ignoreCase = true) } ?: Other
+        }
     }
 }
 
@@ -30,5 +32,7 @@ object ItemTypeSerializer : KSerializer<ItemType> {
         encoder.encodeString(value.name)
     }
 
-    override fun deserialize(decoder: Decoder): ItemType = ItemType.fromString(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): ItemType {
+        return ItemType.fromString(decoder.decodeString())
+    }
 }

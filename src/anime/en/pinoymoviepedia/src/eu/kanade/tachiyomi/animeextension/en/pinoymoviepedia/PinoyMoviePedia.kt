@@ -10,7 +10,7 @@ import eu.kanade.tachiyomi.multisrc.dooplay.DooPlay
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.parallelFlatMapBlocking
+
 import okhttp3.FormBody
 import okhttp3.Request
 import okhttp3.Response
@@ -47,10 +47,10 @@ class PinoyMoviePedia :
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
         val players = document.select("ul#playeroptionsul li")
-        return players.parallelFlatMapBlocking { player ->
+        return players.flatMap { player ->
             val name = player.selectFirst("span.title")!!.text()
             val url = getPlayerUrl(player)
-                ?: return@parallelFlatMapBlocking emptyList<Video>()
+                ?: return@flatMap emptyList<Video>()
             extractVideos(url, name)
         }
     }

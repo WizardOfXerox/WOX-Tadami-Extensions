@@ -11,7 +11,10 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.getPreferencesLazy
+import android.app.Application
+import android.content.SharedPreferences
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.nodes.Document
@@ -29,7 +32,9 @@ class Xvideos :
 
     override val supportsLatest = false
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
 
     override fun popularAnimeSelector(): String = "div#main div#content div.mozaique.cust-nb-cols > div"
 
