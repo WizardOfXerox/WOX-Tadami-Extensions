@@ -44,7 +44,7 @@ class Anichi : ParsedAnimeHttpSource() {
         }
         .build()
 
-    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/anime?page=$page", headers)
+    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/", headers)
     override fun popularAnimeSelector(): String = "div.series-intro__poster, div.flw-item, div.postbody article, div.poster, div.item"
     override fun popularAnimeFromElement(element: Element): SAnime = SAnime.create().apply {
         val a = element.selectFirst("a")

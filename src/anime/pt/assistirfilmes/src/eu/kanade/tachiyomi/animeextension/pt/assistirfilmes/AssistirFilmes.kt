@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 
 class AssistirFilmes : ParsedAnimeHttpSource() {
     override val name = "AssistirFilmes"
-    override val baseUrl = "https://assistirfilmes.co"
+    override val baseUrl = "https://assistirfilmes.net"
     override val lang = "pt"
     override val supportsLatest = true
 
