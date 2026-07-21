@@ -35,6 +35,15 @@ import okhttp3.Request
 import okhttp3.Response
 import java.util.concurrent.TimeUnit
 
+
+    private inline fun <reified T> Response.safeParseAs(): T {
+        val bodyStr = body.string()
+        if (bodyStr.trim().startsWith("<")) {
+            throw java.io.IOException("Server returned HTML page instead of JSON. Please switch domain in Extension Settings.")
+        }
+        return keiyoushi.utils.parseAs<T>(bodyStr)
+    }
+
 class Animetsu :
     AnimeHttpSource(),
     ConfigurableAnimeSource {
@@ -668,7 +677,7 @@ class Animetsu :
 
     companion object {
         private const val PREF_DOMAIN_KEY = "preferred_domain"
-        private val DOMAIN_ENTRIES = listOf("animetsu.net", "animetsu.live", "animetsu.bz", "animetsu.cc")
+        private val DOMAIN_ENTRIES = listOf("animetsu.watch", "animetsu.app", "animetsu.cc", "animetsu.bz", "animetsu.live")
         private val DOMAIN_VALUES = DOMAIN_ENTRIES.map { "https://$it" }
 
         private const val PREF_TITLE_LANG_KEY = "preferred_title_lang"
