@@ -4697,5 +4697,22 @@
     ],
     "nsfw": 1,
     "version": "14.1"
+  },
+  {
+    "name": "Aniyomi: Torbox",
+    "pkg": "eu.kanade.tachiyomi.animeextension.all.torbox",
+    "apk": "aniyomi-all.torbox-v14.1.apk",
+    "lang": "all",
+    "code": 1,
+    "version": "14.1",
+    "nsfw": 0,
+    "sources": [
+      {
+        "name": "Torbox",
+        "lang": "all",
+        "id": "7819238419",
+        "baseUrl": "https://api.torbox.app"
+      }
+    ]
   }
 ]

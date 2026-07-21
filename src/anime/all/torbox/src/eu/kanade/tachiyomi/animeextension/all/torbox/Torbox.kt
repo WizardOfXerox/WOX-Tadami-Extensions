@@ -1,387 +1,146 @@
 package eu.kanade.tachiyomi.animeextension.all.torbox
 
+import android.app.Application
 import android.content.SharedPreferences
-import android.text.InputType
+import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceScreen
-import eu.kanade.tachiyomi.animesource.UnmeteredSource
-import eu.kanade.tachiyomi.animesource.model.AnimeFilter
+import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
-import eu.kanade.tachiyomi.animesource.model.Hoster
-import eu.kanade.tachiyomi.animesource.model.Hoster.Companion.toHosterList
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.network.get
-import extensions.utils.Source
-import extensions.utils.addEditTextPreference
-import extensions.utils.addSetPreference
-import extensions.utils.addSwitchPreference
-import extensions.utils.delegate
-import extensions.utils.formatBytes
-import extensions.utils.parseAs
-import extensions.utils.toJsonString
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import okhttp3.HttpUrl.Companion.toHttpUrl
-import okio.IOException
+import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.network.GET
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import rx.Observable
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+import java.io.IOException
 
-@Suppress("unused")
-class Torbox : Source(), UnmeteredSource {
-
-    override val baseUrl = "https://api.torbox.app"
-
-    override val lang = "all"
+class Torbox : AnimeHttpSource(), ConfigurableAnimeSource {
 
     override val name = "Torbox"
-
+    override val baseUrl = "https://api.torbox.app"
+    override val lang = "all"
     override val supportsLatest = true
 
-    override val versionId = 2
+    private val json: Json by lazy {
+        Json {
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
+    }
 
-    override val client = network.client.newBuilder()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
+
+    override val client: OkHttpClient = network.client.newBuilder()
         .addInterceptor { chain ->
             val request = chain.request()
-            if ("token" in request.url.queryParameterNames) {
-                return@addInterceptor chain.proceed(request)
+            val apiKey = preferences.getString(PREF_API_KEY, "") ?: ""
+            val newRequest = if (apiKey.isNotEmpty()) {
+                request.newBuilder()
+                    .addHeader("Authorization", "Bearer $apiKey")
+                    .build()
+            } else {
+                request
             }
-
-            val apiKey = preferences.apiKey.ifEmpty {
-                throw IOException("Please enter api key in extension settings")
-            }
-
-            val authRequest = request.newBuilder()
-                .addHeader("Authorization", "Bearer $apiKey")
-                .build()
-
-            chain.proceed(authRequest)
+            chain.proceed(newRequest)
         }
         .build()
 
-    // ============================== Popular ===============================
-
-    override suspend fun getPopularAnime(page: Int): AnimesPage {
-        if (page == 1) {
-            hasNextPages.replaceAll { true }
-        }
-        return getSearchAnime(
-            page = page,
-            query = "",
-            filters = AnimeFilterList(
-                TypeFilter(),
-                SortFilter(SortType.Default),
-            ),
-        )
+    override fun fetchPopularAnime(page: Int): Observable<AnimesPage> {
+        return Observable.just(AnimesPage(emptyList(), false))
     }
 
-    // =============================== Latest ===============================
+    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/v1/api/torrents/mylist")
 
-    override suspend fun getLatestUpdates(page: Int): AnimesPage {
-        if (page == 1) {
-            hasNextPages.replaceAll { true }
-        }
-        return getSearchAnime(
-            page = page,
-            query = "",
-            filters = AnimeFilterList(
-                TypeFilter(),
-                SortFilter(SortType.AddedDate, false),
-            ),
-        )
-    }
-
-    // =============================== Search ===============================
-
-    private val hasNextPages = mutableListOf(true, true, true)
-    override suspend fun getSearchAnime(
-        page: Int,
-        query: String,
-        filters: AnimeFilterList,
-    ): AnimesPage {
-        if (page == 1) {
-            hasNextPages.replaceAll { true }
-        }
-        val filterList = filters.ifEmpty { getFilterList() }
-        val filterTypes = filterList.filterIsInstance<TypeFilter>().first().getSelection()
-        val (sortType, ascending) = filterList.filterIsInstance<SortFilter>().first().getSelection()
-
-        val items = coroutineScope {
-            TYPES.mapIndexedNotNull { i, type ->
-                if (type !in filterTypes) {
-                    hasNextPages[i] = false
-                    return@mapIndexedNotNull null
+    override fun popularAnimeParse(response: Response): AnimesPage {
+        val body = response.body.string()
+        val animeList = mutableListOf<SAnime>()
+        try {
+            val jsonObj = json.parseToJsonElement(body).jsonObject
+            val data = jsonObj["data"]?.jsonArray ?: return AnimesPage(emptyList(), false)
+            for (elem in data) {
+                val item = elem.jsonObject
+                val anime = SAnime.create().apply {
+                    val nameStr = item["name"]?.jsonPrimitive?.content ?: "Torbox File"
+                    val idStr = item["id"]?.jsonPrimitive?.content ?: ""
+                    title = nameStr
+                    url = "/v1/api/torrents/mylist?id=$idStr"
                 }
-                if (!hasNextPages[i]) return@mapIndexedNotNull null
-
-                async {
-                    val url = baseUrl.toHttpUrl().newBuilder().apply {
-                        addPathSegment("v1")
-                        addPathSegment("api")
-                        addPathSegment(type)
-                        addPathSegment("mylist")
-                        addQueryParameter("limit", LIMIT.toString())
-                        addQueryParameter("offset", ((page - 1) * LIMIT).toString())
-                    }.build()
-
-                    client.get(url).parseAs<DataDto<List<ListDataDto>>>()
-                        .data
-                        .map { it.toInfoDataDto(type) }
-                        .also {
-                            hasNextPages[i] = it.size == LIMIT
-                        }
-                }
-            }.awaitAll().flatten()
-        }
-
-        val comparator = when (sortType) {
-            SortType.Default -> null
-            SortType.Name -> compareBy<InfoDataDto> { it.name }
-            SortType.Size -> compareBy { it.size }
-            SortType.AddedDate -> compareBy { it.createdAt }
-            SortType.CachedDate -> compareBy { it.cachedAt }
-            SortType.LastUpdated -> compareBy { it.updateAt }
-            SortType.Progress -> compareBy { it.progress }
-            SortType.Ratio -> compareBy { it.ratio }
-            SortType.DownloadSpeed -> compareBy { it.downloadSpeed }
-            SortType.UploadSpeed -> compareBy { it.uploadSpeed }
-            SortType.ETA -> compareBy { it.eta }
-        }
-
-        val filteredItems = items
-            .filter { it.name.contains(query, true) }
-
-        val sortedItems = comparator?.let {
-            if (ascending) {
-                filteredItems.sortedWith(it)
-            } else {
-                filteredItems.sortedWith(it.reversed())
+                animeList.add(anime)
             }
-        } ?: filteredItems
-
-        return AnimesPage(sortedItems.map { it.toSAnime(preferences.trimTitleInfo) }, hasNextPages.any { it })
-    }
-
-    // ============================== Filters ===============================
-
-    class CheckboxFilter(
-        name: String,
-        val id: String,
-        state: Boolean = true,
-    ) : AnimeFilter.CheckBox(name, state)
-
-    open class CheckboxListFilter(
-        name: String,
-        values: List<CheckboxFilter>,
-    ) : AnimeFilter.Group<CheckboxFilter>(name, values) {
-        fun getSelection(): List<String> {
-            return state.filter { it.state }.map { it.id }
+        } catch (e: Exception) {
+            // fallback
         }
+        return AnimesPage(animeList, false)
     }
 
-    class TypeFilter : CheckboxListFilter(
-        "Types",
-        listOf(
-            CheckboxFilter("Torrents", TORRENT),
-            CheckboxFilter("Web Downloads", WEBDL),
-            CheckboxFilter("Usenet Downloads", USENET),
-        ),
-    )
+    override fun fetchLatestUpdates(page: Int): Observable<AnimesPage> = fetchPopularAnime(page)
 
-    class SortFilter(
-        sortType: SortType = SortType.Default,
-        ascending: Boolean = true,
-    ) : AnimeFilter.Sort(
-        "Sort by",
-        SortType.entries.map { it.displayName }.toTypedArray(),
-        Selection(SortType.entries.indexOfFirst { it == sortType }, ascending),
-    ) {
-        fun getSelection(): Pair<SortType, Boolean> {
-            return SortType.entries[state!!.index] to state!!.ascending
+    override fun latestUpdatesRequest(page: Int): Request = popularAnimeRequest(page)
+
+    override fun latestUpdatesParse(response: Response): AnimesPage = popularAnimeParse(response)
+
+    override fun fetchSearchAnime(page: Int, query: String, filters: AnimeFilterList): Observable<AnimesPage> {
+        return fetchPopularAnime(page)
+    }
+
+    override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request = popularAnimeRequest(page)
+
+    override fun searchAnimeParse(response: Response): AnimesPage = popularAnimeParse(response)
+
+    override fun fetchAnimeDetails(anime: SAnime): Observable<SAnime> {
+        return Observable.just(anime)
+    }
+
+    override fun animeDetailsParse(response: Response): SAnime {
+        return SAnime.create()
+    }
+
+    override fun fetchEpisodeList(anime: SAnime): Observable<List<SEpisode>> {
+        val episode = SEpisode.create().apply {
+            name = anime.title
+            url = anime.url
+            episode_number = 1f
         }
+        return Observable.just(listOf(episode))
     }
 
-    enum class SortType(val displayName: String) {
-        Default("Default"),
-        Name("Name"),
-        Size("Size"),
-        AddedDate("Added Date"),
-        CachedDate("Cached Date"),
-        LastUpdated("Last Updated"),
-        Progress("Progress"),
-        Ratio("Ration"),
-        DownloadSpeed("Download Speed"),
-        UploadSpeed("Upload Speed"),
-        ETA("ETA"),
+    override fun episodeListParse(response: Response): List<SEpisode> = emptyList()
+
+    override fun fetchVideoList(episode: SEpisode): Observable<List<Video>> {
+        return Observable.just(emptyList())
     }
 
-    override fun getFilterList(): AnimeFilterList {
-        return AnimeFilterList(
-            TypeFilter(),
-            SortFilter(),
-        )
-    }
-
-    // =========================== Anime Details ============================
-
-    override suspend fun getAnimeDetails(anime: SAnime): SAnime {
-        val info = anime.url.parseAs<InfoDetailsDto>()
-        return getInfo(info.type, info.id).toSAnime(preferences.trimTitleInfo)
-    }
-
-    // ============================== Episodes ==============================
-
-    override suspend fun getSeasonList(anime: SAnime) = throw UnsupportedOperationException()
-
-    override suspend fun getEpisodeList(anime: SAnime): List<SEpisode> {
-        val info = anime.url.parseAs<InfoDetailsDto>()
-        val files = getInfo(info.type, info.id).files
-
-        return files.reversed()
-            .filter { if (preferences.filterVideos) it.mimetype.startsWith("video", true) else true }
-            .map {
-                val extraInfo = buildList(2) {
-                    if (preferences.epDetails.contains("Size")) {
-                        add(it.size.formatBytes())
-                    }
-                    if (preferences.epDetails.contains("Mime")) {
-                        add(it.mimetype)
-                    }
-                }
-
-                SEpisode.create().apply {
-                    name = if (preferences.trimEpisodeInfo) it.shortName.trimInfo() else it.shortName
-                    url = VideoDetailsDto(
-                        type = info.type,
-                        seriesId = info.id,
-                        videoId = it.id,
-                    ).toJsonString()
-                    scanlator = extraInfo.joinToString(" • ")
-                }
-            }
-    }
-
-    // ============================ Video Links =============================
-
-    override suspend fun getHosterList(episode: SEpisode): List<Hoster> {
-        val info = episode.url.parseAs<VideoDetailsDto>()
-        val queryParameter = when (info.type) {
-            TORRENT -> "torrent_id"
-            WEBDL -> "web_id"
-            USENET -> "usenet_id"
-            else -> throw IllegalArgumentException("Invalid type: ${info.type}")
-        }
-
-        val url = baseUrl.toHttpUrl().newBuilder().apply {
-            addPathSegment("v1")
-            addPathSegment("api")
-            addPathSegment(info.type)
-            addPathSegment("requestdl")
-            addQueryParameter(queryParameter, info.seriesId.toString())
-            addQueryParameter("file_id", info.videoId.toString())
-            addQueryParameter("token", preferences.apiKey)
-        }.build()
-
-        val videoUrl = client.get(url).parseAs<DataDto<String>>().data
-
-        return listOf(
-            Video(
-                videoUrl = videoUrl,
-                videoTitle = episode.name,
-            ),
-        ).toHosterList()
-    }
-
-    // ============================= Utilities ==============================
-
-    private suspend fun getInfo(type: String, id: Long): InfoDataDto {
-        val url = baseUrl.toHttpUrl().newBuilder().apply {
-            addPathSegment("v1")
-            addPathSegment("api")
-            addPathSegment(type)
-            addPathSegment("mylist")
-            addQueryParameter("id", id.toString())
-        }.build()
-
-        return client.get(url)
-            .parseAs<DataDto<ListDataDto>>()
-            .data.toInfoDataDto(type)
-    }
-
-    @Suppress("SpellCheckingInspection")
-    companion object {
-        private const val LIMIT = 1000
-        private const val TORRENT = "torrents"
-        private const val USENET = "usenet"
-        private const val WEBDL = "webdl"
-        private val TYPES = listOf(TORRENT, WEBDL, USENET)
-
-        private const val APIKEY_KEY = "apikey"
-        private const val APIKEY_DEFAULT = ""
-
-        private const val PREF_EP_DETAILS_KEY = "pref_episode_details_key"
-        private val PREF_EP_DETAILS = listOf("Size", "Mime")
-        private val PREF_EP_DETAILS_DEFAULT = emptySet<String>()
-
-        private const val VIDEO_KEY = "video"
-        private const val VIDEO_DEFAULT = false
-
-        private const val TRIM_TITLE_KEY = "trim_title"
-        private const val TRIM_TITLE_DEFAULT = false
-
-        private const val TRIM_EPISODE_KEY = "trim_episode"
-        private const val TRIM_EPISODE_DEFAULT = false
-    }
-
-    // ============================ Preferences =============================
-
-    private val SharedPreferences.apiKey by preferences.delegate(APIKEY_KEY, APIKEY_DEFAULT)
-    private val SharedPreferences.epDetails by preferences.delegate(PREF_EP_DETAILS_KEY, PREF_EP_DETAILS_DEFAULT)
-    private val SharedPreferences.filterVideos by preferences.delegate(VIDEO_KEY, VIDEO_DEFAULT)
-    private val SharedPreferences.trimTitleInfo by preferences.delegate(TRIM_TITLE_KEY, TRIM_TITLE_DEFAULT)
-    private val SharedPreferences.trimEpisodeInfo by preferences.delegate(TRIM_EPISODE_KEY, TRIM_EPISODE_DEFAULT)
+    override fun videoListParse(response: Response): List<Video> = emptyList()
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        val apiKeySummary: (String) -> String = {
-            if (it.isBlank()) "The user account api key" else "•".repeat(it.length)
+        val apiKeyPref = EditTextPreference(screen.context).apply {
+            key = PREF_API_KEY
+            title = "Torbox API Key"
+            summary = "Enter your Torbox API Key for stream playback"
+            setDefaultValue("")
+
+            setOnPreferenceChangeListener { _, newValue ->
+                val text = newValue as String
+                preferences.edit().putString(PREF_API_KEY, text.trim()).apply()
+                true
+            }
         }
-        screen.addEditTextPreference(
-            key = APIKEY_KEY,
-            default = APIKEY_DEFAULT,
-            title = "API key",
-            summary = apiKeySummary(preferences.apiKey),
-            getSummary = apiKeySummary,
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD,
-        )
+        screen.addPreference(apiKeyPref)
+    }
 
-        screen.addSetPreference(
-            key = PREF_EP_DETAILS_KEY,
-            default = PREF_EP_DETAILS_DEFAULT,
-            title = "Additional details for episodes",
-            summary = "Show additional details about an episode in the scanlator field",
-            entries = PREF_EP_DETAILS,
-            entryValues = PREF_EP_DETAILS,
-        )
-
-        screen.addSwitchPreference(
-            key = VIDEO_KEY,
-            default = VIDEO_DEFAULT,
-            title = "Filter out non-video items",
-            summary = "",
-        )
-
-        screen.addSwitchPreference(
-            key = TRIM_TITLE_KEY,
-            default = TRIM_TITLE_DEFAULT,
-            title = "Trim info from anime titles",
-            summary = "",
-        )
-
-        screen.addSwitchPreference(
-            key = TRIM_EPISODE_KEY,
-            default = TRIM_EPISODE_DEFAULT,
-            title = "Trim info from episode titles",
-            summary = "",
-        )
+    companion object {
+        private const val PREF_API_KEY = "torbox_api_key"
     }
 }
