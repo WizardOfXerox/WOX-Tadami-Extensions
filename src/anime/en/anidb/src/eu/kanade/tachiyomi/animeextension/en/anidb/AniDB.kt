@@ -41,7 +41,7 @@ class AniDB :
 
     private val preferences by getPreferencesLazy()
 
-    override val client: OkHttpClient = network.client.newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .build()

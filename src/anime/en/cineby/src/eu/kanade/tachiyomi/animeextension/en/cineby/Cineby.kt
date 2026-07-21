@@ -382,7 +382,7 @@ class Cineby :
     }
 
     // ========================== Related Titles ============================
-    override fun relatedAnimeListRequest(anime: SAnime): Request {
+    fun relatedAnimeListRequest(anime: SAnime): Request {
         val (type, id) = animeUrlToId(anime)
         val url = apiUrl.toHttpUrl().newBuilder().apply {
             addPathSegment(type)

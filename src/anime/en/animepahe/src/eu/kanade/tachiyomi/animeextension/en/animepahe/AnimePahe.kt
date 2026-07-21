@@ -238,7 +238,7 @@ class AnimePahe :
     override fun latestUpdatesRequest(page: Int) = throw UnsupportedOperationException()
 
     // =============================== Relation/Suggestions ===============================
-    override fun relatedAnimeListRequest(anime: SAnime) = animeDetailsRequest(anime)
+    fun relatedAnimeListRequest(anime: SAnime) = animeDetailsRequest(anime)
 
     override fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.useAsJsoup()

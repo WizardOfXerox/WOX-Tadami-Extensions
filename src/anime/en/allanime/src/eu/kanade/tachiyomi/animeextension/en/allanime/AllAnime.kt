@@ -151,7 +151,7 @@ class AllAnime :
 
     override fun searchAnimeParse(response: Response): AnimesPage = parseAnime(response)
 
-    override fun relatedAnimeListRequest(anime: SAnime): Request {
+    fun relatedAnimeListRequest(anime: SAnime): Request {
         val genres = anime.genre!!
             .split(",")
             .map { it.trim() }

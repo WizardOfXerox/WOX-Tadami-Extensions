@@ -47,7 +47,7 @@ class AV1Encodes :
     private val prefQuality: String
         get() = preferences.getString(PREF_QUALITY_KEY, PREF_QUALITY_DEFAULT)!!
 
-    override val client: OkHttpClient = network.client.newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
         .dispatcher(Dispatcher().apply { maxRequestsPerHost = 10 })
         .build()
 

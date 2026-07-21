@@ -215,7 +215,7 @@ class Animelib :
     override fun animeDetailsParse(response: Response) = response.parseAs<AnimeInfo>().data.toSAnime()
 
     // =============================== Related ===============================
-    override fun relatedAnimeListRequest(anime: SAnime): Request {
+    fun relatedAnimeListRequest(anime: SAnime): Request {
         val url = apiUrl.toHttpUrl().newBuilder()
         url.addPathSegment("anime")
         url.addPathSegment(anime.url)

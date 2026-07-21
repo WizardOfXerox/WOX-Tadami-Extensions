@@ -202,7 +202,7 @@ class KickAssAnime :
         }
     }
 
-    override fun relatedAnimeListRequest(anime: SAnime) = GET(getAnimeUrl(anime))
+    fun relatedAnimeListRequest(anime: SAnime) = GET(getAnimeUrl(anime))
 
     override fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.asJsoup()

@@ -25,7 +25,7 @@ class DASHFLIX : ParsedAnimeHttpSource() {
     private data class VideoTag(val epUrl: String, val epNumber: Float)
 
     // Resilient OkHttp Client with Rate Limiting & Custom Error Interceptor
-    override val client: OkHttpClient = network.client.newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
         .addInterceptor(RateLimitInterceptor(2, 1, TimeUnit.SECONDS))
         .addInterceptor { chain ->
             val response = chain.proceed(chain.request())

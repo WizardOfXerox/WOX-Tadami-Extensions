@@ -87,7 +87,7 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
 
     override val id: Long = 527189562810L
 
-    override val client: OkHttpClient = network.client.newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
         .retryOnConnectionFailure(true)
         .addInterceptor { chain ->
             val request = chain.request()
