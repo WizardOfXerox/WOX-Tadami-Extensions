@@ -1,5 +1,16 @@
 package eu.kanade.tachiyomi.animeextension.all.missav
 
+import android.app.Application
+import android.content.SharedPreferences
+import androidx.preference.ListPreference
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
 import android.util.Log
 import androidx.preference.PreferenceScreen
 import eu.kanade.tachiyomi.lib.javcoverfetcher.JavCoverFetcher
@@ -17,12 +28,6 @@ import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.util.asJsoup
 import eu.kanade.tachiyomi.lib.m3u8server.M3u8Integration
 import eu.kanade.tachiyomi.lib.unpacker.Unpacker
-import keiyoushi.utils.LazyMutable
-import keiyoushi.utils.addListPreference
-import keiyoushi.utils.delegate
-import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.parseAs
-import keiyoushi.utils.toJsonRequestBody
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
@@ -40,29 +45,27 @@ class MissAV :
 
     override val lang = "all"
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_\$id", 0)
+    }
+    private val json = Json { ignoreUnknownKeys = true }
 
     private val m3u8Integration by lazy {
         M3u8Integration(client)
     }
 
-    override var baseUrl: String
-        by preferences.delegate(PREF_DOMAIN_KEY, PREF_DOMAIN_DEFAULT)
+    override var baseUrl: String = PREF_DOMAIN_DEFAULT
 
     override val supportsLatest = true
 
-    private var docHeaders by LazyMutable {
-        newHeaders()
-    }
+    private var docHeaders: Headers = newHeaders()
 
     private fun newHeaders(): Headers = headers.newBuilder().apply {
         set("Origin", baseUrl)
         set("Referer", "$baseUrl/")
     }.build()
 
-    private var playlistExtractor by LazyMutable {
-        PlaylistUtils(client, docHeaders)
-    }
+    private var playlistExtractor: PlaylistUtils = PlaylistUtils(client, docHeaders)
 
     override fun popularAnimeRequest(page: Int) = GET("$baseUrl/en/today-hot?page=$page", docHeaders)
 
@@ -90,10 +93,13 @@ class MissAV :
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
         val url = baseUrl.toHttpUrl().newBuilder().apply {
+            val subRoute = filters.firstInstanceOrNull<SubtitleFilter>()?.selected
             val genre = filters.firstInstanceOrNull<GenreList>()?.selected
             if (query.isNotEmpty()) {
                 addEncodedPathSegments("en/search")
                 addPathSegment(query.trim())
+            } else if (subRoute != null) {
+                addEncodedPathSegments(subRoute)
             } else if (genre != null) {
                 addEncodedPathSegments(genre)
             } else {
@@ -125,7 +131,7 @@ class MissAV :
                         throw Exception("No more results found")
                     }
 
-                    val data = it.body.string().parseAs<RecommendationsResponse>()
+                    val data = json.decodeFromString<RecommendationsResponse>(it.body.string())
                     recommMap[query] = data.recommId
                     return data.toAnimePage()
                 }
@@ -151,12 +157,10 @@ class MissAV :
     private fun fallbackApiSearch(query: String, page: Int): Request {
         val recommId = recommMap[query]
         return if (page == 1 || recommId == null) {
-            val body = MissAvApi.searchData(query)
-                .toJsonRequestBody()
+            val body = json.encodeToString(MissAvApi.searchData(query)).toRequestBody("application/json".toMediaType())
             POST(MissAvApi.searchURL(getUuid()), docHeaders, body)
         } else {
-            val body = MissAvApi.recommData
-                .toJsonRequestBody()
+            val body = json.encodeToString(MissAvApi.recommData).toRequestBody("application/json".toMediaType())
             POST(MissAvApi.recommURL(recommId), docHeaders, body)
         }
     }
@@ -233,34 +237,37 @@ class MissAV :
 
     override fun List<Video>.sort(): List<Video> {
         val quality = preferences.getString(PREF_QUALITY, PREF_QUALITY_DEFAULT)!!
-
-        return sortedWith(
-            compareBy { it.quality.contains(quality) },
-        ).reversed()
+        return sortedWith(compareByDescending { it.quality.contains(quality) })
     }
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        screen.addListPreference(
-            key = PREF_DOMAIN_KEY,
-            title = PREF_DOMAIN_TITLE,
-            entries = PREF_DOMAIN_ENTRIES,
-            entryValues = PREF_DOMAIN_ENTRIES,
-            default = PREF_DOMAIN_DEFAULT,
-            summary = "%s",
-        ) {
-            baseUrl = it
-            docHeaders = newHeaders()
-            playlistExtractor = PlaylistUtils(client, docHeaders)
-        }
+        ListPreference(screen.context).apply {
+            key = PREF_DOMAIN_KEY
+            title = PREF_DOMAIN_TITLE
+            entries = PREF_DOMAIN_ENTRIES.toTypedArray()
+            entryValues = PREF_DOMAIN_ENTRIES.toTypedArray()
+            setDefaultValue(PREF_DOMAIN_DEFAULT)
+            summary = "%s"
+            setOnPreferenceChangeListener { _, newValue ->
+                val domain = newValue as String
+                baseUrl = domain
+                docHeaders = newHeaders()
+                playlistExtractor = PlaylistUtils(client, docHeaders)
+                true
+            }
+        }.also(screen::addPreference)
 
-        screen.addListPreference(
-            key = PREF_QUALITY,
-            title = PREF_QUALITY_TITLE,
-            entries = PREF_QUALITY_ENTRIES,
-            entryValues = PREF_QUALITY_VALUES,
-            default = PREF_QUALITY_DEFAULT,
-            summary = "%s",
-        )
+        ListPreference(screen.context).apply {
+            key = PREF_QUALITY
+            title = PREF_QUALITY_TITLE
+            entries = PREF_QUALITY_ENTRIES.toTypedArray()
+            entryValues = PREF_QUALITY_VALUES.toTypedArray()
+            setDefaultValue(PREF_QUALITY_DEFAULT)
+            summary = "%s"
+            setOnPreferenceChangeListener { _, newValue ->
+                preferences.edit().putString(PREF_QUALITY, newValue as String).commit()
+            }
+        }.also(screen::addPreference)
 
         JavCoverFetcher.addPreferenceToScreen(screen)
     }

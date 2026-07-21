@@ -146,7 +146,11 @@ internal object RouVideoDto {
         val viewCount: Int,
         val likeCount: Int?, // not available in search & relatedVideos
         val duration: Float, // in seconds
-        val coverImageUrl: String,
+        val coverImageUrl: String? = null,
+        val coverImage: String? = null,
+        val thumbnail: String? = null,
+        val previewImageUrl: String? = null,
+        val posterUrl: String? = null,
         val nameZh: String?,
         val tagZh: List<String>?,
         val sources: List<Source>?, // not available in details
@@ -165,7 +169,12 @@ internal object RouVideoDto {
         fun toSAnime(): SAnime = SAnime.create().apply {
             url = id
             title = name
-            thumbnail_url = coverImageUrl
+            val rawCover = coverImageUrl ?: coverImage ?: thumbnail ?: previewImageUrl ?: posterUrl ?: "https://rou.video/uploads/$id/cover.jpg"
+            thumbnail_url = when {
+                rawCover.startsWith("//") -> "https:$rawCover"
+                rawCover.startsWith("/") -> "https://rou.video$rawCover"
+                else -> rawCover
+            }
             artist = majorCategory
             author = majorCategory
             description = desc

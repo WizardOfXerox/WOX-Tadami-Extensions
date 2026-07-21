@@ -1,5 +1,10 @@
 package eu.kanade.tachiyomi.animeextension.all.nyaatorrent
 
+import android.app.Application
+import android.content.SharedPreferences
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
 import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceScreen
@@ -16,7 +21,6 @@ import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.torrentutils.TorrentUtils
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.getPreferencesLazy
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
@@ -40,7 +44,9 @@ class NyaaTorrent(extName: String, private val extURL: String, private val extId
 
     override val lang = "all"
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_\$id", 0)
+    }
 
     override val supportsLatest = true
 
@@ -52,9 +58,13 @@ class NyaaTorrent(extName: String, private val extURL: String, private val extId
     private val animeNextPageSelector = "ul.pagination a[rel='next']"
     private fun animeFromElement(element: Element): SAnime {
         val anime = SAnime.create()
+        val link = element.select("td:nth-child(2) a:not(.comments)")
         anime.setUrlWithoutDomain(element.select("td:nth-child(2) a").attr("href"))
-        anime.title = element.select("td:nth-child(2) a:not(.comments)").attr("title")
-        // anime.thumbnail_url = "$baseUrl/" + element.select("td:nth-child(1) img").attr("src")
+        anime.title = link.attr("title").ifBlank { link.text() }
+        val iconSrc = element.select("td:nth-child(1) img").attr("abs:src")
+        if (iconSrc.isNotBlank()) {
+            anime.thumbnail_url = iconSrc
+        }
         return anime
     }
 
@@ -147,11 +157,15 @@ class NyaaTorrent(extName: String, private val extURL: String, private val extId
         val desc = document.select("#torrent-description").text()
         anime.description = desc
         anime.author = document.select("a[title=user]").text()
-        val imageRegex = Regex("""\b(http|https)?:\S+(?:jpg|png|gif|bmp|webp|tiff|jpeg)(?!\.html)\b""", RegexOption.IGNORE_CASE)
-        val match = imageRegex.find(desc)
-
-        if (match != null) {
-            anime.thumbnail_url = match.value
+        val descImg = document.selectFirst("#torrent-description img")?.attr("abs:src")
+        if (!descImg.isNullOrBlank()) {
+            anime.thumbnail_url = descImg
+        } else {
+            val imageRegex = Regex("""\b(http|https)?:\S+(?:jpg|png|gif|bmp|webp|tiff|jpeg)(?!\.html)\b""", RegexOption.IGNORE_CASE)
+            val match = imageRegex.find(desc)
+            if (match != null) {
+                anime.thumbnail_url = match.value
+            }
         }
         return anime
     }
@@ -280,16 +294,43 @@ class NyaaTorrent(extName: String, private val extURL: String, private val extId
     private class CategoriesList(availableCategories: Array<String>) : AnimeFilter.Select<String>("Category", availableCategories)
     private val availableCategories = if (extId == 1) {
         listOf(
-            Category("All", "1_0"),
-            Category("Anime Music Video", "1_1"),
-            Category("English-translated", "1_2"),
-            Category("Non-English-translated", "1_3"),
-            Category("Raw", "1_4"),
+            Category("All Categories", "0_0"),
+            Category("Anime - All", "1_0"),
+            Category("Anime - Anime Music Video", "1_1"),
+            Category("Anime - English-translated", "1_2"),
+            Category("Anime - Non-English-translated", "1_3"),
+            Category("Anime - Raw", "1_4"),
+            Category("Audio - All", "2_0"),
+            Category("Audio - Lossless", "2_1"),
+            Category("Audio - Lossy", "2_2"),
+            Category("Literature - All", "3_0"),
+            Category("Literature - English-translated", "3_1"),
+            Category("Literature - Non-English-translated", "3_2"),
+            Category("Literature - Raw", "3_3"),
+            Category("Live Action - All", "4_0"),
+            Category("Live Action - English-translated", "4_1"),
+            Category("Live Action - Idol/PV", "4_2"),
+            Category("Live Action - Non-English-translated", "4_3"),
+            Category("Live Action - Raw", "4_4"),
+            Category("Pictures - All", "5_0"),
+            Category("Pictures - Graphics", "5_1"),
+            Category("Pictures - Photos", "5_2"),
+            Category("Software - All", "6_0"),
+            Category("Software - Applications", "6_1"),
+            Category("Software - Games", "6_2"),
         )
     } else {
         listOf(
-            Category("Anime", "1_1"),
-            Category("Real Life", "2_2"),
+            Category("All Categories", "0_0"),
+            Category("Art - All", "1_0"),
+            Category("Art - Anime", "1_1"),
+            Category("Art - Doujinshi", "1_2"),
+            Category("Art - Games", "1_3"),
+            Category("Art - Manga", "1_4"),
+            Category("Art - Pictures", "1_5"),
+            Category("Real Life - All", "2_0"),
+            Category("Real Life - Photobooks / Pictures", "2_1"),
+            Category("Real Life - Videos", "2_2"),
         )
     }
 

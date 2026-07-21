@@ -1,27 +1,29 @@
 package eu.kanade.tachiyomi.animeextension.all.javguru
 
+import android.app.Application
+import android.content.SharedPreferences
 import android.util.Base64
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.javcoverfetcher.JavCoverFetcher
-import aniyomi.lib.javcoverfetcher.JavCoverFetcher.fetchHDCovers
-import aniyomi.lib.mixdropextractor.MixDropExtractor
-import aniyomi.lib.streamtapeextractor.StreamTapeExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
 import eu.kanade.tachiyomi.animeextension.all.javguru.extractors.EmTurboExtractor
 import eu.kanade.tachiyomi.animeextension.all.javguru.extractors.MaxStreamExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
+import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.javcoverfetcher.JavCoverFetcher
+import eu.kanade.tachiyomi.lib.javcoverfetcher.JavCoverFetcher.fetchHDCovers
+import eu.kanade.tachiyomi.lib.mixdropextractor.MixDropExtractor
+import eu.kanade.tachiyomi.lib.streamtapeextractor.StreamTapeExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.await
 import eu.kanade.tachiyomi.network.awaitSuccess
 import keiyoushi.utils.addListPreference
-import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import keiyoushi.utils.parallelMapNotNullBlocking
 import keiyoushi.utils.tryParse
@@ -32,6 +34,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.select.Elements
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.min
@@ -56,7 +60,9 @@ class JavGuru :
         .followRedirects(false)
         .build()
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
 
     @Volatile
     private lateinit var popularElements: Elements
@@ -75,7 +81,6 @@ class JavGuru :
 
     override fun popularAnimeParse(response: Response): AnimesPage {
         popularElements = response.useAsJsoup().select(".rank-item")
-
         return cachedPopularAnimeParse(1)
     }
 
@@ -99,7 +104,6 @@ class JavGuru :
 
     override fun latestUpdatesRequest(page: Int): Request {
         val url = baseUrl + if (page > 1) "/page/$page/" else ""
-
         return GET(url, headers)
     }
 
@@ -128,7 +132,7 @@ class JavGuru :
         return AnimesPage(entries, page < lastPage)
     }
 
-    // ========================= Search =========================
+    // ========================= Search & Combined Filters =========================
 
     override suspend fun getSearchAnime(page: Int, query: String, filters: AnimeFilterList): AnimesPage {
         val queryUrl = query.toHttpUrlOrNull()
@@ -158,53 +162,51 @@ class JavGuru :
             }
         }
 
-        if (query.isNotEmpty()) {
-            return client.newCall(searchAnimeRequest(page, query, filters))
+        if (query.isNotBlank()) {
+            val pageResult = client.newCall(searchAnimeRequest(page, query, filters))
                 .awaitSuccess()
                 .use(::searchAnimeParse)
+
+            val filterUrlPart = getSelectedFilterUrlPart(filters)
+            if (filterUrlPart.isEmpty()) return pageResult
+
+            val filterKeyword = filterUrlPart.substringAfterLast('/').replace("-", " ")
+            val filteredEntries = pageResult.animes.filter { anime ->
+                anime.title.contains(filterKeyword, ignoreCase = true) ||
+                    (anime.genre?.contains(filterKeyword, ignoreCase = true) == true)
+            }
+            return AnimesPage(filteredEntries.ifEmpty { pageResult.animes }, pageResult.hasNextPage)
         } else {
-            val selectedTags = filters.filterIsInstance<TagGroup>().firstOrNull()?.state?.filter { it.state } ?: emptyList()
-            if (selectedTags.isNotEmpty()) {
-                val combinedSlug = selectedTags.joinToString("+") { it.urlPart.trim('/').substringAfterLast('/') }
-                val url = "$baseUrl/tag/$combinedSlug/" + if (page > 1) "page/$page/" else ""
-                val request = GET(url, headers)
-                return client.newCall(request)
-                    .awaitSuccess()
+            val filterUrlPart = getSelectedFilterUrlPart(filters)
+            if (filterUrlPart.isNotEmpty()) {
+                val url = "$baseUrl$filterUrlPart" + if (page > 1) "page/$page/" else ""
+                return client.newCall(GET(url, headers))
+                    .awaitIgnoreCode(404)
                     .use(::searchAnimeParse)
             }
+            return client.newCall(latestUpdatesRequest(page))
+                .awaitSuccess()
+                .use(::latestUpdatesParse)
+        }
+    }
 
-            filters.forEach { filter ->
-                when (filter) {
-                    is CategoryFilter -> {
-                        if (filter.state != 0) {
-                            val url = "$baseUrl${filter.toUrlPart()}" + if (page > 1) "page/$page/" else ""
-                            val request = GET(url, headers)
-                            return client.newCall(request)
-                                .awaitSuccess()
-                                .use(::searchAnimeParse)
-                        }
-                    }
-
-                    is ActressFilter,
-                    is ActorFilter,
-                    is StudioFilter,
-                    is MakerFilter,
-                    -> {
-                        if (filter.state.isNotEmpty()) {
-                            val url = "$baseUrl${filter.toUrlPart()}" + if (page > 1) "page/$page/" else ""
-                            val request = GET(url, headers)
-                            return client.newCall(request)
-                                .awaitIgnoreCode(404)
-                                .use(::searchAnimeParse)
-                        }
-                    }
-
-                    else -> { }
-                }
+    private fun getSelectedFilterUrlPart(filters: AnimeFilterList): String {
+        filters.forEach { filter ->
+            when (filter) {
+                is CategoryFilter -> if (filter.state != 0) return filter.toUrlPart()
+                is ActressFilter -> if (filter.state.isNotBlank()) return filter.toUrlPart()
+                is ActorFilter -> if (filter.state.isNotBlank()) return filter.toUrlPart()
+                is StudioFilter -> if (filter.state.isNotBlank()) return filter.toUrlPart()
+                is MakerFilter -> if (filter.state.isNotBlank()) return filter.toUrlPart()
+                else -> {}
             }
         }
-
-        throw Exception("Select at least one Filter")
+        val selectedTags = filters.filterIsInstance<TagGroup>().firstOrNull()?.state?.filter { it.state } ?: emptyList()
+        if (selectedTags.isNotEmpty()) {
+            val combinedSlug = selectedTags.joinToString("+") { it.urlPart.trim('/').substringAfterLast('/') }
+            return "/tag/$combinedSlug/"
+        }
+        return ""
     }
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
@@ -277,7 +279,7 @@ class JavGuru :
         return listOf(
             SEpisode.create().apply {
                 url = response.request.url.encodedPath
-                name = "Episode"
+                name = "Episode 1"
                 date_upload = dateUpload
             },
         )
@@ -297,8 +299,8 @@ class JavGuru :
             .toList()
 
         return iframeUrls
-            .parallelMapNotNullBlocking(::resolveHosterUrl)
-            .parallelCatchingFlatMapBlocking(::getVideos)
+            .parallelMapNotNullBlocking { resolveHosterUrl(it) }
+            .parallelCatchingFlatMapBlocking { getVideos(it) }
     }
 
     private suspend fun resolveHosterUrl(iframeUrl: String): String? = runCatching {
@@ -316,7 +318,7 @@ class JavGuru :
             val rtype = RTYPE_REGEX.find(script)?.groupValues?.get(1) ?: "x"
             val keys = KEYS_REGEX.find(script)?.groupValues?.get(1)
                 ?.split(",")
-                ?.map { it.trim().removeSurrounding("'").removeSurrounding("\"") }
+                ?.map { it.trim().removeSurrounding("'").removeSurrounding(""") }
                 ?: return null
 
             val element = iframeDocument.getElementById(cid) ?: return null
@@ -360,15 +362,12 @@ class JavGuru :
     private suspend fun getVideos(hosterUrl: String): List<Video> = when {
         listOf("javplaya", "javclan").any { it in hosterUrl } -> {
             streamWishExtractor.videosFromUrl(hosterUrl).map { video ->
-                val newHeaders = (video.headers ?: headers).newBuilder()
-                    .set("Referer", "$baseUrl/")
-                    .set("Origin", baseUrl)
-                    .build()
+                val cleanHeaders = headersBuilder().removeAll("Referer").build()
                 Video(
                     url = video.url,
                     quality = video.quality,
                     videoUrl = video.videoUrl,
-                    headers = newHeaders,
+                    headers = cleanHeaders,
                     subtitleTracks = video.subtitleTracks,
                     audioTracks = video.audioTracks,
                 )
@@ -451,12 +450,12 @@ class JavGuru :
     companion object {
         const val PREFIX_ID = "id:"
 
-        private val IFRAME_B64_REGEX = Regex(""""iframe_url":"([^"]+)"""")
-        private val CID_REGEX = Regex("""cid:\s*['"]([^'"]+)['"]""")
-        private val BASE_REGEX = Regex("""base:\s*['"]([^'"]+)['"]""")
-        private val RTYPE_REGEX = Regex("""rtype:\s*['"]([^'"]+)['"]""")
-        private val KEYS_REGEX = Regex("""keys:\s*\[([^]]+)]""")
-        private val PAGINATION_REGEX = Regex("""/page/(\d+)""")
+        private val IFRAME_B64_REGEX = Regex("iframe_url\\":\\"([^\\"]+)\\")
+        private val CID_REGEX = Regex("cid:\\s*['\"]([^'\"]+)['\"]")
+        private val BASE_REGEX = Regex("base:\\s*['\"]([^'\"]+)['\"]")
+        private val RTYPE_REGEX = Regex("rtype:\\s*['\"]([^'\"]+)['\"]")
+        private val KEYS_REGEX = Regex("keys:\\s*\\[([^\\]]+)\\]")
+        private val PAGINATION_REGEX = Regex("/page/(\\d+)")
 
         private val DATE_FORMATTER by lazy {
             SimpleDateFormat("MMMM d, yyyy", Locale.US)

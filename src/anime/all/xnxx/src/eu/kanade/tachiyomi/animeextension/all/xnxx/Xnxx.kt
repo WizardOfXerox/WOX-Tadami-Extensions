@@ -71,7 +71,17 @@ class Xnxx : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
             val img = element.selectFirst("div.thumb img, img")
             thumbnail_url = img?.let {
                 val dataSrc = it.attr("data-src")
-                if (dataSrc.isNotBlank()) dataSrc else it.attr("src")
+                val dataSfw = it.attr("data-sfwthumb")
+                val dataMed = it.attr("data-mediumthumb")
+                val src = it.attr("src")
+                val rawUrl = when {
+                    dataSrc.isNotBlank() && !dataSrc.contains("blank.gif") -> dataSrc
+                    dataSfw.isNotBlank() && !dataSfw.contains("blank.gif") -> dataSfw
+                    dataMed.isNotBlank() && !dataMed.contains("blank.gif") -> dataMed
+                    src.isNotBlank() && !src.contains("blank.gif") -> src
+                    else -> ""
+                }
+                rawUrl.replace("THUMBNUM", "1")
             } ?: ""
         }
     }

@@ -1,5 +1,12 @@
 package eu.kanade.tachiyomi.animeextension.all.subsplease
 
+import android.app.Application
+import android.content.SharedPreferences
+import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
 import android.content.SharedPreferences
 import androidx.preference.PreferenceScreen
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
@@ -11,11 +18,6 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.addEditTextPreference
-import keiyoushi.utils.addListPreference
-import keiyoushi.utils.delegate
-import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.tryParse
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonArray
@@ -38,14 +40,16 @@ class Subsplease :
 
     override val supportsLatest = false
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_\$id", 0)
+    }
 
     private val json = Json {
         isLenient = true
         ignoreUnknownKeys = true
     }
 
-    override val supportsRelatedAnimes = false
+    val supportsRelatedAnimes = false
 
     override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/api/?f=schedule&tz=Europe/Berlin")
 
@@ -115,7 +119,7 @@ class Subsplease :
     }
 
     private fun String?.toDate(): Long = this?.let {
-        dateTimeFormat.tryParse(trim())
+        runCatching { dateTimeFormat.parse(it.trim())?.time }.getOrNull()
     } ?: 0L
 
     private val dateTimeFormat by lazy { SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH) }
@@ -129,16 +133,36 @@ class Subsplease :
         return videosFromElement(responseString, num)
     }
 
+    private fun decodeBase32(b32: String): String {
+        val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+        var bits = 0
+        var valBuf = 0
+        val bytes = mutableListOf<Byte>()
+        for (c in b32.uppercase(Locale.ROOT)) {
+            val idx = alphabet.indexOf(c)
+            if (idx == -1) continue
+            valBuf = (valBuf shl 5) or idx
+            bits += 5
+            if (bits >= 8) {
+                bytes.add(((valBuf shr (bits - 8)) and 0xFF).toByte())
+                bits -= 8
+            }
+        }
+        return bytes.joinToString("") { "%02x".format(it) }
+    }
+
     private fun debrid(magnet: String): String {
         val regex = Regex("xt=urn:btih:([A-Fa-f0-9]{40}|[A-Za-z0-9]{32})|dn=([^&]+)")
         var infohash = ""
         var title = ""
         regex.findAll(magnet).forEach { match ->
-            match.groups[1]?.value?.let { infohash = it }
+            match.groups[1]?.value?.let {
+                infohash = if (it.length == 32) decodeBase32(it) else it
+            }
             match.groups[2]?.value?.let { title = it }
         }
-        val token = preferences.token
-        val debridProvider = preferences.debridProvider
+        val token = preferences.getString(PREF_TOKEN_KEY, PREF_TOKEN_DEFAULT)!!
+        val debridProvider = preferences.getString(PREF_DEBRID_KEY, PREF_DEBRID_DEFAULT)!!
         return "https://torrentio.strem.fun/resolve/$debridProvider/$token/$infohash/null/0/$title"
     }
 
@@ -151,19 +175,31 @@ class Subsplease :
             val epN = itJ["episode"]?.jsonPrimitive?.content
             if (num != epN) return@mapNotNull null
 
-            itJ["downloads"]?.jsonArray?.mapNotNull inner@{ item ->
-                val quality = item.jsonObject["res"]?.jsonPrimitive?.content?.plus("p")
-                val videoUrl = item.jsonObject["magnet"]?.jsonPrimitive?.content
-                if (quality == null || videoUrl == null) return@inner null
+            itJ["downloads"]?.jsonArray?.flatMap inner@{ item ->
+                val quality = item.jsonObject["res"]?.jsonPrimitive?.content?.plus("p") ?: "Unknown"
+                val magnetUrl = item.jsonObject["magnet"]?.jsonPrimitive?.content
+                val torrentUrl = item.jsonObject["torrent"]?.jsonPrimitive?.content
+                val resultList = mutableListOf<Video>()
 
-                when (preferences.debridProvider) {
-                    PREF_DEBRID_DEFAULT -> Video(videoUrl, quality, videoUrl)
-
-                    else -> {
-                        val debridUrl = debrid(videoUrl)
-                        Video(debridUrl, quality, debridUrl)
+                if (!magnetUrl.isNullOrBlank()) {
+                    when (preferences.debridProvider) {
+                        PREF_DEBRID_DEFAULT -> {
+                            resultList.add(Video(magnetUrl, "$quality (Magnet)", magnetUrl))
+                            if (!torrentUrl.isNullOrBlank()) {
+                                resultList.add(Video(torrentUrl, "$quality (Torrent File)", torrentUrl))
+                            }
+                        }
+                        else -> {
+                            val debridUrl = debrid(magnetUrl)
+                            resultList.add(Video(debridUrl, "$quality (${preferences.debridProvider.uppercase()})", debridUrl))
+                            resultList.add(Video(magnetUrl, "$quality (Direct Magnet)", magnetUrl))
+                        }
                     }
+                } else if (!torrentUrl.isNullOrBlank()) {
+                    resultList.add(Video(torrentUrl, "$quality (Torrent File)", torrentUrl))
                 }
+
+                resultList
             }
         }?.flatten() ?: emptyList()
     }
@@ -220,7 +256,9 @@ class Subsplease :
 
     // Preferences
 
-    private var SharedPreferences.token by preferences.delegate(PREF_TOKEN_KEY, PREF_TOKEN_DEFAULT)
+    private var token: String
+        get() = preferences.getString(PREF_TOKEN_KEY, PREF_TOKEN_DEFAULT)!!
+        set(value) = preferences.edit().putString(PREF_TOKEN_KEY, value).apply()
 
     private val SharedPreferences.debridProvider
         get() = getString(PREF_DEBRID_KEY, PREF_DEBRID_DEFAULT)!!
@@ -229,36 +267,41 @@ class Subsplease :
         get() = getString(PREF_QUALITY_KEY, PREF_QUALITY_DEFAULT)!!
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        // quality
-        screen.addListPreference(
-            key = PREF_QUALITY_KEY,
-            title = "Default-Quality",
-            entries = PREF_QUALITY_ENTRIES,
-            entryValues = PREF_QUALITY_VALUES,
-            default = PREF_QUALITY_DEFAULT,
-            summary = "%s",
-        )
+        ListPreference(screen.context).apply {
+            key = PREF_QUALITY_KEY
+            title = "Default-Quality"
+            entries = PREF_QUALITY_ENTRIES.toTypedArray()
+            entryValues = PREF_QUALITY_VALUES.toTypedArray()
+            setDefaultValue(PREF_QUALITY_DEFAULT)
+            summary = "%s"
+            setOnPreferenceChangeListener { _, newValue ->
+                preferences.edit().putString(PREF_QUALITY_KEY, newValue as String).commit()
+            }
+        }.also(screen::addPreference)
 
-        // Debrid provider
-        screen.addListPreference(
-            key = PREF_DEBRID_KEY,
-            title = "Debrid Provider",
-            entries = PREF_DEBRID_ENTRIES,
-            entryValues = PREF_DEBRID_VALUES,
-            default = PREF_DEBRID_DEFAULT,
-            summary = "%s",
-        )
+        ListPreference(screen.context).apply {
+            key = PREF_DEBRID_KEY
+            title = "Debrid Provider"
+            entries = PREF_DEBRID_ENTRIES.toTypedArray()
+            entryValues = PREF_DEBRID_VALUES.toTypedArray()
+            setDefaultValue(PREF_DEBRID_DEFAULT)
+            summary = "%s"
+            setOnPreferenceChangeListener { _, newValue ->
+                preferences.edit().putString(PREF_DEBRID_KEY, newValue as String).commit()
+            }
+        }.also(screen::addPreference)
 
-        // Token
-        screen.addEditTextPreference(
-            key = PREF_TOKEN_KEY,
-            title = "Token",
-            default = PREF_TOKEN_DEFAULT,
-            summary = PREF_TOKEN_SUMMARY,
-        ) { newValue ->
-            val value = newValue.trim().ifBlank { PREF_TOKEN_DEFAULT }
-            preferences.token = value
-        }
+        EditTextPreference(screen.context).apply {
+            key = PREF_TOKEN_KEY
+            title = "Token"
+            setDefaultValue(PREF_TOKEN_DEFAULT)
+            summary = PREF_TOKEN_SUMMARY
+            setOnPreferenceChangeListener { _, newValue ->
+                val value = (newValue as String).trim().ifBlank { PREF_TOKEN_DEFAULT }
+                token = value
+                true
+            }
+        }.also(screen::addPreference)
     }
 
     companion object {

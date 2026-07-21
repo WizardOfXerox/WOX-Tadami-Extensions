@@ -30,7 +30,7 @@ class Xvideos :
 
     override val lang = "all"
 
-    override val supportsLatest = false
+    override val supportsLatest = true
 
     private val preferences: SharedPreferences by lazy {
         Injekt.get<Application>().getSharedPreferences("source_$id", 0)
@@ -38,15 +38,25 @@ class Xvideos :
 
     override fun popularAnimeSelector(): String = "div#main div#content div.mozaique.cust-nb-cols > div"
 
-    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/new/$page")
+    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/best/$page", headers)
 
     override fun popularAnimeFromElement(element: Element): SAnime {
         val anime = SAnime.create()
+        val aEl = element.selectFirst("div.thumb-inside div.thumb a") ?: element.selectFirst("a")
         anime.setUrlWithoutDomain(
-            "$baseUrl${element.select("div.thumb-inside div.thumb a").attr("href")}",
+            "$baseUrl${aEl?.attr("href") ?: ""}",
         )
-        anime.title = element.select("div.thumb-under p.title").text()
-        anime.thumbnail_url = element.select("div.thumb-inside div.thumb a img").attr("data-src")
+        anime.title = element.select("div.thumb-under p.title").text().ifBlank { element.select("p.title").text() }
+        val img = element.selectFirst("div.thumb-inside div.thumb a img, img")
+        val dataSrc = img?.attr("data-src") ?: ""
+        val src = img?.attr("src") ?: ""
+        val dataSrcMed = img?.attr("data-src-med") ?: ""
+        anime.thumbnail_url = when {
+            dataSrc.isNotBlank() && !dataSrc.contains("blank.gif") -> dataSrc
+            dataSrcMed.isNotBlank() && !dataSrcMed.contains("blank.gif") -> dataSrcMed
+            src.isNotBlank() && !src.contains("blank.gif") -> src
+            else -> ""
+        }
         return anime
     }
 
@@ -128,13 +138,13 @@ class Xvideos :
         return anime
     }
 
-    override fun latestUpdatesNextPageSelector() = throw Exception("not used")
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/new/$page", headers)
 
-    override fun latestUpdatesFromElement(element: Element) = throw Exception("not used")
+    override fun latestUpdatesSelector(): String = popularAnimeSelector()
 
-    override fun latestUpdatesRequest(page: Int) = throw Exception("not used")
+    override fun latestUpdatesFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
-    override fun latestUpdatesSelector() = throw Exception("not used")
+    override fun latestUpdatesNextPageSelector(): String = popularAnimeNextPageSelector()
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
         AnimeFilter.Header("Search by text does not affect the filter"),

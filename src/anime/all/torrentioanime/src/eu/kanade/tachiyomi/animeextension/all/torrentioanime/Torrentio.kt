@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.animeextension.all.torrentioanime
 
+import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -23,10 +24,6 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.awaitSuccess
-import keiyoushi.utils.applicationContext
-import keiyoushi.utils.bodyString
-import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.tryParse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.add
@@ -38,6 +35,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.Jsoup
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -56,7 +55,11 @@ class Torrentio :
 
     private val json: Json by injectLazy()
 
-    private val preferences by getPreferencesLazy()
+    private val preferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
+
+    private fun SimpleDateFormat.tryParse(dateStr: String?): Long = runCatching { parse(dateStr ?: "")?.time }.getOrNull() ?: 0L
 
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
@@ -256,7 +259,7 @@ class Torrentio :
         val variables = """{"id": ${anime.url}}"""
 
         val metaData = runCatching {
-            json.decodeFromString<DetailsById>(client.newCall(makeGraphQLRequest(getDetailsQuery(), variables)).awaitSuccess().bodyString())
+            json.decodeFromString<DetailsById>(client.newCall(makeGraphQLRequest(getDetailsQuery(), variables)).awaitSuccess().body.string())
         }.getOrNull()?.data?.media
 
         anime.title = metaData?.title?.let { title ->
@@ -309,101 +312,115 @@ class Torrentio :
 
     // ============================== Episodes ==============================
     override fun episodeListRequest(anime: SAnime): Request = GET("https://api.ani.zip/mappings?anilist_id=${anime.url}")
+    private fun tryParseDate(dateStr: String?): Long = runCatching { DATE_FORMATTER.parse(dateStr ?: "")?.time }.getOrNull() ?: 0L
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val responseString = response.body.string()
-        val aniZipResponse = json.decodeFromString<AniZipResponse>(responseString)
+        val aniZipResponse = runCatching { json.decodeFromString<AniZipResponse>(responseString) }.getOrNull()
+        val kitsuId = aniZipResponse?.mappings?.kitsuId?.takeIf { it > 0 }
+        val anilistId = response.request.url.queryParameter("anilist_id") ?: ""
 
-        return when (aniZipResponse.mappings?.type) {
-            "TV", "ONA", "OVA" -> {
-                aniZipResponse.episodes
-                    ?.let { episodes ->
-                        if (preferences.getBoolean(UPCOMING_EP_KEY, UPCOMING_EP_DEFAULT)) {
-                            episodes
-                        } else {
-                            episodes.filter { (_, episode) -> episode?.airDate.let(DATE_FORMATTER::tryParse) <= System.currentTimeMillis() }
-                        }
-                    }
-                    ?.mapNotNull { (_, episode) ->
-                        val episodeNumber = runCatching { episode?.episode?.toFloat() }.getOrNull()
-
-                        if (episodeNumber == null) {
-                            return@mapNotNull null
-                        }
-
-                        val title = episode?.title?.get("en")
-
-                        SEpisode.create().apply {
-                            episode_number = episodeNumber
-                            url = "/stream/series/kitsu:${aniZipResponse.mappings.kitsuId}:${String.format(Locale.ENGLISH, "%.0f", episodeNumber)}.json"
-                            date_upload = episode?.airDate.let(DATE_FORMATTER::tryParse)
-                            name = if (title == null) "Episode ${episode?.episode}" else "Episode ${episode.episode}: $title"
-                            scanlator = episode?.airDate.let(DATE_FORMATTER::tryParse).takeIf { it > System.currentTimeMillis() }?.let { "Upcoming" } ?: ""
-                        }
-                    }.orEmpty().reversed()
+        if (aniZipResponse?.mappings?.type == "MOVIE") {
+            val dateUpload = if (!aniZipResponse.episodes.isNullOrEmpty()) {
+                tryParseDate(aniZipResponse.episodes["1"]?.airDate)
+            } else {
+                0L
             }
 
-            "MOVIE" -> {
-                val dateUpload = if (!aniZipResponse.episodes.isNullOrEmpty()) {
-                    aniZipResponse.episodes["1"]?.airDate.let(DATE_FORMATTER::tryParse)
-                } else {
-                    0L
-                }
-
-                listOf(
-                    SEpisode.create().apply {
-                        episode_number = 1.0F
-                        url = "/stream/movie/kitsu:${aniZipResponse.mappings.kitsuId}.json"
-                        name = "Movie"
-                        date_upload = dateUpload
-                    },
-                ).reversed()
-            }
-
-            else -> emptyList()
+            val targetUrl = if (kitsuId != null) "/stream/movie/kitsu:$kitsuId.json" else "/stream/movie/anilist:$anilistId.json"
+            return listOf(
+                SEpisode.create().apply {
+                    episode_number = 1.0F
+                    url = targetUrl
+                    name = "Movie"
+                    date_upload = dateUpload
+                },
+            )
         }
+
+        val episodes = aniZipResponse?.episodes
+        if (!episodes.isNullOrEmpty()) {
+            val filteredEps = if (preferences.getBoolean(UPCOMING_EP_KEY, UPCOMING_EP_DEFAULT)) {
+                episodes
+            } else {
+                episodes.filter { (_, episode) -> tryParseDate(episode?.airDate) <= System.currentTimeMillis() }
+            }
+
+            val parsedList = filteredEps.mapNotNull { (_, episode) ->
+                val episodeNumber = runCatching { episode?.episode?.toFloat() }.getOrNull() ?: return@mapNotNull null
+                val title = episode?.title?.get("en")
+                val epStr = String.format(Locale.ENGLISH, "%.0f", episodeNumber)
+                val targetUrl = if (kitsuId != null) "/stream/series/kitsu:$kitsuId:$epStr.json" else "/stream/series/anilist:$anilistId:$epStr.json"
+                val epDate = tryParseDate(episode?.airDate)
+
+                SEpisode.create().apply {
+                    episode_number = episodeNumber
+                    url = targetUrl
+                    date_upload = epDate
+                    name = if (title == null) "Episode ${episode?.episode}" else "Episode ${episode.episode}: $title"
+                    scanlator = if (epDate > System.currentTimeMillis()) "Upcoming" else ""
+                }
+            }
+            if (parsedList.isNotEmpty()) {
+                return parsedList.reversed()
+            }
+        }
+
+        // Fallback if AniZip mapping is empty or unavailable
+        val fallbackUrl = if (anilistId.isNotBlank()) "/stream/series/anilist:$anilistId:1.json" else "/stream/series/anilist:0:1.json"
+        return listOf(
+            SEpisode.create().apply {
+                episode_number = 1.0F
+                url = fallbackUrl
+                name = "Episode 1"
+                date_upload = System.currentTimeMillis()
+            },
+        )
     }
 
     // ============================ Video Links =============================
 
     override fun videoListRequest(episode: SEpisode): Request {
-        val mainURL = buildString {
-            append("$baseUrl/")
+        val params = mutableListOf<String>()
 
-            val appendQueryParam: (String, Set<String>?) -> Unit = { key, values ->
-                values?.takeIf { it.isNotEmpty() }?.let {
-                    append("$key=${it.filter(String::isNotBlank).joinToString(",")}|")
+        preferences.getStringSet(PREF_PROVIDER_KEY, PREF_PROVIDERS_DEFAULT)
+            ?.filter(String::isNotBlank)?.takeIf { it.isNotEmpty() }
+            ?.let { params.add("providers=${it.joinToString(",")}") }
+
+        preferences.getStringSet(PREF_LANG_KEY, PREF_LANG_DEFAULT)
+            ?.filter(String::isNotBlank)?.takeIf { it.isNotEmpty() }
+            ?.let { params.add("language=${it.joinToString(",")}") }
+
+        preferences.getStringSet(PREF_QUALITY_KEY, PREF_QUALITY_DEFAULT)
+            ?.filter(String::isNotBlank)?.takeIf { it.isNotEmpty() }
+            ?.let { params.add("qualityfilter=${it.joinToString(",")}") }
+
+        preferences.getString(PREF_SORT_KEY, "quality")
+            ?.takeIf { it.isNotBlank() }
+            ?.let { params.add("sort=$it") }
+
+        val token = preferences.getString(PREF_TOKEN_KEY, null)
+        val debridProvider = preferences.getString(PREF_DEBRID_KEY, "none")
+
+        if (!token.isNullOrBlank() && debridProvider != "none") {
+            params.add("$debridProvider=$token")
+        } else if (token.isNullOrBlank() && debridProvider != "none") {
+            handler.post {
+                Injekt.get<Application>().let { context ->
+                    Toast.makeText(
+                        context,
+                        "Kindly input the debrid token in the extension settings.",
+                        Toast.LENGTH_LONG,
+                    ).show()
                 }
             }
+            throw UnsupportedOperationException()
+        }
 
-            appendQueryParam("providers", preferences.getStringSet(PREF_PROVIDER_KEY, PREF_PROVIDERS_DEFAULT))
-            appendQueryParam("language", preferences.getStringSet(PREF_LANG_KEY, PREF_LANG_DEFAULT))
-            appendQueryParam("qualityfilter", preferences.getStringSet(PREF_QUALITY_KEY, PREF_QUALITY_DEFAULT))
+        val configPath = if (params.isNotEmpty()) params.joinToString("|") + "/" else ""
+        val epPath = episode.url.removePrefix("/")
+        val mainURL = "$baseUrl/$configPath$epPath"
 
-            val sortKey = preferences.getString(PREF_SORT_KEY, "quality")
-            appendQueryParam("sort", sortKey?.let { setOf(it) })
-
-            val token = preferences.getString(PREF_TOKEN_KEY, null)
-            val debridProvider = preferences.getString(PREF_DEBRID_KEY, "none")
-
-            when {
-                token.isNullOrBlank() && debridProvider != "none" -> {
-                    handler.post {
-                        applicationContext.let {
-                            Toast.makeText(
-                                it,
-                                "Kindly input the debrid token in the extension settings.",
-                                Toast.LENGTH_LONG,
-                            ).show()
-                        }
-                    }
-                    throw UnsupportedOperationException()
-                }
-
-                !token.isNullOrBlank() && debridProvider != "none" -> append("$debridProvider=$token|")
-            }
-            append(episode.url)
-        }.removeSuffix("|")
         return GET(mainURL)
     }
 

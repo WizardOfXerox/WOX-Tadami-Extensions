@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.animeextension.all.rouvideo
 
-import aniyomi.lib.playlistutils.PlaylistUtils
+import android.app.Application
 import eu.kanade.tachiyomi.animeextension.all.rouvideo.RouVideoDto.toAnimePage
 import eu.kanade.tachiyomi.animeextension.all.rouvideo.RouVideoFilter.ALL_VIDEOS
 import eu.kanade.tachiyomi.animeextension.all.rouvideo.RouVideoFilter.FEATURED
@@ -15,11 +15,11 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import keiyoushi.lib.i18n.Intl
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.lib.i18n.Intl
-import keiyoushi.utils.getPreferencesLazy
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -29,6 +29,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.nodes.Document
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
 import java.util.Locale
 
@@ -47,7 +49,9 @@ class RouVideo(
 
     private val json: Json by injectLazy()
 
-    private val preferences by getPreferencesLazy()
+    private val preferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0)
+    }
 
     private val intl = Intl(
         language = Locale.getDefault().language.takeIf { lang == "all" } ?: lang,
@@ -103,7 +107,7 @@ class RouVideo(
             .props.pageProps.toAnimePage()
     }
 
-    override suspend fun fetchRelatedAnimeList(anime: SAnime): List<SAnime> = coroutineScope {
+    suspend fun fetchRelatedAnimeList(anime: SAnime): List<SAnime> = coroutineScope {
         listOf(
             async {
                 client.newCall(relatedAnimeListRequest(anime))
@@ -125,7 +129,9 @@ class RouVideo(
             .flatten()
     }
 
-    override fun relatedAnimeListParse(response: Response): List<SAnime> {
+    fun relatedAnimeListRequest(anime: SAnime): Request = animeDetailsRequest(anime)
+
+    fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.asJsoup()
         val data = document.selectFirst("script#__NEXT_DATA__")?.data()
             ?: return emptyList()
@@ -310,9 +316,9 @@ class RouVideo(
         RouVideoFilter.HotSearchFilter(
             intl,
             if (!this::hotSearch.isInitialized || hotSearch.isEmpty()) {
-                setOf(Pair(intl["reset_filter_to_load"], ""))
+                setOf<Pair<String, String>>(Pair(intl["reset_filter_to_load"], ""))
             } else {
-                setOf(Pair(intl["set_video_all_to_filter_tag"], ""))
+                setOf<Pair<String, String>>(Pair(intl["set_video_all_to_filter_tag"], ""))
                     .plus(hotSearch.map { it to it })
             },
         ),

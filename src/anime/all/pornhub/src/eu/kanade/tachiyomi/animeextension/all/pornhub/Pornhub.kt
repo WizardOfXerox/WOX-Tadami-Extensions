@@ -23,7 +23,6 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.text.SimpleDateFormat
 import java.util.Locale
-import keiyoushi.utils.firstInstanceOrNull
 
 class Pornhub : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
@@ -83,11 +82,25 @@ class Pornhub : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
             ?: "Video"
         anime.title = titleText.trim()
         
-        val img = element.selectFirst("div.phimage img, img[data-src], img[data-image], img[src]")
-        val imgSrc = img?.attr("abs:data-src")?.takeIf { it.isNotBlank() }
-            ?: img?.attr("abs:data-image")?.takeIf { it.isNotBlank() }
-            ?: img?.attr("abs:src")?.takeIf { it.isNotBlank() }
+        val imgEl = element.selectFirst("div.phimage img, img[data-mediumthumb], img[data-image], img[data-src], img[src], div.phimage a")
+        var imgSrc = imgEl?.attr("abs:data-mediumthumb")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("abs:data-image")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("abs:data-thumb_url")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("abs:data-src")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("abs:src")?.takeIf { it.isNotBlank() && !it.contains("blank.gif") && !it.contains("placeholder") }
+            ?: imgEl?.attr("data-mediumthumb")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("data-image")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("data-src")?.takeIf { it.isNotBlank() }
+            ?: imgEl?.attr("src")?.takeIf { it.isNotBlank() && !it.contains("blank.gif") && !it.contains("placeholder") }
             ?: ""
+
+        if (imgSrc.isBlank()) {
+            val dataPath = imgEl?.attr("data-path") ?: element.selectFirst("[data-path]")?.attr("data-path") ?: ""
+            if (dataPath.isNotBlank()) {
+                imgSrc = dataPath.replace("{index}", "1")
+            }
+        }
+
         anime.thumbnail_url = imgSrc
         
         return anime

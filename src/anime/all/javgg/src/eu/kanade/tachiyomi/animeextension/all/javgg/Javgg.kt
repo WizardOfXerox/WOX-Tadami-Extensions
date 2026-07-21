@@ -28,7 +28,7 @@ class Javgg :
 
     override val name = "JavGG"
 
-    override val baseUrl = "https://javgg.net"
+    override val baseUrl = "https://javgg.me"
 
     override val lang = "all"
 
@@ -175,14 +175,14 @@ class Javgg :
             embedUrl.contains("filelions") || embedUrl.contains("lion") -> StreamWishExtractor(client, headers).videosFromUrl(url, videoNameGen = { "FileLions:$it" })
 
             embedUrl.contains("wishembed") || embedUrl.contains("streamwish") || embedUrl.contains("strwish") || embedUrl.contains("wish") -> {
-                val docHeaders = headers.newBuilder()
-                    .add("Origin", "https://streamwish.to")
-                    .add("Referer", "https://streamwish.to/")
-                    .build()
-                StreamWishExtractor(client, docHeaders).videosFromUrl(url, videoNameGen = { "StreamWish:$it" })
+                val cleanHeaders = headers.newBuilder().removeAll("Referer").build()
+                StreamWishExtractor(client, cleanHeaders).videosFromUrl(url, videoNameGen = { "StreamWish:$it" })
             }
 
-            embedUrl.contains("vidhide") || embedUrl.contains("streamhide") || embedUrl.contains("guccihide") || embedUrl.contains("streamvid") -> VidHideExtractor(client, headers).videosFromUrl(url)
+            embedUrl.contains("vidhide") || embedUrl.contains("streamhide") || embedUrl.contains("guccihide") || embedUrl.contains("streamvid") -> {
+                val cleanHeaders = headers.newBuilder().removeAll("Referer").build()
+                VidHideExtractor(client, cleanHeaders).videosFromUrl(url)
+            }
 
             embedUrl.contains("voe") -> VoeExtractor(client, headers).videosFromUrl(url)
 
@@ -205,22 +205,39 @@ class Javgg :
     }
 
     private fun org.jsoup.nodes.Element.getImageUrl(): String? {
-        val imageLinkRegex = """https?://\S+\.(jpg|png)""".toRegex()
+        val imageLinkRegex = """https?://\S+\.(jpg|jpeg|png|webp)(\?\S+)?""".toRegex(RegexOption.IGNORE_CASE)
 
-        for (link in this.select("[href], [src]")) {
-            val href = link.attr("href")
-            val src = link.attr("src")
-            if (imageLinkRegex.matches(href)) {
-                return href
+        for (img in this.select("img")) {
+            val srcList = listOf(
+                img.attr("abs:data-src"),
+                img.attr("abs:data-lazy-src"),
+                img.attr("abs:data-original"),
+                img.attr("abs:src"),
+                img.attr("data-src"),
+                img.attr("data-lazy-src"),
+                img.attr("src")
+            )
+            for (s in srcList) {
+                if (s.isNotBlank() && (s.startsWith("http://") || s.startsWith("https://"))) {
+                    return s
+                }
             }
-            if (imageLinkRegex.matches(src)) {
-                return src
+            val srcset = img.attr("srcset")
+            if (srcset.isNotBlank()) {
+                val firstUrl = srcset.split(",").firstOrNull()?.trim()?.split(" ")?.firstOrNull()
+                if (!firstUrl.isNullOrBlank()) return firstUrl
             }
         }
 
-        val textMatches = imageLinkRegex.find(this.text())
+        for (link in this.select("[href], [src]")) {
+            val href = link.attr("abs:href").ifBlank { link.attr("href") }
+            val src = link.attr("abs:src").ifBlank { link.attr("src") }
+            if (imageLinkRegex.matches(href)) return href
+            if (imageLinkRegex.matches(src)) return src
+        }
+
         val htmlMatches = imageLinkRegex.find(this.outerHtml())
-        return textMatches?.value ?: htmlMatches?.value
+        return htmlMatches?.value
     }
 
     override fun List<Video>.sort(): List<Video> {

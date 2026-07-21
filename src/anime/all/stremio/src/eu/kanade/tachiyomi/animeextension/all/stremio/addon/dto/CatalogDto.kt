@@ -9,6 +9,28 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonPrimitive
+
+object AnyStringSerializer : KSerializer<String> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("AnyString", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: String) {
+        encoder.encodeString(value)
+    }
+
+    override fun deserialize(decoder: Decoder): String {
+        val input = decoder as? JsonDecoder
+        if (input != null) {
+            val element = input.decodeJsonElement()
+            if (element is JsonPrimitive) {
+                return element.content
+            }
+            return element.toString()
+        }
+        return decoder.decodeString()
+    }
+}
 
 @Serializable(with = ExtraTypeSerializer::class)
 enum class ExtraType {
@@ -21,7 +43,7 @@ enum class ExtraType {
 
     companion object {
         fun fromString(value: String): ExtraType {
-            return ExtraType.entries.find { it.name.equals(value, ignoreCase = true) } ?: UNKNOWN
+            return ExtraType.values().find { it.name.equals(value, ignoreCase = true) } ?: UNKNOWN
         }
     }
 }
@@ -53,7 +75,7 @@ data class CatalogDto(
         @SerialName("name")
         val type: ExtraType,
         val isRequired: Boolean? = null,
-        val options: List<String>? = null,
+        val options: List<@Serializable(with = AnyStringSerializer::class) String>? = null,
     )
 
     fun hasRequired(type: ExtraType): Boolean {

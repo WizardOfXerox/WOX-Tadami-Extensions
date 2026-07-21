@@ -30,6 +30,21 @@ class SortFilter :
     }
 }
 
+
+class SubtitleFilter :
+    SelectFilter(
+        "Subtitles",
+        SUBTITLES,
+    ) {
+    companion object {
+        val SUBTITLES = listOf(
+            Pair("<Select>", ""),
+            Pair("Chinese Subtitles", "en/chinese-subtitle"),
+            Pair("English Subtitles", "en/english-subtitle"),
+        )
+    }
+}
+
 class GenreList :
     SelectFilter(
         "Genres",

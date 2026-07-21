@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.animeextension.all.javguru.extractors
 
-import aniyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.animesource.model.Video
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
 import okhttp3.Headers
@@ -26,11 +26,17 @@ class EmTurboExtractor(private val client: OkHttpClient, private val headers: He
             return emptyList()
         }
 
-        return playlistExtractor.extractFromHls(urlPlay, url, videoNameGen = { quality -> "EmTurboVid: $quality" })
-            .distinctBy { it.url } // they have the same stream repeated twice in the playlist file
+        val videos = playlistExtractor.extractFromHls(urlPlay, url, videoNameGen = { quality -> "EmTurboVid: $quality" })
+            .distinctBy { it.url }
+
+        // Clean headers without restrictive Referer to prevent ExoPlayer 403 / 0-second playback crashes
+        val cleanHeaders = headers.newBuilder().removeAll("Referer").build()
+        return videos.map { v ->
+            Video(v.url, v.quality, v.videoUrl, cleanHeaders, v.subtitleTracks, v.audioTracks)
+        }
     }
 
     companion object {
-        private val URLPLAY = Regex("""urlPlay\s*=\s*\'([^\']+)""")
+        private val URLPLAY = Regex("urlPlay\\s*=\\s*\'([^\']+)")
     }
 }

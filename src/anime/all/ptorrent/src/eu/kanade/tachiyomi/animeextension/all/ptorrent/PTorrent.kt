@@ -1,5 +1,10 @@
 package eu.kanade.tachiyomi.animeextension.all.ptorrent
 
+import android.app.Application
+import android.content.SharedPreferences
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
 import android.annotation.SuppressLint
 import androidx.preference.PreferenceScreen
 import androidx.preference.SwitchPreferenceCompat
@@ -15,7 +20,6 @@ import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.torrentutils.TorrentUtils
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.getPreferencesLazy
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
@@ -35,9 +39,11 @@ class PTorrent :
 
     override val lang = "all"
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_\$id", 0)
+    }
 
-    override val supportsLatest = false
+    override val supportsLatest = true
 
     override fun headersBuilder(): Headers.Builder = super.headersBuilder()
         .add("Referer", baseUrl)
@@ -59,13 +65,13 @@ class PTorrent :
     override fun popularAnimeNextPageSelector(): String = "div.pagination a:contains(Next)"
 
     // =============================== Latest ===============================
-    override fun latestUpdatesRequest(page: Int): Request = throw UnsupportedOperationException()
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/page/$page")
 
-    override fun latestUpdatesSelector(): String = throw UnsupportedOperationException()
+    override fun latestUpdatesSelector(): String = popularAnimeSelector()
 
-    override fun latestUpdatesFromElement(element: Element): SAnime = throw UnsupportedOperationException()
+    override fun latestUpdatesFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
-    override fun latestUpdatesNextPageSelector() = throw UnsupportedOperationException()
+    override fun latestUpdatesNextPageSelector(): String = popularAnimeNextPageSelector()
 
     // =============================== Search ===============================
     override suspend fun getSearchAnime(page: Int, query: String, filters: AnimeFilterList): AnimesPage {
@@ -96,14 +102,18 @@ class PTorrent :
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
         val encodedQuery = query.replace(" ", "+")
-        val cat = filters.firstNotNullOfOrNull { filter ->
-            if (filter is CategoriesList) getCategory()[filter.state].id else 0
-        }.toString()
+        val catFilter = filters.filterIsInstance<CategoriesList>().firstOrNull()
+        val catId = if (catFilter != null) getCategory()[catFilter.state].id else "0"
 
         return if (query.isNotEmpty()) {
             GET("$baseUrl/s.php?search=$encodedQuery&page=$page")
         } else {
-            GET("$baseUrl/catalog/$cat/page/$page")
+            if (catId == "0") {
+                GET("$baseUrl/page/$page")
+            } else {
+                val encodedCat = java.net.URLEncoder.encode(catId, "UTF-8")
+                GET("$baseUrl/catalog/$encodedCat/page/$page")
+            }
         }
     }
 

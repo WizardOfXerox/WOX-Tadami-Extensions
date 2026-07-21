@@ -15,7 +15,10 @@ import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.torrentutils.TorrentUtils
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.getPreferencesLazy
+import android.app.Application
+import android.content.SharedPreferences
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
@@ -23,6 +26,7 @@ import okhttp3.Response
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.net.SocketTimeoutException
+import java.net.URLEncoder
 import java.util.Locale
 
 class HentaiTorrent :
@@ -35,15 +39,18 @@ class HentaiTorrent :
 
     override val lang = "all"
 
-    private val preferences by getPreferencesLazy()
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_\$id", 0)
+    }
 
-    override val supportsLatest = false
+    override val supportsLatest = true
 
     override fun headersBuilder(): Headers.Builder = super.headersBuilder()
-        .add("Referer", baseUrl)
+        .add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+        .add("Referer", "$baseUrl/")
 
     // ============================== Popular ===============================
-    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/page/$page")
+    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/catalog/Main%20Subsection%20Hentai/page/$page", headers)
 
     override fun popularAnimeSelector(): String = "div.image-container div.image-wrapper"
 
@@ -52,22 +59,21 @@ class HentaiTorrent :
         anime.setUrlWithoutDomain(element.select("a.overlay").attr("href"))
         anime.title = element.select("a.overlay").text().trim()
         anime.thumbnail_url = element.select("img").attr("src")
-
         return anime
     }
 
     override fun popularAnimeNextPageSelector(): String = "div.pagination a:contains(Next)"
 
-    // =============================== Latest ===============================
-    override fun latestUpdatesRequest(page: Int): Request = throw UnsupportedOperationException()
+    // ============================== Latest ===============================
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/page/$page", headers)
 
-    override fun latestUpdatesSelector(): String = throw UnsupportedOperationException()
+    override fun latestUpdatesSelector(): String = popularAnimeSelector()
 
-    override fun latestUpdatesFromElement(element: Element): SAnime = throw UnsupportedOperationException()
+    override fun latestUpdatesFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
-    override fun latestUpdatesNextPageSelector() = throw UnsupportedOperationException()
+    override fun latestUpdatesNextPageSelector(): String = popularAnimeNextPageSelector()
 
-    // =============================== Search ===============================
+    // ============================== Search ===============================
     override suspend fun getSearchAnime(page: Int, query: String, filters: AnimeFilterList): AnimesPage {
         if (query.startsWith("https://")) {
             val url = query.toHttpUrl()
@@ -80,7 +86,7 @@ class HentaiTorrent :
         }
         if (query.startsWith(PREFIX_SEARCH)) {
             val id = query.removePrefix(PREFIX_SEARCH)
-            return client.newCall(GET("$baseUrl/anime/$id"))
+            return client.newCall(GET("$baseUrl/anime/$id", headers))
                 .awaitSuccess()
                 .use(::searchAnimeByIdParse)
         }
@@ -93,15 +99,22 @@ class HentaiTorrent :
     }
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
-        val encodedQuery = query.replace(" ", "+")
-        val cat = filters.firstNotNullOfOrNull { filter ->
-            if (filter is CategoriesList) getCategory()[filter.state].id else 0
-        }.toString()
+        if (query.isNotEmpty()) {
+            val encodedQuery = URLEncoder.encode(query, "UTF-8")
+            return GET("$baseUrl/s.php?search=$encodedQuery&page=$page", headers)
+        }
 
-        return if (query.isNotEmpty()) {
-            GET("$baseUrl/s.php?search=$encodedQuery&page=$page")
+        var cat = ""
+        filters.forEach { filter ->
+            if (filter is CategoryFilter) {
+                cat = filter.toUriPart()
+            }
+        }
+
+        return if (cat.isNotEmpty()) {
+            GET("$baseUrl/catalog/$cat/page/$page", headers)
         } else {
-            GET("$baseUrl/catalog/$cat/page/$page")
+            GET("$baseUrl/page/$page", headers)
         }
     }
 
@@ -114,20 +127,37 @@ class HentaiTorrent :
     // =========================== Anime Details ============================
     override fun animeDetailsParse(document: Document): SAnime {
         val anime = SAnime.create()
-        anime.description = document.select("div.article-content").html().replace(Regex("<(?!br\\s*/?)[^>]+>"), "").replace("<br>", "\n").replace("<br/>", "\n")
+        anime.description = document.select("div.article-content").html()
+            .replace(Regex("<(?!br\\s*/?)[^>]+>"), "")
+            .replace("<br>", "\n")
+            .replace("<br/>", "\n")
         return anime
     }
 
     // ============================== Episodes ==============================
-    override fun episodeListSelector() = "div.download-container div.download-button"
+    override fun episodeListSelector() = "a[href*=/dl.php], a:contains(Download Torrent)"
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val document = response.asJsoup()
-        val downloadButtonUrl = document.select("div.download-container a.download-button").attr("href")
-        val downloadPage = client.newCall(GET("$baseUrl$downloadButtonUrl")).execute().asJsoup()
-        val torrentFileUrl = downloadPage.select("a.download-button").attr("href")
+        var downloadButtonUrl = document.select("a[href*=/dl.php]").attr("href")
+        if (downloadButtonUrl.isBlank()) {
+            downloadButtonUrl = document.select("a:contains(Download Torrent)").attr("href")
+        }
 
-        if (torrentFileUrl.isEmpty()) throw Exception("No Torrent Found!")
+        if (downloadButtonUrl.isBlank()) throw Exception("No Download Link Found on Page!")
+
+        val dlPageUrl = if (downloadButtonUrl.startsWith("http")) downloadButtonUrl else "$baseUrl$downloadButtonUrl"
+        val downloadPage = client.newCall(GET(dlPageUrl, headers)).execute().asJsoup()
+        var torrentFileUrl = downloadPage.select("a[href*=.torrent], a.download-button").attr("abs:href")
+
+        if (torrentFileUrl.isBlank()) {
+            torrentFileUrl = downloadPage.select("a.download-button").attr("href")
+            if (torrentFileUrl.isNotBlank() && !torrentFileUrl.startsWith("http")) {
+                torrentFileUrl = "$baseUrl$torrentFileUrl"
+            }
+        }
+
+        if (torrentFileUrl.isBlank()) throw Exception("No Torrent File Found on Download Page!")
 
         return try {
             val torrent = TorrentUtils.getTorrentInfo(torrentFileUrl, "torrent")
@@ -224,23 +254,32 @@ class HentaiTorrent :
         }.also(screen::addPreference)
     }
 
+    // ============================ ROBUST FILTERS =============================
+
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
-        CategoriesList(categoryName),
+        CategoryFilter()
     )
 
-    private data class Category(val name: String, val id: String?)
-    private class CategoriesList(category: Array<String>) : AnimeFilter.Select<String>("category", category)
-    private val categoryName = getCategory().map {
-        it.name
-    }.toTypedArray()
-    private fun getCategory(): List<Category> = listOf(
-        Category("Home", "0"),
-        Category("Cartoons", "Cartoons"),
-        Category("2D video Hentai", "2D%20video%20Hentai"),
-        Category("3D video Hentai", "3D%20video%20Hentai"),
-        Category("Hentai DVD HD", "Hentai%20DVD%20HD"),
-        Category("Main Subsection Hentai", "Main%20Subsection%20Hentai"),
-    )
+    private open class UriPartFilter(displayName: String, val vals: Array<Pair<String, String>>) :
+        AnimeFilter.Select<String>(displayName, vals.map { it.first }.toTypedArray()) {
+        fun toUriPart() = vals[state].second
+    }
+
+    private class CategoryFilter : UriPartFilter("Category", arrayOf(
+        Pair("All / Latest", ""),
+        Pair("Main Subsection Hentai", "Main%20Subsection%20Hentai"),
+        Pair("2D Video Hentai", "2D%20video%20Hentai"),
+        Pair("3D Video Hentai", "3D%20video%20Hentai"),
+        Pair("Hentai DVD HD", "Hentai%20DVD%20HD"),
+        Pair("Cartoons", "Cartoons"),
+        Pair("Manga Hentai", "Manga%20Hentai"),
+        Pair("Artwork HCG Hentai", "Artwork%20HCG%20Hentai"),
+        Pair("Comics Artwork", "Comics%20Artwork"),
+        Pair("Games Main Subsection", "Games%20main%20subsection"),
+        Pair("Visual Novels Games", "Visual%20Novels%20Games"),
+        Pair("Games Role-playing", "Games%20Role-playing"),
+        Pair("In Progress and Demo Games", "In%20Progress%20and%20Demo%20Games")
+    ))
 
     companion object {
         const val PREFIX_SEARCH = "id:"

@@ -21,10 +21,10 @@ object LoklokFilters {
         fun getValue() = when (state) {
             1 -> "MOVIE,TVSPECIAL"
             2 -> "TV,SETI,VARIETY,TALK,COMIC,DOCUMENTARY"
-            3 -> "MINISERIES" // Shorts
-            4 -> "COMIC" // Anime
+            3 -> "MINISERIES"
+            4 -> "COMIC"
             5 -> "VARIETY,TALK"
-            6 -> "TALK" // Talk Show
+            6 -> "TALK"
             7 -> "DOCUMENTARY"
             else -> "MOVIE,TV,VARIETY,COMIC,DOCUMENTARY,TVSPECIAL,MINISERIES,SETI,TALK"
         }
@@ -110,6 +110,36 @@ object LoklokFilters {
         }
     }
 
+    class GenreTagFilter : AnimeFilter.Select<String>(
+        "Genre Tag",
+        arrayOf(
+            "All",
+            "Anime",
+            "Action",
+            "Romance",
+            "Comedy",
+            "Fantasy",
+            "Drama",
+            "Horror",
+            "Sci-Fi",
+            "Thriller",
+            "Suspense",
+            "Crime",
+            "Adventure",
+            "Animation",
+            "Mystery",
+            "Supernatural",
+            "School",
+            "Slice of Life",
+            "Mecha",
+            "Isekai",
+            "Martial Arts",
+            "Historical"
+        )
+    ) {
+        fun getValue() = if (state > 0) values[state] else ""
+    }
+
     class YearFilter : AnimeFilter.Select<String>(
         "Time Period",
         arrayOf(
@@ -160,6 +190,7 @@ object LoklokFilters {
         TypeFilter(),
         RegionFilter(),
         CategoryFilter(),
+        GenreTagFilter(),
         YearFilter(),
         SortFilter()
     )

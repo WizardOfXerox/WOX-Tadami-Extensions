@@ -87,7 +87,7 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
 
     override val id: Long = 527189562810L
 
-    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder()
         .retryOnConnectionFailure(true)
         .addInterceptor { chain ->
             val request = chain.request()
@@ -253,7 +253,9 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     }
 
     override fun popularAnimeParse(response: Response): AnimesPage {
-        return parseHomeResponse(response)
+        return parseHomeResponse(response, sectionFilter = { type, name ->
+            type == "RANKING_ASSEMBLY" || name.contains("Top", true) || name.contains("Popular", true) || name.contains("Ranking", true) || name.contains("Trending", true)
+        })
     }
 
     override fun latestUpdatesRequest(page: Int): Request {
@@ -262,10 +264,12 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     }
 
     override fun latestUpdatesParse(response: Response): AnimesPage {
-        return parseHomeResponse(response)
+        return parseHomeResponse(response, sectionFilter = { type, name ->
+            type == "SINGLE_ALBUM" || name.contains("New", true) || name.contains("Latest", true) || name.contains("Recent", true) || name.contains("Release", true)
+        })
     }
 
-    private fun parseHomeResponse(response: Response): AnimesPage {
+    private fun parseHomeResponse(response: Response, sectionFilter: ((String, String) -> Boolean)? = null): AnimesPage {
         checkResponse(response)
         val body = ensureJsonBody(response.body?.string(), "browse")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
@@ -278,7 +282,9 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         for (section in recommendItems) {
             val sectionObj = section as? JsonObject ?: continue
             val sectionType = sectionObj["homeSectionType"]?.jsonPrimitive?.content ?: ""
+            val sectionName = sectionObj["homeSectionName"]?.jsonPrimitive?.content ?: ""
             if (sectionType == "BANNER" || sectionType == "BLOCK_GROUP") continue
+            if (sectionFilter != null && !sectionFilter(sectionType, sectionName)) continue
 
             val mediaList = sectionObj["media"] as? JsonArray
                 ?: sectionObj["recommendContentVOList"] as? JsonArray
