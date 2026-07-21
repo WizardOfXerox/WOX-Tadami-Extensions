@@ -7,39 +7,22 @@ import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
-import eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor
+import eu.kanade.tachiyomi.util.asJsoup
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.util.concurrent.TimeUnit
 
 class EncontreiTV : ParsedAnimeHttpSource() {
     override val name = "EncontreiTV"
-    override val baseUrl = "https://encontreitv.com"
+    override val baseUrl = "https://encontreitv.com.br"
     override val lang = "pt"
     override val supportsLatest = true
 
-    // Private request tag data class to preserve metadata across multi-hop redirects
-    private data class VideoTag(val epUrl: String, val epNumber: Float)
-
-    // Resilient OkHttp Client with Rate Limiting & Custom Error Interceptor
-    override val client: OkHttpClient = network.client.newBuilder().addInterceptor(eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptor(2, 1, java.util.concurrent.TimeUnit.SECONDS)).build().newBuilder()
-        .addInterceptor(RateLimitInterceptor(2, 1, TimeUnit.SECONDS))
+    override val client: OkHttpClient = network.client.newBuilder()
         .addInterceptor { chain ->
             val response = chain.proceed(chain.request())
-            if (!response.isSuccessful) {
-                val errorMsg = when (response.code) {
-                    403 -> "Geo-blocked / Cloudflare Block (403): Access denied by server."
-                    404 -> "Endpoint Not Found (404): Page or stream source is missing."
-                    400 -> "Bad Request (400): Invalid parameter passed to endpoint."
-                    429 -> "Rate Limited (429): Exceeded maximum allowed requests per second."
-                    503 -> "DDoS Protection Active (503): Solve Cloudflare challenge in WebView."
-                    else -> "HTTP Error ${response.code}"
-                }
-                throw Exception(errorMsg)
-            }
             response
         }
         .build()
@@ -81,25 +64,16 @@ class EncontreiTV : ParsedAnimeHttpSource() {
         episode_number = element.text().filter { it.isDigit() }.toFloatOrNull() ?: 1.0f
     }
 
-    // Tagged Video Request to prevent parameter loss across redirects
-    override fun videoListRequest(episode: SEpisode): Request {
-        val tag = VideoTag(episode.url, episode.episode_number)
-        return GET(baseUrl + episode.url, headers).newBuilder().tag(VideoTag::class.java, tag).build()
-    }
-
     override fun videoListParse(response: Response): List<Video> {
-        val tag = response.request.tag(VideoTag::class.java)
         val doc = response.asJsoup()
         val videoList = mutableListOf<Video>()
 
-        // 1. Primary iframe selector
         val iframeSrc = doc.selectFirst("div.source-box iframe, div.player-embed iframe, div#source-player-1 iframe, iframe.metaframe, iframe")?.attr("abs:src")
         if (!iframeSrc.isNullOrBlank()) {
             videoList.add(Video(iframeSrc, "Direct Video Stream", iframeSrc, headers))
         }
 
-        // 2. Fallback direct video sources
-        doc.select("video source").forEach { source ->
+        doc.select("video source").toList().forEach { source ->
             val src = source.attr("abs:src")
             if (src.isNotBlank()) {
                 val quality = source.attr("res") ?: "1080p"
@@ -114,6 +88,5 @@ class EncontreiTV : ParsedAnimeHttpSource() {
     override fun videoFromElement(element: Element): Video = throw UnsupportedOperationException()
     override fun videoUrlParse(document: Document): String = ""
 
-    // Fork compatibility method (omitting override for Aniyomi build compatibility)
     fun relatedAnimeListRequest(anime: SAnime): Request = GET("$baseUrl/recommendations", headers)
 }

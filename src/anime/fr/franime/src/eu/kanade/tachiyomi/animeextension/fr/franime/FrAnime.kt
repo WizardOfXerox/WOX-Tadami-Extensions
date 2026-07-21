@@ -26,9 +26,9 @@ class FrAnime : AnimeHttpSource() {
 
     private val domain = "franime.fr"
 
-    override val baseUrl = "https://$domain"
+    override val baseUrl = "https://franime.fr"
 
-    private val baseApiUrl = "https://api.$domain/api"
+    private val baseApiUrl = "https://api.franime.fr/api"
     private val baseApiAnimeUrl = "$baseApiUrl/anime"
 
     override val lang = "fr"

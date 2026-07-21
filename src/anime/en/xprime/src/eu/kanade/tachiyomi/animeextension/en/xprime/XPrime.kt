@@ -31,7 +31,7 @@ class XPrime : ConfigurableAnimeSource, AnimeHttpSource() {
 
     override val name = "XPrime"
 
-    override val baseUrl = "https://xprime.tv"
+    override val baseUrl = "https://xprime.to"
 
     override val lang = "en"
 

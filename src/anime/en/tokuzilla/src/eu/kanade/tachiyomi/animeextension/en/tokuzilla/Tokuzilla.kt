@@ -24,7 +24,7 @@ class Tokuzilla :
 
     override val name = "Tokuzilla"
 
-    override val baseUrl = "https://tokuzilla.net"
+    override val baseUrl = "https://tokuzilla.com"
 
     override val lang = "en"
 
