@@ -198,7 +198,7 @@ class HexaWatch :
         return GET(url, headers)
     }
 
-    override fun relatedAnimeListRequest(anime: SAnime): Request {
+    fun relatedAnimeListRequest(anime: SAnime): Request {
         val url = (apiUrl + anime.url).toHttpUrl().newBuilder().apply {
             addPathSegment("recommendations")
             addQueryParameter("page", "1")
