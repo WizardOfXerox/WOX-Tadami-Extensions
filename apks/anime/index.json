@@ -1,22 +1,5 @@
 [
   {
-    "name": "Aniyomi: AnimeOnsen",
-    "pkg": "eu.kanade.tachiyomi.animeextension.en.animeonsen",
-    "apk": "aniyomi-all.animeonsen-v14.11.apk",
-    "lang": "en",
-    "code": 11,
-    "version": "14.11",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "AnimeOnsen",
-        "lang": "en",
-        "id": "1234567890123456789",
-        "baseUrl": "https://animeonsen.xyz"
-      }
-    ]
-  },
-  {
     "name": "Aniyomi: 123Anime",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.onetwothreeanime",
     "apk": "aniyomi-en.onetwothreeanime-v14.1.apk",
@@ -646,12 +629,12 @@
     ]
   },
   {
-    "name": "Aniyomi: AnimeOnsen (All)",
+    "name": "Aniyomi: AnimeOnsen",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.animeonsen",
-    "apk": "aniyomi-all.animeonsen-v14.11.apk",
+    "apk": "aniyomi-all.animeonsen-v14.20.apk",
     "lang": "all",
-    "code": 11,
-    "version": "14.11",
+    "code": 20,
+    "version": "14.20",
     "nsfw": 0,
     "sources": [
       {
