@@ -643,7 +643,8 @@
         "id": "5234567890123456789",
         "baseUrl": "https://www.animeonsen.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.animeonsen.png"
   },
   {
     "name": "Aniyomi: AnimePahe",
