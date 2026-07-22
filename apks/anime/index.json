@@ -631,10 +631,10 @@
   {
     "name": "Aniyomi: AnimeOnsen",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.animeonsen",
-    "apk": "aniyomi-all.animeonsen-v14.20.apk",
+    "apk": "aniyomi-all.animeonsen-v14.21.apk",
     "lang": "all",
-    "code": 20,
-    "version": "14.20",
+    "code": 21,
+    "version": "14.21",
     "nsfw": 0,
     "sources": [
       {
@@ -4552,8 +4552,8 @@
   {
     "name": "Aniyomi: XPrime",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.xprime",
-    "code": 2,
-    "apk": "aniyomi-en.xprime-v14.2.apk",
+    "code": 3,
+    "apk": "aniyomi-en.xprime-v14.3.apk",
     "lang": "en",
     "sources": [
       {
@@ -4564,7 +4564,7 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.2",
+    "version": "14.3",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.xprime.png"
   },
   {
@@ -4638,10 +4638,10 @@
   {
     "name": "Aniyomi: Xhamster",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.xhamster",
-    "apk": "aniyomi-all.xhamster-v14.1.apk",
+    "apk": "aniyomi-all.xhamster-v14.2.apk",
     "lang": "all",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
