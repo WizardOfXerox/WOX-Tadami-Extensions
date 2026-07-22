@@ -4564,7 +4564,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.2"
+    "version": "14.2",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.xprime.png"
   },
   {
     "name": "Aniyomi: Xvideos",
