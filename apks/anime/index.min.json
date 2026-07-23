@@ -1046,10 +1046,10 @@
   {
     "name": "Aniyomi: AnimeXin",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.animexin",
-    "apk": "aniyomi-all.animexin-v14.27.apk",
+    "apk": "aniyomi-all.animexin-v14.28.apk",
     "lang": "all",
-    "code": 27,
-    "version": "14.27",
+    "code": 28,
+    "version": "14.28",
     "nsfw": 0,
     "sources": [
       {
@@ -1199,8 +1199,8 @@
   {
     "name": "Aniyomi: Anoboye",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.anoboye",
-    "code": 1,
-    "apk": "aniyomi-all.anoboye-v14.1.apk",
+    "code": 10,
+    "apk": "aniyomi-all.anoboye-v14.10.apk",
     "lang": "all",
     "sources": [
       {
@@ -1211,7 +1211,7 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.10"
   },
   {
     "name": "Aniyomi: Arab Seed",
@@ -1545,8 +1545,8 @@
   {
     "name": "Aniyomi: DASHFLIX",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.dashflix",
-    "code": 1,
-    "apk": "aniyomi-all.dashflix-v14.1.apk",
+    "code": 8,
+    "apk": "aniyomi-all.dashflix-v14.8.apk",
     "lang": "all",
     "sources": [
       {
@@ -1557,7 +1557,7 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.1"
+    "version": "14.8"
   },
   {
     "name": "Aniyomi: DattebayoBR",
@@ -2140,10 +2140,10 @@
   {
     "name": "Aniyomi: Hentai Torrent (Torrent)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.hentaitorrent",
-    "apk": "aniyomi-all.hentaitorrent-v14.4.apk",
+    "apk": "aniyomi-all.hentaitorrent-v14.14.apk",
     "lang": "all",
-    "code": 4,
-    "version": "14.4",
+    "code": 14,
+    "version": "14.14",
     "nsfw": 1,
     "sources": [
       {
@@ -3048,10 +3048,10 @@
   {
     "name": "Aniyomi: MyReadingManga",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.myreadingmanga",
-    "apk": "aniyomi-all.myreadingmanga-v14.2.apk",
+    "apk": "aniyomi-all.myreadingmanga-v14.10.apk",
     "lang": "all",
-    "code": 2,
-    "version": "14.2",
+    "code": 10,
+    "version": "14.10",
     "nsfw": 1,
     "sources": [
       {
@@ -3319,10 +3319,10 @@
   {
     "name": "Aniyomi: Nyaa (Torrent)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.nyaatorrent",
-    "apk": "aniyomi-all.nyaatorrent-v14.4.apk",
+    "apk": "aniyomi-all.nyaatorrent-v14.13.apk",
     "lang": "all",
-    "code": 4,
-    "version": "14.4",
+    "code": 13,
+    "version": "14.13",
     "nsfw": 1,
     "sources": [
       {
@@ -3529,10 +3529,10 @@
   {
     "name": "Aniyomi: PinoyMoviePedia",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.pinoymoviepedia",
-    "apk": "aniyomi-en.pinoymoviepedia-v14.10.apk",
+    "apk": "aniyomi-en.pinoymoviepedia-v14.11.apk",
     "lang": "en",
-    "code": 10,
-    "version": "14.10",
+    "code": 11,
+    "version": "14.11",
     "nsfw": 1,
     "sources": [
       {
@@ -3614,10 +3614,10 @@
   {
     "name": "Aniyomi: RouVideo",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.rouvideo",
-    "apk": "aniyomi-all.rouvideo-v14.13.apk",
+    "apk": "aniyomi-all.rouvideo-v14.14.apk",
     "lang": "all",
-    "code": 13,
-    "version": "14.13",
+    "code": 23,
+    "version": "14.23",
     "nsfw": 1,
     "sources": [
       {
@@ -3837,10 +3837,10 @@
   {
     "name": "Aniyomi: Subsplease",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.subsplease",
-    "apk": "aniyomi-all.subsplease-v14.5.apk",
+    "apk": "aniyomi-all.subsplease-v14.6.apk",
     "lang": "all",
-    "code": 5,
-    "version": "14.5",
+    "code": 14,
+    "version": "14.14",
     "nsfw": 0,
     "sources": [
       {
