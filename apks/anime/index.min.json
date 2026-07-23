@@ -14,7 +14,8 @@
         "id": "9168084761765988435",
         "baseUrl": "https://123anime.ru"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.onetwothreeanime.png"
   },
   {
     "name": "Aniyomi: AllAnime",
@@ -31,7 +32,8 @@
         "id": "4709139914729853090",
         "baseUrl": "https://allmanga.to/anime"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.allanime.png"
   },
   {
     "name": "Aniyomi: Anichi",
@@ -48,7 +50,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.anichi.png"
   },
   {
     "name": "Aniyomi: AniDB",
@@ -65,7 +68,8 @@
         "id": "3556703948634317295",
         "baseUrl": "https://anidb.app"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.anidb.png"
   },
   {
     "name": "Aniyomi: Anikage",
@@ -82,7 +86,8 @@
         "id": "975930199828232260",
         "baseUrl": "https://anikage.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.anikage.png"
   },
   {
     "name": "Aniyomi: Anikoto",
@@ -99,7 +104,8 @@
         "id": "4697393375201558791",
         "baseUrl": "https://anikototv.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.anikoto.png"
   },
   {
     "name": "Aniyomi: Anikyuu",
@@ -116,7 +122,8 @@
         "id": "4361637123039891722",
         "baseUrl": "https://anikyuu.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.anikyuu.png"
   },
   {
     "name": "Aniyomi: AniList",
@@ -133,7 +140,8 @@
         "id": "297628545340942341",
         "baseUrl": "https://anilist.co"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.anilist.png"
   },
   {
     "name": "Aniyomi: Anime Blkom",
@@ -150,7 +158,8 @@
         "id": "5743347900850233900",
         "baseUrl": "https://animeblkom.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.animeblkom.png"
   },
   {
     "name": "Aniyomi: Anime Fire",
@@ -167,7 +176,8 @@
         "id": "2914332399101546717",
         "baseUrl": "https://animefire.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animefire.png"
   },
   {
     "name": "Aniyomi: Anime Saturn",
@@ -184,7 +194,8 @@
         "id": "1863212142777957799",
         "baseUrl": "https://www.anisaturn.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.animesaturn.png"
   },
   {
     "name": "Aniyomi: Anime Srbija",
@@ -201,7 +212,8 @@
         "id": "789279548118486310",
         "baseUrl": "https://www.animesrbija.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.sr.animesrbija.png"
   },
   {
     "name": "Aniyomi: Anime-Base",
@@ -218,7 +230,8 @@
         "id": "891780646468545269",
         "baseUrl": "https://anime-base.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.animebase.png"
   },
   {
     "name": "Aniyomi: Anime-Loads",
@@ -235,7 +248,8 @@
         "id": "655155856096",
         "baseUrl": "https://www.anime-loads.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.animeloads.png"
   },
   {
     "name": "Aniyomi: Anime-Sama",
@@ -252,7 +266,8 @@
         "id": "6170936930338275444",
         "baseUrl": "https://anime-sama.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.animesama.png"
   },
   {
     "name": "Aniyomi: Anime-Stream",
@@ -269,7 +284,8 @@
         "id": "314593699490737069",
         "baseUrl": "https://anime-stream.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.animestream.png"
   },
   {
     "name": "Aniyomi: Anime1.me",
@@ -286,7 +302,8 @@
         "id": "8121834351495460193",
         "baseUrl": "https://anime1.me"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.anime1.png"
   },
   {
     "name": "Aniyomi: Anime4up",
@@ -303,7 +320,8 @@
         "id": "528782559387795213",
         "baseUrl": "https://w1.anime4up.rest"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.anime4up.png"
   },
   {
     "name": "Aniyomi: AnimeAv1",
@@ -320,7 +338,8 @@
         "id": "1563723619853520901",
         "baseUrl": "https://animeav1.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeav1.png"
   },
   {
     "name": "Aniyomi: AnimeBalkan",
@@ -337,7 +356,8 @@
         "id": "1322485891319274755",
         "baseUrl": "https://animebalkan.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.sr.animebalkan.png"
   },
   {
     "name": "Aniyomi: AnimeBum",
@@ -354,7 +374,8 @@
         "id": "8233706727551070437",
         "baseUrl": "https://www.animebum.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animebum.png"
   },
   {
     "name": "Aniyomi: AnimeFenix",
@@ -371,7 +392,8 @@
         "id": "1901838936011764172",
         "baseUrl": "https://animefenix2.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animefenix.png"
   },
   {
     "name": "Aniyomi: AnimeFLV",
@@ -388,7 +410,8 @@
         "id": "93702975723668971",
         "baseUrl": "https://www3.animeflv.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeflv.png"
   },
   {
     "name": "Aniyomi: AnimeGG",
@@ -405,7 +428,8 @@
         "id": "2247987965040486818",
         "baseUrl": "https://www.animegg.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animegg.png"
   },
   {
     "name": "Aniyomi: AnimeID",
@@ -422,7 +446,8 @@
         "id": "3757015232925755985",
         "baseUrl": "https://www.animeid.tv/"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeid.png"
   },
   {
     "name": "Aniyomi: AnimeIndo",
@@ -439,7 +464,8 @@
         "id": "2019695674801188380",
         "baseUrl": "https://animeindo.skin"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.animeindo.png"
   },
   {
     "name": "Aniyomi: AnimeIto",
@@ -456,7 +482,8 @@
         "id": "5503541725559168140",
         "baseUrl": "https://animesonline.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animeito.png"
   },
   {
     "name": "Aniyomi: Animejl",
@@ -473,7 +500,8 @@
         "id": "2934893552535692335",
         "baseUrl": "https://www.anime-jl.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animejl.png"
   },
   {
     "name": "Aniyomi: AnimeKai (Unoriginal)",
@@ -490,7 +518,8 @@
         "id": "1571236147208399860",
         "baseUrl": "https://animekaitv.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kotokai.png"
   },
   {
     "name": "Aniyomi: AnimeKhor",
@@ -507,7 +536,8 @@
         "id": "2156984402743841841",
         "baseUrl": "https://animekhor.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animekhor.png"
   },
   {
     "name": "Aniyomi: AnimeLatinoHD",
@@ -524,7 +554,8 @@
         "id": "5412136569974245348",
         "baseUrl": "https://www.animelatinohd.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animelatinohd.png"
   },
   {
     "name": "Aniyomi: Animeler",
@@ -541,7 +572,8 @@
         "id": "6594370763071208431",
         "baseUrl": "https://animeler.pw"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.animeler.png"
   },
   {
     "name": "Aniyomi: Animelib",
@@ -558,7 +590,8 @@
         "id": "1484002441113474607",
         "baseUrl": "https://animelib.org/ru"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ru.animelib.png"
   },
   {
     "name": "Aniyomi: AnimeMovil",
@@ -575,7 +608,8 @@
         "id": "3892773447316414021",
         "baseUrl": "https://animemeow.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animemovil.png"
   },
   {
     "name": "Aniyomi: Animenix",
@@ -592,7 +626,8 @@
         "id": "1547119562002827048",
         "baseUrl": "https://animenix.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animenix.png"
   },
   {
     "name": "Aniyomi: Animenosub",
@@ -609,7 +644,8 @@
         "id": "6722573244246256733",
         "baseUrl": "https://animenosub.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animenosub.png"
   },
   {
     "name": "Aniyomi: AnimeOnline.Ninja",
@@ -626,7 +662,8 @@
         "id": "2765997893095141044",
         "baseUrl": "https://ver.animeonline.ninja"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeonlineninja.png"
   },
   {
     "name": "Aniyomi: AnimeOnsen",
@@ -661,7 +698,8 @@
         "id": "9163675745699695675",
         "baseUrl": "https://animepahe.pw"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animepahe.png"
   },
   {
     "name": "Aniyomi: AnimeParadise",
@@ -678,7 +716,8 @@
         "id": "3319373396687010408",
         "baseUrl": "https://www.animeparadise.moe"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animeparadise.png"
   },
   {
     "name": "Aniyomi: AnimePlay",
@@ -695,7 +734,8 @@
         "id": "3974766726104260721",
         "baseUrl": "https://animeplay.cloud"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animeplay.png"
   },
   {
     "name": "Aniyomi: AnimePlayer",
@@ -712,7 +752,8 @@
         "id": "6456382572881676651",
         "baseUrl": "https://animeplayer.com.br"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animeplayer.png"
   },
   {
     "name": "Aniyomi: AnimeQ",
@@ -729,7 +770,8 @@
         "id": "3666901064696818585",
         "baseUrl": "https://animeq.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animeq.png"
   },
   {
     "name": "Aniyomi: Animerco",
@@ -746,7 +788,8 @@
         "id": "4435835034990361158",
         "baseUrl": "https://zeta.animerco.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.animerco.png"
   },
   {
     "name": "Aniyomi: Animes CX",
@@ -763,7 +806,8 @@
         "id": "3718439836617642466",
         "baseUrl": "https://animescx.com.br"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animescx.png"
   },
   {
     "name": "Aniyomi: Animes Digital",
@@ -780,7 +824,8 @@
         "id": "4877286181768246205",
         "baseUrl": "https://animesdigital.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesdigital.png"
   },
   {
     "name": "Aniyomi: Animes Online CC",
@@ -797,7 +842,8 @@
         "id": "7386550303236826765",
         "baseUrl": "https://animesonlinecc.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesonlinecc.png"
   },
   {
     "name": "Aniyomi: AnimesBr (Dead)",
@@ -814,7 +860,8 @@
         "id": "3000709501394043899",
         "baseUrl": "https://animesbr.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesbr.png"
   },
   {
     "name": "Aniyomi: AnimesDrive",
@@ -831,7 +878,8 @@
         "id": "6170414613821552199",
         "baseUrl": "https://animesdrive.online"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesdrive.png"
   },
   {
     "name": "Aniyomi: AnimeSogo",
@@ -848,7 +896,8 @@
         "id": "8456322126210259639",
         "baseUrl": "https://animesogo.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animesogo.png"
   },
   {
     "name": "Aniyomi: AnimesOnlineCloud",
@@ -865,7 +914,8 @@
         "id": "6962698096138673113",
         "baseUrl": "https://animesonline.cloud"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesonlinecloud.png"
   },
   {
     "name": "Aniyomi: AnimesOnlineVip",
@@ -882,7 +932,8 @@
         "id": "533096643049014020",
         "baseUrl": "https://animesonlinefhd.vip"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesonlinevip.png"
   },
   {
     "name": "Aniyomi: AnimesROLL",
@@ -899,7 +950,8 @@
         "id": "734961575978606843",
         "baseUrl": "https://anroll.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesroll.png"
   },
   {
     "name": "Aniyomi: AnimeTake",
@@ -916,7 +968,8 @@
         "id": "7460925030423755739",
         "baseUrl": "https://animetake.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animetake.png"
   },
   {
     "name": "Aniyomi: AnimeToast",
@@ -933,7 +986,8 @@
         "id": "2386616842414617638",
         "baseUrl": "https://www.animetoast.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.animetoast.png"
   },
   {
     "name": "Aniyomi: AnimeUnity",
@@ -950,7 +1004,8 @@
         "id": "7762808921754601430",
         "baseUrl": "https://www.animeunity.so"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.animeunity.png"
   },
   {
     "name": "Aniyomi: AnimeUno",
@@ -967,7 +1022,8 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animeuno.png"
   },
   {
     "name": "Aniyomi: AnimeVerse",
@@ -984,7 +1040,8 @@
         "id": "2210523582293472538",
         "baseUrl": "https://animeverse.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animeverse.png"
   },
   {
     "name": "Aniyomi: Animevost",
@@ -1007,7 +1064,8 @@
         "id": "6851436110983735038",
         "baseUrl": "https://v13.vost.pw"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ru.animevost.png"
   },
   {
     "name": "Aniyomi: AnimeVostFr",
@@ -1024,7 +1082,8 @@
         "id": "5563793683192822639",
         "baseUrl": "https://animevostfr.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.animevostfr.png"
   },
   {
     "name": "Aniyomi: ANIMEWORLD.tv",
@@ -1041,7 +1100,8 @@
         "id": "6601315231151625432",
         "baseUrl": "https://www.animeworld.ac"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.animeworld.png"
   },
   {
     "name": "Aniyomi: AnimeXin",
@@ -1058,7 +1118,8 @@
         "id": "4620219025406449669",
         "baseUrl": "https://animexin.dev"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.animexin.png"
   },
   {
     "name": "Aniyomi: Animeyt",
@@ -1075,7 +1136,8 @@
         "id": "3945696494710013768",
         "baseUrl": "https://ytanime.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeyt.png"
   },
   {
     "name": "Aniyomi: AnimeYT.es",
@@ -1092,7 +1154,8 @@
         "id": "4742118265598399159",
         "baseUrl": "https://animeyt.es"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeytes.png"
   },
   {
     "name": "Aniyomi: AniSama",
@@ -1109,7 +1172,8 @@
         "id": "1898818943039425198",
         "baseUrl": "https://v1.animesz.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.anisama.png"
   },
   {
     "name": "Aniyomi: Anitube",
@@ -1126,7 +1190,8 @@
         "id": "9152952750171112510",
         "baseUrl": "https://www.anitube.vip"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.anitube.png"
   },
   {
     "name": "Aniyomi: Aniweek",
@@ -1143,7 +1208,8 @@
         "id": "4565983297271071094",
         "baseUrl": "https://aniweek.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ko.aniweek.png"
   },
   {
     "name": "Aniyomi: AniWorld",
@@ -1160,7 +1226,8 @@
         "id": "8286900189409315836",
         "baseUrl": "https://aniworld.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.aniworld.png"
   },
   {
     "name": "Aniyomi: Anizm",
@@ -1177,7 +1244,8 @@
         "id": "3103642053214293691",
         "baseUrl": "https://anizm.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.anizm.png"
   },
   {
     "name": "Aniyomi: AniZone",
@@ -1194,7 +1262,8 @@
         "id": "954848840440936266",
         "baseUrl": "https://anizone.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.anizone.png"
   },
   {
     "name": "Aniyomi: Anoboye",
@@ -1211,7 +1280,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.10"
+    "version": "14.10",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.anoboye.png"
   },
   {
     "name": "Aniyomi: Arab Seed",
@@ -1228,7 +1298,8 @@
         "id": "4544379135186887077",
         "baseUrl": "https://m.asd.homes"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.arabseed.png"
   },
   {
     "name": "Aniyomi: ArabAnime",
@@ -1245,7 +1316,8 @@
         "id": "7694781769943581537",
         "baseUrl": "https://www.arabanime.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.arabanime.png"
   },
   {
     "name": "Aniyomi: asia2tv",
@@ -1262,7 +1334,8 @@
         "id": "2083042094654392493",
         "baseUrl": "https://ww1.asia2tv.pw"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.asia2tv.png"
   },
   {
     "name": "Aniyomi: AsiaLiveAction",
@@ -1279,7 +1352,8 @@
         "id": "5750872840863097496",
         "baseUrl": "https://asialiveaction.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.asialiveaction.png"
   },
   {
     "name": "Aniyomi: AssistirFilmes",
@@ -1296,7 +1370,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.assistirfilmes.png"
   },
   {
     "name": "Aniyomi: AsyaAnimeleri",
@@ -1313,7 +1388,8 @@
         "id": "2012826325126448867",
         "baseUrl": "https://asyaanimeleri.top"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.asyaanimeleri.png"
   },
   {
     "name": "Aniyomi: AV1Encodes",
@@ -1330,7 +1406,8 @@
         "id": "1014227790860730234",
         "baseUrl": "https://av1encodes.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.av1encodes.png"
   },
   {
     "name": "Aniyomi: az-animex",
@@ -1347,7 +1424,8 @@
         "id": "7735188894368809510",
         "baseUrl": "https://www.az-animex.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.azanimex.png"
   },
   {
     "name": "Aniyomi: BeatZ Anime",
@@ -1364,7 +1442,8 @@
         "id": "27781270364033644",
         "baseUrl": "https://www.beatz-anime.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.beatzanime.png"
   },
   {
     "name": "Aniyomi: BetterAnimeIo",
@@ -1381,7 +1460,8 @@
         "id": "2407610655424858426",
         "baseUrl": "https://betteranime.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.betteranimeio.png"
   },
   {
     "name": "Aniyomi: BLZone",
@@ -1398,7 +1478,8 @@
         "id": "1437838328434413410",
         "baseUrl": "https://blzone.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.blzone.png"
   },
   {
     "name": "Aniyomi: Cimaleek",
@@ -1415,7 +1496,8 @@
         "id": "9014633682469494124",
         "baseUrl": "https://m.cimaleek.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.cimaleek.png"
   },
   {
     "name": "Aniyomi: Cine24h",
@@ -1432,7 +1514,8 @@
         "id": "431438597808105152",
         "baseUrl": "https://cine24h.online"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.cine24h.png"
   },
   {
     "name": "Aniyomi: Cineby",
@@ -1449,7 +1532,8 @@
         "id": "3770577718621723403",
         "baseUrl": "https://www.cineby.at"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.cineby.png"
   },
   {
     "name": "Aniyomi: CineCalidad",
@@ -1466,7 +1550,8 @@
         "id": "661928073480792687",
         "baseUrl": "https://www.cinecalidad.ec"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.cinecalidad.png"
   },
   {
     "name": "Aniyomi: Cineplus123",
@@ -1483,7 +1568,8 @@
         "id": "2117238897122405265",
         "baseUrl": "https://cineplus123.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.cineplus123.png"
   },
   {
     "name": "Aniyomi: Cuevana",
@@ -1506,7 +1592,8 @@
         "id": "1487248605713977697",
         "baseUrl": "https://www.cuevana3.eu"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.cuevana.png"
   },
   {
     "name": "Aniyomi: Cycity",
@@ -1523,7 +1610,8 @@
         "id": "4928029692398241219",
         "baseUrl": "https://www.cycani.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.cycity.png"
   },
   {
     "name": "Aniyomi: DarkMahou",
@@ -1540,7 +1628,8 @@
         "id": "59748104323952005",
         "baseUrl": "https://darkmahou.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.darkmahou.png"
   },
   {
     "name": "Aniyomi: DASHFLIX",
@@ -1557,7 +1646,8 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.8"
+    "version": "14.8",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.dashflix.png"
   },
   {
     "name": "Aniyomi: DattebayoBR",
@@ -1574,7 +1664,8 @@
         "id": "429519413057267556",
         "baseUrl": "https://www.dattebayo-br.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.dattebayobr.png"
   },
   {
     "name": "Aniyomi: Debrid Index",
@@ -1591,7 +1682,8 @@
         "id": "824133852049869443",
         "baseUrl": "https://torrentio.strem.fun"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.debridindex.png"
   },
   {
     "name": "Aniyomi: desu-online",
@@ -1608,7 +1700,8 @@
         "id": "5996410160070658951",
         "baseUrl": "https://desu-online.pl"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pl.desuonline.png"
   },
   {
     "name": "Aniyomi: DeTodoPeliculas",
@@ -1625,7 +1718,8 @@
         "id": "4976463260586484820",
         "baseUrl": "https://detodopeliculas.nu"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.detodopeliculas.png"
   },
   {
     "name": "Aniyomi: Docchi",
@@ -1642,7 +1736,8 @@
         "id": "594564153449456404",
         "baseUrl": "https://docchi.pl"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pl.docchi.png"
   },
   {
     "name": "Aniyomi: Donghua no Sekai",
@@ -1659,7 +1754,8 @@
         "id": "1190488322033769414",
         "baseUrl": "https://donghuanosekai.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.donghuanosekai.png"
   },
   {
     "name": "Aniyomi: DonghuaStream",
@@ -1676,7 +1772,8 @@
         "id": "5750955808412743706",
         "baseUrl": "https://donghuastream.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.donghuastream.png"
   },
   {
     "name": "Aniyomi: Doramasflix",
@@ -1693,7 +1790,8 @@
         "id": "1955566742338181506",
         "baseUrl": "https://doramasflix.in"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.doramasflix.png"
   },
   {
     "name": "Aniyomi: Doramasyt",
@@ -1710,7 +1808,8 @@
         "id": "885919523581666049",
         "baseUrl": "https://www.doramasyt.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.doramasyt.png"
   },
   {
     "name": "Aniyomi: Doramogo",
@@ -1727,7 +1826,8 @@
         "id": "913841527115486600",
         "baseUrl": "https://doramogo.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.doramogo.png"
   },
   {
     "name": "Aniyomi: Egy Dead",
@@ -1744,7 +1844,8 @@
         "id": "8402300441936118056",
         "baseUrl": "https://egydead.space"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.egydead.png"
   },
   {
     "name": "Aniyomi: EmpireStreaming",
@@ -1761,7 +1862,8 @@
         "id": "1449801594109278557",
         "baseUrl": "https://empire-stream.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.empirestreaming.png"
   },
   {
     "name": "Aniyomi: EncontreiTV",
@@ -1778,7 +1880,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.encontreitv.png"
   },
   {
     "name": "Aniyomi: EnNovelas (Dead)",
@@ -1795,7 +1898,8 @@
         "id": "6683521813386506618",
         "baseUrl": "https://l.ennovelas-tv.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.ennovelas.png"
   },
   {
     "name": "Aniyomi: FanPelis",
@@ -1812,7 +1916,8 @@
         "id": "1270541458457028378",
         "baseUrl": "https://fanpelis.la"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.fanpelis.png"
   },
   {
     "name": "Aniyomi: FASELHD",
@@ -1829,7 +1934,8 @@
         "id": "1378291029586884571",
         "baseUrl": "https://www.faselhds.biz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.faselhd.png"
   },
   {
     "name": "Aniyomi: FilmesOnlineSH",
@@ -1846,7 +1952,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.filmesonlinesh.png"
   },
   {
     "name": "Aniyomi: FilmPalast",
@@ -1863,7 +1970,8 @@
         "id": "3592180368623395225",
         "baseUrl": "https://filmpalast.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.filmpalast.png"
   },
   {
     "name": "Aniyomi: FlixLatam",
@@ -1880,7 +1988,8 @@
         "id": "2400169316701597839",
         "baseUrl": "https://flixlatam.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.flixlatam.png"
   },
   {
     "name": "Aniyomi: FRAnime",
@@ -1897,7 +2006,8 @@
         "id": "3074980924810171824",
         "baseUrl": "https://franime.fr"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.franime.png"
   },
   {
     "name": "Aniyomi: French Anime",
@@ -1914,7 +2024,8 @@
         "id": "8142032927870763721",
         "baseUrl": "https://french-anime.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.frenchanime.png"
   },
   {
     "name": "Aniyomi: Fun Anime TV",
@@ -1931,7 +2042,8 @@
         "id": "7920607630206318931",
         "baseUrl": "https://betterclass.click"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.funanimetv.png"
   },
   {
     "name": "Aniyomi: Gnula",
@@ -1948,7 +2060,8 @@
         "id": "6896649241746590059",
         "baseUrl": "https://gnula.life"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.gnula.png"
   },
   {
     "name": "Aniyomi: Google Drive",
@@ -1965,7 +2078,8 @@
         "id": "4222017068256633289",
         "baseUrl": "https://drive.google.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.googledrive.png"
   },
   {
     "name": "Aniyomi: GoogleDriveIndex",
@@ -1982,7 +2096,8 @@
         "id": "7558489246571085102",
         "baseUrl": ""
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.googledriveindex.png"
   },
   {
     "name": "Aniyomi: Goyabu",
@@ -1999,7 +2114,8 @@
         "id": "191823841242368911",
         "baseUrl": "https://goyabu.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.goyabu.png"
   },
   {
     "name": "Aniyomi: Hackstore",
@@ -2016,7 +2132,8 @@
         "id": "1202443264869837465",
         "baseUrl": "https://www.hackstore.fo"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hackstore.png"
   },
   {
     "name": "Aniyomi: haho.moe",
@@ -2033,7 +2150,8 @@
         "id": "3727306173180829340",
         "baseUrl": "https://haho.moe"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hahomoe.png"
   },
   {
     "name": "Aniyomi: hanime.tv",
@@ -2050,7 +2168,8 @@
         "id": "2649711761599612719",
         "baseUrl": "https://hanime.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hanime.png"
   },
   {
     "name": "Aniyomi: Hanime1.me",
@@ -2067,7 +2186,8 @@
         "id": "2853734405579058222",
         "baseUrl": "https://hanime1.me"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.hanime1.png"
   },
   {
     "name": "Aniyomi: HazeFlix",
@@ -2084,7 +2204,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.hazeflix.png"
   },
   {
     "name": "Aniyomi: HDFilmCehennemi",
@@ -2101,7 +2222,8 @@
         "id": "7053678650145882822",
         "baseUrl": "https://www.hdfilmcehennemi.nl"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.hdfilmcehennemi.png"
   },
   {
     "name": "Aniyomi: HDS",
@@ -2118,7 +2240,8 @@
         "id": "3206613581297348563",
         "baseUrl": "https://on1.hds.quest"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.hds.png"
   },
   {
     "name": "Aniyomi: Hentai Saturn",
@@ -2135,7 +2258,8 @@
         "id": "5832452298268268088",
         "baseUrl": "https://www.hentaisaturn.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.hentaisaturn.png"
   },
   {
     "name": "Aniyomi: Hentai Torrent (Torrent)",
@@ -2152,7 +2276,8 @@
         "id": "5093529078954574163",
         "baseUrl": "https://www.hentaitorrents.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.hentaitorrent.png"
   },
   {
     "name": "Aniyomi: Hentaijk",
@@ -2169,7 +2294,8 @@
         "id": "4616479108300191837",
         "baseUrl": "https://hentaijk.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hentaijk.png"
   },
   {
     "name": "Aniyomi: Hentaila",
@@ -2186,7 +2312,8 @@
         "id": "6447194598203666818",
         "baseUrl": "https://hentaila.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hentaila.png"
   },
   {
     "name": "Aniyomi: HentaiMama",
@@ -2203,7 +2330,8 @@
         "id": "8058423919997530503",
         "baseUrl": "https://hentaimama.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaimama.png"
   },
   {
     "name": "Aniyomi: HentaiTk",
@@ -2220,7 +2348,8 @@
         "id": "7726637677864789742",
         "baseUrl": "https://hentaitk.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hentaitk.png"
   },
   {
     "name": "Aniyomi: HentaiZM",
@@ -2237,7 +2366,8 @@
         "id": "9058842310298227429",
         "baseUrl": "https://www.hentaizm6.online"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.hentaizm.png"
   },
   {
     "name": "Aniyomi: HexaWatch",
@@ -2254,7 +2384,8 @@
         "id": "8787688252737895237",
         "baseUrl": "https://hexa.su"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hexawatch.png"
   },
   {
     "name": "Aniyomi: HomeCine",
@@ -2271,7 +2402,8 @@
         "id": "4683784015054845419",
         "baseUrl": "https://homecine.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.homecine.png"
   },
   {
     "name": "Aniyomi: Hstream (Custom)",
@@ -2288,7 +2420,8 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.13"
+    "version": "14.13",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hstream.png"
   },
   {
     "name": "Aniyomi: iyf",
@@ -2305,7 +2438,8 @@
         "id": "3164438094592800620",
         "baseUrl": "https://www.iyf.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.iyf.png"
   },
   {
     "name": "Aniyomi: Jable",
@@ -2334,7 +2468,8 @@
         "id": "7335707215680841826",
         "baseUrl": "https://jable.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.jable.png"
   },
   {
     "name": "Aniyomi: Jav Guru",
@@ -2351,7 +2486,8 @@
         "id": "8546813608934181796",
         "baseUrl": "https://jav.guru"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javguru.png"
   },
   {
     "name": "Aniyomi: JavGG",
@@ -2368,7 +2504,8 @@
         "id": "3378993382379910095",
         "baseUrl": "https://javgg.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javgg.png"
   },
   {
     "name": "Aniyomi: Jellyfin",
@@ -2397,7 +2534,8 @@
         "id": "7066619062139039107",
         "baseUrl": ""
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.jellyfin.png"
   },
   {
     "name": "Aniyomi: JetAnime",
@@ -2414,7 +2552,8 @@
         "id": "8914615515692839881",
         "baseUrl": "https://ssl.jetanimes.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.jetanime.png"
   },
   {
     "name": "Aniyomi: Jkanime",
@@ -2431,7 +2570,8 @@
         "id": "6007374093317538838",
         "baseUrl": "https://jkanime.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.jkanime.png"
   },
   {
     "name": "Aniyomi: JPFilms",
@@ -2448,7 +2588,8 @@
         "id": "865558085806297637",
         "baseUrl": "https://jp-films.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.jpfilms.png"
   },
   {
     "name": "Aniyomi: Katanime",
@@ -2465,7 +2606,8 @@
         "id": "2564532783405004779",
         "baseUrl": "https://katanime.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.katanime.png"
   },
   {
     "name": "Aniyomi: Kayoanime",
@@ -2482,7 +2624,8 @@
         "id": "203922289858257167",
         "baseUrl": "https://kayoanime.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kayoanime.png"
   },
   {
     "name": "Aniyomi: KickAssAnime",
@@ -2499,7 +2642,8 @@
         "id": "2081771513481539599",
         "baseUrl": "https://kaa.lt"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kickassanime.png"
   },
   {
     "name": "Aniyomi: KimoiTV",
@@ -2516,7 +2660,8 @@
         "id": "6358473316829302267",
         "baseUrl": "https://kimoitv.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kimoitv.png"
   },
   {
     "name": "Aniyomi: Kinoking",
@@ -2533,7 +2678,8 @@
         "id": "996816978236636598",
         "baseUrl": "https://kinoking.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.kinoking.png"
   },
   {
     "name": "Aniyomi: KissAnime",
@@ -2550,7 +2696,8 @@
         "id": "7306944860534104910",
         "baseUrl": "https://kissanime.com.ru"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kissanime.png"
   },
   {
     "name": "Aniyomi: KissKH",
@@ -2567,7 +2714,8 @@
         "id": "2434089544252410046",
         "baseUrl": "https://kisskh.ovh"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kisskh.png"
   },
   {
     "name": "Aniyomi: Kool",
@@ -2584,7 +2732,8 @@
         "id": "5602415922350710914",
         "baseUrl": "https://www.kool.to"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.kool.png"
   },
   {
     "name": "Aniyomi: Kuramanime",
@@ -2601,7 +2750,8 @@
         "id": "4677878836897500878",
         "baseUrl": "https://v8.kuramanime.tel"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.kuramanime.png"
   },
   {
     "name": "Aniyomi: Kuronime",
@@ -2618,7 +2768,8 @@
         "id": "2083695115646974607",
         "baseUrl": "https://tv1.kuronime.vip"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.kuronime.png"
   },
   {
     "name": "Aniyomi: LACartoons",
@@ -2635,7 +2786,8 @@
         "id": "4124511684994754369",
         "baseUrl": "https://www.lacartoons.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.lacartoons.png"
   },
   {
     "name": "Aniyomi: LaMovie",
@@ -2652,7 +2804,8 @@
         "id": "5419283741928374105",
         "baseUrl": "https://la.movie"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.lamovie.png"
   },
   {
     "name": "Aniyomi: Latanime",
@@ -2669,7 +2822,8 @@
         "id": "7257892387451890645",
         "baseUrl": "https://latanime.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.latanime.png"
   },
   {
     "name": "Aniyomi: LegionAnime",
@@ -2686,7 +2840,8 @@
         "id": "508651506167756898",
         "baseUrl": "https://legionanime.club/api"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.legionanime.png"
   },
   {
     "name": "Aniyomi: LMAnime",
@@ -2703,7 +2858,8 @@
         "id": "7296222662412524790",
         "baseUrl": "https://lmanime.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.lmanime.png"
   },
   {
     "name": "Aniyomi: LocoPelis",
@@ -2720,7 +2876,8 @@
         "id": "7685749277599065785",
         "baseUrl": "https://www.locopelis.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.locopelis.png"
   },
   {
     "name": "Aniyomi: Loklok",
@@ -2737,7 +2894,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.loklok.png"
   },
   {
     "name": "Aniyomi: LoveFlix",
@@ -2754,7 +2912,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.loveflix.png"
   },
   {
     "name": "Aniyomi: LuciferDonghua",
@@ -2771,7 +2930,8 @@
         "id": "1480485712825107891",
         "baseUrl": "https://luciferdonghua.in"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.luciferdonghua.png"
   },
   {
     "name": "Aniyomi: Mapple",
@@ -2788,7 +2948,8 @@
         "id": "4419717598017841435",
         "baseUrl": "https://mapple.uk"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.mapple.png"
   },
   {
     "name": "Aniyomi: MetroSeries",
@@ -2805,7 +2966,8 @@
         "id": "302544302370133084",
         "baseUrl": "https://www3.seriesmetro.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.metroseries.png"
   },
   {
     "name": "Aniyomi: Meus Animes",
@@ -2822,7 +2984,8 @@
         "id": "8394381853778573358",
         "baseUrl": "https://meusanimes.vip"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.meusanimes.png"
   },
   {
     "name": "Aniyomi: MhdFlix",
@@ -2839,7 +3002,8 @@
         "id": "4812325950703384298",
         "baseUrl": "https://ww1.mhdflix.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.mhdflix.png"
   },
   {
     "name": "Aniyomi: MiniOppai",
@@ -2856,7 +3020,8 @@
         "id": "3422641844834047610",
         "baseUrl": "https://minioppai.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.minioppai.png"
   },
   {
     "name": "Aniyomi: Miruro.tv",
@@ -2873,7 +3038,8 @@
         "id": "4467610354363305307",
         "baseUrl": "https://www.miruro.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.miruro.png"
   },
   {
     "name": "Aniyomi: MissAV",
@@ -2890,7 +3056,8 @@
         "id": "168969881246615628",
         "baseUrl": "https://missav.live"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.missav.png"
   },
   {
     "name": "Aniyomi: Moflix-Stream",
@@ -2907,7 +3074,8 @@
         "id": "6760309784631443658",
         "baseUrl": "https://moflix-stream.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.moflixstream.png"
   },
   {
     "name": "Aniyomi: MonosChinos",
@@ -2924,7 +3092,8 @@
         "id": "6957694006954649296",
         "baseUrl": "https://monoschinos.st"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.monoschinos.png"
   },
   {
     "name": "Aniyomi: Movie4k",
@@ -2941,7 +3110,8 @@
         "id": "4846722280190238047",
         "baseUrl": "https://movie4k.stream"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.movie4k.png"
   },
   {
     "name": "Aniyomi: MoviesMod",
@@ -2958,7 +3128,8 @@
         "id": "2828515480418041073",
         "baseUrl": "https://moviesmod.red"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.moviesmod.png"
   },
   {
     "name": "Aniyomi: Muito Hentai",
@@ -2975,7 +3146,8 @@
         "id": "1062606379654091909",
         "baseUrl": "https://www.muitohentai.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.muitohentai.png"
   },
   {
     "name": "Aniyomi: MundoDonghua",
@@ -2992,7 +3164,8 @@
         "id": "4356029013369426954",
         "baseUrl": "https://www.mundodonghua.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.mundodonghua.png"
   },
   {
     "name": "Aniyomi: My Running Man",
@@ -3009,7 +3182,8 @@
         "id": "6399273548157311628",
         "baseUrl": "https://www.myrunningman.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.myrunningman.png"
   },
   {
     "name": "Aniyomi: Myanime",
@@ -3026,7 +3200,8 @@
         "id": "4364465995809265087",
         "baseUrl": "https://myanime.live"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.myanime.png"
   },
   {
     "name": "Aniyomi: MyKdrama",
@@ -3043,7 +3218,8 @@
         "id": "7657190496536415953",
         "baseUrl": "https://mykdrama.co"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.mykdrama.png"
   },
   {
     "name": "Aniyomi: MyReadingManga",
@@ -3246,7 +3422,8 @@
         "id": "4129272632455883902",
         "baseUrl": "https://myreadingmanga.info"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.myreadingmanga.png"
   },
   {
     "name": "Aniyomi: NeoNime",
@@ -3263,7 +3440,8 @@
         "id": "6698339357657312694",
         "baseUrl": "https://neonime.ink"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.neonime.png"
   },
   {
     "name": "Aniyomi: Newgrounds",
@@ -3280,7 +3458,8 @@
         "id": "1105406593306973475",
         "baseUrl": "https://www.newgrounds.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.newgrounds.png"
   },
   {
     "name": "Aniyomi: NimeGami",
@@ -3297,7 +3476,8 @@
         "id": "3947801646056600641",
         "baseUrl": "https://nimegami.id"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.nimegami.png"
   },
   {
     "name": "Aniyomi: Nivod",
@@ -3314,7 +3494,8 @@
         "id": "1182396933972053592",
         "baseUrl": "https://www.nivod.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.nivod.png"
   },
   {
     "name": "Aniyomi: Nyaa (Torrent)",
@@ -3337,7 +3518,8 @@
         "id": "9136480360798112194",
         "baseUrl": "https://sukebei.nyaa.si/"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.nyaatorrent.png"
   },
   {
     "name": "Aniyomi: OgladajAnime",
@@ -3354,7 +3536,8 @@
         "id": "1174869729090616971",
         "baseUrl": "https://ogladajanime.pl"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pl.ogladajanime.png"
   },
   {
     "name": "Aniyomi: Okanime",
@@ -3371,7 +3554,8 @@
         "id": "2275740574829569178",
         "baseUrl": "https://www.okanime.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.okanime.png"
   },
   {
     "name": "Aniyomi: Oploverz",
@@ -3388,7 +3572,8 @@
         "id": "2573103800968432770",
         "baseUrl": "https://oploverz.media"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.oploverz.png"
   },
   {
     "name": "Aniyomi: Oppai Stream",
@@ -3405,7 +3590,8 @@
         "id": "1938195875614354298",
         "baseUrl": "https://oppai.stream"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.oppaistream.png"
   },
   {
     "name": "Aniyomi: OtakuDesu",
@@ -3422,7 +3608,8 @@
         "id": "3428487071093013526",
         "baseUrl": "https://otakudesu.blog"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.otakudesu.png"
   },
   {
     "name": "Aniyomi: Pandrama",
@@ -3439,7 +3626,8 @@
         "id": "8290662435507939982",
         "baseUrl": "https://pandrama.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pandrama.png"
   },
   {
     "name": "Aniyomi: PelisForte",
@@ -3456,7 +3644,8 @@
         "id": "4419048029031752703",
         "baseUrl": "https://www2.pelisforte.se"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pelisforte.png"
   },
   {
     "name": "Aniyomi: PelisPlusHD",
@@ -3473,7 +3662,8 @@
         "id": "1400819034564144238",
         "baseUrl": "https://pelisplushd.bz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pelisplushd.png"
   },
   {
     "name": "Aniyomi: PelisPlusPh",
@@ -3490,7 +3680,8 @@
         "id": "4917265654298497443",
         "baseUrl": "https://www.pelisplushd.la"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pelisplusph.png"
   },
   {
     "name": "Aniyomi: PelisPlusTo",
@@ -3507,7 +3698,8 @@
         "id": "1705636111422561130",
         "baseUrl": "https://tioplus.app"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pelisplusto.png"
   },
   {
     "name": "Aniyomi: Pi Fansubs",
@@ -3524,7 +3716,8 @@
         "id": "2457282111412357647",
         "baseUrl": "https://pifansubs.club"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.pifansubs.png"
   },
   {
     "name": "Aniyomi: PinoyMoviePedia",
@@ -3541,7 +3734,8 @@
         "id": "8569022244537791293",
         "baseUrl": "https://pinoymoviepedia.ru"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.pinoymoviepedia.png"
   },
   {
     "name": "Aniyomi: PKFilmes",
@@ -3558,7 +3752,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.pkfilmes.png"
   },
   {
     "name": "Aniyomi: Pornhub",
@@ -3575,7 +3770,8 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.3"
+    "version": "14.3",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.pornhub.png"
   },
   {
     "name": "Aniyomi: PTorrent (Torrent)",
@@ -3592,7 +3788,8 @@
         "id": "2514899426758091629",
         "baseUrl": "https://www.ptorrents.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.ptorrent.png"
   },
   {
     "name": "Aniyomi: Q1N",
@@ -3609,7 +3806,8 @@
         "id": "2969482460524685571",
         "baseUrl": "https://q1n.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesgratis.png"
   },
   {
     "name": "Aniyomi: RouVideo",
@@ -3644,7 +3842,8 @@
         "id": "8210438569455151012",
         "baseUrl": "https://rou.video/home"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.rouvideo.png"
   },
   {
     "name": "Aniyomi: Rule34Video",
@@ -3661,7 +3860,8 @@
         "id": "9212790518101043860",
         "baseUrl": "https://rule34video.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.rule34video.png"
   },
   {
     "name": "Aniyomi: Samato",
@@ -3678,7 +3878,8 @@
         "id": "9061916959875958361",
         "baseUrl": "https://samatoden.blogspot.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.samatodenvideos.png"
   },
   {
     "name": "Aniyomi: Samehadaku",
@@ -3695,7 +3896,8 @@
         "id": "7446063017613536202",
         "baseUrl": "https://v2.samehadaku.how"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.id.samehadaku.png"
   },
   {
     "name": "Aniyomi: Serienstream",
@@ -3712,7 +3914,8 @@
         "id": "5798377917298605009",
         "baseUrl": "http://186.2.175.5"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.de.serienstream.png"
   },
   {
     "name": "Aniyomi: SeriesKao",
@@ -3729,7 +3932,8 @@
         "id": "1179552672777572300",
         "baseUrl": "https://serieskao.top"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.serieskao.png"
   },
   {
     "name": "Aniyomi: SeuFilme",
@@ -3746,7 +3950,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1"
+    "version": "14.1",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.seufilme.png"
   },
   {
     "name": "Aniyomi: SmartAnimes",
@@ -3763,7 +3968,8 @@
         "id": "7160915998368939090",
         "baseUrl": "https://smartanimes.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.smartanimes.png"
   },
   {
     "name": "Aniyomi: SoloLatino",
@@ -3780,7 +3986,8 @@
         "id": "2714169179278506077",
         "baseUrl": "https://sololatino.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.sololatino.png"
   },
   {
     "name": "Aniyomi: StreamingCommunity",
@@ -3815,7 +4022,8 @@
         "id": "7246470104959245892",
         "baseUrl": "https://streamingunity.biz/it"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.streamingcommunity.png"
   },
   {
     "name": "Aniyomi: Stremio",
@@ -3832,7 +4040,8 @@
         "id": "8425771932667600381",
         "baseUrl": "https://app.strem.io/shell-v4.4"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.stremio.png"
   },
   {
     "name": "Aniyomi: Subsplease",
@@ -3849,7 +4058,8 @@
         "id": "8766955949256845198",
         "baseUrl": "https://subsplease.org"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.subsplease.png"
   },
   {
     "name": "Aniyomi: SuperStream",
@@ -3866,7 +4076,8 @@
         "id": "4654371105831183338",
         "baseUrl": "https://showbox.shegu.net/api/api_client/index/"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.superstream.png"
   },
   {
     "name": "Aniyomi: SupJav",
@@ -3895,7 +4106,8 @@
         "id": "2689098384082963484",
         "baseUrl": "https://supjav.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.supjav.png"
   },
   {
     "name": "Aniyomi: SushiAnimes",
@@ -3912,7 +4124,8 @@
         "id": "3082275639294081311",
         "baseUrl": "https://sushianimes.com.br"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.sushianimes.png"
   },
   {
     "name": "Aniyomi: Ted",
@@ -3929,7 +4142,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.5"
+    "version": "14.5",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.ted.png"
   },
   {
     "name": "Aniyomi: TioanimeH",
@@ -3952,7 +4166,8 @@
         "id": "754333127542778562",
         "baseUrl": "https://tiohentai.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.tioanimeh.png"
   },
   {
     "name": "Aniyomi: Tiodonghua.com",
@@ -3969,7 +4184,8 @@
         "id": "6830054141432094072",
         "baseUrl": "https://anime.tiodonghua.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.tiodonghua.png"
   },
   {
     "name": "Aniyomi: Tokuzilla",
@@ -3986,7 +4202,8 @@
         "id": "525433677388000141",
         "baseUrl": "https://tokuzilla.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.tokuzilla.png"
   },
   {
     "name": "Aniyomi: Toonitalia",
@@ -4003,7 +4220,8 @@
         "id": "8903679906651673401",
         "baseUrl": "https://toonitalia.green"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.toonitalia.png"
   },
   {
     "name": "Aniyomi: Torbox",
@@ -4037,7 +4255,8 @@
         "id": "3688044905832724625",
         "baseUrl": "https://torrentio.strem.fun"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.torrentio.png"
   },
   {
     "name": "Aniyomi: Torrentio Anime (Torrent / Debrid)",
@@ -4054,7 +4273,8 @@
         "id": "7490206640756700883",
         "baseUrl": "https://torrentio.strem.fun"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.torrentioanime.png"
   },
   {
     "name": "Aniyomi: TR Anime Izle",
@@ -4071,7 +4291,8 @@
         "id": "2607995207802293539",
         "baseUrl": "https://www.tranimeizle.io"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.tranimeizle.png"
   },
   {
     "name": "Aniyomi: TRAnimeCI",
@@ -4088,7 +4309,8 @@
         "id": "5869353240534047560",
         "baseUrl": "https://tranimaci.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.tranimeci.png"
   },
   {
     "name": "Aniyomi: Tuktuk Cinema",
@@ -4105,7 +4327,8 @@
         "id": "7363299109912773155",
         "baseUrl": "https://tuktukhd.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.tuktukcinema.png"
   },
   {
     "name": "Aniyomi: Twitch",
@@ -4122,7 +4345,8 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.4"
+    "version": "14.4",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.twitch.png"
   },
   {
     "name": "Aniyomi: Türk Anime TV",
@@ -4139,7 +4363,8 @@
         "id": "1539162878022626585",
         "baseUrl": "https://www.turkanime.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.turkanime.png"
   },
   {
     "name": "Aniyomi: UAKino",
@@ -4156,7 +4381,8 @@
         "id": "2256494309842770890",
         "baseUrl": "https://uakino.best"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.uk.uakino.png"
   },
   {
     "name": "Aniyomi: UFDub",
@@ -4173,7 +4399,8 @@
         "id": "4077428168272340843",
         "baseUrl": "https://ufdub.com/anime"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.uk.ufdub.png"
   },
   {
     "name": "Aniyomi: UHD Movies",
@@ -4190,7 +4417,8 @@
         "id": "582068848290425167",
         "baseUrl": "https://uhdmovies.vip"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.uhdmovies.png"
   },
   {
     "name": "Aniyomi: UniqueStream",
@@ -4207,7 +4435,8 @@
         "id": "1915898919039572670",
         "baseUrl": "https://uniquestream.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.uniquestream.png"
   },
   {
     "name": "Aniyomi: VeoHentai",
@@ -4224,7 +4453,8 @@
         "id": "1192827176989085393",
         "baseUrl": "https://veohentai.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.veohentai.png"
   },
   {
     "name": "Aniyomi: VerAni.me",
@@ -4241,7 +4471,8 @@
         "id": "2476297921251317481",
         "baseUrl": "https://verani.me"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.veranime.png"
   },
   {
     "name": "Aniyomi: VerAnimes",
@@ -4258,7 +4489,8 @@
         "id": "6262145028910416459",
         "baseUrl": "https://wwv.veranimes.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.veranimes.png"
   },
   {
     "name": "Aniyomi: VerPelisTop",
@@ -4275,7 +4507,8 @@
         "id": "8167780943978050375",
         "baseUrl": "https://www1.verpelis.top"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.verpelistop.png"
   },
   {
     "name": "Aniyomi: VoirCartoon",
@@ -4292,7 +4525,8 @@
         "id": "6593176551595101740",
         "baseUrl": "https://voircartoon.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.voircartoon.png"
   },
   {
     "name": "Aniyomi: Vostfree",
@@ -4309,7 +4543,8 @@
         "id": "8596049504378147571",
         "baseUrl": "https://vostfree.ws"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.vostfree.png"
   },
   {
     "name": "Aniyomi: VVVVID",
@@ -4326,7 +4561,8 @@
         "id": "8309061778249307518",
         "baseUrl": "https://www.vvvvid.it"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.vvvvid.png"
   },
   {
     "name": "Aniyomi: Wbijam",
@@ -4343,7 +4579,8 @@
         "id": "3333993424729096948",
         "baseUrl": "https://wbijam.pl"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pl.wbijam.png"
   },
   {
     "name": "Aniyomi: WcoAnimeDub",
@@ -4360,7 +4597,8 @@
         "id": "8622868574170180857",
         "baseUrl": "https://www.wcoanimedub.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcoanimedub.png"
   },
   {
     "name": "Aniyomi: WcoAnimeSub",
@@ -4377,7 +4615,8 @@
         "id": "665629163594938512",
         "baseUrl": "https://www.wcoanimesub.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcoanimesub.png"
   },
   {
     "name": "Aniyomi: WcoForever",
@@ -4394,7 +4633,8 @@
         "id": "5805164799487731673",
         "baseUrl": "https://www.wcoforever.net"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcoforever.png"
   },
   {
     "name": "Aniyomi: Wcofun",
@@ -4411,7 +4651,8 @@
         "id": "1677488626877212634",
         "baseUrl": "https://www.wcoflix.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcofun.png"
   },
   {
     "name": "Aniyomi: WCOStream",
@@ -4428,7 +4669,8 @@
         "id": "4144024127778211557",
         "baseUrl": "https://www.wcostream.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcostream.png"
   },
   {
     "name": "Aniyomi: WcoTv",
@@ -4445,7 +4687,8 @@
         "id": "648702763126013078",
         "baseUrl": "https://www.wco.tv"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.wcotv.png"
   },
   {
     "name": "Aniyomi: Wiflix",
@@ -4462,7 +4705,8 @@
         "id": "7149332646839704216",
         "baseUrl": "https://flemmix.best"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.wiflix.png"
   },
   {
     "name": "Aniyomi: WIT ANIME",
@@ -4479,7 +4723,8 @@
         "id": "8940958730943730988",
         "baseUrl": "https://witanime.cyou"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.witanime.png"
   },
   {
     "name": "Aniyomi: Xfani",
@@ -4496,7 +4741,8 @@
         "id": "8868273686324481907",
         "baseUrl": "https://anime.xifanacg.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.xfani.png"
   },
   {
     "name": "Aniyomi: Xiaoxintv",
@@ -4513,7 +4759,8 @@
         "id": "7859804793032054884",
         "baseUrl": "https://xiaoxintv.cc"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.xiaoxintv.png"
   },
   {
     "name": "Aniyomi: Xnxx (Custom)",
@@ -4530,7 +4777,8 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.4"
+    "version": "14.4",
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.xnxx.png"
   },
   {
     "name": "Aniyomi: XPrime",
@@ -4565,7 +4813,8 @@
         "id": "8016727706963226859",
         "baseUrl": "https://www.xvideos.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.xvideos.png"
   },
   {
     "name": "Aniyomi: YummyAnime",
@@ -4582,7 +4831,8 @@
         "id": "6100431890263423378",
         "baseUrl": "https://ru.yummyani.me"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ru.yummyanime.png"
   },
   {
     "name": "Aniyomi: zeroanime",
@@ -4599,7 +4849,8 @@
         "id": "2089287837152010776",
         "baseUrl": "https://www4.zeroanime.xyz"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.zeroanime.png"
   },
   {
     "name": "Aniyomi: Zonaleros",
@@ -4616,7 +4867,8 @@
         "id": "7487458127391606163",
         "baseUrl": "https://www.zona-leros.com"
       }
-    ]
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.zonaleros.png"
   },
   {
     "name": "Aniyomi: Xhamster",
