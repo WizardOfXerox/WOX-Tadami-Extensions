@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "extension-tools": {
+      "command": "python",
+      "args": ["H:/Ideas/Tadami-Extensions/scratch/run_deep_scan.py"]
+    }
+  }
+}
