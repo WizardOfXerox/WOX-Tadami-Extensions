@@ -1,0 +1,2661 @@
+{
+  "Anime Extensions": {
+    "repo": "yuzono/anime-extensions",
+    "open_count": 30,
+    "closed_count": 30,
+    "open_issues": [
+      {
+        "number": 803,
+        "title": "fix(missav): HLS download reliability and quality options",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-21T16:12:37Z",
+        "updated_at": "2026-08-22T16:45:10Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/803",
+        "body": "Fixes MissAV downloads that stall/restart at ~3% and unlocks 1080p.\n\n## Changes\n\n**m3u8server: serve playlists as chunked responses**\nFFmpeg n7.1 treats a fixed-length HTTP EOF as `AVERROR_EOF` and, with\nAnimetail's hardcoded `-reconnect_at_eof 1`, reconnects forever at the\nstart of a download. Serv"
+      },
+      {
+        "number": 632,
+        "title": "YummyAnime [RU]: Fix Alloha and VK extractror",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-07-12T10:20:57Z",
+        "updated_at": "2026-08-22T16:27:27Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/632",
+        "body": "Checklist:\r\n\r\n- [X] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Added the `isNsfw = true` fla"
+      },
+      {
+        "number": 806,
+        "title": "Tomato [PT]: Source Re-addition",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-22T09:44:22Z",
+        "updated_at": "2026-08-22T09:46:41Z",
+        "closed_at": null,
+        "labels": [
+          "Previously deleted",
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/806",
+        "body": "### Source name\n\nTomato\n\n### Source link\n\nhttps://edge.betomato.com/\n\n### Source language\n\nPortuguês\n\n### Other details\n\nThis was an app that used to be in another repo, but the repo went down and the app no ​​longer works. Since I have both the standard APK and the decompiled version, I'll provide "
+      },
+      {
+        "number": 745,
+        "title": "Otakudesu [ID]: No Available video",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-09T05:45:09Z",
+        "updated_at": "2026-08-21T20:32:24Z",
+        "closed_at": null,
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/745",
+        "body": "### Source information\n\nOtakudesu 14.42\n\n### Source language\n\nIndonesia\n\n### Steps to reproduce\n\n1.Select the anime you want to watch \n2.Select the episode \n3.And it shows no available video\n\n### Expected behavior\n\nShould be able to play videos\n\n### Actual behavior\n\nThis happened instead \n\n<img widt"
+      },
+      {
+        "number": 580,
+        "title": "hanimeTV [EN]: Error 404 & Unable To Resolve Host",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-02T16:15:27Z",
+        "updated_at": "2026-08-21T19:56:34Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/580",
+        "body": "### Source information\n\nhanime.tv 14.21\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\n1. open hanime library \n2. select a video\n3. video page open to detail\n\n\n### Expected behavior\n\n1. open hanime library \n2. select a video\n3. video open to detail\n4. video page show details like author, des"
+      },
+      {
+        "number": 799,
+        "title": "Wbijam [PL]: Remove Dead Source",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-20T17:21:16Z",
+        "updated_at": "2026-08-20T17:22:06Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/799",
+        "body": "Website doesn't offer video content anymore.\r\n\r\nChecklist:\r\n\r\n- [ ] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Cl"
+      },
+      {
+        "number": 669,
+        "title": "fix(deps): update dependency com.android.tools.build:gradle to v9.3.1",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-07-19T01:02:50Z",
+        "updated_at": "2026-08-20T14:52:56Z",
+        "closed_at": null,
+        "labels": [
+          "dependencies"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/pull/669",
+        "body": "This PR contains the following updates:\n\n| Package | Change | [Age](https://docs.renovatebot.com/merge-confidence/) | [Confidence](https://docs.renovatebot.com/merge-confidence/) |\n|---|---|---|---|\n| [com.android.tools.build:gradle](https://developer.android.com/studio/build) ([source](https://andr"
+      },
+      {
+        "number": 701,
+        "title": "Miruro.tv [EN]: Error 503 & Error 444 (Videos)",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-28T12:27:56Z",
+        "updated_at": "2026-08-20T13:57:52Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/701",
+        "body": "### Source information\n\nMiruro.tv 14.5 English\n\n### Source language\n\nEnglish \n\n### Steps to reproduce\n\n1. Open Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo 3rd Season\n2. Watch an Episode \n\n\n### Expected behavior\n\nThe anime should play when and episode is clicked\n\n### Actual behavior\n"
+      },
+      {
+        "number": 35,
+        "title": "Dependency Dashboard",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-02-22T16:07:29Z",
+        "updated_at": "2026-08-19T18:50:11Z",
+        "closed_at": null,
+        "labels": [
+          "dependencies"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/35",
+        "body": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard](https://docs.renovatebot.com/key-concepts/dashboard/) docs to learn more.<br>[View this repository on the Mend.io Web Portal](https://developer.mend.io/github/yuzono/anime-extensions).\n\n## Abandoned Dependen"
+      },
+      {
+        "number": 532,
+        "title": "chore(deps): update gradle to v9.7.1",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-06-21T01:41:03Z",
+        "updated_at": "2026-08-19T18:50:06Z",
+        "closed_at": null,
+        "labels": [
+          "dependencies"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/pull/532",
+        "body": "This PR contains the following updates:\n\n| Package | Update | Change |\n|---|---|---|\n| [gradle](https://gradle.org) ([source](https://redirect.github.com/gradle/gradle)) | minor | `9.5.1` → `9.7.1` |\n\n---\n\n### Release Notes\n\n<details>\n<summary>gradle/gradle (gradle)</summary>\n\n### [`v9.7.1`](https:/"
+      },
+      {
+        "number": 797,
+        "title": "Tukif [FR]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-19T12:44:46Z",
+        "updated_at": "2026-08-19T12:48:07Z",
+        "closed_at": null,
+        "labels": [
+          "Source request",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/797",
+        "body": "### Source name\n\nTukif\n\n### Source link\n\nhttps://tukif.porn/\n\n### Source language\n\nFrench \n\n### Other details\n\nadult video site \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) an"
+      },
+      {
+        "number": 796,
+        "title": "PlayVids [EN]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T17:48:55Z",
+        "updated_at": "2026-08-18T17:51:11Z",
+        "closed_at": null,
+        "labels": [
+          "Source request",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/796",
+        "body": "### Source name\n\nPlayvids\n\n### Source link\n\nhttps://www.playvids.com/\n\n### Source language\n\nEnglish \n\n### Other details\n\nadult video site \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-an"
+      },
+      {
+        "number": 795,
+        "title": "FPO [EN]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T17:45:59Z",
+        "updated_at": "2026-08-18T17:50:44Z",
+        "closed_at": null,
+        "labels": [
+          "Source request",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/795",
+        "body": "### Source name\n\nFpoxxx\n\n### Source link\n\nhttps://www.fpo.xxx/\n\n### Source language\n\nEnglish\n\n### Other details\n\nadult video site \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) "
+      },
+      {
+        "number": 794,
+        "title": "TNAFlix [EN]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T17:43:52Z",
+        "updated_at": "2026-08-18T17:49:42Z",
+        "closed_at": null,
+        "labels": [
+          "Source request",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/794",
+        "body": "### Source name\n\ntnaflix \n\n### Source link\n\nhttps://www.tnaflix.com/\n\n### Source language\n\nEnglish \n\n### Other details\n\nadult video website \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-"
+      },
+      {
+        "number": 793,
+        "title": "Redecanais [PT]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T17:39:32Z",
+        "updated_at": "2026-08-18T17:46:53Z",
+        "closed_at": null,
+        "labels": [
+          "Cloudflare protected",
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/793",
+        "body": "### Source name\n\nRedecanais.in \n\n### Source link\n\nhttps://www16.redecanais.in/\n\n### Source language\n\nPortuguese\n\n### Other details\n\nmovie and series website \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.gith"
+      },
+      {
+        "number": 791,
+        "title": "OppaiStream [EN]: Add Login",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T17:17:14Z",
+        "updated_at": "2026-08-18T17:41:29Z",
+        "closed_at": null,
+        "labels": [
+          "question",
+          "Feature request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/791",
+        "body": "### Source name\n\nOppai Stream\n\n### Source language\n\nEnglish\n\n### Describe your suggested feature\n\nWhat the title says. Many videos on oppai stream are behind a log in to prevent issues with bad actors and such, as far an I understand it, and as such they are unwatchable via the extension, instead to"
+      },
+      {
+        "number": 790,
+        "title": "AsiaLiveAction [ES]: No Available Videos",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T10:21:08Z",
+        "updated_at": "2026-08-18T10:23:29Z",
+        "closed_at": null,
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/790",
+        "body": "### Source information\n\nAsiaLiveAction 14.50 (Spanish)\n\n### Source language\n\nSpanish \n\n### Steps to reproduce\n\n1. Open Rage\n2. Try to watch the movie\n3. It shows a \"No available videos\" \n\n### Expected behavior\n\nAbrir correctamente la película \n\n### Actual behavior\n\nNo carga ni cuando intercambio las"
+      },
+      {
+        "number": 784,
+        "title": "Q1N [PT]: Source Down",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-16T13:39:12Z",
+        "updated_at": "2026-08-17T16:45:19Z",
+        "closed_at": null,
+        "labels": [
+          "Source is down"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/784",
+        "body": "### Source name\n\nQ1n\n\n### Source language\n\nportuguese\n\n### Source link\n\nhttps://q1n.net\n\n### Other details\n\nthe site is down\n\n### Acknowledgements\n\n- [x] I have updated all installed extensions.\n- [x] I have opened WebView and checked that the source website is down.\n- [x] I have searched the existi"
+      },
+      {
+        "number": 786,
+        "title": "AniStream.biz [PT]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T08:22:12Z",
+        "updated_at": "2026-08-17T16:43:30Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/786",
+        "body": "### Source name\n\nAnisTream.biz/\n\n### Source link\n\nhttps://anistream.biz/\n\n### Source language\n\nBrazilian Portuguese \n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/e"
+      },
+      {
+        "number": 787,
+        "title": "RedeToons [PT]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T08:32:15Z",
+        "updated_at": "2026-08-17T16:42:43Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/787",
+        "body": "### Source name\n\nRedeToons CC\n\n### Source link\n\nhttps://redetoons.cc/browse\n\n### Source language\n\nBrazilian Portuguese \n\n### Other details\n\nMOVIES ONLINE SERIES AND ANIME Estilo Netflix \n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension"
+      },
+      {
+        "number": 788,
+        "title": "MeusAnimes Online [PT]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T08:35:43Z",
+        "updated_at": "2026-08-17T16:42:15Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/788",
+        "body": "### Source name\n\nMeusAnimes Online/\n\n### Source link\n\nhttps://meusanimes.online/\n\n### Source language\n\nBrazilian Portuguese \n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.git"
+      },
+      {
+        "number": 758,
+        "title": "fix(en/anikoto): restore playback and honor video preferences",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-12T08:42:20Z",
+        "updated_at": "2026-08-16T06:57:34Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/758",
+        "body": "## Summary\n\n- Route Anikoto HLS streams through the shared M3U8 local proxy so CDN referer requirements and image-wrapped segments are handled by the player.\n- Apply Anikoto quality, server, and type preference sorting after custom video extraction.\n- Improve quality, server, and type matching durin"
+      },
+      {
+        "number": 783,
+        "title": "Nekopoi [ID]: Add Source",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-15T21:41:41Z",
+        "updated_at": "2026-08-16T03:44:55Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/783",
+        "body": "## Summary\nCloses #94\n\nAdds **Nekopoi** (`https://nekopoi.care`) Indonesian NSFW anime/hentai extension source (`eu.kanade.tachiyomi.animeextension.id.nekopoi`).\n\n### Features\n- **Popular Anime & Latest Updates (Dual-Tab Architecture)**:\n  - **Popular Tab**: Fetches the comprehensive A-Z series inde"
+      },
+      {
+        "number": 469,
+        "title": "Fix AnimeID extension: Change to a new domain and fix video servers ",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-06-10T23:25:30Z",
+        "updated_at": "2026-08-15T22:03:02Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/469",
+        "body": "## 📌 Changes made to the AnimeID extension\r\n\r\n### 🌐 Domain change\r\n- Updated base domain from `https://www.animeid.com/` → `https://wwv.animeid2.com/`\r\n- Adapted all selectors and requests to the new domain.\r\n\r\n### 📦 New video extractors\r\n- **VoeExtractor** (working correctly)\r\n- **Mp4uploadExtracto"
+      },
+      {
+        "number": 496,
+        "title": "HentaiLA.tv [ES]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-06-12T14:18:33Z",
+        "updated_at": "2026-08-15T18:04:02Z",
+        "closed_at": null,
+        "labels": [
+          "Source request",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/496",
+        "body": "### Source name\n\nHentaiLA.tv\n\n### Source link\n\nhttps://hentaila.tv/\n\n### Source language\n\nSpanish\n\n### Other details\n\n18+/NSFW = yes\n\nHay otra página con un nombre similar, pero tienen distintos animes. Incluso tienen servers de discord distintos.\n\n### Acknowledgements\n\n- [x] I have checked that the"
+      },
+      {
+        "number": 781,
+        "title": "HentaiLA [ES]: Black Screen Video",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-15T17:15:16Z",
+        "updated_at": "2026-08-15T17:20:27Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/781",
+        "body": "### Source information\n\nHentaiLA +18 (Spanish) 14.47 \n\n### Source language\n\nSpanish\n\n### Steps to reproduce\n\n1. Open any anime.\n\n2. Open any episode.\n\n3. The video loading symbol will appear.\n\n\n### Expected behavior\n\n1. Open any anime episode.\n2. The loading symbol appears.\n3. The video starts playi"
+      },
+      {
+        "number": 779,
+        "title": "NetPrime [EN]: Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-15T10:08:39Z",
+        "updated_at": "2026-08-15T10:16:35Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/779",
+        "body": "### Source name\n\nNetprime\n\n### Source link\n\nhttps://netprime.cc/home\n\n### Source language\n\nEnglish\n\n### Other details\n\n18+ = Yes\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) an"
+      },
+      {
+        "number": 778,
+        "title": "[EN] AV1Encodes: sync fixes",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-15T07:35:10Z",
+        "updated_at": "2026-08-15T07:36:16Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/778",
+        "body": "This PR syncs only the `src/en/av1encodes` fixes from `shan-test-project/anime-extensions`.\n\nThe branch is based on the current `yuzono/anime-extensions:master`, and no files outside `src/en/av1encodes` are included.\n\n## Summary by Sourcery\n\nUpdate the AV1Encodes extension to improve popularity list"
+      },
+      {
+        "number": 557,
+        "title": "Feat(Anilist): Add personal list import and API token authentication",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-06-28T10:58:11Z",
+        "updated_at": "2026-08-14T18:51:16Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/557",
+        "body": "Closes #547\r\n\r\nThis PR introduces the ability for users to directly browse their personal AniList collections through the extension.\r\n\r\n### Changes included:\r\n\r\n- **Personal List Filter**: Added a dropdown filter to the search menu allowing users to view their personal lists (Watching, Completed, Pa"
+      },
+      {
+        "number": 776,
+        "title": "NoobSubs [EN]: Source Down",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-14T13:40:09Z",
+        "updated_at": "2026-08-14T13:40:09Z",
+        "closed_at": null,
+        "labels": [
+          "Source is down"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/776",
+        "body": "### Source name\n\nNoobSubs\n\n### Source language\n\nEnglish\n\n### Source link\n\nhttps://www.noobsubs.com/ ; https://noobftp1.noobsubs.com/ ; https://noobftp2.noobsubs.com/\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have updated all installed extensions.\n- [x] I have opened WebView an"
+      }
+    ],
+    "closed_issues": [
+      {
+        "number": 766,
+        "title": "Anime-Sama [FR]: Add New Server",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-13T10:02:40Z",
+        "updated_at": "2026-08-22T09:52:16Z",
+        "closed_at": "2026-08-21T18:41:16Z",
+        "labels": [
+          "Feature request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/766",
+        "body": "### Source name\n\nAnime Sama\n\n### Source language\n\nFr\n\n### Describe your suggested feature\n\nIf you go on the website, you can see that there is a new drive (Lecteur 1). And the app Anniku doesn't Can load animes for this source.\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have se"
+      },
+      {
+        "number": 739,
+        "title": "Anime-Sama [FR]: Missing Servers",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-08T00:53:06Z",
+        "updated_at": "2026-08-22T09:50:17Z",
+        "closed_at": "2026-08-22T09:50:17Z",
+        "labels": [
+          "Bug",
+          "question"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/739",
+        "body": "### Source information\n\nAnime sama 14.29\n\n### Source language\n\nFrench \n\n### Steps to reproduce\n\nPreviously, the extension allowed users to choose multiple players, whether for the dubbed or subtitled version, and also for the quality level, but this is no longer the case.\n\n### Expected behavior\n\nBei"
+      },
+      {
+        "number": 805,
+        "title": "Anime-Sama [FR]: restore missing video servers",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T21:04:55Z",
+        "updated_at": "2026-08-22T09:50:16Z",
+        "closed_at": "2026-08-22T09:50:16Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/805",
+        "body": "## Summary\n\n`getVideoList` dispatched player URLs through a `when` chain recognising only sibnet, vk, sendvid and vidmoly, returning `emptyList()` for everything else. Anime-Sama has since moved most of its catalogue onto hosts the extension had never heard of, so users saw a single server (or none)"
+      },
+      {
+        "number": 804,
+        "title": "MKissa: fix crypto for 2025-08 site rebuild (v14.64)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T20:38:16Z",
+        "updated_at": "2026-08-21T21:03:19Z",
+        "closed_at": "2026-08-21T21:03:19Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/804",
+        "body": "Closes https://yuzono-tracker.7he.dev/report/471\r\n\r\nFixes MKissa playback broken with crypto error after 2025-08 site rebuild.\r\n\r\n**Site changes (chunk `https://cdn.mkissa.net/all/mk/_app/immutable/chunks/9ow_8gVi.js`):**\r\n- `buildId` now decoded via string table rotation (`Mm=zt(520,520)->132`) not"
+      },
+      {
+        "number": 28,
+        "title": "Serienstream [DE]: Error 404",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-02-18T23:44:03Z",
+        "updated_at": "2026-08-21T16:49:22Z",
+        "closed_at": "2026-08-21T16:49:22Z",
+        "labels": [
+          "Domain changed",
+          "Redesign"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/28",
+        "body": "### Source information\n\nSerienstream v.14.30\n\n### Source language\n\nGerman / Deutsch\n\n### Source new URL\n\ns.to\n\n### Other details\n\nAfter the website maintained by the service operators was updated, the extension now receives HTTP 404 responses. The URL has not changed, but the site overhaul (an updat"
+      },
+      {
+        "number": 800,
+        "title": "Fix VOE decoder, support more subs playlistutil, fix serienstream",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T07:37:58Z",
+        "updated_at": "2026-08-21T16:49:21Z",
+        "closed_at": "2026-08-21T16:49:21Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/800",
+        "body": "- Change baseUrl\r\n- Update popular selector to a.show-card and parse new thumbnail/title\r\n- Fix latest to use /neue-episoden table parsing\r\n- Replace search endpoint /ajax/search with /api/search/suggest and handle new JSON\r\n- Update anime details selectors for new layout (h1, cover image, genres, d"
+      },
+      {
+        "number": 802,
+        "title": "fix(lib/m3u8server): change nanohttpd",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T12:51:31Z",
+        "updated_at": "2026-08-21T13:38:37Z",
+        "closed_at": "2026-08-21T13:38:37Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/802",
+        "body": "Replace broken JitPack -SNAPSHOT coordinate\r\ncom.github.NanoHttpd.nanohttpd:nanohttpd:-SNAPSHOT with Maven Central\r\norg.nanohttpd:nanohttpd:2.3.1 matching aniyomiorg/aniyomi\r\ngradle/aniyomi.versions.toml (nanohttpd = \"2.3.1\") and\r\naniyomiorg/extensions-lib gradle/libs.versions.toml.\r\n\r\nM3u8HttpServe"
+      },
+      {
+        "number": 801,
+        "title": "Revert \"Hanime1.me [ZH]: Fix parsing logic for details and episodes\"",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T08:49:01Z",
+        "updated_at": "2026-08-21T08:50:17Z",
+        "closed_at": "2026-08-21T08:49:37Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/801",
+        "body": "Reverts yuzono/anime-extensions#667\n\n## Summary by Sourcery\n\nRevert the Hanime1.me parsing changes to restore the prior details and episode extraction behavior.\n\nEnhancements:\n- Restore the previous Hanime1.me detail and episode parsing behavior for titles, metadata, thumbnails, links, and upload da"
+      },
+      {
+        "number": 666,
+        "title": "Hanime1.me[ZH] videos not available",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-07-18T14:44:29Z",
+        "updated_at": "2026-08-21T08:04:04Z",
+        "closed_at": "2026-08-21T08:04:04Z",
+        "labels": [
+          "Bug",
+          "Redesign",
+          "18+"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/666",
+        "body": "### Source information\n\nHanime1.me 14.6\n\n### Source language\n\n中文 \n\n### Steps to reproduce\n\nEntering any entry shows no video entry, attempting to play it  shows nothing.\n\n### Expected behavior\n\nOpening an entry should show the episode/video to be played\n\n### Actual behavior\n\nOpening an entry shows n"
+      },
+      {
+        "number": 667,
+        "title": "Hanime1.me [ZH]: Fix parsing logic for details and episodes",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-07-18T19:56:14Z",
+        "updated_at": "2026-08-21T08:04:03Z",
+        "closed_at": "2026-08-21T08:04:03Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/667",
+        "body": "- Update anime details selectors to use meta tags and share button title\r\n- Improve genre text cleanup (remove # prefix and count suffix)\r\n- Fix episode list selectors for href and title\r\n- Fix upload date extraction using regex\r\n- Bump version code\r\n\r\nClosed #666 \r\n\r\nChecklist:\r\n\r\n- [x] Updated `ex"
+      },
+      {
+        "number": 798,
+        "title": "Anikura",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-20T14:31:33Z",
+        "updated_at": "2026-08-20T14:54:54Z",
+        "closed_at": "2026-08-20T14:54:54Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/798",
+        "body": "### Source name\n\nAnikura\n\n### Source link\n\nhttps://www.anikura.club\n\n### Source language\n\nEnglish \n\n### Other details\n\n18+\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) and veri"
+      },
+      {
+        "number": 792,
+        "title": "MKissa [EN]: Fix stream persisted query & minor cleanups",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T17:31:19Z",
+        "updated_at": "2026-08-18T18:22:47Z",
+        "closed_at": "2026-08-18T18:22:46Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/792",
+        "body": "The streams endpoint stopped resolving the hardcoded persisted-query hash after the site edited its episode query (PersistedQueryNotFound). Send our own query text alongside the hash so the server registers it via APQ, and derive STREAM_HASH from that text at runtime — a future site-side query edit "
+      },
+      {
+        "number": 789,
+        "title": "Hanime1.me [ZH]: Fix hanime1 fetching episode failed",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T09:29:31Z",
+        "updated_at": "2026-08-18T13:00:25Z",
+        "closed_at": "2026-08-18T13:00:10Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/789",
+        "body": "- Fix parsing episode incorrectly\r\n\r\nClosed #666 \r\n\r\nChecklist:\r\n\r\n- [x] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [x] Referenced all related issues in the PR body (e.g"
+      },
+      {
+        "number": 785,
+        "title": "AnimesOnline Blue",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-17T08:12:34Z",
+        "updated_at": "2026-08-17T16:41:31Z",
+        "closed_at": "2026-08-17T16:41:31Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/785",
+        "body": "### Source name\n\nAnimesOnline Blue\n\n### Source link\n\nhttps://animesonline.blue/\n\n### Source language\n\nBrazilian Portuguese \n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.gith"
+      },
+      {
+        "number": 536,
+        "title": "Add source: Voiranime [FR]",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-06-21T20:19:46Z",
+        "updated_at": "2026-08-17T08:18:20Z",
+        "closed_at": "2026-08-14T14:55:33Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/536",
+        "body": "Close #534 \r\n\r\nChecklist:\r\n\r\n- [X] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [X] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [X] Added the `isN"
+      },
+      {
+        "number": 629,
+        "title": "Fixes/miruro: Squash Merge",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-07-12T03:11:36Z",
+        "updated_at": "2026-08-15T23:11:24Z",
+        "closed_at": "2026-07-12T03:12:13Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/629",
+        "body": "See https://github.com/yuzono/anime-extensions/pull/334\r\n"
+      },
+      {
+        "number": 782,
+        "title": "Nekopoi: Add Indonesian NSFW source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-15T18:33:18Z",
+        "updated_at": "2026-08-15T19:11:44Z",
+        "closed_at": "2026-08-15T18:55:54Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/782",
+        "body": "## Summary\nCloses #94\n\nAdds **Nekopoi** (`https://nekopoi.care`) Indonesian NSFW anime/hentai extension source.\n\n### Features\n- **Popular Anime, Latest Updates, and Search** with full pagination support.\n- **Category filters** (Hentai, 2D Animation, 3D Hentai, JAV, JAV Cosplay) and **70+ Genre filte"
+      },
+      {
+        "number": 780,
+        "title": "Rive [EN] : Source Request",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-15T13:38:36Z",
+        "updated_at": "2026-08-15T14:40:30Z",
+        "closed_at": "2026-08-15T14:40:30Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/780",
+        "body": "### Source name\n\nRive\n\n### Source link\n\nhttps://www.rivestream.app/\n\n### Source language\n\nEnglish\n\n### Other details\n\nNSFW = yes\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) an"
+      },
+      {
+        "number": 777,
+        "title": "[Source Request] DesiDubAnime, AnimeWorld India, AnimeSalt (Hindi/Tamil/Telugu Dub)",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-15T07:22:05Z",
+        "updated_at": "2026-08-15T07:47:11Z",
+        "closed_at": "2026-08-15T07:47:11Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/777",
+        "body": "### Source name\n\nDesiDubAnime, AnimeWorld India, AnimeSalt\n\n### Source link\n\nhttps://www.desidubanime.me/, https://watchanimeworld.in/, https://animesalt.ac/\n\n### Source language\n\nHindi\n\n### Other details\n\n### Source Request\n\nPlease consider adding the following Hindi / regional-dub anime sites:\n\n##"
+      },
+      {
+        "number": 389,
+        "title": "MundoDonghua [ES]: No Results Found",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-05-26T14:16:16Z",
+        "updated_at": "2026-08-15T07:40:15Z",
+        "closed_at": "2026-08-15T07:40:15Z",
+        "labels": [
+          "Bug",
+          "Redesign"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/389",
+        "body": "### Source information\n\nMundoDonghua 14.41 (Spanish)\n\n### Source language\n\nSpanish\n\n### Steps to reproduce\n\n1. I enter the extension \n2. It's not showing me any results. \n\n<img width=\"1080\" height=\"1716\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8c74fd44-f140-47d2-8c05-e817dc0c02f4"
+      },
+      {
+        "number": 494,
+        "title": "AnimeTake [EN]: No Results Found",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-06-12T14:10:11Z",
+        "updated_at": "2026-08-15T07:36:11Z",
+        "closed_at": "2026-08-15T07:36:11Z",
+        "labels": [
+          "Bug",
+          "Redesign",
+          "Valid"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/494",
+        "body": "### Source information\n\nAnimeTake 14.17 \n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\n- Open extension\n\n### Expected behavior\n\n- Entries should appear\n\n### Actual behavior\n\n- Entries do not appear with `No results found` error\n\n### Which app are you using?\n\nAnikku\n\n### App version\n\n0.1.7\n\n"
+      },
+      {
+        "number": 534,
+        "title": "Voiranime [FR] : Source Request",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-06-21T07:12:25Z",
+        "updated_at": "2026-08-14T14:55:34Z",
+        "closed_at": "2026-08-14T14:55:34Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/534",
+        "body": "### Source name\n\nVoiranime\n\n### Source link\n\nhttps://voir-anime.to/\n\n### Source language\n\nFrench\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://yuzono.github.io/extensions-aniyomi/) "
+      },
+      {
+        "number": 775,
+        "title": "Tokuzilla [EN]: Remove Dead Source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-14T13:19:38Z",
+        "updated_at": "2026-08-14T13:22:05Z",
+        "closed_at": "2026-08-14T13:20:58Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/775",
+        "body": "Checklist:\r\n\r\n- [ ] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Added the `isNsfw = true` fla"
+      },
+      {
+        "number": 225,
+        "title": "Tokuzilla [EN]: NullPointerException (Anime Details & Episodes)",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-05-02T04:00:00Z",
+        "updated_at": "2026-08-14T13:17:59Z",
+        "closed_at": "2026-08-14T13:17:59Z",
+        "labels": [
+          "Bug",
+          "Redesign",
+          "Source is down",
+          "Valid"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/225",
+        "body": "### Source information\n\nAniyomi: Tokuzilla English 14.28\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nLoad Extension\nClick a title\nNo description or episodes will load and a white \"NullPointerException: null\" error message is at the bottom of the screen\n\n### Expected behavior\n\nepisodes wil"
+      },
+      {
+        "number": 774,
+        "title": "KissAnime [EN]: Remove Dead Source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-14T12:36:25Z",
+        "updated_at": "2026-08-14T12:42:52Z",
+        "closed_at": "2026-08-14T12:42:10Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/774",
+        "body": "Checklist:\r\n\r\n- [ ] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Added the `isNsfw = true` fla"
+      },
+      {
+        "number": 673,
+        "title": "Animetsu [Multi]: Remove Dead Source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-07-20T11:42:02Z",
+        "updated_at": "2026-08-14T10:03:34Z",
+        "closed_at": "2026-08-14T10:02:30Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/673",
+        "body": "Closes #742.\r\n\r\nChecklist:\r\n\r\n- [ ] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [x] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Added the `is"
+      },
+      {
+        "number": 742,
+        "title": "Animetsu [Multi]: Source Down",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-08T15:06:38Z",
+        "updated_at": "2026-08-14T10:02:31Z",
+        "closed_at": "2026-08-14T10:02:31Z",
+        "labels": [
+          "Source is down"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/742",
+        "body": "### Source name\n\nanimetsu\n\n### Source language\n\n\"English\"\n\n### Source link\n\nwww.animetsu.org\n\n### Other details\n\nAlert, please note that animetsu.org and animetsu.net is no longer working & the site redirects users to omg10 link\n\n### Acknowledgements\n\n- [x] I have updated all installed extensions.\n-"
+      },
+      {
+        "number": 773,
+        "title": "Anizone missing",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-14T08:46:32Z",
+        "updated_at": "2026-08-14T08:48:13Z",
+        "closed_at": "2026-08-14T08:48:13Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/773",
+        "body": "### Source information\n\nAnizone 14.11\n\n### Source language\n\nMulti\n\n### Steps to reproduce\n\n1. First step download extension \n2. Second step Install extension\n3. Anizone does not appear in the downloaded extension list\n\n### Expected behavior\n\nAnizone should be in this list\n\n<img width=\"1080\" height=\""
+      },
+      {
+        "number": 772,
+        "title": "Miruro.tv ext LATEST tab change",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-14T07:45:32Z",
+        "updated_at": "2026-08-14T08:22:16Z",
+        "closed_at": "2026-08-14T08:08:07Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/yuzono/anime-extensions/issues/772",
+        "body": "### Source information\n\nMiruro.tv 14.6\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nInstall ext\nClick on LATEST option\n\n### Expected behavior\n\nShould show the latest updated episode animes. This \"Newest\" page\n\n<img width=\"1080\" height=\"2032\" alt=\"Image\" src=\"https://github.com/user-attachm"
+      },
+      {
+        "number": 771,
+        "title": "HentaiHaven[EN]: Migrate to AnimeHttpSource and clean up",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-14T01:39:22Z",
+        "updated_at": "2026-08-14T06:51:55Z",
+        "closed_at": "2026-08-14T06:51:43Z",
+        "labels": [],
+        "url": "https://github.com/yuzono/anime-extensions/pull/771",
+        "body": "Solve the crashing app\n\nClose #391\n\nChecklist:\n\n- [x] Updated `extVersionCode` value in `build.gradle` for individual extensions\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\n- [X] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\n- [ "
+      }
+    ],
+    "recent_commits": [
+      {
+        "sha": "2a48cb2",
+        "author": "github-actions[bot]",
+        "date": "2026-08-22T09:50:27Z",
+        "message": "[skip ci] chore: Mass-bump on extensions",
+        "url": "https://github.com/yuzono/anime-extensions/commit/2a48cb297a652c6f7bd69b13a5c34553ae4f3cf0"
+      },
+      {
+        "sha": "aba8e3a",
+        "author": "7heMech",
+        "date": "2026-08-22T09:50:15Z",
+        "message": "Anime-Sama [FR]: restore missing video servers (#805)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/aba8e3a339e9dd3e70bc58b4dff6fadb5e5b9a4c"
+      },
+      {
+        "sha": "b5229d2",
+        "author": "7heMech",
+        "date": "2026-08-21T21:03:18Z",
+        "message": "MKissa: fix crypto for 2025-08 site rebuild (v14.64) (#804)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/b5229d22716002c8ec073082562977086a607502"
+      },
+      {
+        "sha": "b3bc153",
+        "author": "github-actions[bot]",
+        "date": "2026-08-21T17:17:01Z",
+        "message": "[skip ci] chore: Mass-bump on extensions",
+        "url": "https://github.com/yuzono/anime-extensions/commit/b3bc153b9e1e9f2d53cdd0486f50388ee443226b"
+      },
+      {
+        "sha": "6bd4ce2",
+        "author": "7heMech",
+        "date": "2026-08-21T16:49:20Z",
+        "message": "Fix VOE decoder, support more subs playlistutil, fix serienstream (#800)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/6bd4ce27c1764833777236545923a801b02aeb5e"
+      },
+      {
+        "sha": "190a169",
+        "author": "github-actions[bot]",
+        "date": "2026-08-21T13:38:55Z",
+        "message": "[skip ci] chore: Mass-bump on extensions",
+        "url": "https://github.com/yuzono/anime-extensions/commit/190a169b231f60a7b0774cf9f5e2d6c9f73ff164"
+      },
+      {
+        "sha": "334ab46",
+        "author": "7heMech",
+        "date": "2026-08-21T13:38:36Z",
+        "message": "fix(lib/m3u8server): change nanohttpd (#802)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/334ab46c4cc73e8e72fe37255f8874728c5e3011"
+      },
+      {
+        "sha": "929345d",
+        "author": "Cuong-Tran",
+        "date": "2026-08-21T09:25:43Z",
+        "message": "fix(workflow): Fix issue where 'publish' still runs even 'build' was failed",
+        "url": "https://github.com/yuzono/anime-extensions/commit/929345db4782fc376eaa97e8f1431db3e18af340"
+      },
+      {
+        "sha": "8e0c2c6",
+        "author": "ipcjs",
+        "date": "2026-08-21T08:04:03Z",
+        "message": "Hanime1.me [ZH]: Fix Details and Episodes Parsing (#667)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/8e0c2c6cc5f210d9c96a799973f68555114d3eb9"
+      },
+      {
+        "sha": "69fb2fb",
+        "author": "7heMech",
+        "date": "2026-08-18T18:22:46Z",
+        "message": "MKissa [EN]: Fix Stream Persisted Query & Cleanup (#792)",
+        "url": "https://github.com/yuzono/anime-extensions/commit/69fb2fb5b0ecbc1626c61e7704203bef4f89ddf5"
+      }
+    ]
+  },
+  "Manga Extensions": {
+    "repo": "keiyoushi/extensions-source",
+    "open_count": 30,
+    "closed_count": 30,
+    "open_issues": [
+      {
+        "number": 18559,
+        "title": "Mangas-Origines.fr: fix page list",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T13:30:18Z",
+        "updated_at": "2026-08-22T16:05:40Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18559",
+        "body": "closes https://github.com/keiyoushi/extensions-source/issues/18555\r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [x] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [x] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")"
+      },
+      {
+        "number": 18496,
+        "title": "Baozimh Feat: Update Baozi Extension Functions",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-18T14:58:32Z",
+        "updated_at": "2026-08-22T15:50:25Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18496",
+        "body": "* Add app mirror domain ( Close #14115 )\r\n* Migrate and update the banner remove function\r\n* Add remove duplicate image across page function\r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code"
+      },
+      {
+        "number": 18560,
+        "title": "Migrate Komga to 1.6",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T13:59:39Z",
+        "updated_at": "2026-08-22T15:03:55Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18560",
+        "body": "This pr also changes how login is handled, so the user doesn't need to restart the app and/or re-enter the settings screen during the login process.\r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc th"
+      },
+      {
+        "number": 18551,
+        "title": "MangaFire: add a solver for shape-selecting captcha",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T03:15:21Z",
+        "updated_at": "2026-08-22T14:54:28Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18551",
+        "body": "MangaFire's shape-selecting captcha still shows up for certain IP addresses despite them switching over to Cloudflare challenge.\r\n\r\nThis change adds a solver for MangaFire's captcha via a WebView using OpenCV.js.\r\n\r\nSince the success rate of the solver is around 10% to 20%, the solver is run in batc"
+      },
+      {
+        "number": 18075,
+        "title": "Madara 1.6",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-07-29T13:38:16Z",
+        "updated_at": "2026-08-22T14:53:40Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18075",
+        "body": "Opened for initial review of the actual theme.\r\n\r\nOpted to store wordpress post id as stable unique global id for manga and slug/path saved in memo. There is compatibility for old library entries, so migration isn't strictly needed.\r\n\r\nThere are now two variants:\r\n - ajax: `madara_load_more`\r\n - non"
+      },
+      {
+        "number": 18561,
+        "title": "Migrate vgperson to ext lib 1.6",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T14:44:44Z",
+        "updated_at": "2026-08-22T14:49:50Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18561",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18553,
+        "title": "ManhwaZ: Migrate to libVersion 1.6",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T04:43:33Z",
+        "updated_at": "2026-08-22T14:34:18Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18553",
+        "body": "Checklist:\r\n\r\n- [ ] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 17094,
+        "title": "I've encountered several errors in Manga Crab",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-06-29T03:57:05Z",
+        "updated_at": "2026-08-22T14:34:11Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/17094",
+        "body": "### Source information\n\nManga Crab 1.4.74\n\n### Source language\n\nSpanish - Español\n\n### Steps to reproduce\n\nhttps://github.com/user-attachments/assets/b82cfd31-9f61-4a5e-b1f5-4043e8e98909\n\n### Expected behavior\n\n1. Display all available chapters\n2. Allow users to read and download the titles.\n\n### Ac"
+      },
+      {
+        "number": 18557,
+        "title": "GalleryAdults (multi-src): Fixes & 1.6 & Add NHentai.to",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-22T12:46:57Z",
+        "updated_at": "2026-08-22T14:34:05Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18557",
+        "body": "Closes #18427\r\nCloses #4659\r\nCloses #124 \r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [x] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [x] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentW"
+      },
+      {
+        "number": 1371,
+        "title": "Source request (VI): Jelly Comics",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2024-02-18T16:57:36Z",
+        "updated_at": "2026-08-22T14:09:36Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/1371",
+        "body": "### Source name\n\nJelly Comics\n\n### Source link\n\n~~https://jellycomics.com~~\n~~https://jellycomics.net~~\n~~https://jellycomics.xyz~~\n~~https://jellycomics.site~~\nhttps://jellycomics.store\n\n### Source language\n\nVietnamese\n\n### Other details\n\n18+/NSFW = yes\n\n### Acknowledgements\n\n- [X] I have checked t"
+      },
+      {
+        "number": 16246,
+        "title": "Newtoki (unoriginal?) Source Request",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-05-27T04:28:59Z",
+        "updated_at": "2026-08-22T14:08:57Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/16246",
+        "body": "### Source name\n\nNewtoki\n\n### Source link\n\nhttps://t.me/toki_ch ~~https://t.me/s/newtoki_ch~~ ~~https://뉴토끼평생.net~~\n~~https://www.newto07.com~~\n~~https://newto08.com https://mato08.com~~\n~~https://newto09.com https://mato09.com~~\n~~https://newto10.com https://mato10.com~~\n~~https://newto11.com https"
+      },
+      {
+        "number": 18541,
+        "title": "Changed New Manhwa Domain",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-21T11:03:12Z",
+        "updated_at": "2026-08-22T12:34:39Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18541",
+        "body": "closes #18175\r\nMigated New Manhwa to Say Manhwa and a small fix for the new css\r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [x] Referenced all related issues in the PR body (e.g. \""
+      },
+      {
+        "number": 17793,
+        "title": "Asura Scans [EN]: Some Requests",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-21T10:54:09Z",
+        "updated_at": "2026-08-22T09:43:04Z",
+        "closed_at": null,
+        "labels": [
+          "Feature request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/17793",
+        "body": "### Source name\n\nAsuraScans\n\n### Source language\n\nEnglish\n\n### Describe your suggested feature\n\n<img width=\"400\" height=\"200\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/2e341c07-f853-4137-965f-f7c973ae8bc3\" />\n\n\n- Please add type to genre list for `auto webtoon mode` [type+genre]\n\n-"
+      },
+      {
+        "number": 18555,
+        "title": "Mangas-Origines: `UnsupportedOperationException: null` error",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-22T08:50:12Z",
+        "updated_at": "2026-08-22T09:00:34Z",
+        "closed_at": null,
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18555",
+        "body": "### Source information\n\nMangas-Origines.fr 1.6.57\n\n### Source language\n\nFrench\n\n### Steps to reproduce\n\nOpen a chapter\n\n### Expected behavior\n\nHave the chapter \n\n### Actual behavior\n\nUnsupportedOperationException: null\n\n### Mihon/Mihon fork version\n\n0.20.4\n\n### Android version\n\nOne ui 8.5\n\n### Other"
+      },
+      {
+        "number": 18499,
+        "title": "Sky Manga: `Hostname skymanga.work not verified` error, switch to HTTP URL",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-19T01:35:43Z",
+        "updated_at": "2026-08-22T08:48:52Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Domain changed"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18499",
+        "body": "### Source information\n\nSky Manga 1.4.33\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\n1. Select webtoon from source\n2. Attempt to open chapter\n3. Attempt to open Web View\n\n### Expected behavior\n\nChapters should open and load.\n\n### Actual behavior\n\nGet an error message: \n\n> SSLPeerUnverifie"
+      },
+      {
+        "number": 18503,
+        "title": "Source request (FR): Comics Tracker (`comics-tracker.net`)",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-19T07:39:11Z",
+        "updated_at": "2026-08-22T08:41:54Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18503",
+        "body": "### Source name\n\nComics Tracker \n\n### Source link\n\nhttps://comics-tracker.net\n\n### Source language\n\nFrench \n\n### Other details\n\nHello!\n\nIt would be super cool to add Comics Tracker for us French readers of US comics, since Japscan does not work anymore we need more extensions of US Comics. Thank you"
+      },
+      {
+        "number": 18552,
+        "title": "Comix search not showing manhwa",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-22T04:01:56Z",
+        "updated_at": "2026-08-22T08:17:18Z",
+        "closed_at": null,
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18552",
+        "body": "### Source information\n\nComix 1.6.35\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\n1. Search, using the title, in comix extension\n\nManhwa title: After I Died, My Boy Groom\nUrl: https://comix.to/title/0z19l-after-i-died-my-boy-groom?cm_id=4830174 \n\nSearching for manhwa in webview works but i"
+      },
+      {
+        "number": 18519,
+        "title": "RawDEX: `No results found`, `Attempt to invoke virtual method` error",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T01:50:33Z",
+        "updated_at": "2026-08-22T06:09:19Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18519",
+        "body": "### Source information\n\nRawDEX 1.4.55\n\n### Source language\n\nKorean\n\n### Steps to reproduce\n\n1. Open a saved RawDEX webtoon\n\n### Expected behavior\n\nWebtoon loads\n\n### Actual behavior\n\nAn error: \n\n> NullPointerException: Attempt to invoke virtual method 'java.lang.Class java.lang.Object.getClass()' on"
+      },
+      {
+        "number": 18530,
+        "title": "Komiku.com: `No results found` error",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T14:04:13Z",
+        "updated_at": "2026-08-22T06:07:06Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18530",
+        "body": "### Source information\n\nKomiku.com\n\n### Source language\n\nIndonesia\n\n### Steps to reproduce\n\n1. Open Mihon\n2. Browse Komiku.com\n\n### Expected behavior\n\nit should list entries\n\n### Actual behavior\n\nit shows nothing but access through webview is normal\n\n<img width=\"1080\" height=\"2400\" alt=\"Image\" src=\""
+      },
+      {
+        "number": 18543,
+        "title": "Mgread.io: `Expected URL scheme` error with chapter images",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-21T12:13:31Z",
+        "updated_at": "2026-08-22T06:02:37Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18543",
+        "body": "### Source information\n\nMgread.io 1.4.1\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nI am trying to read manga but it lods a few chapters after that it says \n\" IllegalArgumentException: Expected URL scheme 'http' or 'https' but was 'data' \"\n\n<img width=\"720\" height=\"1544\" alt=\"Image\" src=\""
+      },
+      {
+        "number": 18036,
+        "title": "Catharsis World: add login to read chapters",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-07-27T23:08:57Z",
+        "updated_at": "2026-08-22T03:51:46Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18036",
+        "body": "Catharsis World started gating chapter pages behind registration. Without a session,\nany chapter URL answers HTTP 404 with the theme's \"page not found\" template, so the\nHTML never carries the `chapter-protector` payload that `Madara.pageListParse` needs\nto resolve the page list — reading is currentl"
+      },
+      {
+        "number": 18542,
+        "title": "Mangafreak: New website URL (`ww3.mangafreak.me`)",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-21T11:24:37Z",
+        "updated_at": "2026-08-21T17:31:59Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Domain changed",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18542",
+        "body": "### Source information\n\nMangafreak 1.4.14\n\n### Source language\n\nEnglish\n\n### Source new URL\n\nhttps://ww3.mangafreak.me\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have updated the extension to the latest version (as listed on the [extensions listing](https://keiyoushi.github.io/"
+      },
+      {
+        "number": 14847,
+        "title": "Source request (ES): TuMangaOnline (unoriginal)",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-04-16T22:02:11Z",
+        "updated_at": "2026-08-21T16:04:49Z",
+        "closed_at": null,
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/14847",
+        "body": "### Source name\n\nzonatmo org\n\n### Source link\n\nhttps://zonatmo.org\n\n### Source language\n\nSpanish \n\n### Other details\n\nAnother clone of zonatmo or tumangaonline, but with a resemblance to the original website\n\n<img width=\"721\" height=\"1676\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/"
+      },
+      {
+        "number": 17967,
+        "title": "Toonkor: New website URL (`tkor146.com`)",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-25T22:11:46Z",
+        "updated_at": "2026-08-21T11:26:17Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Domain changed",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/17967",
+        "body": "### Source information\n\nToonkor 1.4.7\n\n### Source language\n\nKorean\n\n### Source new URL\n\n~~https://tkor138.com~~\n~~https://tkor139.com~~\n~~https://tkor140.com~~\n~~https://tkor141.com~~\n~~https://tkor142.com~~\n~~https://tkor143.com~~\n~~https://tkor144.com~~\n~~https://tkor145.com~~\nhttps://tkor146.com\n"
+      },
+      {
+        "number": 18528,
+        "title": "Dilar: Unsupported encryption protocol version: 10/8/9",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T11:42:10Z",
+        "updated_at": "2026-08-20T23:27:57Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18528",
+        "body": "### Source information\n\nDilar 1.6.14\n\n### Source language\n\nArabic\n\n### Steps to reproduce\n\n1. Open Mihon app.\n2. Go to Dilar extension and open any manga (e.g. Garden of May).\n3. Try to open any chapter.\n4. The chapter fails to load and kicks out with the error message.\n\n### Expected behavior\n\nThe c"
+      },
+      {
+        "number": 18490,
+        "title": "MangaYi no pages found error",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T10:49:31Z",
+        "updated_at": "2026-08-20T23:25:02Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18490",
+        "body": "### Source information\n\nMangaYi 1.4.1\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nOpen any chapter\n\n### Expected behavior\n\nManga chapter should appear\n\n### Actual behavior\n\nIt show \"no pages found\"\n\n### Mihon/Mihon fork version\n\nMihon 0.20.4\n\n### Android version\n\nAndroid 13\n\n### Other det"
+      },
+      {
+        "number": 18472,
+        "title": "Read Berserk Manga - No Pages Found",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T11:06:08Z",
+        "updated_at": "2026-08-20T23:24:01Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Valid"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18472",
+        "body": "### Source information\n\nRead Berserk Manga 1.4.8\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\n1. Install Read Berserk Manga\n2. Open Source\n3. Click Berserk\n4. Select any chapter\n5. Attempts to load for less than a second then \"no pages found\" appears\n\n### Expected behavior\n\nOpen the chapte"
+      },
+      {
+        "number": 18512,
+        "title": "WitchScans: migrate to standalone source for witchtoons.net",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-19T19:29:06Z",
+        "updated_at": "2026-08-20T17:45:04Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18512",
+        "body": "WitchScans moved from WordPress (MangaThemesia) to a Next.js site at witchtoons.net. The old MangaThemesia theme no longer matches the new site structure, so this rewrites it as a standalone KeiSource extension.\n\nFixes #18365\n\nChecklist:\n\n- [x] Updated `versionCode` value in `build.gradle.kts`\n- [ ]"
+      },
+      {
+        "number": 18371,
+        "title": "Url change",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-13T21:31:57Z",
+        "updated_at": "2026-08-20T15:13:36Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Domain changed"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18371",
+        "body": "### Source information\n\nBoxmanhwa latest\n\n### Source language\n\nEnglish \n\n### Source new URL\n\nhttps://comizy.io/\n\n### Other details\n\nBoxmanhwa - Comizy.io\n\n### Acknowledgements\n\n- [x] I have updated the extension to the latest version (as listed on the [extensions listing](https://keiyoushi.github.io"
+      },
+      {
+        "number": 18166,
+        "title": "Possível extensão BR Shadow Mangás",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-03T02:39:52Z",
+        "updated_at": "2026-08-20T15:11:41Z",
+        "closed_at": null,
+        "labels": [
+          "Source is down",
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18166",
+        "body": "### Source name\n\nShadow Mangás \n\n### Source link\n\nhttps://shadow-mang.onrender.com/\n\n### Source language\n\nPortuguês Brasil\n\n### Other details\n\n.\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://keiyoushi.github.io/exte"
+      }
+    ],
+    "closed_issues": [
+      {
+        "number": 18562,
+        "title": "Uzantı düzeltmesi",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-22T17:17:29Z",
+        "updated_at": "2026-08-22T17:20:11Z",
+        "closed_at": "2026-08-22T17:18:05Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18562",
+        "body": "Başlık seçimi 3 adımda düzeltildi:\n\n1. Resmi İngilizce linkteki (engtl) başlık türetilip alternatif İngilizce başlıklarla normalize eşleştirilir; eşleşen alternatif döndürülür (kesme işareti normalize edildi, örn: Im Not A Soccer Genius -> I'm Not a Soccer Genius!).\n2. Resmi link yoksa links/referre"
+      },
+      {
+        "number": 18535,
+        "title": "Mangamelon [EN]: New extension",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-20T22:49:55Z",
+        "updated_at": "2026-08-22T16:59:37Z",
+        "closed_at": "2026-08-22T12:40:53Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18535",
+        "body": "Adds a new source for [Manga Melon](https://mangamelon.com), an English manga aggregator.\n\nManga Melon is a Nuxt/Vue SPA backed by a private API at `api.mangamelon.com` (POST form-encoded `data` payloads), so the source is a custom `KeiSource` rather than a multisrc theme.\n\n- Popular / Latest / Sear"
+      },
+      {
+        "number": 18550,
+        "title": "Manga18fx: migrate to 1.6, remove Madara, sort genres, popular page 2+, search with `'`",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T23:46:19Z",
+        "updated_at": "2026-08-22T14:07:06Z",
+        "closed_at": "2026-08-22T14:07:06Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18550",
+        "body": "Probably still have some weird abstractions, not that familiar with 1.6 yet.\r\n\r\nLacking areas (not exhaustive):\r\n- Not using slug for manga URL\r\n- Not using `DateTimeFormatter`\r\n- Conventions\r\n- English: the app will stop pagination if a page only contains non-English entries\r\n\r\nMarking as a draft a"
+      },
+      {
+        "number": 18554,
+        "title": "Hanabimanga: add App request method",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-22T06:12:15Z",
+        "updated_at": "2026-08-22T13:00:58Z",
+        "closed_at": "2026-08-22T12:41:10Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18554",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18556,
+        "title": "BiliManga: fix some chapters error",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-22T12:29:09Z",
+        "updated_at": "2026-08-22T13:00:42Z",
+        "closed_at": "2026-08-22T12:41:15Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18556",
+        "body": "Closes #18171 \r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentWarning` configuration in `b"
+      },
+      {
+        "number": 18558,
+        "title": "a chinese comic web suggested",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-22T12:49:35Z",
+        "updated_at": "2026-08-22T12:49:45Z",
+        "closed_at": "2026-08-22T12:49:45Z",
+        "labels": [
+          "Duplicate",
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18558",
+        "body": "### Source name\n\n嬉皮漫画\n\n### Source link\n\nhttps://m.hipmh.com/\n\n### Source language\n\nChinese\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already exist by searching the [extension listing](https://keiyoushi.github.io/extensions/) and verifie"
+      },
+      {
+        "number": 18171,
+        "title": "BiliManga无法搜索",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-03T09:46:41Z",
+        "updated_at": "2026-08-22T12:41:15Z",
+        "closed_at": "2026-08-22T12:41:15Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18171",
+        "body": "### Source information\n\nBiliManga 1.6.13\n\n### Source language\n\n中文\n\n### Steps to reproduce\n\n无法搜索\n\n\n### Expected behavior\n\n可以搜索\n\n### Actual behavior\n\n无法搜索\n\n### Mihon/Mihon fork version\n\ntachimanga\n\n### Android version\n\nios26.5.2\n\n### Other details\n\n<img width=\"645\" height=\"1398\" alt=\"Image\" src=\"https"
+      },
+      {
+        "number": 18549,
+        "title": "Yomu Comics: Accept plain payloads again",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T22:00:13Z",
+        "updated_at": "2026-08-22T12:41:06Z",
+        "closed_at": "2026-08-22T12:41:06Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18549",
+        "body": "The site dropped the encryption entirely, a day after #18538. There is no `AES.decrypt` left in any chunk and the payloads are now plain JSON:\n\n```jsonc\n// /api/library\n{ \"garimpo\": [ { \"title\": \"...\", \"slug\": \"...\", \"cover\": \"...\" } ], \"pagination\": { ... } }\n// /obra/{slug}   \"encryptedChapters\": "
+      },
+      {
+        "number": 18548,
+        "title": "add Pureskill (UK)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T20:29:35Z",
+        "updated_at": "2026-08-22T12:41:02Z",
+        "closed_at": "2026-08-22T12:41:02Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18548",
+        "body": "Checklist:\r\n\r\n- [ ] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18540,
+        "title": "Guazimanhua: parse authors",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T10:56:39Z",
+        "updated_at": "2026-08-22T12:40:57Z",
+        "closed_at": "2026-08-22T12:40:57Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18540",
+        "body": "## Summary\n\n- Parse the author from the list card metadata and manga detail page.\n- Bump the extension `versionCode` from 5 to 6.\n\n## Root Cause\n\nThe source populated titles, URLs, thumbnails, genres, and status, but never assigned `SManga.author`. Mihon therefore displayed its default unknown-autho"
+      },
+      {
+        "number": 18265,
+        "title": "Comikey",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-08T04:42:51Z",
+        "updated_at": "2026-08-22T12:40:49Z",
+        "closed_at": "2026-08-22T12:40:49Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18265",
+        "body": "### Source information\n\nComikey  Brasil \n\n### Source language\n\nPortuguês Brasil\n\n### Steps to reproduce\n\nExtensão comikey Brasil não está funcionando em alguma comics\n\n<img width=\"1080\" height=\"2400\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/13a2e321-1daf-41c4-af57-c151781fdc2c\" />"
+      },
+      {
+        "number": 18511,
+        "title": "Comikey (Multi): Fix 404 and 1.6 migration",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-19T18:53:28Z",
+        "updated_at": "2026-08-22T12:40:48Z",
+        "closed_at": "2026-08-22T12:40:48Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18511",
+        "body": "Closes  #18265\r\n\r\nChecklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [x] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [x] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentWarning` configuration in `b"
+      },
+      {
+        "number": 18464,
+        "title": "Migrate Manhwa Scan to Mantraz Scan",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-17T04:49:44Z",
+        "updated_at": "2026-08-22T12:40:44Z",
+        "closed_at": "2026-08-22T12:40:44Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18464",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18544,
+        "title": "Add Cloudflare solver",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T14:27:28Z",
+        "updated_at": "2026-08-22T12:33:11Z",
+        "closed_at": "2026-08-22T12:32:06Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18544",
+        "body": "Adds a Cloudflare solver interceptor, which attempts to solve the Cloudflare challenge before falling back to the original Cloudflare interceptor.\r\n\r\nNot sure which version codes to update, so I only updated the version codes for MangaFire, Mangakakalot, and Manganato.\r\n\r\n<details>\r\n  <summary>Solve"
+      },
+      {
+        "number": 18545,
+        "title": "Flame Comics 404",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-21T14:49:57Z",
+        "updated_at": "2026-08-22T09:39:38Z",
+        "closed_at": "2026-08-21T17:36:10Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18545",
+        "body": "### Source information\n\n1.4.50\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nUsing extension\n\n### Expected behavior\n\ncomics appear\n\n### Actual behavior\n\n404 error\n\n### Mihon/Mihon fork version\n\n0.20.4\n\n### Android version\n\nFire Max 11\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n"
+      },
+      {
+        "number": 18330,
+        "title": "MangaFire",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-11T20:47:20Z",
+        "updated_at": "2026-08-22T08:37:01Z",
+        "closed_at": "2026-08-22T08:37:01Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18330",
+        "body": "### Source information\n\nMangaFire 1.6.29\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nRecently updated and it no longer working\n\n### Expected behavior\n\nIt webview is still working\n\n### Actual behavior\n\nIt's not working please fix\n\n### Mihon/Mihon fork version\n\nMihon 0.20.4\n\n### Android ver"
+      },
+      {
+        "number": 17971,
+        "title": "Doujindesu: kotlinx.serialization.json.jsondecodingexception",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-07-26T00:19:39Z",
+        "updated_at": "2026-08-22T08:36:39Z",
+        "closed_at": "2026-08-22T08:36:39Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/17971",
+        "body": "### Source information\n\nDoujindesu 1.4.19\n\n### Source language\n\nIndonesia\n\n### Steps to reproduce\n\n-) access the extension\n-) choose something\n-) select chapter\n\n### Expected behavior\n\nLoad the chapter\n\n### Actual behavior\n\n<img width=\"1080\" height=\"588\" alt=\"Image\" src=\"https://github.com/user-atta"
+      },
+      {
+        "number": 18394,
+        "title": "Manga origine",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-14T17:42:45Z",
+        "updated_at": "2026-08-22T08:30:12Z",
+        "closed_at": "2026-08-22T08:30:12Z",
+        "labels": [
+          "Source request"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18394",
+        "body": "### Source name\n\nhttps://github.com/keiyoushi/extensions-source\n\n### Source link\n\nhttps://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json\n\n### Source language\n\nManga\n\n### Other details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have checked that the extension does not already e"
+      },
+      {
+        "number": 18249,
+        "title": "Hanabimanga: add new source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-07T15:36:12Z",
+        "updated_at": "2026-08-22T06:09:55Z",
+        "closed_at": "2026-08-09T15:38:39Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18249",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [x] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18501,
+        "title": "Add LeerManhwas extension",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-19T06:06:48Z",
+        "updated_at": "2026-08-22T04:08:45Z",
+        "closed_at": "2026-08-20T14:17:07Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18501",
+        "body": "\r\n## Summary\r\n\r\nAdds the Spanish LeerManhwas extension.\r\n\r\n## Changes\r\n\r\n- Adds the LeerManhwas source implementation.\r\n- Adds the extension Gradle configuration.\r\n- Supports browsing popular manga, latest updates, search, filters, manga details, chapter lists, and page retrieval.\r\n\r\n## Source\r\n\r\n- "
+      },
+      {
+        "number": 18242,
+        "title": "Comix: update of titles without chapters takes really long time",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-07T14:16:56Z",
+        "updated_at": "2026-08-22T03:44:46Z",
+        "closed_at": "2026-08-21T10:47:51Z",
+        "labels": [
+          "Bug"
+        ],
+        "url": "https://github.com/keiyoushi/extensions-source/issues/18242",
+        "body": "### Source information\n\nComix 1.4.34\n\n### Source language\n\nEnglish\n\n### Steps to reproduce\n\nhttps://comix.to/title/7rgv0-at-the-convenience-store-late-at-night\nOpen and update chapter list.\nOr add to library and do library update\n\n### Expected behavior\n\nGet chapter list -> no chapters -> show \"no ch"
+      },
+      {
+        "number": 18482,
+        "title": "NoxManga: Fix 401 by signing API requests",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T03:24:46Z",
+        "updated_at": "2026-08-22T00:13:13Z",
+        "closed_at": "2026-08-19T13:55:34Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18482",
+        "body": "Closes #17907\n\nThe source moved from `noxtoons.com` to `noxmangas.org` and its API moved from `xodneo.site` to `/api/v1` on the site's own domain. That API now rejects unsigned requests with `401 {\"error\":\"Assinatura de requisição obrigatória\"}`, which is what users are hitting.\n\nThe site loads `/_n"
+      },
+      {
+        "number": 18483,
+        "title": "Yomu Comics: Fix NullPointerException on encrypted payloads",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T03:25:04Z",
+        "updated_at": "2026-08-22T00:13:12Z",
+        "closed_at": "2026-08-19T13:55:40Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18483",
+        "body": "Closes #17914\n\nThe site now ships its library, chapter list and page payloads encrypted with CryptoJS AES. The old code looked for `capitulos_lista` / `imagens_lista` in plain text and then did `matches[selectRealArray(chapterArrays)!!]`, so the lookup returned null and the `!!` threw the reported `"
+      },
+      {
+        "number": 18487,
+        "title": "MangaDex: add created-at filter",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T06:08:43Z",
+        "updated_at": "2026-08-22T00:13:11Z",
+        "closed_at": "2026-08-19T13:55:46Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18487",
+        "body": "MangaDex's homepage has a \"Popular New Titles\" section that can't currently be reproduced in the app. The site fetches it with:\r\n\r\n`/manga?includes[]=cover_art&includes[]=artist&includes[]=author&order[followedCount]=desc&contentRating[]=safe&contentRating[]=suggestive&hasAvailableChapters=true&crea"
+      },
+      {
+        "number": 18498,
+        "title": "Dilar: fix chapter page",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T20:12:31Z",
+        "updated_at": "2026-08-22T00:13:10Z",
+        "closed_at": "2026-08-19T13:55:51Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18498",
+        "body": "Checklist:\n\n- [x] Updated `versionCode` value in `build.gradle.kts`\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` approp"
+      },
+      {
+        "number": 14890,
+        "title": "VortexScans (EN): Switch to HTML scraping",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-04-19T02:42:06Z",
+        "updated_at": "2026-08-22T00:13:09Z",
+        "closed_at": "2026-08-19T14:10:59Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/14890",
+        "body": "Closes #14841\n\n## What's happening\n\nThe backend API endpoints `/api/post` (manga details + chapter list) and `/api/chapter` (page images) started returning `HTTP 403 Forbidden` for anonymous callers. `/api/query` (used for popular / latest / search) is unaffected.\n\nReproduced with curl:\n\n```\nGET htt"
+      },
+      {
+        "number": 17855,
+        "title": "MangaLivre: handle chapter route tokens",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-07-22T22:44:27Z",
+        "updated_at": "2026-08-22T00:13:08Z",
+        "closed_at": "2026-08-19T14:13:30Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/17855",
+        "body": "## Summary\n\n- request the official per-chapter route token with the current reading-gate signature\n- attach `x-toon-route-token` only to chapter page-list requests\n- cache tokens using the server expiry and refresh them after a chapter 404\n- refresh both the seed and route token after a 403\n- bump t"
+      },
+      {
+        "number": 16421,
+        "title": "add procomic",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-06-03T17:34:53Z",
+        "updated_at": "2026-08-22T00:13:07Z",
+        "closed_at": "2026-08-19T14:14:14Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/16421",
+        "body": "Checklist:\r\n\r\n- [ ] Updated `extVersionCode` value in `build.gradle` for individual extensions\r\n- [ ] Updated `overrideVersionCode` or `baseVersionCode` as needed for all multisrc extensions\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Added the `isNsfw = true` fla"
+      },
+      {
+        "number": 18395,
+        "title": "XCOMIC [Multi]: Use Home Page Latest & Chapter Deduplication",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-14T18:34:26Z",
+        "updated_at": "2026-08-22T00:13:06Z",
+        "closed_at": "2026-08-18T06:58:56Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18395",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [ ] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      },
+      {
+        "number": 18471,
+        "title": "Mangadotnet[EN]: Fix Search & Filters",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-17T08:38:28Z",
+        "updated_at": "2026-08-22T00:13:05Z",
+        "closed_at": "2026-08-19T14:59:51Z",
+        "labels": [],
+        "url": "https://github.com/keiyoushi/extensions-source/pull/18471",
+        "body": "Checklist:\r\n\r\n- [x] Updated `versionCode` value in `build.gradle.kts`\r\n- [ ] Updated `baseVersionCode` in `build.gradle.kts` (if updated multisrc theme code)\r\n- [x] Referenced all related issues in the PR body (e.g. \"Closes #xyz\")\r\n- [ ] Set the `contentWarning` configuration in `build.gradle.kts` a"
+      }
+    ],
+    "recent_commits": [
+      {
+        "sha": "fd4236e",
+        "author": "Vetle Ledaal",
+        "date": "2026-08-22T14:07:05Z",
+        "message": "Manga18fx: migrate to 1.6, remove from Madara, sort genres, popular page 2+, search with `'` (#18550)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/fd4236e034ea55f9df1799bf34b7c713f1a46780"
+      },
+      {
+        "sha": "808890d",
+        "author": "Hualiang",
+        "date": "2026-08-22T12:41:14Z",
+        "message": "BiliManga: fix some chapters error (#18556)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/808890d0cb65b49885db328b80834d932dd44354"
+      },
+      {
+        "sha": "f8c758d",
+        "author": "Hualiang",
+        "date": "2026-08-22T12:41:10Z",
+        "message": "Hanabimanga: add App request method (#18554)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/f8c758d1e20b2aeb5d31afeec922773d383153fb"
+      },
+      {
+        "sha": "b4d52c6",
+        "author": "BigLongs",
+        "date": "2026-08-22T12:41:05Z",
+        "message": "Yomu Comics: Accept plain payloads again (#18549)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/b4d52c688796b6a3595c809947bd26d7165b0327"
+      },
+      {
+        "sha": "eb6ce87",
+        "author": "Exinaus",
+        "date": "2026-08-22T12:41:01Z",
+        "message": "add Pureskill (UK) (#18548)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/eb6ce87323e4c4f32e1c0ceb57f4f6ef7824c031"
+      },
+      {
+        "sha": "fa08ef0",
+        "author": "muzhuoyun",
+        "date": "2026-08-22T12:40:56Z",
+        "message": "Guazimanhua: parse authors (#18540)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/fa08ef06a7a92f8610f35267de2b3f881a59b662"
+      },
+      {
+        "sha": "206fd5a",
+        "author": "Sleepy ❄️",
+        "date": "2026-08-22T12:40:52Z",
+        "message": "Mangamelon [EN]: New extension (#18535)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/206fd5a1cd5219b19037be8f115abb2451a9257a"
+      },
+      {
+        "sha": "f0ed045",
+        "author": "disk-iq8",
+        "date": "2026-08-22T12:40:48Z",
+        "message": "Comikey (Multi): Fix 404 and 1.6 migration (#18511)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/f0ed045210304af24fc987046f0c04115e1eb8cb"
+      },
+      {
+        "sha": "be5bb5a",
+        "author": "SamValdezS",
+        "date": "2026-08-22T12:40:44Z",
+        "message": "Migrate Manhwa Scan to Mantraz Scan (#18464)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/be5bb5abe310159ea734742959cd92c8fd1e9463"
+      },
+      {
+        "sha": "524d656",
+        "author": "Exinaus",
+        "date": "2026-08-21T10:48:42Z",
+        "message": "HoneyManga: fix title (#18533)",
+        "url": "https://github.com/keiyoushi/extensions-source/commit/524d656dc38e032ccb6492336f3a0bdfbaf9b503"
+      }
+    ]
+  },
+  "Novel Plugins": {
+    "repo": "LNReader/lnreader-sources",
+    "open_count": 30,
+    "closed_count": 30,
+    "open_issues": [
+      {
+        "number": 2306,
+        "title": "feat(ar/rewayahfans): add روايه فانز plugin",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-07-14T06:59:12Z",
+        "updated_at": "2026-08-22T16:42:47Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2306",
+        "body": "## Summary\n- Add new Arabic plugin for rewayahfans.net\n- WordPress REST API for novel listing and search\n- Chapter content via WP REST API with HTML fallback"
+      },
+      {
+        "number": 2457,
+        "title": "[IDWN.id] Empty chapter: Shadow Slave — Shadow Slave – Chapter 1 Nightmare Begins\n Bahasa IndonesiaDecember 26, 2024",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-22T15:42:06Z",
+        "updated_at": "2026-08-22T15:42:16Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: Baca Light Novel[bacalightnovel]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2457",
+        "body": "### Plugin\n\nBahasa Indonesia: Baca Light Novel\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\nafter open chapter, not appear the text\n\n### Expected Behavior\n\nshow the chapter what I open, like chapter 1 \n\n### Actual Behavior\n\nan error\n\n### LNReader Version\n\n2.1.2, I think all version, same "
+      },
+      {
+        "number": 2456,
+        "title": "[novelfire]  Chapter couldn't be loaded",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-22T14:29:47Z",
+        "updated_at": "2026-08-22T14:29:56Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: Novel Fire[novelfire]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2456",
+        "body": "### Plugin\n\nEnglish: Novel Fire\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\nOpen any novel fire book.\nIn some chapters randomly it will not load the chapter. Closing the reloading the app multiple times finally loads the chapter at times.\n\n### Expected Behavior\n\nClosing and reloading aro"
+      },
+      {
+        "number": 2453,
+        "title": "Ranobehub source is not working — novel list empty / chapters blank",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T18:52:15Z",
+        "updated_at": "2026-08-20T18:52:25Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Can't Load Novels",
+          "Plugin: RanobeHub[RNBH.org]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2453",
+        "body": "### Plugin\n\nРусский: RanobeHub\n\n### Severity\n\nCan't Load Novels\n\n### Steps To Reproduce\n\n1. Open the app and select the Ranobehub source.\n2. Try to load the novel list.\n\n### Expected Behavior\n\n1. The novel list should load correctly.\n2. Chapter content of novels (including those in Favorites) should"
+      },
+      {
+        "number": 2452,
+        "title": "Lib read chapters not updating",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T11:33:55Z",
+        "updated_at": "2026-08-20T11:34:04Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: Lib Read[libread]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2452",
+        "body": "### Plugin\n\nEnglish: Lib Read\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\nOpen novels in library linked to lib read\nOpen chapters. No new chapters\n\n### Expected Behavior\n\nNew chapters should load\n\n### Actual Behavior\n\nNo new chapters loaded, despite new chapters in webgiew\n\n### LNReader "
+      },
+      {
+        "number": 2445,
+        "title": "Chapter Available in Webview but not in App",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-19T15:36:07Z",
+        "updated_at": "2026-08-20T07:23:57Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2445",
+        "body": "Shadowslave"
+      },
+      {
+        "number": 2449,
+        "title": "IndoWebNovel",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T05:20:55Z",
+        "updated_at": "2026-08-20T05:21:03Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Can't Load Novels",
+          "Plugin: IndoWebNovel[IDWN.id]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2449",
+        "body": "### Plugin\n\nBahasa Indonesia: IndoWebNovel\n\n### Severity\n\nCan't Load Novels\n\n### Steps To Reproduce\n\nIndoWebNovel\nAll novels cannot contain novel chapters\n\n### Expected Behavior\n\nFix it as soon as possible \n\n### Actual Behavior\n\nUpdated Eat The World Tree \nThe chapter doesn't appear \n\n### LNReader V"
+      },
+      {
+        "number": 2314,
+        "title": "Please add",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-15T14:02:41Z",
+        "updated_at": "2026-08-20T04:38:41Z",
+        "closed_at": null,
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2314",
+        "body": "### Plugin Name\n\nTomato mtl,wuxia click,no bad novel,readhive,woopread\n\n### Website URL\n\nTomatoMTL https://tomatomtl.com TomatoMTL – Chinese MTL Reading Assist Tool\n\n### Language\n\nEnglish \n\n### Other Details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed th"
+      },
+      {
+        "number": 2447,
+        "title": "Genres and minimum chapters",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-20T04:20:37Z",
+        "updated_at": "2026-08-20T04:23:42Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Plugin: WTR-LAB[WTRLAB]",
+          "Severity: Wrong Formatting"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2447",
+        "body": "### Plugin\n\nEnglish: WTR-LAB\n\n### Severity\n\nWrong Formatting\n\n### Steps To Reproduce\n\n1 Use minimum chapters\n\n1 see genres and tags\n\n### Expected Behavior\n\nWork\n\n### Actual Behavior\n\nMinimum chapter doesn't work\n\n<img width=\"720\" height=\"1600\" alt=\"Image\" src=\"https://github.com/user-attachments/ass"
+      },
+      {
+        "number": 1970,
+        "title": "MahouReader",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-01-06T20:43:58Z",
+        "updated_at": "2026-08-19T19:32:43Z",
+        "closed_at": null,
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/1970",
+        "body": "### Plugin Name\n\nMahouReader\n\n### Website URL\n\nhttps://mahoureader.com/\n\n### Language\n\nPortuguese Brazil\n\n### Other Details\n\n_No response_\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed this plugin has not been requested before.\n- [x] I have used the plugin name as the is"
+      },
+      {
+        "number": 2442,
+        "title": "Can't read or download chapters in this galaxy novel plugin",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-19T10:25:07Z",
+        "updated_at": "2026-08-19T10:25:16Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Other",
+          "Plugin: Galaxy Novels[galaxynovels]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2442",
+        "body": "### Plugin\n\n‎العربية: Galaxy Novels\n\n### Severity\n\nOther\n\n### Steps To Reproduce\n\n1 Open the galaxy novels plugins\nAll novels are showing\n2 Click on any novel\n3 Click on chapter\n4. Could not reach site (403)\n\n### Expected Behavior\n\nThe chapter open normally or download correctly\n\n### Actual Behavior"
+      },
+      {
+        "number": 2441,
+        "title": "[allnovel] Empty chapter: Reverend Insanity — Chapter 1509 - Third Entry to Thieving Heaven’s dream realm",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T19:30:43Z",
+        "updated_at": "2026-08-18T19:30:43Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2441",
+        "body": ""
+      },
+      {
+        "number": 2440,
+        "title": "LightNovelCave Plugin discontinuation - Request new one",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T16:57:09Z",
+        "updated_at": "2026-08-18T16:57:09Z",
+        "closed_at": null,
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2440",
+        "body": "### Plugin Name\n\nLightNovelCave\n\n### Website URL\n\nhttps://www.novelcodex.com/\n\n### Language\n\nEnglish\n\n### Other Details\n\nLightNovelCave in https://www.lightnovelcave.com/\n\n<img width=\"1080\" height=\"2400\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/4531e02e-9559-4c99-8447-20f956855ed8"
+      },
+      {
+        "number": 2433,
+        "title": "A big issue 😕…",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T05:25:43Z",
+        "updated_at": "2026-08-18T15:23:40Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2433",
+        "body": "The issue is related to box novel which is now novel nice.\n\nWhat is the actual problem?\n-> The webpage has cloud flare protection, but it doesn't normally appear on the webpage, you have to switch to the webview on the app then search for something then the cloud flare protection will appear and the"
+      },
+      {
+        "number": 2438,
+        "title": "Eat The World Tree",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T10:20:42Z",
+        "updated_at": "2026-08-18T10:20:54Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Can't Load Novels",
+          "Plugin: IndoWebNovel[IDWN.id]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2438",
+        "body": "### Plugin\n\nBahasa Indonesia: IndoWebNovel\n\n### Severity\n\nCan't Load Novels\n\n### Steps To Reproduce\n\nIndowebnovel Eat The World Tree \nChapters not appearing when loading \n\n### Expected Behavior\n\nI don't know what to fill in\n\n### Actual Behavior\n\n.\n\n### LNReader Version\n\n2.1.2\n\n### Plugin Version\n\n1."
+      },
+      {
+        "number": 2437,
+        "title": "Novel doesn't open at all",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-18T06:57:28Z",
+        "updated_at": "2026-08-18T06:57:37Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Can't Load Novels",
+          "Plugin: MVLEMPYR[mvlempyr.com]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2437",
+        "body": "### Plugin\n\nEnglish: MVLEMPYR\n\n### Severity\n\nCan't Load Novels\n\n### Steps To Reproduce\n\n1. Open the plugin\n2. Search for a novel\n3. Click on a novel\n4. Error shows up\n\n<img width=\"1080\" height=\"2340\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/1f09cdd3-cde9-4f85-8077-40f30a12aeff\" />"
+      },
+      {
+        "number": 2436,
+        "title": "[novelfire] Empty chapter, even when web view is working fine",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T14:32:38Z",
+        "updated_at": "2026-08-17T14:34:34Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: Novel Fire[novelfire]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2436",
+        "body": "### Plugin\n\nEnglish: Novel Fire\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\nGo to the Novel Fire plugin\nChoose any novel\nRead a few chapters, randomly the next chapter will stop loading and you'll see the following error message: \nChapter couldn't be loaded\nNo readable content was found."
+      },
+      {
+        "number": 2435,
+        "title": "[allnovel] Empty chapter: Shadow Slave — Chapter 822 Shadow Cohort",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T12:13:40Z",
+        "updated_at": "2026-08-17T12:13:40Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2435",
+        "body": ""
+      },
+      {
+        "number": 2434,
+        "title": "[allnovel] Empty chapter: The Divine Nine-Dragon Cauldron — Chapter 1: The Silver Disciple re issue ",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-17T11:43:31Z",
+        "updated_at": "2026-08-17T11:43:31Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2434",
+        "body": ""
+      },
+      {
+        "number": 2362,
+        "title": "Dragonholic Plugin Issue",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-30T16:35:26Z",
+        "updated_at": "2026-08-16T16:43:06Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Domain Changed",
+          "Plugin: Dragonholic[dragonholic]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2362",
+        "body": "### Plugin\n\nEnglish: Dragonholic\n\n### Severity\n\nDomain Changed\n\n### Steps To Reproduce\n\nWhen you try to use the plugin you get an error and no novels show up. When using the Web view mode, it says that the domain has changed. \n\n<img width=\"720\" height=\"1600\" alt=\"Image\" src=\"https://github.com/user-"
+      },
+      {
+        "number": 2432,
+        "title": "[novelfull] Empty chapter: Super Gene — Chapter 553: The Legendary Man on the Ice Fields",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-16T14:43:35Z",
+        "updated_at": "2026-08-16T14:43:35Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2432",
+        "body": ""
+      },
+      {
+        "number": 2382,
+        "title": "this code is written by chat gpt fixing json parse error",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2026-08-05T08:53:09Z",
+        "updated_at": "2026-08-16T05:48:24Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2382",
+        "body": "this plugin has not been fixed for a very long time so i used chat gpt to write code for it i do not know will it work if you  write the code and replace this code made by clanker. I would be very grateful.\r\n\r\n#### Checklist\r\n\r\n- [✔ ] Update version code if an existing plugin was modified\r\n- [❌ ] Te"
+      },
+      {
+        "number": 2429,
+        "title": "[anf.net] Empty chapter: Lord of the Mysteries — Chapter 1066 - Familiar Name",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-15T17:24:04Z",
+        "updated_at": "2026-08-15T17:24:04Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2429",
+        "body": ""
+      },
+      {
+        "number": 2427,
+        "title": "Beast Novels",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-15T14:32:52Z",
+        "updated_at": "2026-08-15T14:32:52Z",
+        "closed_at": null,
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2427",
+        "body": "### Plugin Name\n\nBeast Novels\n\n### Website URL\n\nhttps://beastnovels.com/\n\n### Language\n\nEnglish\n\n### Other Details\n\n<img width=\"1440\" height=\"3200\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/91e233ff-0c37-4189-adcf-49f21246d46d\" />\n\n### Acknowledgements\n\n- [x] I have searched existi"
+      },
+      {
+        "number": 2349,
+        "title": "[FreeWebNovel] remove 'ad loading' images",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-07-25T22:52:26Z",
+        "updated_at": "2026-08-14T16:17:08Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2349",
+        "body": "Okay, so (i think) recently, FWN has changed the way they load their ads, and show placeholder images before loading the ads. This causes those same images to be shown in chapters.\nHere's a screenshot (the image is tiny because of custom CSS):\n\n<img width=\"1080\" height=\"2318\" alt=\"Image\" src=\"https:"
+      },
+      {
+        "number": 2425,
+        "title": "[RNBH.org] Empty chapter: Реинкарнация безработного: История о приключениях в другом мире (W) — Глава 5(148). И снова на Демонический континент.",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-13T19:56:14Z",
+        "updated_at": "2026-08-13T19:56:26Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Can't Load Novels",
+          "Plugin: RanobeHub[RNBH.org]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2425",
+        "body": "### Plugin\n\nРусский: RanobeHub\n\n### Severity\n\nCan't Load Novels\n\n### Steps To Reproduce\n\nAfter updating to the latest version, the text isn't displaying in any of the chapters, even though the other chapters open and are accessible.\n\n### Expected Behavior\n\nThe text isn't loading for me, even though "
+      },
+      {
+        "number": 2423,
+        "title": "Add Crimson Scroll",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-13T18:07:34Z",
+        "updated_at": "2026-08-13T18:07:43Z",
+        "closed_at": null,
+        "labels": [
+          "Plugin Request",
+          "Theme: Madara"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2423",
+        "body": "### Plugin Name\n\nCrimson Scrolls\n\n### Website URL\n\nhttps://crimsonscrolls.net\n\n### Language\n\nEnglish\n\n### Other Details\n\nIt is a new site and currently they don't have many novels, but it seems high quality. I found a specific novel, I was looking for, that wasn't available on the other sites and I "
+      },
+      {
+        "number": 1852,
+        "title": "New sources mznovels, shanghaifantasy, katreadingarchive[lightnovelwp]",
+        "state": "open",
+        "is_pr": true,
+        "created_at": "2025-10-22T20:08:00Z",
+        "updated_at": "2026-08-13T17:48:30Z",
+        "closed_at": null,
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/1852",
+        "body": "& improvements to relibrary & lightnovelwp template"
+      },
+      {
+        "number": 2422,
+        "title": "[allnovel] Empty chapter: Martial Peak — Chapter 5 – The Proud Golden Statue",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-13T15:00:43Z",
+        "updated_at": "2026-08-13T15:00:52Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: AllNovel[allnovel]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2422",
+        "body": "### Plugin\n\nEnglish: AllNovel\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\n<img width=\"720\" height=\"1570\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bbc1c9d9-06d9-481b-8407-a2aea9f44739\" />\n\n### Expected Behavior\n\nThe chapter should display correctly \n\n### Actual Behavior"
+      },
+      {
+        "number": 2420,
+        "title": "[novelfire] Empty chapter: Chrysalis — Chapter 1. Anthony Reborn",
+        "state": "open",
+        "is_pr": false,
+        "created_at": "2026-08-12T20:55:51Z",
+        "updated_at": "2026-08-12T20:57:44Z",
+        "closed_at": null,
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: Novel Fire[novelfire]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2420",
+        "body": "### Plugin\n\nEnglish: Novel Fire\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\nI entered successful, processed to search up the light novel chrysalis.A error occured when tried to read the first chapter this is when l reported the issue \n\n### Expected Behavior\n\nI should have accessed the ch"
+      }
+    ],
+    "closed_issues": [
+      {
+        "number": 2455,
+        "title": "[sakura.id] Empty chapter: Became the Patron of Villains — 1",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-22T04:22:18Z",
+        "updated_at": "2026-08-22T04:22:35Z",
+        "closed_at": "2026-08-22T04:22:35Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2455",
+        "body": ""
+      },
+      {
+        "number": 2454,
+        "title": "fix(english/novel7s): fix paragraph parser for smart quotes",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-21T14:07:21Z",
+        "updated_at": "2026-08-22T01:46:57Z",
+        "closed_at": "2026-08-22T01:46:57Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2454",
+        "body": "## **fix(english/novel7s): fix paragraph parser for smart quotes**\r\n- Fixed an issue where the paragraph parser would incorrectly merge paragraphs if a sentence ended with a smart quote (`”` or `’`).\r\n- Bumped plugin version to `1.0.1`.\r\n\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing p"
+      },
+      {
+        "number": 2439,
+        "title": "feat(madara): add novel-short.com extension",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-18T11:37:42Z",
+        "updated_at": "2026-08-22T01:46:18Z",
+        "closed_at": "2026-08-22T01:46:18Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2439",
+        "body": "## **feat(madara): add novel-short.com extension**\r\n\r\nAdded a new extension for `novel-short.com` utilizing the Madara multisrc generator.\r\n\r\n**Features included:**\r\n- Full text search\r\n- Advanced native site filters (Genres, Order By, Status, Release Year, Author)\r\n- Chapter and novel parsing lever"
+      },
+      {
+        "number": 2446,
+        "title": "perf(lnori): open novels fast on phones",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-20T02:48:26Z",
+        "updated_at": "2026-08-22T01:45:43Z",
+        "closed_at": "2026-08-22T01:45:43Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2446",
+        "body": "## What\n\nOpening a novel on LNORI downloads every volume page at once (~0.5MB each, dozens for a long series) and fully parses each page with cheerio, only to read its table of contents. On a phone (Hermes, no JIT) that is ~a minute of loading skeletons for a series like Re:ZERO, and because the fet"
+      },
+      {
+        "number": 2443,
+        "title": "Feat(add puffinfolio)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-19T13:17:02Z",
+        "updated_at": "2026-08-22T01:44:51Z",
+        "closed_at": "2026-08-22T01:44:51Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2443",
+        "body": "Adds a plugin for [Puffin Folio](https://www.puffinfolio.com) — an English fan-translation site for Chinese and Japanese web novels. Four ongoing series at the moment.\n\n**I'm the site owner submitting my own site**, so there's no scraping-consent question here — happy to keep the plugin in step with"
+      },
+      {
+        "number": 2444,
+        "title": "Empty Chapters",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-19T15:33:52Z",
+        "updated_at": "2026-08-22T00:46:31Z",
+        "closed_at": "2026-08-19T15:34:21Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2444",
+        "body": ""
+      },
+      {
+        "number": 2451,
+        "title": "novel ringan",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-20T05:39:17Z",
+        "updated_at": "2026-08-20T05:39:28Z",
+        "closed_at": "2026-08-20T05:39:27Z",
+        "labels": [
+          "Duplicate",
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2451",
+        "body": "### Plugin Name\n\nnovel ringan\n\n### Website URL\n\nhttps://novelringan.com/\n\n### Language\n\nINDONESIA \n\n### Other Details\n\nIndonesian Language Plugins A Little Total 9 If Added This Will Be 10 Can It Be Added\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed this plugin has not "
+      },
+      {
+        "number": 2450,
+        "title": "novelringan",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-20T05:35:44Z",
+        "updated_at": "2026-08-20T05:35:55Z",
+        "closed_at": "2026-08-20T05:35:54Z",
+        "labels": [
+          "Duplicate",
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2450",
+        "body": "### Plugin Name\n\nnovelringan\n\n### Website URL\n\nhttps://novelringan.com/\n\n### Language\n\nBAHASA INDONESIA \n\n### Other Details\n\nIndonesian Language Plugins A Little Total 9 If Added This Will Be 10 Can It Be Added\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed this plugin ha"
+      },
+      {
+        "number": 2448,
+        "title": "please add this site",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-20T04:25:07Z",
+        "updated_at": "2026-08-20T04:25:20Z",
+        "closed_at": "2026-08-20T04:25:19Z",
+        "labels": [
+          "Duplicate",
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2448",
+        "body": "### Plugin Name\n\ntomatomtl\n\n### Website URL\n\nhttps://tomatomtl.com/\n\n### Language\n\nEnglish, MTL\n\n### Other Details\n\nI hope u can add this\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed this plugin has not been requested before.\n- [x] I have used the plugin name as the iss"
+      },
+      {
+        "number": 2405,
+        "title": "Dreamy translations pr",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-09T15:45:36Z",
+        "updated_at": "2026-08-20T00:46:20Z",
+        "closed_at": "2026-08-16T05:48:46Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2405",
+        "body": "The code was ai generated by chat gpt. I did not see anything condoning the use of AI in the repo. I apologize if such a PR is against your guidelines and for possibly wasting someone's time.\r\n\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plu"
+      },
+      {
+        "number": 2416,
+        "title": "fix: update webview url for Chikari",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-11T22:13:30Z",
+        "updated_at": "2026-08-19T00:46:50Z",
+        "closed_at": "2026-08-16T05:36:24Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2416",
+        "body": "fix: update webview url for Chikari\r\n\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [ ] Reference related issues in the PR body (e.g. Closes #xyz)\r\n"
+      },
+      {
+        "number": 2417,
+        "title": "fix(english): lightnovelworld empty chapter (coupling with my APP PR)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-12T03:22:02Z",
+        "updated_at": "2026-08-19T00:46:49Z",
+        "closed_at": "2026-08-16T05:36:55Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2417",
+        "body": "\r\n- bump version to 1.0.2\r\n\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [x] Reference related issues in the PR body (e.g. Closes #xyz)\r\n"
+      },
+      {
+        "number": 2421,
+        "title": "feat: add Anime Anyway plugin (english)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-12T23:12:01Z",
+        "updated_at": "2026-08-19T00:46:48Z",
+        "closed_at": "2026-08-16T05:37:17Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2421",
+        "body": "## Summary\n\nAdds a plugin for [Anime Anyway](https://animeanyway.com/), a fan-translation site publishing continuation volumes of *Classroom of the Elite: Year 3* plus an original collab web novel, *High School Syndrome*. Each volume is exposed as its own novel (matching how the light novels are act"
+      },
+      {
+        "number": 2428,
+        "title": "fix(french): update French sources, add J-Garden/Trad-Index/LightNovelVF, drop Phenix Scans",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-15T16:55:32Z",
+        "updated_at": "2026-08-19T00:46:47Z",
+        "closed_at": "2026-08-16T05:42:05Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2428",
+        "body": "## Résumé\n\nMise à jour des sources françaises : correction de 9 plugins existants, ajout de 3 nouvelles sources (J-Garden, Trad-Index, LightNovelVF) et suppression de la source morte Phenix Scans.\n\nDeux corrections techniques transversales corrigent des bugs qui n'apparaissaient qu'**sur l'applicati"
+      },
+      {
+        "number": 2418,
+        "title": "fix(russian): fix ranobelib",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-12T03:44:36Z",
+        "updated_at": "2026-08-19T00:46:46Z",
+        "closed_at": "2026-08-16T05:42:26Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2418",
+        "body": "- No novel cover in Novel list(need app update)\r\n- next-chapter navigation\r\n- Cyrillic search\r\n- bump to 2.2.6\r\n- empty chapter error\r\n- Closes #2371, #2389, #2390\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- ["
+      },
+      {
+        "number": 2424,
+        "title": "feat: Add Crimson Scrolls MultiSrc Source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-13T18:07:59Z",
+        "updated_at": "2026-08-19T00:46:45Z",
+        "closed_at": "2026-08-16T05:58:21Z",
+        "labels": [
+          "bot"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2424",
+        "body": "Adds `Crimson Scrolls` to the `madara` multi-source configuration.\n\nCloses #2423\n\nThis draft was generated from the theme detected for the plugin request. Before marking it ready, verify theme-specific options such as chapter ordering, browse paths, filters, custom parsing, and language."
+      },
+      {
+        "number": 2384,
+        "title": "feat: Add asianfanfics MultiSrc Source",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-05T08:57:49Z",
+        "updated_at": "2026-08-19T00:46:44Z",
+        "closed_at": "2026-08-16T06:53:34Z",
+        "labels": [
+          "bot"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2384",
+        "body": "Adds `asianfanfics` to the `madara` multi-source configuration.\n\nCloses #2383\n\nThis draft was generated from the theme detected for the plugin request. Before marking it ready, verify theme-specific options such as chapter ordering, browse paths, filters, custom parsing, and language."
+      },
+      {
+        "number": 2430,
+        "title": "feat(english): add novel7s extension",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-16T06:54:05Z",
+        "updated_at": "2026-08-19T00:46:43Z",
+        "closed_at": "2026-08-16T07:14:16Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2430",
+        "body": "#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [x] Reference related issues in the PR body (e.g. Closes #xyz)\r\n"
+      },
+      {
+        "number": 2431,
+        "title": "Feat(add mynovels.su)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-16T07:37:08Z",
+        "updated_at": "2026-08-19T00:46:42Z",
+        "closed_at": "2026-08-16T11:55:37Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2431",
+        "body": "#### Checklist\r\ncloses #2426 \r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [x] Reference related issues in the PR body (e.g. Closes #xyz)\r\n"
+      },
+      {
+        "number": 2371,
+        "title": "[Ranobelib] Next chapter navigation always opens the first chapter",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-01T17:15:37Z",
+        "updated_at": "2026-08-19T00:46:40Z",
+        "closed_at": "2026-08-16T05:42:27Z",
+        "labels": [
+          "Bug",
+          "Severity: Missing Chapter",
+          "Plugin: RanobeLib[RLIB]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2371",
+        "body": "### Plugin\n\nРусский: RanobeLib\n\n### Severity\n\nMissing Chapter\n\n### Steps To Reproduce\n\n### Description\n\nWhen reading a novel using the Ranobelib plugin, navigating to the next chapter always redirects to the first chapter instead of opening the chapter that follows the current one.\n\n### Steps to rep"
+      },
+      {
+        "number": 2426,
+        "title": "Please add mynovels.su",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-15T12:50:08Z",
+        "updated_at": "2026-08-19T00:46:39Z",
+        "closed_at": "2026-08-16T11:55:38Z",
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2426",
+        "body": "### Plugin Name\n\nMynovels\n\n### Website URL\n\nhttps://mynovels.su/\n\n### Language\n\nEnglish\n\n### Other Details\n\nSome novels from novelight.net have been moved to mynovels.su such as \"The Artist Who Paints Dungeon\" https://mynovels.su/book/Z68MpyH0ex vs https://novelight.net/book/the-artist-who-paints-du"
+      },
+      {
+        "number": 2058,
+        "title": "Dreamy Translations plugin request",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-03-04T17:39:43Z",
+        "updated_at": "2026-08-19T00:46:39Z",
+        "closed_at": "2026-08-16T05:49:23Z",
+        "labels": [
+          "Plugin Request"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2058",
+        "body": "### Plugin Name\n\nDreamy Translations\n\n### Website URL\n\nhttps://dreamy-translations.com\n\n### Language\n\nEnglish\n\n### Other Details\n\nMany highly rated korean novels on novelupdates are here.\n\n### Acknowledgements\n\n- [x] I have searched existing issues and confirmed this plugin has not been requested be"
+      },
+      {
+        "number": 2404,
+        "title": "fix(french): rewrite Chireads, repoint Ligh Novel FR, drop dead MassNovel and MTL Novel (FR)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-09T10:50:23Z",
+        "updated_at": "2026-08-18T00:46:16Z",
+        "closed_at": "2026-08-15T16:56:53Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2404",
+        "body": "## PR description\n\nFixes the broken French sources in LNReader, adapting each plugin to the current state of its website. All working sources pass the live check (`scripts/live-check-plugin.js`) with 4/4 steps.\n\n### 1. Chireads (`plugins/french/chireads.ts`) — rewritten for the new site theme\nThe si"
+      },
+      {
+        "number": 2021,
+        "title": "fix: Madara Double slashes",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-02-07T01:12:50Z",
+        "updated_at": "2026-08-15T00:47:12Z",
+        "closed_at": "2026-02-12T17:44:48Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2021",
+        "body": "As all URLs in sources.json end in /, starting any novel URL with / will result in double slashes between the two.\r\nFor most sources, this causes no issue. However, it appears to cause issues for others.\r\n\r\nSetting this to `''` will reduce the amount of double slashes with no risk of issue."
+      },
+      {
+        "number": 1982,
+        "title": "chore: Mark down sites (check on 1/20 or later)",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-01-13T23:42:11Z",
+        "updated_at": "2026-08-15T00:47:12Z",
+        "closed_at": "2026-08-12T11:55:01Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/1982",
+        "body": "- [X] Verified previous PR down sites still down\r\n- [X] Found and marked more down sites\r\n- [X] Verifying sites don't come back up after a week\r\n\r\nLess certain if these sites will come back, thought there was a chance. Better to mark it and check back later."
+      },
+      {
+        "number": 2411,
+        "title": "feat: added Chikari english plugin",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-11T02:31:22Z",
+        "updated_at": "2026-08-14T01:14:56Z",
+        "closed_at": "2026-08-11T04:37:25Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2411",
+        "body": "Add Chikari plugin as LightNovelWorld has been merged with Chikari and LightNovelWorld chapter updates are paused.\r\n\r\n#### Checklist\r\n\r\n- [ ] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [ ] Reference related issues in the PR body (e.g"
+      },
+      {
+        "number": 2403,
+        "title": "feat(multisrc): filter rearrangement to Novelphoenix",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-09T08:28:20Z",
+        "updated_at": "2026-08-13T01:15:51Z",
+        "closed_at": "2026-08-10T15:51:16Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2403",
+        "body": "- 'Sort Results By' and 'Translation Status' moved to the top of the filter list\r\n- bump novelphoenix to 1.0.1\r\n\r\n#### Checklist\r\n\r\n- [x] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [ ] Reference related issues in the PR body (e.g. Cl"
+      },
+      {
+        "number": 2408,
+        "title": "Text-to-Speech",
+        "state": "closed",
+        "is_pr": false,
+        "created_at": "2026-08-10T14:04:59Z",
+        "updated_at": "2026-08-13T01:15:49Z",
+        "closed_at": "2026-08-10T17:28:14Z",
+        "labels": [
+          "Bug",
+          "Severity: Other",
+          "Plugin: MeioNovel[meionovel]"
+        ],
+        "url": "https://github.com/lnreader/lnreader-plugins/issues/2408",
+        "body": "### Plugin\n\nBahasa Indonesia: MeioNovel\n\n### Severity\n\nOther\n\n### Steps To Reproduce\n\n1 How to Survive as a Terminally Ill Imperial Official - Cara Bertahan Hidup sebagai Pejabat Kekaisaran yang Sakit Parah\n2 Tales of Herding Gods\n\n### Expected Behavior\n\nText-to-Speech not happening \n\n### Actual Beh"
+      },
+      {
+        "number": 2402,
+        "title": "docs: Fix Documentation Accuracy, Dead Links, and Grammar in Docs",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-09T05:31:37Z",
+        "updated_at": "2026-08-12T01:14:20Z",
+        "closed_at": "2026-08-09T05:32:14Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2402",
+        "body": "- Correct API docs against actual src/types/plugin.ts and libs/*: fix FilterToValues type name, add missing PluginBase fields (customJS, customCSS, webStorageUtilized, resolveUrl), add missing SourceNovel.rating and ChapterItem.scanlator fields, fix ExcludableCheckboxGroupValue's include/exclude key"
+      },
+      {
+        "number": 2367,
+        "title": "feat(multisrc): Add novelfire and novelphoenix",
+        "state": "closed",
+        "is_pr": true,
+        "created_at": "2026-08-01T05:14:14Z",
+        "updated_at": "2026-08-12T01:14:19Z",
+        "closed_at": "2026-08-09T03:13:17Z",
+        "labels": [],
+        "url": "https://github.com/lnreader/lnreader-plugins/pull/2367",
+        "body": "#### Checklist\r\n\r\n- [ ] Update version code if an existing plugin was modified\r\n- [x] Test changes in Plugin Playground or the app\r\n- [ ] Reference related issues in the PR body (e.g. Closes #xyz)\r\n"
+      }
+    ],
+    "recent_commits": [
+      {
+        "sha": "25d9a21",
+        "author": "github-actions[bot]",
+        "date": "2026-08-22T01:47:51Z",
+        "message": "chore: Update Issue Template Plugin Options [skip ci]",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/25d9a21ce223f67ffb64406e2a157370780818e7"
+      },
+      {
+        "sha": "a4acc41",
+        "author": "Shivam Dewangan",
+        "date": "2026-08-22T01:46:56Z",
+        "message": "fix(english/novel7s): fix paragraph parser for smart quotes (#2454)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/a4acc41fba05ce0acbfc30ec4ee4a92dd0e141c9"
+      },
+      {
+        "sha": "a3cede7",
+        "author": "Shivam Dewangan",
+        "date": "2026-08-22T01:46:18Z",
+        "message": "feat(madara): add novel-short.com extension (#2439)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/a3cede715897c959e977ceaed1a92e8bbe14260c"
+      },
+      {
+        "sha": "ab469d0",
+        "author": "lipexama",
+        "date": "2026-08-22T01:45:42Z",
+        "message": "perf(lnori): open novels fast on phones (#2446)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/ab469d0dac9a3801609ec18e5f925264fe875b48"
+      },
+      {
+        "sha": "ef56d7f",
+        "author": "github-actions[bot]",
+        "date": "2026-08-22T01:45:36Z",
+        "message": "chore: Update Issue Template Plugin Options [skip ci]",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/ef56d7f64ebd380a4e826b70f040b421019f7e32"
+      },
+      {
+        "sha": "fff00fd",
+        "author": "Tayyeba Shoaib",
+        "date": "2026-08-22T01:44:50Z",
+        "message": "Feat(add puffinfolio) (#2443)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/fff00fd06b62a409fd4aa799c5b62d8c51e2ed58"
+      },
+      {
+        "sha": "1f1e2d3",
+        "author": "github-actions[bot]",
+        "date": "2026-08-16T11:56:27Z",
+        "message": "chore: Update Issue Template Plugin Options [skip ci]",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/1f1e2d399930ce03ef43b01b13dd55997846ec44"
+      },
+      {
+        "sha": "b27a53a",
+        "author": "Ahjie521",
+        "date": "2026-08-16T11:55:37Z",
+        "message": "Feat(add mynovels.su) (#2431)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/b27a53a6bdfa227aaeb529dec2ba697945de96dd"
+      },
+      {
+        "sha": "b4e0a46",
+        "author": "github-actions[bot]",
+        "date": "2026-08-16T07:15:04Z",
+        "message": "chore: Update Issue Template Plugin Options [skip ci]",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/b4e0a46a45a55fd6bd49f21baef00ed0d7873a3e"
+      },
+      {
+        "sha": "ece0643",
+        "author": "Shivam Dewangan",
+        "date": "2026-08-16T07:14:15Z",
+        "message": "feat(english): add novel7s extension (#2430)",
+        "url": "https://github.com/lnreader/lnreader-plugins/commit/ece0643aea521b91f80cd6aa4aeb117b5880fd50"
+      }
+    ]
+  }
+}
