@@ -2,7 +2,7 @@ ext {
     extName = 'PelisPlusPh'
     extClass = '.Pelisplusph'
     themePkg = 'pelisplus'
-    baseUrl = 'https://www.pelisplushd.la'
+    baseUrl = 'https://pelisplushd.la'
     overrideVersionCode = 82
 }
 

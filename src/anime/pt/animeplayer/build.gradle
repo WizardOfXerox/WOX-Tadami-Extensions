@@ -2,7 +2,7 @@ ext {
     extName = 'AnimePlayer'
     extClass = '.AnimePlayer'
     themePkg = 'dooplay'
-    baseUrl = 'https://animeplayer.com.br'
+    baseUrl = 'https://anreyalp.vip'
     overrideVersionCode = 6
     isNsfw = true
 }

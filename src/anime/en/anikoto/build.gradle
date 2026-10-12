@@ -3,7 +3,7 @@ ext {
     extClass = '.Anikoto'
     themePkg = 'anikototheme'
     baseUrl = 'https://anikototv.to'
-    overrideVersionCode = 1
+    overrideVersionCode = 4
 }
 
 apply from: "$rootDir/common.gradle"

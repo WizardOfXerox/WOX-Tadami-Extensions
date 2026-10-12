@@ -2,7 +2,7 @@ ext {
     extName = 'MyKdrama'
     extClass = '.MyKdrama'
     themePkg = 'animestream'
-    baseUrl = 'https://mykdrama.co'
+    baseUrl = 'http://mykdrama.co'
     overrideVersionCode = 9
 }
 
