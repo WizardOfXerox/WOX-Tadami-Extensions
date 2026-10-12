@@ -2098,10 +2098,10 @@
   {
     "name": "Aniyomi: Hentaigasm",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaigasm",
-    "apk": "aniyomi-en.hentaigasm-v14.1.apk",
+    "apk": "aniyomi-en.hentaigasm-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -2112,7 +2112,7 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaigasm.png",
-    "sha256": "1e9625b312b5d28f7c7ad65c622e6c56785ad401e0bb8ddb3cbdff4d5159baf9"
+    "sha256": "0977bc6cbfc3f5724e1d4a73561189dd14856f28e1a3faff258e7fa5b6641016"
   },
   {
     "name": "Aniyomi: Hentaijk",

@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-10-12 19:30:56",
-  "scan_duration_sec": 175.27,
+  "timestamp": "2026-10-12 19:46:56",
+  "scan_duration_sec": 86.14,
   "anime": {
     "category": "anime",
-    "total_items": 225,
-    "total_sources": 269,
-    "total_unique_domains": 227,
+    "total_items": 226,
+    "total_sources": 270,
+    "total_unique_domains": 228,
     "apk_missing": [
       {
         "pkg": "eu.kanade.tachiyomi.animeextension.all.javguru",
@@ -28,14 +28,14 @@
         "apk": "aniyomi-all.missav-v14.27.apk"
       },
       {
-        "pkg": "eu.kanade.tachiyomi.animeextension.all.pornhub",
-        "name": "Aniyomi: Pornhub",
-        "apk": "aniyomi-all.pornhub-v14.3.apk"
-      },
-      {
         "pkg": "eu.kanade.tachiyomi.animeextension.all.ptorrent",
         "name": "Aniyomi: PTorrent (Torrent)",
         "apk": "aniyomi-all.ptorrent-v14.4.apk"
+      },
+      {
+        "pkg": "eu.kanade.tachiyomi.animeextension.all.pornhub",
+        "name": "Aniyomi: Pornhub",
+        "apk": "aniyomi-all.pornhub-v14.3.apk"
       },
       {
         "pkg": "eu.kanade.tachiyomi.animeextension.all.stremio",
@@ -69,26 +69,11 @@
         "name": "Aniyomi: Torbox"
       }
     ],
-    "ok_count": 136,
-    "redirect_count": 15,
+    "ok_count": 143,
+    "redirect_count": 14,
     "cf_count": 61,
-    "dead_count": 15,
+    "dead_count": 10,
     "dead_details": [
-      {
-        "url": "https://animescx.com.br",
-        "status": "NXDOMAIN",
-        "code": 0,
-        "error": "DNS resolution failed",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animescx",
-            "ext_name": "Aniyomi: Animes CX",
-            "src_name": "Animes CX",
-            "lang": "pt-BR",
-            "base_url": "https://animescx.com.br"
-          }
-        ]
-      },
       {
         "url": "https://v1.animesz.xyz",
         "status": "NXDOMAIN",
@@ -101,6 +86,21 @@
             "src_name": "AniSama",
             "lang": "fr",
             "base_url": "https://v1.animesz.xyz"
+          }
+        ]
+      },
+      {
+        "url": "https://animescx.com.br",
+        "status": "NXDOMAIN",
+        "code": 0,
+        "error": "DNS resolution failed",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animescx",
+            "ext_name": "Aniyomi: Animes CX",
+            "src_name": "Animes CX",
+            "lang": "pt-BR",
+            "base_url": "https://animescx.com.br"
           }
         ]
       },
@@ -136,9 +136,9 @@
       },
       {
         "url": "https://darkmahou.org",
-        "status": "ERROR",
-        "code": 0,
-        "error": "Remote end closed connection without response",
+        "status": "HTTP_429",
+        "code": 429,
+        "error": "Too Many Requests",
         "sources": [
           {
             "pkg": "eu.kanade.tachiyomi.animeextension.pt.darkmahou",
@@ -165,21 +165,6 @@
         ]
       },
       {
-        "url": "https://animenix.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.es.animenix",
-            "ext_name": "Aniyomi: Animenix",
-            "src_name": "Animenix",
-            "lang": "es",
-            "base_url": "https://animenix.com"
-          }
-        ]
-      },
-      {
         "url": "https://www.cineby.at",
         "status": "NXDOMAIN",
         "code": 0,
@@ -195,32 +180,17 @@
         ]
       },
       {
-        "url": "https://animesogo.to",
+        "url": "https://animenix.com",
         "status": "TIMEOUT",
         "code": 0,
         "error": "Socket timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.animesogo",
-            "ext_name": "Aniyomi: AnimeSogo",
-            "src_name": "AnimeSogo",
-            "lang": "en",
-            "base_url": "https://animesogo.to"
-          }
-        ]
-      },
-      {
-        "url": "https://animetake.tv",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.animetake",
-            "ext_name": "Aniyomi: AnimeTake",
-            "src_name": "AnimeTake",
-            "lang": "en",
-            "base_url": "https://animetake.tv"
+            "pkg": "eu.kanade.tachiyomi.animeextension.es.animenix",
+            "ext_name": "Aniyomi: Animenix",
+            "src_name": "Animenix",
+            "lang": "es",
+            "base_url": "https://animenix.com"
           }
         ]
       },
@@ -236,51 +206,6 @@
             "src_name": "Animes ROLL",
             "lang": "pt-BR",
             "base_url": "https://animes.tokyo"
-          }
-        ]
-      },
-      {
-        "url": "https://animesonline.cloud",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesonlinecloud",
-            "ext_name": "Aniyomi: AnimesOnlineCloud",
-            "src_name": "Animes Online Cloud",
-            "lang": "pt-BR",
-            "base_url": "https://animesonline.cloud"
-          }
-        ]
-      },
-      {
-        "url": "https://anoboye.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.all.anoboye",
-            "ext_name": "Aniyomi: Anoboye",
-            "src_name": "Anoboye",
-            "lang": "all",
-            "base_url": "https://anoboye.com"
-          }
-        ]
-      },
-      {
-        "url": "https://www.cinecalidad.am",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.es.cinecalidad",
-            "ext_name": "Aniyomi: CineCalidad",
-            "src_name": "CineCalidad",
-            "lang": "es",
-            "base_url": "https://www.cinecalidad.am"
           }
         ]
       },
@@ -315,19 +240,6 @@
         ]
       },
       {
-        "orig_url": "https://animefenix2.tv",
-        "final_url": "https://tvanime.tv/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
-            "ext_name": "Aniyomi: AnimeFenix",
-            "src_name": "AnimeFenix",
-            "lang": "es",
-            "base_url": "https://animefenix2.tv"
-          }
-        ]
-      },
-      {
         "orig_url": "https://anidb.app",
         "final_url": "https://anilab.so/",
         "sources": [
@@ -337,6 +249,19 @@
             "src_name": "AniDB",
             "lang": "en",
             "base_url": "https://anidb.app"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://animefenix2.tv",
+        "final_url": "https://tvanime.tv/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
+            "ext_name": "Aniyomi: AnimeFenix",
+            "src_name": "AnimeFenix",
+            "lang": "es",
+            "base_url": "https://animefenix2.tv"
           }
         ]
       },
@@ -406,19 +331,6 @@
         ]
       },
       {
-        "orig_url": "https://homecine.cc",
-        "final_url": "http://ww547.homecine.cc/?tkn=19vnMT3S",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.es.homecine",
-            "ext_name": "Aniyomi: HomeCine",
-            "src_name": "HomeCine",
-            "lang": "es",
-            "base_url": "https://homecine.cc"
-          }
-        ]
-      },
-      {
         "orig_url": "https://www.pelisplushd.la",
         "final_url": "https://pelisplushd.la/",
         "sources": [
@@ -428,26 +340,6 @@
             "src_name": "PelisPlusPh",
             "lang": "es",
             "base_url": "https://www.pelisplushd.la"
-          }
-        ]
-      },
-      {
-        "orig_url": "https://streamingunity.vip/en",
-        "final_url": "https://streamingunity.fun/en",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.all.streamingcommunity",
-            "ext_name": "Aniyomi: StreamingCommunity",
-            "src_name": "StreamingUnity (Movie)",
-            "lang": "en",
-            "base_url": "https://streamingunity.vip/en"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.all.streamingcommunity",
-            "ext_name": "Aniyomi: StreamingCommunity",
-            "src_name": "StreamingUnity (Tv)",
-            "lang": "en",
-            "base_url": "https://streamingunity.vip/en"
           }
         ]
       },
@@ -468,6 +360,26 @@
             "src_name": "StreamingUnity (Tv)",
             "lang": "it",
             "base_url": "https://streamingunity.vip/it"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://streamingunity.vip/en",
+        "final_url": "https://streamingunity.fun/en",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.all.streamingcommunity",
+            "ext_name": "Aniyomi: StreamingCommunity",
+            "src_name": "StreamingUnity (Movie)",
+            "lang": "en",
+            "base_url": "https://streamingunity.vip/en"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.all.streamingcommunity",
+            "ext_name": "Aniyomi: StreamingCommunity",
+            "src_name": "StreamingUnity (Tv)",
+            "lang": "en",
+            "base_url": "https://streamingunity.vip/en"
           }
         ]
       },
@@ -513,15 +425,15 @@
     ],
     "cf_details": [
       {
-        "url": "https://animeblkom.net",
+        "url": "https://www.anime-loads.org",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.ar.animeblkom",
-            "ext_name": "Aniyomi: Anime Blkom",
-            "src_name": "أنمي بالكوم",
-            "lang": "ar",
-            "base_url": "https://animeblkom.net"
+            "pkg": "eu.kanade.tachiyomi.animeextension.de.animeloads",
+            "ext_name": "Aniyomi: Anime-Loads",
+            "src_name": "Anime-Loads",
+            "lang": "de",
+            "base_url": "https://www.anime-loads.org"
           }
         ]
       },
@@ -552,15 +464,15 @@
         ]
       },
       {
-        "url": "https://animeler.pw",
+        "url": "https://animeblkom.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.tr.animeler",
-            "ext_name": "Aniyomi: Animeler",
-            "src_name": "Animeler",
-            "lang": "tr",
-            "base_url": "https://animeler.pw"
+            "pkg": "eu.kanade.tachiyomi.animeextension.ar.animeblkom",
+            "ext_name": "Aniyomi: Anime Blkom",
+            "src_name": "أنمي بالكوم",
+            "lang": "ar",
+            "base_url": "https://animeblkom.net"
           }
         ]
       },
@@ -617,6 +529,19 @@
         ]
       },
       {
+        "url": "https://animeler.pw",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.tr.animeler",
+            "ext_name": "Aniyomi: Animeler",
+            "src_name": "Animeler",
+            "lang": "tr",
+            "base_url": "https://animeler.pw"
+          }
+        ]
+      },
+      {
         "url": "https://animesonlinecc.to",
         "code": 403,
         "sources": [
@@ -643,15 +568,41 @@
         ]
       },
       {
-        "url": "https://animesdrive.online",
+        "url": "https://animeplay.cloud",
+        "code": 503,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeplay",
+            "ext_name": "Aniyomi: AnimePlay",
+            "src_name": "Anime Play",
+            "lang": "pt-BR",
+            "base_url": "https://animeplay.cloud"
+          }
+        ]
+      },
+      {
+        "url": "https://www.arabanime.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesdrive",
-            "ext_name": "Aniyomi: AnimesDrive",
-            "src_name": "Animes Drive",
-            "lang": "pt-BR",
-            "base_url": "https://animesdrive.online"
+            "pkg": "eu.kanade.tachiyomi.animeextension.ar.arabanime",
+            "ext_name": "Aniyomi: ArabAnime",
+            "src_name": "ArabAnime",
+            "lang": "ar",
+            "base_url": "https://www.arabanime.net"
+          }
+        ]
+      },
+      {
+        "url": "https://anizm.net",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.tr.anizm",
+            "ext_name": "Aniyomi: Anizm",
+            "src_name": "Anizm",
+            "lang": "tr",
+            "base_url": "https://anizm.net"
           }
         ]
       },
@@ -682,32 +633,6 @@
         ]
       },
       {
-        "url": "https://anizm.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.tr.anizm",
-            "ext_name": "Aniyomi: Anizm",
-            "src_name": "Anizm",
-            "lang": "tr",
-            "base_url": "https://anizm.net"
-          }
-        ]
-      },
-      {
-        "url": "https://www.arabanime.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.ar.arabanime",
-            "ext_name": "Aniyomi: ArabAnime",
-            "src_name": "ArabAnime",
-            "lang": "ar",
-            "base_url": "https://www.arabanime.net"
-          }
-        ]
-      },
-      {
         "url": "https://asialiveaction.com",
         "code": 403,
         "sources": [
@@ -717,6 +642,19 @@
             "src_name": "AsiaLiveAction",
             "lang": "es",
             "base_url": "https://asialiveaction.com"
+          }
+        ]
+      },
+      {
+        "url": "https://animesdrive.online",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesdrive",
+            "ext_name": "Aniyomi: AnimesDrive",
+            "src_name": "Animes Drive",
+            "lang": "pt-BR",
+            "base_url": "https://animesdrive.online"
           }
         ]
       },
@@ -743,6 +681,19 @@
             "src_name": "Cine24h",
             "lang": "es",
             "base_url": "https://cine24h.online"
+          }
+        ]
+      },
+      {
+        "url": "https://animeq.blog",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeq",
+            "ext_name": "Aniyomi: AnimeQ",
+            "src_name": "AnimeQ",
+            "lang": "pt-BR",
+            "base_url": "https://animeq.blog"
           }
         ]
       },
@@ -812,19 +763,6 @@
         ]
       },
       {
-        "url": "https://www.anime-loads.org",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.de.animeloads",
-            "ext_name": "Aniyomi: Anime-Loads",
-            "src_name": "Anime-Loads",
-            "lang": "de",
-            "base_url": "https://www.anime-loads.org"
-          }
-        ]
-      },
-      {
         "url": "https://hanime1.me",
         "code": 403,
         "sources": [
@@ -834,19 +772,6 @@
             "src_name": "Hanime1.me",
             "lang": "zh",
             "base_url": "https://hanime1.me"
-          }
-        ]
-      },
-      {
-        "url": "https://animeplay.cloud",
-        "code": 503,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeplay",
-            "ext_name": "Aniyomi: AnimePlay",
-            "src_name": "Anime Play",
-            "lang": "pt-BR",
-            "base_url": "https://animeplay.cloud"
           }
         ]
       },
@@ -904,19 +829,6 @@
         ]
       },
       {
-        "url": "https://javgg.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
-            "ext_name": "Aniyomi: JavGG",
-            "src_name": "JavGG",
-            "lang": "all",
-            "base_url": "https://javgg.net"
-          }
-        ]
-      },
-      {
         "url": "https://jkanime.net",
         "code": 403,
         "sources": [
@@ -943,28 +855,15 @@
         ]
       },
       {
-        "url": "https://animeq.blog",
+        "url": "https://javgg.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeq",
-            "ext_name": "Aniyomi: AnimeQ",
-            "src_name": "AnimeQ",
-            "lang": "pt-BR",
-            "base_url": "https://animeq.blog"
-          }
-        ]
-      },
-      {
-        "url": "https://v8.kuramanime.tel",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.id.kuramanime",
-            "ext_name": "Aniyomi: Kuramanime",
-            "src_name": "Kuramanime",
-            "lang": "id",
-            "base_url": "https://v8.kuramanime.tel"
+            "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
+            "ext_name": "Aniyomi: JavGG",
+            "src_name": "JavGG",
+            "lang": "all",
+            "base_url": "https://javgg.net"
           }
         ]
       },
@@ -1251,15 +1150,15 @@
         ]
       },
       {
-        "url": "https://myanime.live",
+        "url": "https://v8.kuramanime.tel",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.myanime",
-            "ext_name": "Aniyomi: Myanime",
-            "src_name": "Myanime",
-            "lang": "en",
-            "base_url": "https://myanime.live"
+            "pkg": "eu.kanade.tachiyomi.animeextension.id.kuramanime",
+            "ext_name": "Aniyomi: Kuramanime",
+            "src_name": "Kuramanime",
+            "lang": "id",
+            "base_url": "https://v8.kuramanime.tel"
           }
         ]
       },
@@ -1299,6 +1198,58 @@
             "src_name": "Pi Fansubs",
             "lang": "pt-BR",
             "base_url": "https://pifansubs.club"
+          }
+        ]
+      },
+      {
+        "url": "https://myanime.live",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.en.myanime",
+            "ext_name": "Aniyomi: Myanime",
+            "src_name": "Myanime",
+            "lang": "en",
+            "base_url": "https://myanime.live"
+          }
+        ]
+      },
+      {
+        "url": "https://v2.samehadaku.how",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.id.samehadaku",
+            "ext_name": "Aniyomi: Samehadaku",
+            "src_name": "Samehadaku",
+            "lang": "id",
+            "base_url": "https://v2.samehadaku.how"
+          }
+        ]
+      },
+      {
+        "url": "https://smartanimes.net",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.pt.smartanimes",
+            "ext_name": "Aniyomi: SmartAnimes",
+            "src_name": "SmartAnimes",
+            "lang": "pt-BR",
+            "base_url": "https://smartanimes.net"
+          }
+        ]
+      },
+      {
+        "url": "https://showbox.shegu.net/api/api_client/index",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.en.superstream",
+            "ext_name": "Aniyomi: SuperStream",
+            "src_name": "SuperStream",
+            "lang": "en",
+            "base_url": "https://showbox.shegu.net/api/api_client/index/"
           }
         ]
       },
@@ -1343,19 +1294,6 @@
         ]
       },
       {
-        "url": "https://showbox.shegu.net/api/api_client/index",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.superstream",
-            "ext_name": "Aniyomi: SuperStream",
-            "src_name": "SuperStream",
-            "lang": "en",
-            "base_url": "https://showbox.shegu.net/api/api_client/index/"
-          }
-        ]
-      },
-      {
         "url": "https://sushianimes.com.br",
         "code": 403,
         "sources": [
@@ -1365,45 +1303,6 @@
             "src_name": "Sushi Animes",
             "lang": "pt-BR",
             "base_url": "https://sushianimes.com.br"
-          }
-        ]
-      },
-      {
-        "url": "https://v2.samehadaku.how",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.id.samehadaku",
-            "ext_name": "Aniyomi: Samehadaku",
-            "src_name": "Samehadaku",
-            "lang": "id",
-            "base_url": "https://v2.samehadaku.how"
-          }
-        ]
-      },
-      {
-        "url": "https://tranimaci.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.tr.tranimeci",
-            "ext_name": "Aniyomi: TRAnimeCI",
-            "src_name": "TRAnimeCI",
-            "lang": "tr",
-            "base_url": "https://tranimaci.com"
-          }
-        ]
-      },
-      {
-        "url": "https://smartanimes.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.pt.smartanimes",
-            "ext_name": "Aniyomi: SmartAnimes",
-            "src_name": "SmartAnimes",
-            "lang": "pt-BR",
-            "base_url": "https://smartanimes.net"
           }
         ]
       },
@@ -1421,28 +1320,28 @@
         ]
       },
       {
-        "url": "https://uakino.best",
+        "url": "https://tranimaci.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.uk.uakino",
-            "ext_name": "Aniyomi: UAKino",
-            "src_name": "UAKino",
-            "lang": "uk",
-            "base_url": "https://uakino.best"
+            "pkg": "eu.kanade.tachiyomi.animeextension.tr.tranimeci",
+            "ext_name": "Aniyomi: TRAnimeCI",
+            "src_name": "TRAnimeCI",
+            "lang": "tr",
+            "base_url": "https://tranimaci.com"
           }
         ]
       },
       {
-        "url": "https://www.wcoanimesub.tv",
+        "url": "https://www.wcostream.tv",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcoanimesub",
-            "ext_name": "Aniyomi: WcoAnimeSub",
-            "src_name": "WcoAnimeSub",
+            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcostream",
+            "ext_name": "Aniyomi: WCOStream",
+            "src_name": "WCOStream",
             "lang": "en",
-            "base_url": "https://www.wcoanimesub.tv"
+            "base_url": "https://www.wcostream.tv"
           }
         ]
       },
@@ -1460,15 +1359,28 @@
         ]
       },
       {
-        "url": "https://www.wcoflix.tv",
+        "url": "https://www.newgrounds.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcofun",
-            "ext_name": "Aniyomi: Wcofun",
-            "src_name": "Wcofun",
-            "lang": "en",
-            "base_url": "https://www.wcoflix.tv"
+            "pkg": "eu.kanade.tachiyomi.animeextension.all.newgrounds",
+            "ext_name": "Aniyomi: Newgrounds",
+            "src_name": "Newgrounds",
+            "lang": "all",
+            "base_url": "https://www.newgrounds.com"
+          }
+        ]
+      },
+      {
+        "url": "https://uakino.best",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.uk.uakino",
+            "ext_name": "Aniyomi: UAKino",
+            "src_name": "UAKino",
+            "lang": "uk",
+            "base_url": "https://uakino.best"
           }
         ]
       },
@@ -1499,15 +1411,28 @@
         ]
       },
       {
-        "url": "https://www.wcostream.tv",
+        "url": "https://www.wcoflix.tv",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcostream",
-            "ext_name": "Aniyomi: WCOStream",
-            "src_name": "WCOStream",
+            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcofun",
+            "ext_name": "Aniyomi: Wcofun",
+            "src_name": "Wcofun",
             "lang": "en",
-            "base_url": "https://www.wcostream.tv"
+            "base_url": "https://www.wcoflix.tv"
+          }
+        ]
+      },
+      {
+        "url": "https://www.wcoanimesub.tv",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.animeextension.en.wcoanimesub",
+            "ext_name": "Aniyomi: WcoAnimeSub",
+            "src_name": "WcoAnimeSub",
+            "lang": "en",
+            "base_url": "https://www.wcoanimesub.tv"
           }
         ]
       },
@@ -1536,19 +1461,6 @@
             "base_url": "https://www.vvvvid.it"
           }
         ]
-      },
-      {
-        "url": "https://www.newgrounds.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.animeextension.all.newgrounds",
-            "ext_name": "Aniyomi: Newgrounds",
-            "src_name": "Newgrounds",
-            "lang": "all",
-            "base_url": "https://www.newgrounds.com"
-          }
-        ]
       }
     ]
   },
@@ -1559,10 +1471,10 @@
     "total_unique_domains": 1274,
     "apk_missing": [],
     "icon_missing": [],
-    "ok_count": 897,
-    "redirect_count": 45,
-    "cf_count": 216,
-    "dead_count": 116,
+    "ok_count": 933,
+    "redirect_count": 47,
+    "cf_count": 215,
+    "dead_count": 79,
     "dead_details": [
       {
         "url": "https://www.simply-cosplay.com",
@@ -1610,299 +1522,17 @@
         ]
       },
       {
-        "url": "https://www.dragonball-multiverse.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "en",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "fr",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ja",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "zh",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "es",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "it",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "pt",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "de",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "pl",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "nl",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "tr",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "pt-BR",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "hu",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ga",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ca",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "no",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ru",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ro",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "eu",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "lt",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "hr",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ko",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "fi",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "he",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "bg",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "sv",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "el",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "es-419",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "ar",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "fil",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "la",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "da",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "co",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "br",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "vec",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse",
-            "lang": "lmo",
-            "base_url": "https://www.dragonball-multiverse.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
-            "ext_name": "Tachiyomi: Dragon Ball Multiverse",
-            "src_name": "Dragon Ball Multiverse Parody",
-            "lang": "fr",
-            "base_url": "https://www.dragonball-multiverse.com"
-          }
-        ]
-      },
-      {
-        "url": "https://manga-starz.net",
-        "status": "HTTP_525",
-        "code": 525,
+        "url": "https://culturedworks.com",
+        "status": "HTTP_526",
+        "code": 526,
         "error": "<none>",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
-            "ext_name": "Tachiyomi: Manga Starz",
-            "src_name": "Manga Starz",
-            "lang": "ar",
-            "base_url": "https://manga-starz.net"
-          }
-        ]
-      },
-      {
-        "url": "https://coomer.st",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.coomer",
-            "ext_name": "Tachiyomi: Coomer",
-            "src_name": "Coomer",
-            "lang": "all",
-            "base_url": "https://coomer.st"
+            "pkg": "eu.kanade.tachiyomi.extension.en.culturedworks",
+            "ext_name": "Tachiyomi: CulturedWorks",
+            "src_name": "CulturedWorks",
+            "lang": "en",
+            "base_url": "https://culturedworks.com"
           }
         ]
       },
@@ -1937,81 +1567,6 @@
         ]
       },
       {
-        "url": "https://manga-lionz.org",
-        "status": "HTTP_525",
-        "code": 525,
-        "error": "<none>",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.mangalionz",
-            "ext_name": "Tachiyomi: MangaLionz",
-            "src_name": "MangaLionz",
-            "lang": "ar",
-            "base_url": "https://manga-lionz.org"
-          }
-        ]
-      },
-      {
-        "url": "https://kemono.cr",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.kemono",
-            "ext_name": "Tachiyomi: Kemono",
-            "src_name": "Kemono",
-            "lang": "all",
-            "base_url": "https://kemono.cr"
-          }
-        ]
-      },
-      {
-        "url": "https://azorafly.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
-            "ext_name": "Tachiyomi: Azora",
-            "src_name": "Azora",
-            "lang": "ar",
-            "base_url": "https://azorafly.com"
-          }
-        ]
-      },
-      {
-        "url": "https://hentaiman.net",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.hentaiman",
-            "ext_name": "Tachiyomi: HentaiMan",
-            "src_name": "HentaiMan",
-            "lang": "ar",
-            "base_url": "https://hentaiman.net"
-          }
-        ]
-      },
-      {
-        "url": "https://sparkmanga.net",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.mangaspark",
-            "ext_name": "Tachiyomi: MangaSpark",
-            "src_name": "MangaSpark",
-            "lang": "ar",
-            "base_url": "https://sparkmanga.net"
-          }
-        ]
-      },
-      {
         "url": "https://kaliscan.com",
         "status": "NXDOMAIN",
         "code": 0,
@@ -2023,36 +1578,6 @@
             "src_name": "KaliScan",
             "lang": "en",
             "base_url": "https://kaliscan.com"
-          }
-        ]
-      },
-      {
-        "url": "https://arc-relight.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.arcrelight",
-            "ext_name": "Tachiyomi: Arc-Relight",
-            "src_name": "Arc-Relight",
-            "lang": "en",
-            "base_url": "https://arc-relight.com"
-          }
-        ]
-      },
-      {
-        "url": "https://assortedscans.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.assortedscans",
-            "ext_name": "Tachiyomi: Assorted Scans",
-            "src_name": "Assorted Scans",
-            "lang": "en",
-            "base_url": "https://assortedscans.com"
           }
         ]
       },
@@ -2072,76 +1597,17 @@
         ]
       },
       {
-        "url": "https://manga.clone-army.org",
+        "url": "https://hentaiman.net",
         "status": "TIMEOUT",
         "code": 0,
         "error": "Socket timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.en.clonemanga",
-            "ext_name": "Tachiyomi: Clone Manga",
-            "src_name": "Clone Manga",
-            "lang": "en",
-            "base_url": "https://manga.clone-army.org"
-          }
-        ]
-      },
-      {
-        "url": "https://comickfan.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.comickfan",
-            "ext_name": "Tachiyomi: ComicK Fanmade",
-            "src_name": "ComicK Fanmade",
-            "lang": "en",
-            "base_url": "https://comickfan.com"
-          }
-        ]
-      },
-      {
-        "url": "https://mahoushoujobu.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.magicaltranslators",
-            "ext_name": "Tachiyomi: Magical Translators",
-            "src_name": "Magical Translators",
-            "lang": "en",
-            "base_url": "https://mahoushoujobu.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.magicaltranslators",
-            "ext_name": "Tachiyomi: Magical Translators",
-            "src_name": "Magical Translators",
-            "lang": "es",
-            "base_url": "https://mahoushoujobu.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.magicaltranslators",
-            "ext_name": "Tachiyomi: Magical Translators",
-            "src_name": "Magical Translators",
-            "lang": "pl",
-            "base_url": "https://mahoushoujobu.com"
-          }
-        ]
-      },
-      {
-        "url": "https://culturedworks.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.culturedworks",
-            "ext_name": "Tachiyomi: CulturedWorks",
-            "src_name": "CulturedWorks",
-            "lang": "en",
-            "base_url": "https://culturedworks.com"
+            "pkg": "eu.kanade.tachiyomi.extension.ar.hentaiman",
+            "ext_name": "Tachiyomi: HentaiMan",
+            "src_name": "HentaiMan",
+            "lang": "ar",
+            "base_url": "https://hentaiman.net"
           }
         ]
       },
@@ -2176,21 +1642,6 @@
         ]
       },
       {
-        "url": "https://dynasty-scans.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.dynasty",
-            "ext_name": "Tachiyomi: Dynasty Scans",
-            "src_name": "Dynasty Scans",
-            "lang": "en",
-            "base_url": "https://dynasty-scans.com"
-          }
-        ]
-      },
-      {
         "url": "https://manhwahub.net",
         "status": "NXDOMAIN",
         "code": 0,
@@ -2202,36 +1653,6 @@
             "src_name": "ManhwaHub",
             "lang": "en",
             "base_url": "https://manhwahub.net"
-          }
-        ]
-      },
-      {
-        "url": "https://reader.deathtollscans.net",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.deathtollscans",
-            "ext_name": "Tachiyomi: Death Toll Scans",
-            "src_name": "Death Toll Scans",
-            "lang": "en",
-            "base_url": "https://reader.deathtollscans.net"
-          }
-        ]
-      },
-      {
-        "url": "https://infinityscans.org",
-        "status": "HTTP_520",
-        "code": 520,
-        "error": "<none>",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.infinityscans",
-            "ext_name": "Tachiyomi: InfinityScans",
-            "src_name": "InfinityScans",
-            "lang": "en",
-            "base_url": "https://infinityscans.org"
           }
         ]
       },
@@ -2251,47 +1672,17 @@
         ]
       },
       {
-        "url": "https://gdscans.com",
+        "url": "https://arc-relight.com",
         "status": "TIMEOUT",
         "code": 0,
-        "error": "Socket timed out",
+        "error": "Connection timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.en.galaxydegenscans",
-            "ext_name": "Tachiyomi: GalaxyDegenScans",
-            "src_name": "GalaxyDegenScans",
+            "pkg": "eu.kanade.tachiyomi.extension.en.arcrelight",
+            "ext_name": "Tachiyomi: Arc-Relight",
+            "src_name": "Arc-Relight",
             "lang": "en",
-            "base_url": "https://gdscans.com"
-          }
-        ]
-      },
-      {
-        "url": "https://doujindistrict.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.hm2d",
-            "ext_name": "Tachiyomi: HM2D",
-            "src_name": "HM2D",
-            "lang": "en",
-            "base_url": "https://doujindistrict.com"
-          }
-        ]
-      },
-      {
-        "url": "https://linkmanga.com",
-        "status": "HTTP_525",
-        "code": 525,
-        "error": "<none>",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.linkmanga",
-            "ext_name": "Tachiyomi: LinkManga",
-            "src_name": "LinkManga",
-            "lang": "en",
-            "base_url": "https://linkmanga.com"
+            "base_url": "https://arc-relight.com"
           }
         ]
       },
@@ -2311,6 +1702,51 @@
         ]
       },
       {
+        "url": "https://assortedscans.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Connection timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.assortedscans",
+            "ext_name": "Tachiyomi: Assorted Scans",
+            "src_name": "Assorted Scans",
+            "lang": "en",
+            "base_url": "https://assortedscans.com"
+          }
+        ]
+      },
+      {
+        "url": "https://vortexscans.org",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.arvenscans",
+            "ext_name": "Tachiyomi: Vortex Scans",
+            "src_name": "Vortex Scans",
+            "lang": "en",
+            "base_url": "https://vortexscans.org"
+          }
+        ]
+      },
+      {
+        "url": "https://comickfan.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.comickfan",
+            "ext_name": "Tachiyomi: ComicK Fanmade",
+            "src_name": "ComicK Fanmade",
+            "lang": "en",
+            "base_url": "https://comickfan.com"
+          }
+        ]
+      },
+      {
         "url": "https://shibamanga.com",
         "status": "SSL_ERROR",
         "code": 0,
@@ -2322,6 +1758,21 @@
             "src_name": "Shiba Manga",
             "lang": "en",
             "base_url": "https://shibamanga.com"
+          }
+        ]
+      },
+      {
+        "url": "https://doujindistrict.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.hm2d",
+            "ext_name": "Tachiyomi: HM2D",
+            "src_name": "HM2D",
+            "lang": "en",
+            "base_url": "https://doujindistrict.com"
           }
         ]
       },
@@ -2356,77 +1807,17 @@
         ]
       },
       {
-        "url": "https://gensura.net",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
+        "url": "https://accounts.google.com/v3/signin/identifier",
+        "status": "HTTP_400",
+        "code": 400,
+        "error": "Bad Request",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.en.mangahen",
-            "ext_name": "Tachiyomi: Gensura",
-            "src_name": "Gensura",
-            "lang": "en",
-            "base_url": "https://gensura.net"
-          }
-        ]
-      },
-      {
-        "url": "https://mangahe.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.mangahe",
-            "ext_name": "Tachiyomi: MangaHe",
-            "src_name": "MangaHe",
-            "lang": "en",
-            "base_url": "https://mangahe.com"
-          }
-        ]
-      },
-      {
-        "url": "https://mangakatana.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.mangakatana",
-            "ext_name": "Tachiyomi: MangaKatana",
-            "src_name": "MangaKatana",
-            "lang": "en",
-            "base_url": "https://mangakatana.com"
-          }
-        ]
-      },
-      {
-        "url": "https://comivex.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.mangamob",
-            "ext_name": "Tachiyomi: Comivex",
-            "src_name": "Comivex",
-            "lang": "en",
-            "base_url": "https://comivex.com"
-          }
-        ]
-      },
-      {
-        "url": "https://mangaonline.fun",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.mangaonlinefun",
-            "ext_name": "Tachiyomi: MangaOnline.fun",
-            "src_name": "MangaOnline.fun",
-            "lang": "en",
-            "base_url": "https://mangaonline.fun"
+            "pkg": "eu.kanade.tachiyomi.extension.es.gistamishouse",
+            "ext_name": "Tachiyomi: Gistamis House",
+            "src_name": "Gistamis House",
+            "lang": "es",
+            "base_url": "https://accounts.google.com/v3/signin/identifier"
           }
         ]
       },
@@ -2446,17 +1837,17 @@
         ]
       },
       {
-        "url": "https://accounts.google.com/v3/signin/identifier",
-        "status": "HTTP_400",
-        "code": 400,
-        "error": "Bad Request",
+        "url": "https://mangahe.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.gistamishouse",
-            "ext_name": "Tachiyomi: Gistamis House",
-            "src_name": "Gistamis House",
-            "lang": "es",
-            "base_url": "https://accounts.google.com/v3/signin/identifier"
+            "pkg": "eu.kanade.tachiyomi.extension.en.mangahe",
+            "ext_name": "Tachiyomi: MangaHe",
+            "src_name": "MangaHe",
+            "lang": "en",
+            "base_url": "https://mangahe.com"
           }
         ]
       },
@@ -2472,6 +1863,36 @@
             "src_name": "HentaiHall",
             "lang": "es",
             "base_url": "https://hentaihall.com"
+          }
+        ]
+      },
+      {
+        "url": "https://lunapiecesfansub.com",
+        "status": "SSL_ERROR",
+        "code": 0,
+        "error": "[SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1010)",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.es.lunapieces",
+            "ext_name": "Tachiyomi: Luna Pieces",
+            "src_name": "Luna Pieces",
+            "lang": "es",
+            "base_url": "https://lunapiecesfansub.com"
+          }
+        ]
+      },
+      {
+        "url": "https://novamanhwa.cc",
+        "status": "HTTP_525",
+        "code": 525,
+        "error": "<none>",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.es.novamanhwa",
+            "ext_name": "Tachiyomi: Nova Manhwas",
+            "src_name": "Nova Manhwas",
+            "lang": "es",
+            "base_url": "https://novamanhwa.cc"
           }
         ]
       },
@@ -2506,47 +1927,17 @@
         ]
       },
       {
-        "url": "https://lunapiecesfansub.com",
-        "status": "SSL_ERROR",
-        "code": 0,
-        "error": "[SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1010)",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.lunapieces",
-            "ext_name": "Tachiyomi: Luna Pieces",
-            "src_name": "Luna Pieces",
-            "lang": "es",
-            "base_url": "https://lunapiecesfansub.com"
-          }
-        ]
-      },
-      {
-        "url": "https://scanimnortal.com",
+        "url": "https://www.sapphirescan.com",
         "status": "SSL_ERROR",
         "code": 0,
         "error": "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.inmortalscan",
-            "ext_name": "Tachiyomi: Inmortal Scan",
-            "src_name": "Inmortal Scan",
+            "pkg": "eu.kanade.tachiyomi.extension.es.sapphirescan",
+            "ext_name": "Tachiyomi: SapphireScan",
+            "src_name": "SapphireScan",
             "lang": "es",
-            "base_url": "https://scanimnortal.com"
-          }
-        ]
-      },
-      {
-        "url": "https://app.ninekon.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.ninekon",
-            "ext_name": "Tachiyomi: Ninekon",
-            "src_name": "Ninekon",
-            "lang": "en",
-            "base_url": "https://app.ninekon.com"
+            "base_url": "https://www.sapphirescan.com"
           }
         ]
       },
@@ -2566,47 +1957,17 @@
         ]
       },
       {
-        "url": "https://novamanhwa.cc",
-        "status": "HTTP_525",
-        "code": 525,
-        "error": "<none>",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.novamanhwa",
-            "ext_name": "Tachiyomi: Nova Manhwas",
-            "src_name": "Nova Manhwas",
-            "lang": "es",
-            "base_url": "https://novamanhwa.cc"
-          }
-        ]
-      },
-      {
-        "url": "https://www.sapphirescan.com",
-        "status": "SSL_ERROR",
+        "url": "https://perf-scan.xyz",
+        "status": "NXDOMAIN",
         "code": 0,
-        "error": "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+        "error": "DNS resolution failed",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.sapphirescan",
-            "ext_name": "Tachiyomi: SapphireScan",
-            "src_name": "SapphireScan",
-            "lang": "es",
-            "base_url": "https://www.sapphirescan.com"
-          }
-        ]
-      },
-      {
-        "url": "https://rinkocomics.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.rinkocomics",
-            "ext_name": "Tachiyomi: Rinko Comics",
-            "src_name": "Rinko Comics",
-            "lang": "en",
-            "base_url": "https://rinkocomics.com"
+            "pkg": "eu.kanade.tachiyomi.extension.fr.perfscan",
+            "ext_name": "Tachiyomi: Perf Scan",
+            "src_name": "Perf Scan",
+            "lang": "fr",
+            "base_url": "https://perf-scan.xyz"
           }
         ]
       },
@@ -2626,36 +1987,6 @@
         ]
       },
       {
-        "url": "https://tcbonepiecechapters.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.tcbscans",
-            "ext_name": "Tachiyomi: TCB Scans",
-            "src_name": "TCB Scans",
-            "lang": "en",
-            "base_url": "https://tcbonepiecechapters.com"
-          }
-        ]
-      },
-      {
-        "url": "https://perf-scan.xyz",
-        "status": "NXDOMAIN",
-        "code": 0,
-        "error": "DNS resolution failed",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.perfscan",
-            "ext_name": "Tachiyomi: Perf Scan",
-            "src_name": "Perf Scan",
-            "lang": "fr",
-            "base_url": "https://perf-scan.xyz"
-          }
-        ]
-      },
-      {
         "url": "https://www.mangakawaii.io",
         "status": "HTTP_410",
         "code": 410,
@@ -2667,51 +1998,6 @@
             "src_name": "Mangakawaii",
             "lang": "fr",
             "base_url": "https://www.mangakawaii.io"
-          }
-        ]
-      },
-      {
-        "url": "https://toonizy.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.toonizy",
-            "ext_name": "Tachiyomi: Toonizy",
-            "src_name": "Toonizy",
-            "lang": "en",
-            "base_url": "https://toonizy.com"
-          }
-        ]
-      },
-      {
-        "url": "https://mangatop.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.topmanhua",
-            "ext_name": "Tachiyomi: Top Manhua",
-            "src_name": "Top Manhua",
-            "lang": "en",
-            "base_url": "https://mangatop.org"
-          }
-        ]
-      },
-      {
-        "url": "https://tritinia.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.tritiniascans",
-            "ext_name": "Tachiyomi: TritiniaScans",
-            "src_name": "TritiniaScans",
-            "lang": "en",
-            "base_url": "https://tritinia.org"
           }
         ]
       },
@@ -2791,36 +2077,6 @@
         ]
       },
       {
-        "url": "https://eternalmangas.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.eternalmangas",
-            "ext_name": "Tachiyomi: EternalMangas",
-            "src_name": "EternalMangas",
-            "lang": "es",
-            "base_url": "https://eternalmangas.org"
-          }
-        ]
-      },
-      {
-        "url": "https://heavenmanga.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.heavenmanga",
-            "ext_name": "Tachiyomi: HeavenManga",
-            "src_name": "HeavenManga",
-            "lang": "es",
-            "base_url": "https://heavenmanga.com"
-          }
-        ]
-      },
-      {
         "url": "https://siikomik.net",
         "status": "SSL_ERROR",
         "code": 0,
@@ -2832,21 +2088,6 @@
             "src_name": "Siikomik",
             "lang": "id",
             "base_url": "https://siikomik.net"
-          }
-        ]
-      },
-      {
-        "url": "https://manhwascanx.lat",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.mantrazscan",
-            "ext_name": "Tachiyomi: Manhwa Scan",
-            "src_name": "Manhwa Scan",
-            "lang": "es",
-            "base_url": "https://manhwascanx.lat"
           }
         ]
       },
@@ -2866,21 +2107,6 @@
         ]
       },
       {
-        "url": "https://mangaesp.topmanhuas.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.mangaesp",
-            "ext_name": "Tachiyomi: MangaEsp",
-            "src_name": "MangaEsp",
-            "lang": "es",
-            "base_url": "https://mangaesp.topmanhuas.org"
-          }
-        ]
-      },
-      {
         "url": "https://yaoiscan.fr",
         "status": "HTTP_504",
         "code": 504,
@@ -2896,40 +2122,40 @@
         ]
       },
       {
-        "url": "https://ragnarokscanlation.org",
-        "status": "TIMEOUT",
+        "url": "https://scanimnortal.com",
+        "status": "SSL_ERROR",
         "code": 0,
-        "error": "Socket timed out",
+        "error": "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.ragnarokscanlation",
-            "ext_name": "Tachiyomi: Ragnarok Scanlation",
-            "src_name": "Ragnarok Scanlation",
+            "pkg": "eu.kanade.tachiyomi.extension.es.inmortalscan",
+            "ext_name": "Tachiyomi: Inmortal Scan",
+            "src_name": "Inmortal Scan",
             "lang": "es",
-            "base_url": "https://ragnarokscanlation.org"
+            "base_url": "https://scanimnortal.com"
           }
         ]
       },
       {
-        "url": "https://chaostrad.fr",
+        "url": "https://manhwascanx.lat",
         "status": "TIMEOUT",
         "code": 0,
-        "error": "Socket timed out",
+        "error": "Connection timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.chaostrad",
-            "ext_name": "Tachiyomi: ChaosTrad",
-            "src_name": "ChaosTrad",
-            "lang": "fr",
-            "base_url": "https://chaostrad.fr"
+            "pkg": "eu.kanade.tachiyomi.extension.es.mantrazscan",
+            "ext_name": "Tachiyomi: Manhwa Scan",
+            "src_name": "Manhwa Scan",
+            "lang": "es",
+            "base_url": "https://manhwascanx.lat"
           }
         ]
       },
       {
         "url": "https://pornhwa.fr",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
+        "status": "HTTP_523",
+        "code": 523,
+        "error": "<none>",
         "sources": [
           {
             "pkg": "eu.kanade.tachiyomi.extension.fr.pornhwafr",
@@ -2937,6 +2163,21 @@
             "src_name": "Pornwha.fr",
             "lang": "fr",
             "base_url": "https://pornhwa.fr"
+          }
+        ]
+      },
+      {
+        "url": "https://mangamura.me",
+        "status": "HTTP_523",
+        "code": 523,
+        "error": "<none>",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ja.mangamura",
+            "ext_name": "Tachiyomi: Manga Mura",
+            "src_name": "Manga Mura",
+            "lang": "ja",
+            "base_url": "https://mangamura.me"
           }
         ]
       },
@@ -2952,6 +2193,21 @@
             "src_name": "Komikhwa",
             "lang": "id",
             "base_url": "https://komikhwa.com"
+          }
+        ]
+      },
+      {
+        "url": "https://02.cosmicscans.to",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.id.cosmicscansid",
+            "ext_name": "Tachiyomi: CosmicScans",
+            "src_name": "CosmicScans",
+            "lang": "id",
+            "base_url": "https://02.cosmicscans.to"
           }
         ]
       },
@@ -2986,21 +2242,6 @@
         ]
       },
       {
-        "url": "https://soulscans.my.id",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.id.soulscans",
-            "ext_name": "Tachiyomi: Soul Scans",
-            "src_name": "Soul Scans",
-            "lang": "id",
-            "base_url": "https://soulscans.my.id"
-          }
-        ]
-      },
-      {
         "url": "https://www.osakascan.com",
         "status": "SSL_ERROR",
         "code": 0,
@@ -3016,32 +2257,17 @@
         ]
       },
       {
-        "url": "https://lupiteam.net",
+        "url": "https://www.phoenixscans.com",
         "status": "TIMEOUT",
         "code": 0,
         "error": "Socket timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.it.lupiteam",
-            "ext_name": "Tachiyomi: LupiTeam",
-            "src_name": "LupiTeam",
+            "pkg": "eu.kanade.tachiyomi.extension.it.phoenixscans",
+            "ext_name": "Tachiyomi: Phoenix Scans",
+            "src_name": "Phoenix Scans",
             "lang": "it",
-            "base_url": "https://lupiteam.net"
-          }
-        ]
-      },
-      {
-        "url": "https://www.hentai-archive.com",
-        "status": "ERROR",
-        "code": 0,
-        "error": "Remote end closed connection without response",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.it.hentaiarchive",
-            "ext_name": "Tachiyomi: HentaiArchive",
-            "src_name": "HentaiArchive",
-            "lang": "it",
-            "base_url": "https://www.hentai-archive.com"
+            "base_url": "https://www.phoenixscans.com"
           }
         ]
       },
@@ -3061,21 +2287,6 @@
         ]
       },
       {
-        "url": "https://mangamura.me",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ja.mangamura",
-            "ext_name": "Tachiyomi: Manga Mura",
-            "src_name": "Manga Mura",
-            "lang": "ja",
-            "base_url": "https://mangamura.me"
-          }
-        ]
-      },
-      {
         "url": "https://tkor146.com/%EC%9B%B9%ED%88%B0",
         "status": "NXDOMAIN",
         "code": 0,
@@ -3087,36 +2298,6 @@
             "src_name": "Toonkor",
             "lang": "ko",
             "base_url": "https://tkor146.com/%EC%9B%B9%ED%88%B0"
-          }
-        ]
-      },
-      {
-        "url": "https://rawkuma.net",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ja.rawkuma",
-            "ext_name": "Tachiyomi: Rawkuma",
-            "src_name": "Rawkuma",
-            "lang": "ja",
-            "base_url": "https://rawkuma.net"
-          }
-        ]
-      },
-      {
-        "url": "https://ghostscan.xyz",
-        "status": "NXDOMAIN",
-        "code": 0,
-        "error": "DNS resolution failed",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.ghostscan",
-            "ext_name": "Tachiyomi: Ghost Scan",
-            "src_name": "Ghost Scan",
-            "lang": "pt-BR",
-            "base_url": "https://ghostscan.xyz"
           }
         ]
       },
@@ -3136,6 +2317,21 @@
         ]
       },
       {
+        "url": "https://ghostscan.xyz",
+        "status": "NXDOMAIN",
+        "code": 0,
+        "error": "DNS resolution failed",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.pt.ghostscan",
+            "ext_name": "Tachiyomi: Ghost Scan",
+            "src_name": "Ghost Scan",
+            "lang": "pt-BR",
+            "base_url": "https://ghostscan.xyz"
+          }
+        ]
+      },
+      {
         "url": "https://hayalistic.blog",
         "status": "NXDOMAIN",
         "code": 0,
@@ -3147,6 +2343,21 @@
             "src_name": "Hayalistic",
             "lang": "tr",
             "base_url": "https://hayalistic.blog"
+          }
+        ]
+      },
+      {
+        "url": "https://brasilhentai.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.pt.brasilhentai",
+            "ext_name": "Tachiyomi: Brasil Hentai",
+            "src_name": "Brasil Hentai",
+            "lang": "pt-BR",
+            "base_url": "https://brasilhentai.com"
           }
         ]
       },
@@ -3166,25 +2377,10 @@
         ]
       },
       {
-        "url": "https://mangalivre.to",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.mangalivreto",
-            "ext_name": "Tachiyomi: Manga Livre.to",
-            "src_name": "Manga Livre.to",
-            "lang": "pt-BR",
-            "base_url": "https://mangalivre.to"
-          }
-        ]
-      },
-      {
         "url": "https://desu.uno",
         "status": "TIMEOUT",
         "code": 0,
-        "error": "Connection timed out",
+        "error": "Socket timed out",
         "sources": [
           {
             "pkg": "eu.kanade.tachiyomi.extension.ru.desu",
@@ -3192,21 +2388,6 @@
             "src_name": "Desu",
             "lang": "ru",
             "base_url": "https://desu.uno"
-          }
-        ]
-      },
-      {
-        "url": "https://astramanga.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.astramanga",
-            "ext_name": "Tachiyomi: AstraManga",
-            "src_name": "AstraManga",
-            "lang": "ru",
-            "base_url": "https://astramanga.org"
           }
         ]
       },
@@ -3241,92 +2422,17 @@
         ]
       },
       {
-        "url": "https://wamanga.ru",
+        "url": "https://tomilo-lib.ru",
         "status": "TIMEOUT",
         "code": 0,
         "error": "Connection timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.wamanga",
-            "ext_name": "Tachiyomi: WaManga",
-            "src_name": "WaManga",
+            "pkg": "eu.kanade.tachiyomi.extension.ru.tomilolib",
+            "ext_name": "Tachiyomi: Tomilo-lib",
+            "src_name": "Tomilo-lib",
             "lang": "ru",
-            "base_url": "https://wamanga.ru"
-          }
-        ]
-      },
-      {
-        "url": "https://manga-shi.org",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.mangashi",
-            "ext_name": "Tachiyomi: Manga-shi",
-            "src_name": "Manga-shi",
-            "lang": "ru",
-            "base_url": "https://manga-shi.org"
-          }
-        ]
-      },
-      {
-        "url": "https://mangazure.net",
-        "status": "HTTP_523",
-        "code": 523,
-        "error": "<none>",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.mangazure",
-            "ext_name": "Tachiyomi: MangaZure",
-            "src_name": "MangaZure",
-            "lang": "tr",
-            "base_url": "https://mangazure.net"
-          }
-        ]
-      },
-      {
-        "url": "https://nhentaiclub.online",
-        "status": "NXDOMAIN",
-        "code": 0,
-        "error": "DNS resolution failed",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.nhentaiclub",
-            "ext_name": "Tachiyomi: NhentaiClub",
-            "src_name": "NhentaiClub",
-            "lang": "vi",
-            "base_url": "https://nhentaiclub.online"
-          }
-        ]
-      },
-      {
-        "url": "https://moon-toon.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.th.moodtoon",
-            "ext_name": "Tachiyomi: Moodtoon",
-            "src_name": "Moodtoon",
-            "lang": "th",
-            "base_url": "https://moon-toon.com"
-          }
-        ]
-      },
-      {
-        "url": "https://www.manhuakey.com",
-        "status": "SSL_ERROR",
-        "code": 0,
-        "error": "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.th.manhuakey",
-            "ext_name": "Tachiyomi: ManhuaKey",
-            "src_name": "ManhuaKey",
-            "lang": "th",
-            "base_url": "https://www.manhuakey.com"
+            "base_url": "https://tomilo-lib.ru"
           }
         ]
       },
@@ -3346,32 +2452,47 @@
         ]
       },
       {
-        "url": "https://www.nabicix.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.koreliscans",
-            "ext_name": "Tachiyomi: Koreli Scans",
-            "src_name": "Koreli Scans",
-            "lang": "tr",
-            "base_url": "https://www.nabicix.com"
-          }
-        ]
-      },
-      {
-        "url": "https://yidan9.club",
+        "url": "https://nhentaiclub.online",
         "status": "NXDOMAIN",
         "code": 0,
         "error": "DNS resolution failed",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.zh.yidan",
-            "ext_name": "Tachiyomi: Yidan Girl",
-            "src_name": "一耽女孩",
-            "lang": "zh",
-            "base_url": "https://yidan9.club"
+            "pkg": "eu.kanade.tachiyomi.extension.vi.nhentaiclub",
+            "ext_name": "Tachiyomi: NhentaiClub",
+            "src_name": "NhentaiClub",
+            "lang": "vi",
+            "base_url": "https://nhentaiclub.online"
+          }
+        ]
+      },
+      {
+        "url": "https://www.manhuakey.com",
+        "status": "SSL_ERROR",
+        "code": 0,
+        "error": "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.th.manhuakey",
+            "ext_name": "Tachiyomi: ManhuaKey",
+            "src_name": "ManhuaKey",
+            "lang": "th",
+            "base_url": "https://www.manhuakey.com"
+          }
+        ]
+      },
+      {
+        "url": "https://zenko.online",
+        "status": "HTTP_520",
+        "code": 520,
+        "error": "<none>",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.uk.zenko",
+            "ext_name": "Tachiyomi: Zenko",
+            "src_name": "Zenko",
+            "lang": "uk",
+            "base_url": "https://zenko.online"
           }
         ]
       },
@@ -3391,77 +2512,32 @@
         ]
       },
       {
-        "url": "https://xxl.hentaichan.live",
-        "status": "TIMEOUT",
+        "url": "https://yidan9.club",
+        "status": "NXDOMAIN",
         "code": 0,
-        "error": "Connection timed out",
+        "error": "DNS resolution failed",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.henchan",
-            "ext_name": "Tachiyomi: HenChan",
-            "src_name": "HenChan",
-            "lang": "ru",
-            "base_url": "https://xxl.hentaichan.live"
+            "pkg": "eu.kanade.tachiyomi.extension.zh.yidan",
+            "ext_name": "Tachiyomi: Yidan Girl",
+            "src_name": "一耽女孩",
+            "lang": "zh",
+            "base_url": "https://yidan9.club"
           }
         ]
       },
       {
-        "url": "https://im.manga-chan.me",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.mangachan",
-            "ext_name": "Tachiyomi: MangaChan",
-            "src_name": "MangaChan",
-            "lang": "ru",
-            "base_url": "https://im.manga-chan.me"
-          }
-        ]
-      },
-      {
-        "url": "https://nemesisscans.com",
+        "url": "https://mangazure.net",
         "status": "TIMEOUT",
         "code": 0,
         "error": "Socket timed out",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.nemesisscans",
-            "ext_name": "Tachiyomi: Nemesis scans",
-            "src_name": "Nemesisscans",
+            "pkg": "eu.kanade.tachiyomi.extension.tr.mangazure",
+            "ext_name": "Tachiyomi: MangaZure",
+            "src_name": "MangaZure",
             "lang": "tr",
-            "base_url": "https://nemesisscans.com"
-          }
-        ]
-      },
-      {
-        "url": "https://opiatoon.shop",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.opiatoon",
-            "ext_name": "Tachiyomi: Opiatoon",
-            "src_name": "Opiatoon",
-            "lang": "tr",
-            "base_url": "https://opiatoon.shop"
-          }
-        ]
-      },
-      {
-        "url": "https://shijiescans.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Socket timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.shijiescans",
-            "ext_name": "Tachiyomi: Shijie Scans",
-            "src_name": "Shijie Scans",
-            "lang": "tr",
-            "base_url": "https://shijiescans.com"
+            "base_url": "https://mangazure.net"
           }
         ]
       },
@@ -3477,6 +2553,36 @@
             "src_name": "Yaoibar",
             "lang": "tr",
             "base_url": "https://yaoibar.lol"
+          }
+        ]
+      },
+      {
+        "url": "https://rumix.me",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Connection timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.rumix",
+            "ext_name": "Tachiyomi: RuMIX",
+            "src_name": "RuMIX",
+            "lang": "ru",
+            "base_url": "https://rumix.me"
+          }
+        ]
+      },
+      {
+        "url": "https://shijiescans.com",
+        "status": "TIMEOUT",
+        "code": 0,
+        "error": "Socket timed out",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.tr.shijiescans",
+            "ext_name": "Tachiyomi: Shijie Scans",
+            "src_name": "Shijie Scans",
+            "lang": "tr",
+            "base_url": "https://shijiescans.com"
           }
         ]
       },
@@ -3554,24 +2660,22 @@
             "base_url": "https://dom4lfansub.online"
           }
         ]
-      },
-      {
-        "url": "https://comic.bh3.com",
-        "status": "TIMEOUT",
-        "code": 0,
-        "error": "Connection timed out",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.zh.bh3",
-            "ext_name": "Tachiyomi: BH3",
-            "src_name": "《崩坏3》IP站",
-            "lang": "zh",
-            "base_url": "https://comic.bh3.com"
-          }
-        ]
       }
     ],
     "redirect_details": [
+      {
+        "orig_url": "https://kodokustudio.com",
+        "final_url": "https://kodokueasyaccess.com/manhwa/reverend-insanity",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.kodokustudio",
+            "ext_name": "Tachiyomi: Kodoku Studio",
+            "src_name": "Kodoku Studio",
+            "lang": "all",
+            "base_url": "https://kodokustudio.com"
+          }
+        ]
+      },
       {
         "orig_url": "https://mangaball.net",
         "final_url": "https://mangaball.com/",
@@ -3873,15 +2977,28 @@
         ]
       },
       {
-        "orig_url": "https://www.mangaxhentai.com",
-        "final_url": "https://mangaxhentai.com/",
+        "orig_url": "https://manga-starz.net",
+        "final_url": "https://starzmanga.com/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.mangahub",
-            "ext_name": "Tachiyomi: MangaHub",
-            "src_name": "MangaHub",
+            "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+            "ext_name": "Tachiyomi: Manga Starz",
+            "src_name": "Manga Starz",
             "lang": "ar",
-            "base_url": "https://www.mangaxhentai.com"
+            "base_url": "https://manga-starz.net"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://www.silentquill.net",
+        "final_url": "https://silentquill.net/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.armageddon",
+            "ext_name": "Tachiyomi: Armageddon",
+            "src_name": "Armageddon",
+            "lang": "en",
+            "base_url": "https://www.silentquill.net"
           }
         ]
       },
@@ -3899,28 +3016,15 @@
         ]
       },
       {
-        "orig_url": "https://kodokustudio.com",
-        "final_url": "https://kodokueasyaccess.com/manhwa/reverend-insanity",
+        "orig_url": "https://www.mangaxhentai.com",
+        "final_url": "https://mangaxhentai.com/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.all.kodokustudio",
-            "ext_name": "Tachiyomi: Kodoku Studio",
-            "src_name": "Kodoku Studio",
-            "lang": "all",
-            "base_url": "https://kodokustudio.com"
-          }
-        ]
-      },
-      {
-        "orig_url": "https://www.silentquill.net",
-        "final_url": "https://silentquill.net/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.armageddon",
-            "ext_name": "Tachiyomi: Armageddon",
-            "src_name": "Armageddon",
-            "lang": "en",
-            "base_url": "https://www.silentquill.net"
+            "pkg": "eu.kanade.tachiyomi.extension.ar.mangahub",
+            "ext_name": "Tachiyomi: MangaHub",
+            "src_name": "MangaHub",
+            "lang": "ar",
+            "base_url": "https://www.mangaxhentai.com"
           }
         ]
       },
@@ -3951,19 +3055,6 @@
         ]
       },
       {
-        "orig_url": "https://evascans.org",
-        "final_url": "https://evascans.net/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.evascans",
-            "ext_name": "Tachiyomi: Eva Scans",
-            "src_name": "Eva Scans",
-            "lang": "en",
-            "base_url": "https://evascans.org"
-          }
-        ]
-      },
-      {
         "orig_url": "https://kaynscan.org",
         "final_url": "https://kaynscans.com/",
         "sources": [
@@ -3973,6 +3064,19 @@
             "src_name": "Kayn Scans",
             "lang": "en",
             "base_url": "https://kaynscan.org"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://evascans.org",
+        "final_url": "https://evascans.net/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.evascans",
+            "ext_name": "Tachiyomi: Eva Scans",
+            "src_name": "Eva Scans",
+            "lang": "en",
+            "base_url": "https://evascans.org"
           }
         ]
       },
@@ -4003,6 +3107,19 @@
         ]
       },
       {
+        "orig_url": "https://app.ninekon.com",
+        "final_url": "https://www.doujum.com/en/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.ninekon",
+            "ext_name": "Tachiyomi: Ninekon",
+            "src_name": "Ninekon",
+            "lang": "en",
+            "base_url": "https://app.ninekon.com"
+          }
+        ]
+      },
+      {
         "orig_url": "https://ravenscans.net",
         "final_url": "https://ravenscans.org/",
         "sources": [
@@ -4016,19 +3133,6 @@
         ]
       },
       {
-        "orig_url": "https://sirenscans.com",
-        "final_url": "https://sirenscans.org/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.sirenscans",
-            "ext_name": "Tachiyomi: Siren Scans",
-            "src_name": "Siren Scans",
-            "lang": "en",
-            "base_url": "https://sirenscans.com"
-          }
-        ]
-      },
-      {
         "orig_url": "https://violetscans.org",
         "final_url": "https://violetmanga.com/",
         "sources": [
@@ -4038,6 +3142,19 @@
             "src_name": "Violet Scans",
             "lang": "en",
             "base_url": "https://violetscans.org"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://sirenscans.com",
+        "final_url": "https://sirenscans.org/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.sirenscans",
+            "ext_name": "Tachiyomi: Siren Scans",
+            "src_name": "Siren Scans",
+            "lang": "en",
+            "base_url": "https://sirenscans.com"
           }
         ]
       },
@@ -4064,6 +3181,19 @@
             "src_name": "Catoons",
             "lang": "es",
             "base_url": "https://newcat1.xyz"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://mangaesp.topmanhuas.org",
+        "final_url": "https://ragnarokscanlation.org/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.es.mangaesp",
+            "ext_name": "Tachiyomi: MangaEsp",
+            "src_name": "MangaEsp",
+            "lang": "es",
+            "base_url": "https://mangaesp.topmanhuas.org"
           }
         ]
       },
@@ -4107,32 +3237,6 @@
         ]
       },
       {
-        "orig_url": "https://v4.luvyaa.co",
-        "final_url": "https://v5.luvyaa.co/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.id.Luvyaa",
-            "ext_name": "Tachiyomi: Luvyaa",
-            "src_name": "Luvyaa",
-            "lang": "id",
-            "base_url": "https://v4.luvyaa.co"
-          }
-        ]
-      },
-      {
-        "orig_url": "https://komikindo.fit",
-        "final_url": "https://2.komikindo.shop/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.id.komikindo",
-            "ext_name": "Tachiyomi: Komikindo",
-            "src_name": "Komikindo",
-            "lang": "id",
-            "base_url": "https://komikindo.fit"
-          }
-        ]
-      },
-      {
         "orig_url": "https://v1.komiknesiaku.com",
         "final_url": "https://v2.komiknesiaku.com/",
         "sources": [
@@ -4159,6 +3263,19 @@
         ]
       },
       {
+        "orig_url": "https://komikindo.fit",
+        "final_url": "https://2.komikindo.shop/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.id.komikindo",
+            "ext_name": "Tachiyomi: Komikindo",
+            "src_name": "Komikindo",
+            "lang": "id",
+            "base_url": "https://komikindo.fit"
+          }
+        ]
+      },
+      {
         "orig_url": "https://kumopoi.org",
         "final_url": "https://kumopoi.id/",
         "sources": [
@@ -4168,6 +3285,19 @@
             "src_name": "KumoPoi",
             "lang": "id",
             "base_url": "https://kumopoi.org"
+          }
+        ]
+      },
+      {
+        "orig_url": "https://v4.luvyaa.co",
+        "final_url": "https://v5.luvyaa.co/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.id.Luvyaa",
+            "ext_name": "Tachiyomi: Luvyaa",
+            "src_name": "Luvyaa",
+            "lang": "id",
+            "base_url": "https://v4.luvyaa.co"
           }
         ]
       },
@@ -4185,19 +3315,6 @@
         ]
       },
       {
-        "orig_url": "https://07.ikiru.wtf",
-        "final_url": "https://ikiru.id/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.id.mangatale",
-            "ext_name": "Tachiyomi: Ikiru",
-            "src_name": "Ikiru",
-            "lang": "id",
-            "base_url": "https://07.ikiru.wtf"
-          }
-        ]
-      },
-      {
         "orig_url": "https://jmanga.land",
         "final_url": "https://jmanga.media/",
         "sources": [
@@ -4211,15 +3328,15 @@
         ]
       },
       {
-        "orig_url": "https://02.cosmicscans.to",
-        "final_url": "https://04.cosmicscans.to/",
+        "orig_url": "https://dokiraw.wtf",
+        "final_url": "https://dokiraw.link/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.id.cosmicscansid",
-            "ext_name": "Tachiyomi: CosmicScans",
-            "src_name": "CosmicScans",
-            "lang": "id",
-            "base_url": "https://02.cosmicscans.to"
+            "pkg": "eu.kanade.tachiyomi.extension.ja.dokiraw",
+            "ext_name": "Tachiyomi: Dokiraw",
+            "src_name": "Dokiraw",
+            "lang": "ja",
+            "base_url": "https://dokiraw.wtf"
           }
         ]
       },
@@ -4237,15 +3354,15 @@
         ]
       },
       {
-        "orig_url": "https://dokiraw.wtf",
-        "final_url": "https://dokiraw.link/",
+        "orig_url": "https://07.ikiru.wtf",
+        "final_url": "https://ikiru.id/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ja.dokiraw",
-            "ext_name": "Tachiyomi: Dokiraw",
-            "src_name": "Dokiraw",
-            "lang": "ja",
-            "base_url": "https://dokiraw.wtf"
+            "pkg": "eu.kanade.tachiyomi.extension.id.mangatale",
+            "ext_name": "Tachiyomi: Ikiru",
+            "src_name": "Ikiru",
+            "lang": "id",
+            "base_url": "https://07.ikiru.wtf"
           }
         ]
       },
@@ -4328,15 +3445,15 @@
         ]
       },
       {
-        "orig_url": "https://sunsetmanga.com",
-        "final_url": "https://sunsetscans.com.tr/",
+        "orig_url": "https://siyahmelek.live",
+        "final_url": "https://siyahmelek.my/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.sunsetmanga",
-            "ext_name": "Tachiyomi: Sunset Manga",
-            "src_name": "Sunset Manga",
+            "pkg": "eu.kanade.tachiyomi.extension.tr.siyahmelek",
+            "ext_name": "Tachiyomi: Siyah Melek",
+            "src_name": "Siyah Melek",
             "lang": "tr",
-            "base_url": "https://sunsetmanga.com"
+            "base_url": "https://siyahmelek.live"
           }
         ]
       },
@@ -4354,6 +3471,19 @@
         ]
       },
       {
+        "orig_url": "https://sunsetmanga.com",
+        "final_url": "https://sunsetscans.com.tr/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.tr.sunsetmanga",
+            "ext_name": "Tachiyomi: Sunset Manga",
+            "src_name": "Sunset Manga",
+            "lang": "tr",
+            "base_url": "https://sunsetmanga.com"
+          }
+        ]
+      },
+      {
         "orig_url": "https://luottruyen16.com",
         "final_url": "https://luottruyen19.com/",
         "sources": [
@@ -4363,19 +3493,6 @@
             "src_name": "LuotTruyen",
             "lang": "vi",
             "base_url": "https://luottruyen16.com"
-          }
-        ]
-      },
-      {
-        "orig_url": "https://nettruyen13s.com",
-        "final_url": "https://nettruyen14s.com/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.nettruyens",
-            "ext_name": "Tachiyomi: NetTruyenS (unoriginal)",
-            "src_name": "NetTruyenS (unoriginal)",
-            "lang": "vi",
-            "base_url": "https://nettruyen13s.com"
           }
         ]
       },
@@ -4393,6 +3510,19 @@
         ]
       },
       {
+        "orig_url": "https://nettruyen13s.com",
+        "final_url": "https://nettruyen14s.com/",
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.nettruyens",
+            "ext_name": "Tachiyomi: NetTruyenS (unoriginal)",
+            "src_name": "NetTruyenS (unoriginal)",
+            "lang": "vi",
+            "base_url": "https://nettruyen13s.com"
+          }
+        ]
+      },
+      {
         "orig_url": "https://vinahentai.wiki",
         "final_url": "https://vinahentai.pics/",
         "sources": [
@@ -4402,19 +3532,6 @@
             "src_name": "VinaHentai",
             "lang": "vi",
             "base_url": "https://vinahentai.wiki"
-          }
-        ]
-      },
-      {
-        "orig_url": "https://dualeotruyencw.com",
-        "final_url": "https://dualeotruyenvie.com/",
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.dualeotruyen",
-            "ext_name": "Tachiyomi: Dua Leo Truyen",
-            "src_name": "Dưa Leo Truyện",
-            "lang": "vi",
-            "base_url": "https://dualeotruyencw.com"
           }
         ]
       },
@@ -4432,15 +3549,15 @@
         ]
       },
       {
-        "orig_url": "https://siyahmelek.live",
-        "final_url": "https://siyahmelek.my/",
+        "orig_url": "https://dualeotruyencw.com",
+        "final_url": "https://dualeotruyenvie.com/",
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.siyahmelek",
-            "ext_name": "Tachiyomi: Siyah Melek",
-            "src_name": "Siyah Melek",
-            "lang": "tr",
-            "base_url": "https://siyahmelek.live"
+            "pkg": "eu.kanade.tachiyomi.extension.vi.dualeotruyen",
+            "ext_name": "Tachiyomi: Dua Leo Truyen",
+            "src_name": "Dưa Leo Truyện",
+            "lang": "vi",
+            "base_url": "https://dualeotruyencw.com"
           }
         ]
       }
@@ -5318,6 +4435,54 @@
         ]
       },
       {
+        "url": "https://thelibraryofohara.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "id",
+            "base_url": "https://thelibraryofohara.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "en",
+            "base_url": "https://thelibraryofohara.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "es",
+            "base_url": "https://thelibraryofohara.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "it",
+            "base_url": "https://thelibraryofohara.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "ar",
+            "base_url": "https://thelibraryofohara.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
+            "ext_name": "Tachiyomi: The Library of Ohara",
+            "src_name": "The Library of Ohara",
+            "lang": "fr",
+            "base_url": "https://thelibraryofohara.com"
+          }
+        ]
+      },
+      {
         "url": "https://www.simply-hentai.com",
         "code": 403,
         "sources": [
@@ -5394,80 +4559,6 @@
         ]
       },
       {
-        "url": "https://thelibraryofohara.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "id",
-            "base_url": "https://thelibraryofohara.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "en",
-            "base_url": "https://thelibraryofohara.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "es",
-            "base_url": "https://thelibraryofohara.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "it",
-            "base_url": "https://thelibraryofohara.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "ar",
-            "base_url": "https://thelibraryofohara.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.thelibraryofohara",
-            "ext_name": "Tachiyomi: The Library of Ohara",
-            "src_name": "The Library of Ohara",
-            "lang": "fr",
-            "base_url": "https://thelibraryofohara.com"
-          }
-        ]
-      },
-      {
-        "url": "https://en.xchina.co",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.yellownote",
-            "ext_name": "Tachiyomi: YellowNote",
-            "src_name": "小黄书",
-            "lang": "en",
-            "base_url": "https://en.xchina.co"
-          }
-        ]
-      },
-      {
-        "url": "https://tw.xchina.co",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.yellownote",
-            "ext_name": "Tachiyomi: YellowNote",
-            "src_name": "小黄书",
-            "lang": "zh-Hant",
-            "base_url": "https://tw.xchina.co"
-          }
-        ]
-      },
-      {
         "url": "https://xchina.co",
         "code": 403,
         "sources": [
@@ -5481,15 +4572,15 @@
         ]
       },
       {
-        "url": "https://arabshentai.com",
+        "url": "https://en.xchina.co",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
-            "ext_name": "Tachiyomi: Arabs Hentai",
-            "src_name": "هنتاي العرب",
-            "lang": "ar",
-            "base_url": "https://arabshentai.com"
+            "pkg": "eu.kanade.tachiyomi.extension.all.yellownote",
+            "ext_name": "Tachiyomi: YellowNote",
+            "src_name": "小黄书",
+            "lang": "en",
+            "base_url": "https://en.xchina.co"
           }
         ]
       },
@@ -5520,6 +4611,45 @@
         ]
       },
       {
+        "url": "https://tw.xchina.co",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.yellownote",
+            "ext_name": "Tachiyomi: YellowNote",
+            "src_name": "小黄书",
+            "lang": "zh-Hant",
+            "base_url": "https://tw.xchina.co"
+          }
+        ]
+      },
+      {
+        "url": "https://arabshentai.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+            "ext_name": "Tachiyomi: Arabs Hentai",
+            "src_name": "هنتاي العرب",
+            "lang": "ar",
+            "base_url": "https://arabshentai.com"
+          }
+        ]
+      },
+      {
+        "url": "https://yabai.si",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.all.yabai",
+            "ext_name": "Tachiyomi: Yabai",
+            "src_name": "Yabai",
+            "lang": "all",
+            "base_url": "https://yabai.si"
+          }
+        ]
+      },
+      {
         "url": "https://manga.detectiveconanar.com",
         "code": 403,
         "sources": [
@@ -5529,39 +4659,6 @@
             "src_name": "شبكة كونان العربية",
             "lang": "ar",
             "base_url": "https://manga.detectiveconanar.com"
-          }
-        ]
-      },
-      {
-        "url": "https://ar.kenmanga.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.areamanga",
-            "ext_name": "Tachiyomi: Area Manga",
-            "src_name": "أريا مانجا",
-            "lang": "ar",
-            "base_url": "https://ar.kenmanga.com"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
-            "ext_name": "Tachiyomi: Area Scans",
-            "src_name": "Area Scans",
-            "lang": "ar",
-            "base_url": "https://ar.kenmanga.com"
-          }
-        ]
-      },
-      {
-        "url": "https://goonscans.org",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ar.goonscans",
-            "ext_name": "Tachiyomi: Goon Scans",
-            "src_name": "Goon Scans",
-            "lang": "ar",
-            "base_url": "https://goonscans.org"
           }
         ]
       },
@@ -5588,6 +4685,26 @@
             "src_name": "Hijala",
             "lang": "ar",
             "base_url": "https://hijala.com"
+          }
+        ]
+      },
+      {
+        "url": "https://ar.kenmanga.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ar.areamanga",
+            "ext_name": "Tachiyomi: Area Manga",
+            "src_name": "أريا مانجا",
+            "lang": "ar",
+            "base_url": "https://ar.kenmanga.com"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
+            "ext_name": "Tachiyomi: Area Scans",
+            "src_name": "Area Scans",
+            "lang": "ar",
+            "base_url": "https://ar.kenmanga.com"
           }
         ]
       },
@@ -5627,19 +4744,6 @@
             "src_name": "Evil production",
             "lang": "cs",
             "base_url": "https://evil-manga.eu"
-          }
-        ]
-      },
-      {
-        "url": "https://yabai.si",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.all.yabai",
-            "ext_name": "Tachiyomi: Yabai",
-            "src_name": "Yabai",
-            "lang": "all",
-            "base_url": "https://yabai.si"
           }
         ]
       },
@@ -5748,19 +4852,6 @@
         ]
       },
       {
-        "url": "https://ero18x.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.ero18x",
-            "ext_name": "Tachiyomi: Ero18x",
-            "src_name": "Ero18x",
-            "lang": "en",
-            "base_url": "https://ero18x.com"
-          }
-        ]
-      },
-      {
         "url": "https://elan.school",
         "code": 403,
         "sources": [
@@ -5770,6 +4861,19 @@
             "src_name": "Elan School",
             "lang": "en",
             "base_url": "https://elan.school"
+          }
+        ]
+      },
+      {
+        "url": "https://ero18x.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.ero18x",
+            "ext_name": "Tachiyomi: Ero18x",
+            "src_name": "Ero18x",
+            "lang": "en",
+            "base_url": "https://ero18x.com"
           }
         ]
       },
@@ -5839,19 +4943,6 @@
         ]
       },
       {
-        "url": "https://hotcomics.me",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.hotcomics",
-            "ext_name": "Tachiyomi: HotComics",
-            "src_name": "HotComics",
-            "lang": "en",
-            "base_url": "https://hotcomics.me"
-          }
-        ]
-      },
-      {
         "url": "https://kaizenscan.com",
         "code": 403,
         "sources": [
@@ -5861,6 +4952,19 @@
             "src_name": "Kaizen Scan",
             "lang": "en",
             "base_url": "https://kaizenscan.com"
+          }
+        ]
+      },
+      {
+        "url": "https://hotcomics.me",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.hotcomics",
+            "ext_name": "Tachiyomi: HotComics",
+            "src_name": "HotComics",
+            "lang": "en",
+            "base_url": "https://hotcomics.me"
           }
         ]
       },
@@ -5995,19 +5099,6 @@
         ]
       },
       {
-        "url": "https://www.manhuazonghe.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.manhuazonghe",
-            "ext_name": "Tachiyomi: Manhua Zonghe",
-            "src_name": "Manhua Zonghe",
-            "lang": "en",
-            "base_url": "https://www.manhuazonghe.com"
-          }
-        ]
-      },
-      {
         "url": "https://manhwa68.com",
         "code": 403,
         "sources": [
@@ -6017,6 +5108,19 @@
             "src_name": "Manhwa68",
             "lang": "en",
             "base_url": "https://manhwa68.com"
+          }
+        ]
+      },
+      {
+        "url": "https://www.manhuazonghe.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.manhuazonghe",
+            "ext_name": "Tachiyomi: Manhua Zonghe",
+            "src_name": "Manhua Zonghe",
+            "lang": "en",
+            "base_url": "https://www.manhuazonghe.com"
           }
         ]
       },
@@ -6060,19 +5164,6 @@
         ]
       },
       {
-        "url": "https://myhentaicomics.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.myhentaicomics",
-            "ext_name": "Tachiyomi: MyHentaiComics",
-            "src_name": "MyHentaiComics",
-            "lang": "en",
-            "base_url": "https://myhentaicomics.com"
-          }
-        ]
-      },
-      {
         "url": "https://myhentaigallery.com",
         "code": 403,
         "sources": [
@@ -6086,15 +5177,15 @@
         ]
       },
       {
-        "url": "https://www.nineanime.com",
+        "url": "https://myhentaicomics.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.en.nineanime",
-            "ext_name": "Tachiyomi: NineAnime",
-            "src_name": "NineAnime",
+            "pkg": "eu.kanade.tachiyomi.extension.en.myhentaicomics",
+            "ext_name": "Tachiyomi: MyHentaiComics",
+            "src_name": "MyHentaiComics",
             "lang": "en",
-            "base_url": "https://www.nineanime.com"
+            "base_url": "https://myhentaicomics.com"
           }
         ]
       },
@@ -6108,6 +5199,19 @@
             "src_name": "NovelCrow",
             "lang": "en",
             "base_url": "https://novelcrow.com"
+          }
+        ]
+      },
+      {
+        "url": "https://www.nineanime.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.nineanime",
+            "ext_name": "Tachiyomi: NineAnime",
+            "src_name": "NineAnime",
+            "lang": "en",
+            "base_url": "https://www.nineanime.com"
           }
         ]
       },
@@ -6216,19 +5320,6 @@
         ]
       },
       {
-        "url": "https://webtoonscan.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.en.webtoonscan",
-            "ext_name": "Tachiyomi: WebtoonScan",
-            "src_name": "WebtoonScan",
-            "lang": "en",
-            "base_url": "https://webtoonscan.com"
-          }
-        ]
-      },
-      {
         "url": "https://www.webnovel.com",
         "code": 403,
         "sources": [
@@ -6238,6 +5329,19 @@
             "src_name": "WebNovel",
             "lang": "en",
             "base_url": "https://www.webnovel.com"
+          }
+        ]
+      },
+      {
+        "url": "https://webtoonscan.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.en.webtoonscan",
+            "ext_name": "Tachiyomi: WebtoonScan",
+            "src_name": "WebtoonScan",
+            "lang": "en",
+            "base_url": "https://webtoonscan.com"
           }
         ]
       },
@@ -6385,6 +5489,19 @@
         ]
       },
       {
+        "url": "https://manhwa-latino.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.es.manhwalatino",
+            "ext_name": "Tachiyomi: Manhwa-Latino",
+            "src_name": "Manhwa-Latino",
+            "lang": "es",
+            "base_url": "https://manhwa-latino.com"
+          }
+        ]
+      },
+      {
         "url": "https://lmtos.net",
         "code": 403,
         "sources": [
@@ -6407,6 +5524,19 @@
             "src_name": "Manga Crab",
             "lang": "es",
             "base_url": "https://mangacrab.org"
+          }
+        ]
+      },
+      {
+        "url": "https://manhwa-online.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.es.manhwaonline",
+            "ext_name": "Tachiyomi: ManhwaOnline",
+            "src_name": "ManhwaOnline",
+            "lang": "es",
+            "base_url": "https://manhwa-online.com"
           }
         ]
       },
@@ -6450,28 +5580,15 @@
         ]
       },
       {
-        "url": "https://manhwa-latino.com",
+        "url": "https://plotnofansub.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.manhwalatino",
-            "ext_name": "Tachiyomi: Manhwa-Latino",
-            "src_name": "Manhwa-Latino",
+            "pkg": "eu.kanade.tachiyomi.extension.es.plottwistnofansub",
+            "ext_name": "Tachiyomi: Plot Twist No Fansub",
+            "src_name": "Plot Twist No Fansub",
             "lang": "es",
-            "base_url": "https://manhwa-latino.com"
-          }
-        ]
-      },
-      {
-        "url": "https://manhwa-online.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.manhwaonline",
-            "ext_name": "Tachiyomi: ManhwaOnline",
-            "src_name": "ManhwaOnline",
-            "lang": "es",
-            "base_url": "https://manhwa-online.com"
+            "base_url": "https://plotnofansub.com"
           }
         ]
       },
@@ -6485,19 +5602,6 @@
             "src_name": "Orcku Mangas",
             "lang": "es",
             "base_url": "https://orckumangas.com"
-          }
-        ]
-      },
-      {
-        "url": "https://plotnofansub.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.es.plottwistnofansub",
-            "ext_name": "Tachiyomi: Plot Twist No Fansub",
-            "src_name": "Plot Twist No Fansub",
-            "lang": "es",
-            "base_url": "https://plotnofansub.com"
           }
         ]
       },
@@ -6554,15 +5658,15 @@
         ]
       },
       {
-        "url": "https://vercomicsporno.com",
+        "url": "https://astral-manga.fr",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.vcpvmp",
-            "ext_name": "Tachiyomi: VCPVMP",
-            "src_name": "VCP",
-            "lang": "es",
-            "base_url": "https://vercomicsporno.com"
+            "pkg": "eu.kanade.tachiyomi.extension.fr.astralmanga",
+            "ext_name": "Tachiyomi: Astral-Manga",
+            "src_name": "AstralManga",
+            "lang": "fr",
+            "base_url": "https://astral-manga.fr"
           }
         ]
       },
@@ -6580,15 +5684,15 @@
         ]
       },
       {
-        "url": "https://astral-manga.fr",
+        "url": "https://vercomicsporno.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.astralmanga",
-            "ext_name": "Tachiyomi: Astral-Manga",
-            "src_name": "AstralManga",
-            "lang": "fr",
-            "base_url": "https://astral-manga.fr"
+            "pkg": "eu.kanade.tachiyomi.extension.es.vcpvmp",
+            "ext_name": "Tachiyomi: VCPVMP",
+            "src_name": "VCP",
+            "lang": "es",
+            "base_url": "https://vercomicsporno.com"
           }
         ]
       },
@@ -6606,15 +5710,15 @@
         ]
       },
       {
-        "url": "https://topcomicporno.net",
+        "url": "https://www.japscan.foo/mangas/?sort=popular&p=1",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.es.topcomicpornonet",
-            "ext_name": "Tachiyomi: TopComicPorno.net",
-            "src_name": "TopComicPorno.net",
-            "lang": "es",
-            "base_url": "https://topcomicporno.net"
+            "pkg": "eu.kanade.tachiyomi.extension.fr.japscan",
+            "ext_name": "Tachiyomi: Japscan",
+            "src_name": "Japscan",
+            "lang": "fr",
+            "base_url": "https://www.japscan.foo/mangas/?sort=popular&p=1"
           }
         ]
       },
@@ -6632,15 +5736,15 @@
         ]
       },
       {
-        "url": "https://www.japscan.foo/mangas/?sort=popular&p=1",
+        "url": "https://topcomicporno.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.japscan",
-            "ext_name": "Tachiyomi: Japscan",
-            "src_name": "Japscan",
-            "lang": "fr",
-            "base_url": "https://www.japscan.foo/mangas/?sort=popular&p=1"
+            "pkg": "eu.kanade.tachiyomi.extension.es.topcomicpornonet",
+            "ext_name": "Tachiyomi: TopComicPorno.net",
+            "src_name": "TopComicPorno.net",
+            "lang": "es",
+            "base_url": "https://topcomicporno.net"
           }
         ]
       },
@@ -6697,32 +5801,6 @@
         ]
       },
       {
-        "url": "https://raijin-scans.fr",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.raijinscans",
-            "ext_name": "Tachiyomi: Raijin Scans",
-            "src_name": "Raijin Scans",
-            "lang": "fr",
-            "base_url": "https://raijin-scans.fr"
-          }
-        ]
-      },
-      {
-        "url": "https://sushiscan.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.fr.sushiscan",
-            "ext_name": "Tachiyomi: Sushi-Scan",
-            "src_name": "Sushi-Scan",
-            "lang": "fr",
-            "base_url": "https://sushiscan.net"
-          }
-        ]
-      },
-      {
         "url": "https://epsilonsoft.to",
         "code": 403,
         "sources": [
@@ -6732,6 +5810,19 @@
             "src_name": "Soft Epsilon Scan",
             "lang": "fr",
             "base_url": "https://epsilonsoft.to"
+          }
+        ]
+      },
+      {
+        "url": "https://raijin-scans.fr",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.fr.raijinscans",
+            "ext_name": "Tachiyomi: Raijin Scans",
+            "src_name": "Raijin Scans",
+            "lang": "fr",
+            "base_url": "https://raijin-scans.fr"
           }
         ]
       },
@@ -6749,15 +5840,15 @@
         ]
       },
       {
-        "url": "https://v1.bacami.site",
+        "url": "https://sushiscan.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.id.bacami",
-            "ext_name": "Tachiyomi: Bacami",
-            "src_name": "Bacami",
-            "lang": "id",
-            "base_url": "https://v1.bacami.site"
+            "pkg": "eu.kanade.tachiyomi.extension.fr.sushiscan",
+            "ext_name": "Tachiyomi: Sushi-Scan",
+            "src_name": "Sushi-Scan",
+            "lang": "fr",
+            "base_url": "https://sushiscan.net"
           }
         ]
       },
@@ -6771,6 +5862,19 @@
             "src_name": "Doujinku",
             "lang": "id",
             "base_url": "https://doujinku.org"
+          }
+        ]
+      },
+      {
+        "url": "https://v1.bacami.site",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.id.bacami",
+            "ext_name": "Tachiyomi: Bacami",
+            "src_name": "Bacami",
+            "lang": "id",
+            "base_url": "https://v1.bacami.site"
           }
         ]
       },
@@ -6905,19 +6009,6 @@
         ]
       },
       {
-        "url": "https://sektekomik.xyz",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.id.sektekomik",
-            "ext_name": "Tachiyomi: Sekte Komik",
-            "src_name": "Sekte Komik",
-            "lang": "id",
-            "base_url": "https://sektekomik.xyz"
-          }
-        ]
-      },
-      {
         "url": "https://ddt.hastateam.com",
         "code": 403,
         "sources": [
@@ -6957,6 +6048,19 @@
         ]
       },
       {
+        "url": "https://sektekomik.xyz",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.id.sektekomik",
+            "ext_name": "Tachiyomi: Sekte Komik",
+            "src_name": "Sekte Komik",
+            "lang": "id",
+            "base_url": "https://sektekomik.xyz"
+          }
+        ]
+      },
+      {
         "url": "https://www.walpurgiscan.it",
         "code": 503,
         "sources": [
@@ -6983,19 +6087,6 @@
         ]
       },
       {
-        "url": "https://manga.fod.fujitv.co.jp",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ja.fodfuji",
-            "ext_name": "Tachiyomi: FOD",
-            "src_name": "FOD",
-            "lang": "ja",
-            "base_url": "https://manga.fod.fujitv.co.jp"
-          }
-        ]
-      },
-      {
         "url": "https://hachiraw.net",
         "code": 403,
         "sources": [
@@ -7005,6 +6096,19 @@
             "src_name": "Hachiraw",
             "lang": "ja",
             "base_url": "https://hachiraw.net"
+          }
+        ]
+      },
+      {
+        "url": "https://manga.fod.fujitv.co.jp",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ja.fodfuji",
+            "ext_name": "Tachiyomi: FOD",
+            "src_name": "FOD",
+            "lang": "ja",
+            "base_url": "https://manga.fod.fujitv.co.jp"
           }
         ]
       },
@@ -7022,6 +6126,19 @@
         ]
       },
       {
+        "url": "https://apenasmaisumyaoi.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.pt.amuy",
+            "ext_name": "Tachiyomi: Amuy",
+            "src_name": "Amuy",
+            "lang": "pt-BR",
+            "base_url": "https://apenasmaisumyaoi.com"
+          }
+        ]
+      },
+      {
         "url": "https://acervohentai.com",
         "code": 403,
         "sources": [
@@ -7035,15 +6152,15 @@
         ]
       },
       {
-        "url": "https://apenasmaisumyaoi.com",
+        "url": "https://erosect.xyz",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.amuy",
-            "ext_name": "Tachiyomi: Amuy",
-            "src_name": "Amuy",
+            "pkg": "eu.kanade.tachiyomi.extension.pt.erosect",
+            "ext_name": "Tachiyomi: Ero Sect",
+            "src_name": "EroSect",
             "lang": "pt-BR",
-            "base_url": "https://apenasmaisumyaoi.com"
+            "base_url": "https://erosect.xyz"
           }
         ]
       },
@@ -7070,19 +6187,6 @@
             "src_name": "Blackout Comics",
             "lang": "pt-BR",
             "base_url": "https://blackoutcomics.com"
-          }
-        ]
-      },
-      {
-        "url": "https://erosect.xyz",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.erosect",
-            "ext_name": "Tachiyomi: Ero Sect",
-            "src_name": "EroSect",
-            "lang": "pt-BR",
-            "base_url": "https://erosect.xyz"
           }
         ]
       },
@@ -7152,19 +6256,6 @@
         ]
       },
       {
-        "url": "https://tiraninha.world",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.littletyrant",
-            "ext_name": "Tachiyomi: Little Tyrant",
-            "src_name": "Little Tyrant",
-            "lang": "pt-BR",
-            "base_url": "https://tiraninha.world"
-          }
-        ]
-      },
-      {
         "url": "https://lycantoons.com",
         "code": 403,
         "sources": [
@@ -7178,15 +6269,15 @@
         ]
       },
       {
-        "url": "https://mangaflix.net",
+        "url": "https://mangadash.net",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.mangaflix",
-            "ext_name": "Tachiyomi: Manga Flix",
-            "src_name": "MangaFlix",
+            "pkg": "eu.kanade.tachiyomi.extension.pt.mangadash",
+            "ext_name": "Tachiyomi: MangaDash",
+            "src_name": "MangaDash",
             "lang": "pt-BR",
-            "base_url": "https://mangaflix.net"
+            "base_url": "https://mangadash.net"
           }
         ]
       },
@@ -7204,15 +6295,28 @@
         ]
       },
       {
-        "url": "https://mangadash.net",
+        "url": "https://tiraninha.world",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.mangadash",
-            "ext_name": "Tachiyomi: MangaDash",
-            "src_name": "MangaDash",
+            "pkg": "eu.kanade.tachiyomi.extension.pt.littletyrant",
+            "ext_name": "Tachiyomi: Little Tyrant",
+            "src_name": "Little Tyrant",
             "lang": "pt-BR",
-            "base_url": "https://mangadash.net"
+            "base_url": "https://tiraninha.world"
+          }
+        ]
+      },
+      {
+        "url": "https://mangaflix.net",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.pt.mangaflix",
+            "ext_name": "Tachiyomi: Manga Flix",
+            "src_name": "MangaFlix",
+            "lang": "pt-BR",
+            "base_url": "https://mangaflix.net"
           }
         ]
       },
@@ -7243,19 +6347,6 @@
         ]
       },
       {
-        "url": "https://www.muitohentai.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.muitohentai",
-            "ext_name": "Tachiyomi: Muito Hentai",
-            "src_name": "Muito Hentai",
-            "lang": "pt-BR",
-            "base_url": "https://www.muitohentai.com"
-          }
-        ]
-      },
-      {
         "url": "https://minitwoscan.com",
         "code": 403,
         "sources": [
@@ -7265,6 +6356,19 @@
             "src_name": "MiniTwo Scan",
             "lang": "pt-BR",
             "base_url": "https://minitwoscan.com"
+          }
+        ]
+      },
+      {
+        "url": "https://www.muitohentai.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.pt.muitohentai",
+            "ext_name": "Tachiyomi: Muito Hentai",
+            "src_name": "Muito Hentai",
+            "lang": "pt-BR",
+            "base_url": "https://www.muitohentai.com"
           }
         ]
       },
@@ -7308,19 +6412,6 @@
         ]
       },
       {
-        "url": "https://nx-toons.xyz",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.spectralscan",
-            "ext_name": "Tachiyomi: Nexus Toons",
-            "src_name": "Nexus Toons",
-            "lang": "pt-BR",
-            "base_url": "https://nx-toons.xyz"
-          }
-        ]
-      },
-      {
         "url": "https://starligthscan.com",
         "code": 403,
         "sources": [
@@ -7347,15 +6438,15 @@
         ]
       },
       {
-        "url": "https://yomu.com.br",
+        "url": "https://nx-toons.xyz",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.pt.sssscanlator",
-            "ext_name": "Tachiyomi: Yomu Comics",
-            "src_name": "Yomu Comics",
+            "pkg": "eu.kanade.tachiyomi.extension.pt.spectralscan",
+            "ext_name": "Tachiyomi: Nexus Toons",
+            "src_name": "Nexus Toons",
             "lang": "pt-BR",
-            "base_url": "https://yomu.com.br"
+            "base_url": "https://nx-toons.xyz"
           }
         ]
       },
@@ -7373,28 +6464,15 @@
         ]
       },
       {
-        "url": "https://hentailib.me",
+        "url": "https://yomu.com.br",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.hentailib",
-            "ext_name": "Tachiyomi: HentaiLib",
-            "src_name": "HentaiLib",
-            "lang": "ru",
-            "base_url": "https://hentailib.me"
-          }
-        ]
-      },
-      {
-        "url": "https://nude-moon.org",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.nudemoon",
-            "ext_name": "Tachiyomi: Nude-Moon",
-            "src_name": "Nude-Moon",
-            "lang": "ru",
-            "base_url": "https://nude-moon.org"
+            "pkg": "eu.kanade.tachiyomi.extension.pt.sssscanlator",
+            "ext_name": "Tachiyomi: Yomu Comics",
+            "src_name": "Yomu Comics",
+            "lang": "pt-BR",
+            "base_url": "https://yomu.com.br"
           }
         ]
       },
@@ -7412,6 +6490,32 @@
         ]
       },
       {
+        "url": "https://nude-moon.org",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.nudemoon",
+            "ext_name": "Tachiyomi: Nude-Moon",
+            "src_name": "Nude-Moon",
+            "lang": "ru",
+            "base_url": "https://nude-moon.org"
+          }
+        ]
+      },
+      {
+        "url": "https://hentailib.me",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.hentailib",
+            "ext_name": "Tachiyomi: HentaiLib",
+            "src_name": "HentaiLib",
+            "lang": "ru",
+            "base_url": "https://hentailib.me"
+          }
+        ]
+      },
+      {
         "url": "https://slashlib.me",
         "code": 403,
         "sources": [
@@ -7425,6 +6529,19 @@
         ]
       },
       {
+        "url": "https://inkstory.net",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.inkstory",
+            "ext_name": "Tachiyomi: InkStory",
+            "src_name": "InkStory",
+            "lang": "ru",
+            "base_url": "https://inkstory.net"
+          }
+        ]
+      },
+      {
         "url": "https://doujin-lc.net",
         "code": 403,
         "sources": [
@@ -7434,6 +6551,19 @@
             "src_name": "Doujin-Lc",
             "lang": "th",
             "base_url": "https://doujin-lc.net"
+          }
+        ]
+      },
+      {
+        "url": "https://mangabuff.ru",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.mangabuff",
+            "ext_name": "Tachiyomi: MangaBuff",
+            "src_name": "MangaBuff",
+            "lang": "ru",
+            "base_url": "https://mangabuff.ru"
           }
         ]
       },
@@ -7473,39 +6603,6 @@
             "src_name": "PopsManga",
             "lang": "th",
             "base_url": "https://popsmanga.net"
-          }
-        ]
-      },
-      {
-        "url": "https://mangabuff.ru",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.mangabuff",
-            "ext_name": "Tachiyomi: MangaBuff",
-            "src_name": "MangaBuff",
-            "lang": "ru",
-            "base_url": "https://mangabuff.ru"
-          }
-        ]
-      },
-      {
-        "url": "https://senkuro.me",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.senkognito",
-            "ext_name": "Tachiyomi: Senkognito",
-            "src_name": "Senkognito",
-            "lang": "ru",
-            "base_url": "https://senkuro.me"
-          },
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.senkuro",
-            "ext_name": "Tachiyomi: Senkuro",
-            "src_name": "Senkuro",
-            "lang": "ru",
-            "base_url": "https://senkuro.me"
           }
         ]
       },
@@ -7627,19 +6724,6 @@
         ]
       },
       {
-        "url": "https://inkstory.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.ru.inkstory",
-            "ext_name": "Tachiyomi: InkStory",
-            "src_name": "InkStory",
-            "lang": "ru",
-            "base_url": "https://inkstory.net"
-          }
-        ]
-      },
-      {
         "url": "https://www.patimanga.com",
         "code": 403,
         "sources": [
@@ -7666,15 +6750,22 @@
         ]
       },
       {
-        "url": "https://www.kuroimanga.best",
+        "url": "https://senkuro.me",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.kuroimanga",
-            "ext_name": "Tachiyomi: Kuroi Manga",
-            "src_name": "Kuroi Manga",
-            "lang": "tr",
-            "base_url": "https://www.kuroimanga.best"
+            "pkg": "eu.kanade.tachiyomi.extension.ru.senkognito",
+            "ext_name": "Tachiyomi: Senkognito",
+            "src_name": "Senkognito",
+            "lang": "ru",
+            "base_url": "https://senkuro.me"
+          },
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.ru.senkuro",
+            "ext_name": "Tachiyomi: Senkuro",
+            "src_name": "Senkuro",
+            "lang": "ru",
+            "base_url": "https://senkuro.me"
           }
         ]
       },
@@ -7692,15 +6783,28 @@
         ]
       },
       {
-        "url": "https://manga-tr.com",
+        "url": "https://www.kuroimanga.best",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.tr.mangatr",
-            "ext_name": "Tachiyomi: Manga-TR",
-            "src_name": "Manga-TR",
+            "pkg": "eu.kanade.tachiyomi.extension.tr.kuroimanga",
+            "ext_name": "Tachiyomi: Kuroi Manga",
+            "src_name": "Kuroi Manga",
             "lang": "tr",
-            "base_url": "https://manga-tr.com"
+            "base_url": "https://www.kuroimanga.best"
+          }
+        ]
+      },
+      {
+        "url": "https://cmangax18.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.cmanga",
+            "ext_name": "Tachiyomi: CManga",
+            "src_name": "CManga",
+            "lang": "vi",
+            "base_url": "https://cmangax18.com"
           }
         ]
       },
@@ -7744,19 +6848,6 @@
         ]
       },
       {
-        "url": "https://cmangax18.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.cmanga",
-            "ext_name": "Tachiyomi: CManga",
-            "src_name": "CManga",
-            "lang": "vi",
-            "base_url": "https://cmangax18.com"
-          }
-        ]
-      },
-      {
         "url": "https://doctruyen3qhub3.com",
         "code": 403,
         "sources": [
@@ -7770,19 +6861,6 @@
         ]
       },
       {
-        "url": "https://fastscan.org",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.fastscan",
-            "ext_name": "Tachiyomi: FastScan",
-            "src_name": "FastScan",
-            "lang": "vi",
-            "base_url": "https://fastscan.org"
-          }
-        ]
-      },
-      {
         "url": "https://goctruyentranhvui30.com",
         "code": 403,
         "sources": [
@@ -7792,6 +6870,19 @@
             "src_name": "Goc Truyen Tranh Vui",
             "lang": "vi",
             "base_url": "https://goctruyentranhvui30.com"
+          }
+        ]
+      },
+      {
+        "url": "https://fastscan.org",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.fastscan",
+            "ext_name": "Tachiyomi: FastScan",
+            "src_name": "FastScan",
+            "lang": "vi",
+            "base_url": "https://fastscan.org"
           }
         ]
       },
@@ -7835,32 +6926,6 @@
         ]
       },
       {
-        "url": "https://luvevalands2.co",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.luvevaland",
-            "ext_name": "Tachiyomi: LuvEvaLand",
-            "src_name": "LuvEvaLand",
-            "lang": "vi",
-            "base_url": "https://luvevalands2.co"
-          }
-        ]
-      },
-      {
-        "url": "https://mimihentai.net",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.mimihentai",
-            "ext_name": "Tachiyomi: MiMiHentai",
-            "src_name": "MiMiHentai",
-            "lang": "vi",
-            "base_url": "https://mimihentai.net"
-          }
-        ]
-      },
-      {
         "url": "https://moetruyen.net",
         "code": 403,
         "sources": [
@@ -7887,19 +6952,6 @@
         ]
       },
       {
-        "url": "https://nhattruyenqq.com",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.nhattruyen",
-            "ext_name": "Tachiyomi: NhatTruyen",
-            "src_name": "NhatTruyen",
-            "lang": "vi",
-            "base_url": "https://nhattruyenqq.com"
-          }
-        ]
-      },
-      {
         "url": "https://nettruyenviet10.com",
         "code": 403,
         "sources": [
@@ -7913,6 +6965,32 @@
         ]
       },
       {
+        "url": "https://nhattruyenqq.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.nhattruyen",
+            "ext_name": "Tachiyomi: NhatTruyen",
+            "src_name": "NhatTruyen",
+            "lang": "vi",
+            "base_url": "https://nhattruyenqq.com"
+          }
+        ]
+      },
+      {
+        "url": "https://mimihentai.net",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.mimihentai",
+            "ext_name": "Tachiyomi: MiMiHentai",
+            "src_name": "MiMiHentai",
+            "lang": "vi",
+            "base_url": "https://mimihentai.net"
+          }
+        ]
+      },
+      {
         "url": "https://nettruyenx.net",
         "code": 403,
         "sources": [
@@ -7922,6 +7000,32 @@
             "src_name": "NetTruyenX (unoriginal)",
             "lang": "vi",
             "base_url": "https://nettruyenx.net"
+          }
+        ]
+      },
+      {
+        "url": "https://luvevalands2.co",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.luvevaland",
+            "ext_name": "Tachiyomi: LuvEvaLand",
+            "src_name": "LuvEvaLand",
+            "lang": "vi",
+            "base_url": "https://luvevalands2.co"
+          }
+        ]
+      },
+      {
+        "url": "https://panomic.online",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.vi.panomic",
+            "ext_name": "Tachiyomi: Panomic",
+            "src_name": "Panomic",
+            "lang": "vi",
+            "base_url": "https://panomic.online"
           }
         ]
       },
@@ -7948,19 +7052,6 @@
             "src_name": "SayHentai",
             "lang": "vi",
             "base_url": "https://sayhentai.cx"
-          }
-        ]
-      },
-      {
-        "url": "https://panomic.online",
-        "code": 403,
-        "sources": [
-          {
-            "pkg": "eu.kanade.tachiyomi.extension.vi.panomic",
-            "ext_name": "Tachiyomi: Panomic",
-            "src_name": "Panomic",
-            "lang": "vi",
-            "base_url": "https://panomic.online"
           }
         ]
       },
@@ -8030,15 +7121,15 @@
         ]
       },
       {
-        "url": "http://www.92mh.com",
+        "url": "https://18mh.org",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.zh.jiuermanhua",
-            "ext_name": "Tachiyomi: 92Manhua",
-            "src_name": "92漫画",
+            "pkg": "eu.kanade.tachiyomi.extension.zh.eighteenmanhua",
+            "ext_name": "Tachiyomi: 18Manhua",
+            "src_name": "18漫画",
             "lang": "zh",
-            "base_url": "http://www.92mh.com"
+            "base_url": "https://18mh.org"
           }
         ]
       },
@@ -8056,15 +7147,15 @@
         ]
       },
       {
-        "url": "https://18mh.org",
+        "url": "http://www.92mh.com",
         "code": 403,
         "sources": [
           {
-            "pkg": "eu.kanade.tachiyomi.extension.zh.eighteenmanhua",
-            "ext_name": "Tachiyomi: 18Manhua",
-            "src_name": "18漫画",
+            "pkg": "eu.kanade.tachiyomi.extension.zh.jiuermanhua",
+            "ext_name": "Tachiyomi: 92Manhua",
+            "src_name": "92漫画",
             "lang": "zh",
-            "base_url": "https://18mh.org"
+            "base_url": "http://www.92mh.com"
           }
         ]
       },
@@ -8091,6 +7182,19 @@
             "src_name": "MyComic",
             "lang": "zh",
             "base_url": "https://mycomic.com"
+          }
+        ]
+      },
+      {
+        "url": "https://manga-tr.com",
+        "code": 403,
+        "sources": [
+          {
+            "pkg": "eu.kanade.tachiyomi.extension.tr.mangatr",
+            "ext_name": "Tachiyomi: Manga-TR",
+            "src_name": "Manga-TR",
+            "lang": "tr",
+            "base_url": "https://manga-tr.com"
           }
         ]
       }

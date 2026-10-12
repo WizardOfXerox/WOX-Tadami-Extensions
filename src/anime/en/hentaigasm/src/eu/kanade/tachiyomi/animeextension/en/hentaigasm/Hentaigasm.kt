@@ -54,6 +54,25 @@ class Hentaigasm :
     override fun headersBuilder(): Headers.Builder = super.headersBuilder()
         .add("Referer", "$baseUrl/")
 
+    // ======================= List Cleaning / Deduplication =======================
+
+    private fun cleanAnimeList(animes: List<SAnime>): List<SAnime> {
+        return animes.map { anime ->
+            val slug = anime.url.trim('/').substringAfterLast('/')
+            val cleanSlug = slug.replace(CLEAN_SLUG_REGEX, "")
+            val cleanUrl = if (cleanSlug.isNotBlank()) "/$cleanSlug/" else anime.url
+
+            val cleanTitle = anime.title.replace(CLEAN_TITLE_REGEX, "").trim()
+
+            SAnime.create().apply {
+                this.url = cleanUrl
+                this.title = if (cleanTitle.isNotBlank()) cleanTitle else anime.title
+                this.thumbnail_url = anime.thumbnail_url
+                this.initialized = anime.initialized
+            }
+        }.distinctBy { it.url }.distinctBy { it.title.lowercase() }
+    }
+
     // ============================== Popular ===============================
 
     override fun popularAnimeRequest(page: Int): Request {
@@ -81,6 +100,11 @@ class Hentaigasm :
 
     override fun popularAnimeNextPageSelector(): String = "div.wp-pagenavi a.nextpostslink, div.wp-pagenavi a.larger"
 
+    override fun popularAnimeParse(response: Response): AnimesPage {
+        val page = super.popularAnimeParse(response)
+        return AnimesPage(cleanAnimeList(page.animes), page.hasNextPage)
+    }
+
     // =============================== Latest ===============================
 
     override fun latestUpdatesRequest(page: Int): Request = popularAnimeRequest(page)
@@ -90,6 +114,11 @@ class Hentaigasm :
     override fun latestUpdatesFromElement(element: Element): SAnime = popularAnimeFromElement(element)
 
     override fun latestUpdatesNextPageSelector(): String = popularAnimeNextPageSelector()
+
+    override fun latestUpdatesParse(response: Response): AnimesPage {
+        val page = super.latestUpdatesParse(response)
+        return AnimesPage(cleanAnimeList(page.animes), page.hasNextPage)
+    }
 
     // =============================== Search ===============================
 
@@ -137,9 +166,10 @@ class Hentaigasm :
                         }.getOrNull()
                 }
             }
-            return AnimesPage(animes, hasNextPage)
+            return AnimesPage(cleanAnimeList(animes), hasNextPage)
         }
-        return super.searchAnimeParse(response)
+        val page = super.searchAnimeParse(response)
+        return AnimesPage(cleanAnimeList(page.animes), page.hasNextPage)
     }
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
@@ -150,9 +180,10 @@ class Hentaigasm :
 
     override fun animeDetailsParse(document: Document): SAnime {
         val anime = SAnime.create()
-        anime.title = document.selectFirst("h1#title, h1.entry-title")?.text()
+        val rawTitle = document.selectFirst("h1#title, h1.entry-title")?.text()
             ?: document.selectFirst("meta[property=og:title]")?.attr("content")
             ?: document.selectFirst("title")?.text().orEmpty()
+        anime.title = rawTitle.replace(CLEAN_TITLE_REGEX, "").trim().ifBlank { rawTitle }
 
         anime.thumbnail_url = document.selectFirst("meta[property=og:image]")?.attr("content")
             ?: document.selectFirst("div.thumb img")?.attr("abs:src")
@@ -180,19 +211,93 @@ class Hentaigasm :
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val document = response.asJsoup()
-        val title = document.selectFirst("h1#title, h1.entry-title")?.text()
+        val currentUrl = response.request.url.toString()
+        val currentTitle = document.selectFirst("h1#title, h1.entry-title")?.text()
             ?: document.selectFirst("meta[property=og:title]")?.attr("content")
-            ?: "Episode 1"
+            ?: ""
+        val cleanTitle = currentTitle.replace(CLEAN_TITLE_REGEX, "").trim().ifBlank { currentTitle }
+        val slug = currentUrl.trim('/').substringAfterLast('/')
+        val cleanSlug = slug.replace(CLEAN_SLUG_REGEX, "")
 
-        val episode = SEpisode.create().apply {
-            setUrlWithoutDomain(response.request.url.encodedPath)
-            name = title
-            episode_number = runCatching {
-                EP_REGEX.find(title)?.groupValues?.get(1)?.toFloat()
-            }.getOrNull() ?: 1F
-            date_upload = 0L
+        val episodes = mutableListOf<SEpisode>()
+
+        // 1. Fetch complete episode list from WP REST API for this series
+        if (cleanTitle.isNotBlank()) {
+            runCatching {
+                val apiUrl = "$baseUrl/wp-json/wp/v2/posts".toHttpUrl().newBuilder()
+                    .addQueryParameter("search", cleanTitle)
+                    .addQueryParameter("per_page", "100")
+                    .build()
+                val apiReq = GET(apiUrl.toString(), headers)
+                val apiResp = client.newCall(apiReq).execute()
+                if (apiResp.isSuccessful) {
+                    val posts = json.decodeFromString<List<WpPost>>(apiResp.body.string())
+                    posts.forEach { post ->
+                        val postTitle = Jsoup.parse(post.title.rendered).text()
+                        val postCleanTitle = postTitle.replace(CLEAN_TITLE_REGEX, "").trim()
+                        val postSlug = post.link.trim('/').substringAfterLast('/')
+                        val postCleanSlug = postSlug.replace(CLEAN_SLUG_REGEX, "")
+
+                        if (postCleanTitle.equals(cleanTitle, ignoreCase = true) ||
+                            (cleanSlug.isNotBlank() && postCleanSlug.equals(cleanSlug, ignoreCase = true)) ||
+                            postCleanTitle.contains(cleanTitle, ignoreCase = true)
+                        ) {
+                            episodes.add(
+                                SEpisode.create().apply {
+                                    setUrlWithoutDomain(post.link)
+                                    name = postTitle
+                                    episode_number = runCatching {
+                                        EP_REGEX.find(postTitle)?.groupValues?.get(1)?.toFloat()
+                                    }.getOrNull() ?: 1F
+                                    date_upload = 0L
+                                },
+                            )
+                        }
+                    }
+                }
+            }
         }
-        return listOf(episode)
+
+        // 2. Fallback to scraping related episodes and current page if API yields nothing
+        if (episodes.isEmpty()) {
+            val relatedLinks = document.select("div.related-posts a.clip-link, div.related-posts div.item a")
+            relatedLinks.forEach { link ->
+                val epTitle = link.attr("title").ifBlank { link.text() }.trim()
+                val epHref = link.attr("abs:href").ifBlank { link.attr("href") }
+                val epSlug = epHref.trim('/').substringAfterLast('/')
+                val epCleanSlug = epSlug.replace(CLEAN_SLUG_REGEX, "")
+
+                if ((cleanSlug.isNotBlank() && epCleanSlug.equals(cleanSlug, ignoreCase = true)) ||
+                    epTitle.replace(CLEAN_TITLE_REGEX, "").trim().equals(cleanTitle, ignoreCase = true)
+                ) {
+                    episodes.add(
+                        SEpisode.create().apply {
+                            setUrlWithoutDomain(epHref)
+                            name = epTitle
+                            episode_number = runCatching {
+                                EP_REGEX.find(epTitle)?.groupValues?.get(1)?.toFloat()
+                            }.getOrNull() ?: 1F
+                            date_upload = 0L
+                        },
+                    )
+                }
+            }
+
+            // Always add the current page as at least 1 episode
+            episodes.add(
+                SEpisode.create().apply {
+                    setUrlWithoutDomain(response.request.url.encodedPath)
+                    name = currentTitle.ifBlank { "Episode 1" }
+                    episode_number = runCatching {
+                        EP_REGEX.find(currentTitle)?.groupValues?.get(1)?.toFloat()
+                    }.getOrNull() ?: 1F
+                    date_upload = 0L
+                },
+            )
+        }
+
+        return episodes.distinctBy { it.url }
+            .sortedByDescending { it.episode_number }
     }
 
     override fun episodeListSelector(): String = throw UnsupportedOperationException("Not used")
@@ -289,7 +394,10 @@ class Hentaigasm :
         private val JW_IMAGE_REGEX = Regex("""(?i)image\s*:\s*["'](https?://[^"']+\.(?:jpg|jpeg|png|webp)[^"']*)["']""")
         private val MP4_LINK_REGEX = Regex("""(?i)href\s*=\s*["'](https?://[^"']+\.mp4[^"']*)["']""")
         private val IMG_SRC_REGEX = Regex("""(?i)src\s*=\s*["'](https?://[^"']+\.(?:jpg|jpeg|png|webp)[^"']*)["']""")
-        private val EP_REGEX = Regex("""(?i)(?:episode|\bep\b|\bpart\b)?\s*(\d+(?:\.\d+)?)\s*(?:subbed|raw|dubbed|$)""")
+        private val EP_REGEX = Regex("""(?i)(?:episode|\bep\b|\bpart\b)?\s*(\d+(?:\.\d+)?)\s*(?:uncensored|subbed|raw|dubbed|$)""")
+
+        private val CLEAN_TITLE_REGEX = Regex("""(?i)(?:\s+(?:episode|\bep\b|\bpart\b)?\s*\d+(?:\.\d+)?\s*(?:uncensored|subbed|raw|dubbed)?|\s+(?:uncensored|subbed|raw|dubbed))\s*$""")
+        private val CLEAN_SLUG_REGEX = Regex("""(?i)-(?:\d+(?:\.\d+)?-(?:uncensored-)?(?:subbed|raw|dubbed)|\d+(?:\.\d+)?|(?:uncensored-)?(?:subbed|raw|dubbed))$""")
 
         private const val PREF_SERVER_KEY = "pref_server"
         private const val PREF_SERVER_DEFAULT = "Stream"
