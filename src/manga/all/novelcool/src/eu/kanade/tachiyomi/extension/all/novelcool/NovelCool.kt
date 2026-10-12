@@ -207,10 +207,15 @@ abstract class NovelCool :
         return SManga.create().apply {
             title = document.selectFirst("h1.bookinfo-title")!!.text()
             description = document.selectFirst("div.bk-summary-txt")?.text()
-            genre = document.select(".bookinfo-category-list a").joinToString { it.text() }
+            genre = document.selectFirst(".bk-cates")?.select(".bk-cate-item a[title]")?.joinToString { it.text() }
+                ?: document.select(".bookinfo-category-list a").joinToString { it.text() }
             author = document.selectFirst(".bookinfo-author > a")?.attr("title")
             thumbnail_url = document.selectFirst(".bookinfo-pic-img")?.attr("abs:src")
-            status = document.select(".bookinfo-category-list a").first()?.text().parseStatus()
+            status = when (document.selectFirst(".bk-cate-type1 a")?.attr("abs:href")?.toHttpUrl()?.pathSegments?.last()) {
+                "updated.html" -> SManga.ONGOING
+                "completed.html" -> SManga.COMPLETED
+                else -> document.select(".bookinfo-category-list a").first()?.text().parseStatus()
+            }
         }
     }
 

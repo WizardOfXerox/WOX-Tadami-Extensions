@@ -77,7 +77,7 @@ abstract class Comick :
                 4, 5, 6 -> "most_follow_new"
                 else -> throw UnsupportedOperationException()
             }
-            addQueryParameter("days", days.toString())
+            addQueryParameter("day", days.toString())
             addQueryParameter("type", type)
             fragment(page.toString())
         }.build()

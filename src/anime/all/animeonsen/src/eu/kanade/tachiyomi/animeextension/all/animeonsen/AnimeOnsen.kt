@@ -47,7 +47,7 @@ class AnimeOnsen :
 
     private val searchUrl = "https://search.animeonsen.xyz"
 
-    override val lang = "all"
+    override val lang = "en"
 
     override val supportsLatest = false
 

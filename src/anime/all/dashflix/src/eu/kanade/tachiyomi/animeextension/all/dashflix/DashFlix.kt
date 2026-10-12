@@ -24,7 +24,7 @@ import uy.kohesive.injekt.api.get
 class DashFlix : AnimeHttpSource(), ConfigurableAnimeSource {
     override val name = "DASHFLIX"
     override val baseUrl = "https://dashflix.top"
-    override val lang = "all"
+    override val lang = "en"
     override val supportsLatest = true
 
     private val tmdbApiKey = "4f599baa15d072c9de346b2816a131b8"

@@ -36,7 +36,7 @@ class Subsplease :
 
     override val baseUrl = "https://subsplease.org"
 
-    override val lang = "all"
+    override val lang = "en"
 
     override val supportsLatest = false
 

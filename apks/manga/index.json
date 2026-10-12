@@ -416,10 +416,10 @@
   {
     "name": "Tachiyomi: Comick (Unoriginal)",
     "pkg": "eu.kanade.tachiyomi.extension.all.comicklive",
-    "apk": "tachiyomi-all.comicklive-v1.4.5.apk",
+    "apk": "tachiyomi-all.comicklive-v1.4.6.apk",
     "lang": "all",
-    "code": 5,
-    "version": "1.4.5",
+    "code": 6,
+    "version": "1.4.6",
     "nsfw": 0,
     "sources": [
       {
@@ -531,7 +531,7 @@
         "baseUrl": "https://comick.live"
       }
     ],
-    "sha256": "20e2ef1b272ddf6cbc6e885d9adfdea7793197b9d5b50abe177dad05af252a9a"
+    "sha256": "e2f93e0ec6bf898c67883798a3186b780f8c688d9de5a48e6a12fd3f9eade7bf"
   },
   {
     "name": "Tachiyomi: ComicsKingdom",
@@ -4694,10 +4694,10 @@
   {
     "name": "Tachiyomi: NovelCool",
     "pkg": "eu.kanade.tachiyomi.extension.all.novelcool",
-    "apk": "tachiyomi-all.novelcool-v1.4.8.apk",
+    "apk": "tachiyomi-all.novelcool-v1.4.9.apk",
     "lang": "all",
-    "code": 8,
-    "version": "1.4.8",
+    "code": 9,
+    "version": "1.4.9",
     "nsfw": 0,
     "sources": [
       {
@@ -4743,7 +4743,7 @@
         "baseUrl": "https://fr.novelcool.com"
       }
     ],
-    "sha256": "694a200c9d4c1c865bc24d5df34e59d2d5a7b8b59d86ab1fa5e0c2cf99bf3881"
+    "sha256": "7972aed83e3d64710b8132b2b055d6527b1fb7421b7a6b17cc4caa72612a5381"
   },
   {
     "name": "Tachiyomi: One Piece Fans",
