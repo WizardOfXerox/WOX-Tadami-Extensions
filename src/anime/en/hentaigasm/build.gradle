@@ -1,0 +1,8 @@
+ext {
+    extName = 'Hentaigasm'
+    extClass = '.Hentaigasm'
+    extVersionCode = 1
+    isNsfw = true
+}
+
+apply from: "$rootDir/common.gradle"
