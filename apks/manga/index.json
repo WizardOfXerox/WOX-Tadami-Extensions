@@ -76,25 +76,6 @@
     "size": 302117
   },
   {
-    "name": "Tachiyomi: 24HNovel",
-    "pkg": "eu.kanade.tachiyomi.extension.en.novel24h",
-    "apk": "tachiyomi-en.novel24h-v1.4.53.apk",
-    "lang": "en",
-    "code": 53,
-    "version": "1.4.53",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "24HNovel",
-        "lang": "en",
-        "id": "8392183862780411192",
-        "baseUrl": "https://24hnovel.com"
-      }
-    ],
-    "sha256": "3eaf44572826323c9cf08bb6efd5829cdfe147d153fe2a53fadbc3603d57dea3",
-    "size": 225940
-  },
-  {
     "name": "Tachiyomi: 3600000 Beauty",
     "pkg": "eu.kanade.tachiyomi.extension.all.beauty3600000",
     "apk": "tachiyomi-all.beauty3600000-v1.4.6.apk",
@@ -546,25 +527,6 @@
     ],
     "sha256": "d7d9e90f4f469020580ddb32e0f769eb3d62e9697b0ba091ce46ff74e4778800",
     "size": 227361
-  },
-  {
-    "name": "Tachiyomi: Ainz Scans ID",
-    "pkg": "eu.kanade.tachiyomi.extension.id.ainzscansid",
-    "apk": "tachiyomi-id.ainzscansid-v1.4.35.apk",
-    "lang": "id",
-    "code": 35,
-    "version": "1.4.35",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Ainz Scans ID",
-        "lang": "id",
-        "id": "6828652413569586396",
-        "baseUrl": "https://v2.ainzscans01.com"
-      }
-    ],
-    "sha256": "272a7b238a5927961e1f30d69725ba8a47b2bfe593806aaa206b5c6e4db8aa40",
-    "size": 247713
   },
   {
     "name": "Tachiyomi: Akaza Scans",
@@ -1862,25 +1824,6 @@
     "size": 251492
   },
   {
-    "name": "Tachiyomi: BatCave",
-    "pkg": "eu.kanade.tachiyomi.extension.en.batcave",
-    "apk": "tachiyomi-en.batcave-v1.4.7.apk",
-    "lang": "en",
-    "code": 7,
-    "version": "1.4.7",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "BatCave",
-        "lang": "en",
-        "id": "7422099479605463706",
-        "baseUrl": "https://batcave.biz"
-      }
-    ],
-    "sha256": "2cf63f1ee16ad43bae2280bbee8450e35bf765a48e560ed241da7605fd2e8832",
-    "size": 191181
-  },
-  {
     "name": "Tachiyomi: Battle In 5 Seconds After Meeting",
     "pkg": "eu.kanade.tachiyomi.extension.en.battleinfivesecondsaftermeeting",
     "apk": "tachiyomi-en.battleinfivesecondsaftermeeting-v1.4.52.apk",
@@ -1993,25 +1936,6 @@
     ],
     "sha256": "3ff79b061100046a3b4cf66277fc4bfffc7541c7039503222de1884e9af59a62",
     "size": 240269
-  },
-  {
-    "name": "Tachiyomi: BlackToon",
-    "pkg": "eu.kanade.tachiyomi.extension.ko.blacktoon",
-    "apk": "tachiyomi-ko.blacktoon-v1.4.1.apk",
-    "lang": "ko",
-    "code": 1,
-    "version": "1.4.1",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "블랙툰",
-        "lang": "ko",
-        "id": "7080800841003944426",
-        "baseUrl": "https://blacktoon420.com"
-      }
-    ],
-    "sha256": "dc860c26afeb07504a6f1b459c8ff9a9681e39cf3183667ed469bc422d88e3ac",
-    "size": 188631
   },
   {
     "name": "Tachiyomi: Blackout Comics",
@@ -4503,25 +4427,6 @@
     "size": 177169
   },
   {
-    "name": "Tachiyomi: DoujinsHell",
-    "pkg": "eu.kanade.tachiyomi.extension.es.doujinshell",
-    "apk": "tachiyomi-es.doujinshell-v1.4.53.apk",
-    "lang": "es",
-    "code": 53,
-    "version": "1.4.53",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "DoujinsHell",
-        "lang": "es",
-        "id": "7008709488397053596",
-        "baseUrl": "https://doujinshell.net"
-      }
-    ],
-    "sha256": "505c4a6f2dea60cc084fe36dffcdeba1629166df1b2a8744537f5026f754cd98",
-    "size": 280692
-  },
-  {
     "name": "Tachiyomi: Dragon Ball Multiverse",
     "pkg": "eu.kanade.tachiyomi.extension.all.dragonballmultiverse",
     "apk": "tachiyomi-all.dragonballmultiverse-v1.4.8.apk",
@@ -5935,25 +5840,6 @@
     "size": 254284
   },
   {
-    "name": "Tachiyomi: Galaxy Manga",
-    "pkg": "eu.kanade.tachiyomi.extension.en.galaxymanga",
-    "apk": "tachiyomi-en.galaxymanga-v1.4.32.apk",
-    "lang": "en",
-    "code": 32,
-    "version": "1.4.32",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Galaxy Manga",
-        "lang": "en",
-        "id": "3084421114955435608",
-        "baseUrl": "https://galaxymanga.io"
-      }
-    ],
-    "sha256": "626b677523d4411c7ea1bf93dd27c94d8ab7a9b45c0f85b2b57bdb8f0b75041f",
-    "size": 211197
-  },
-  {
     "name": "Tachiyomi: GalaxyDegenScans",
     "pkg": "eu.kanade.tachiyomi.extension.en.galaxydegenscans",
     "apk": "tachiyomi-en.galaxydegenscans-v1.4.56.apk",
@@ -5990,25 +5876,6 @@
     ],
     "sha256": "ae12220b11f96c72a2464253f5a0f5e2b8aa1ee4d3bd0093f8c973ff2f7a4e37",
     "size": 220297
-  },
-  {
-    "name": "Tachiyomi: GantzVN",
-    "pkg": "eu.kanade.tachiyomi.extension.vi.gantzvn",
-    "apk": "tachiyomi-vi.gantzvn-v1.4.53.apk",
-    "lang": "vi",
-    "code": 53,
-    "version": "1.4.53",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "GantzVN",
-        "lang": "vi",
-        "id": "934565583439501324",
-        "baseUrl": "https://gantzvn.com"
-      }
-    ],
-    "sha256": "3c2076d7564c767da9b2eb8d957dd2d5e6e329b9e977693fe443dd847f238f8a",
-    "size": 244424
   },
   {
     "name": "Tachiyomi: Garcia Manga",
@@ -7363,25 +7230,6 @@
     "size": 171659
   },
   {
-    "name": "Tachiyomi: Hentai-Scantrad",
-    "pkg": "eu.kanade.tachiyomi.extension.fr.hentaiscantrad",
-    "apk": "tachiyomi-fr.hentaiscantrad-v1.4.53.apk",
-    "lang": "fr",
-    "code": 53,
-    "version": "1.4.53",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "Hentai-Scantrad",
-        "lang": "fr",
-        "id": "6747208512135394944",
-        "baseUrl": "https://hentai.scantrad-vf.cc"
-      }
-    ],
-    "sha256": "89cc703ff3721a3fdcda4fa72a63ca907cd88e61e3aca0bfc7f24181aee9c25c",
-    "size": 233244
-  },
-  {
     "name": "Tachiyomi: Hentai.cat",
     "pkg": "eu.kanade.tachiyomi.extension.ca.fansubscathentai",
     "apk": "tachiyomi-ca.fansubscathentai-v1.4.6.apk",
@@ -8432,25 +8280,6 @@
     "size": 225789
   },
   {
-    "name": "Tachiyomi: Hiveworks Comics",
-    "pkg": "eu.kanade.tachiyomi.extension.en.hiveworks",
-    "apk": "tachiyomi-en.hiveworks-v1.4.12.apk",
-    "lang": "en",
-    "code": 12,
-    "version": "1.4.12",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Hiveworks Comics",
-        "lang": "en",
-        "id": "6620819060709781499",
-        "baseUrl": "https://hiveworkscomics.com"
-      }
-    ],
-    "sha256": "2ba9ff07fa4108397bce05cbb31849be774953065b32d32380e7b0f74f777842",
-    "size": 197225
-  },
-  {
     "name": "Tachiyomi: HizoManga",
     "pkg": "eu.kanade.tachiyomi.extension.ar.hizomanga",
     "apk": "tachiyomi-ar.hizomanga-v1.4.52.apk",
@@ -9476,25 +9305,6 @@
     "size": 229304
   },
   {
-    "name": "Tachiyomi: KamiComic",
-    "pkg": "eu.kanade.tachiyomi.extension.vi.kamicomic",
-    "apk": "tachiyomi-vi.kamicomic-v1.4.4.apk",
-    "lang": "vi",
-    "code": 4,
-    "version": "1.4.4",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "KamiComic",
-        "lang": "vi",
-        "id": "4858507068999692510",
-        "baseUrl": "https://kamicomi.com"
-      }
-    ],
-    "sha256": "1a15188dac2cdd4d9c01b7597da517cb7d27e5b7254599a6ddeea43362c30804",
-    "size": 247213
-  },
-  {
     "name": "Tachiyomi: Kanzenin",
     "pkg": "eu.kanade.tachiyomi.extension.id.kanzenin",
     "apk": "tachiyomi-id.kanzenin-v1.4.33.apk",
@@ -10386,25 +10196,6 @@
     ],
     "sha256": "cfde3eb92c6dc938495663822f4e64e39b6bd4641624cfba2356aee7f177e528",
     "size": 214329
-  },
-  {
-    "name": "Tachiyomi: Kuroi Manga",
-    "pkg": "eu.kanade.tachiyomi.extension.tr.kuroimanga",
-    "apk": "tachiyomi-tr.kuroimanga-v1.4.57.apk",
-    "lang": "tr",
-    "code": 57,
-    "version": "1.4.57",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "Kuroi Manga",
-        "lang": "tr",
-        "id": "8755089223917220341",
-        "baseUrl": "https://www.kuroimanga.best"
-      }
-    ],
-    "sha256": "563810613bf28b3d88034c738f7963d627435207e88236220f824fe1fff8dd5e",
-    "size": 265546
   },
   {
     "name": "Tachiyomi: LANraragi",
@@ -13204,25 +12995,6 @@
     ],
     "sha256": "d7465adcdd21a96a3e99e0df485130341a2dfc6195313b0a4628edc8eb0aaa65",
     "size": 229917
-  },
-  {
-    "name": "Tachiyomi: MangaChan",
-    "pkg": "eu.kanade.tachiyomi.extension.ru.mangachan",
-    "apk": "tachiyomi-ru.mangachan-v1.4.22.apk",
-    "lang": "ru",
-    "code": 22,
-    "version": "1.4.22",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "MangaChan",
-        "lang": "ru",
-        "id": "7",
-        "baseUrl": "https://im.manga-chan.me"
-      }
-    ],
-    "sha256": "d5d30710a061c0e1df9f580d58cd7f4389a4f1b9cb9e029299c3fb36960b7c07",
-    "size": 178001
   },
   {
     "name": "Tachiyomi: MangaCloud",
@@ -16040,25 +15812,6 @@
     "size": 205633
   },
   {
-    "name": "Tachiyomi: ManhwaManhua",
-    "pkg": "eu.kanade.tachiyomi.extension.en.manhwamanhua",
-    "apk": "tachiyomi-en.manhwamanhua-v1.4.52.apk",
-    "lang": "en",
-    "code": 52,
-    "version": "1.4.52",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "ManhwaManhua",
-        "lang": "en",
-        "id": "8935586841672178004",
-        "baseUrl": "https://manhwamanhua.com"
-      }
-    ],
-    "sha256": "53f6005a92d6d0dc93700e22dfecc2ae36b3f0b41719bff431557b445cea3bf8",
-    "size": 227296
-  },
-  {
     "name": "Tachiyomi: ManhwaNex",
     "pkg": "eu.kanade.tachiyomi.extension.en.manhwanex",
     "apk": "tachiyomi-en.manhwanex-v1.4.52.apk",
@@ -16944,25 +16697,6 @@
     "size": 280124
   },
   {
-    "name": "Tachiyomi: Moodtoon",
-    "pkg": "eu.kanade.tachiyomi.extension.th.moodtoon",
-    "apk": "tachiyomi-th.moodtoon-v1.4.33.apk",
-    "lang": "th",
-    "code": 33,
-    "version": "1.4.33",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "Moodtoon",
-        "lang": "th",
-        "id": "8560199796461456661",
-        "baseUrl": "https://moon-toon.com"
-      }
-    ],
-    "sha256": "e02c33a41b1acce509c17c17d7f4f3040ca35c601fa0cbd4e4325916c3086d80",
-    "size": 215269
-  },
-  {
     "name": "Tachiyomi: Moon Daisy Scans",
     "pkg": "eu.kanade.tachiyomi.extension.tr.moondaisyscans",
     "apk": "tachiyomi-tr.moondaisyscans-v1.4.38.apk",
@@ -17056,25 +16790,6 @@
     ],
     "sha256": "ec783cc147e722d3c157de9f8dc4abfefec9fe3ccc4d6daa796250f412cee787",
     "size": 163273
-  },
-  {
-    "name": "Tachiyomi: Murim",
-    "pkg": "eu.kanade.tachiyomi.extension.ar.murim",
-    "apk": "tachiyomi-ar.murim-v1.4.14.apk",
-    "lang": "ar",
-    "code": 14,
-    "version": "1.4.14",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Murim",
-        "lang": "ar",
-        "id": "4966914277555229831",
-        "baseUrl": "https://www.murim.site"
-      }
-    ],
-    "sha256": "150d0ad12ad38c628c59b1f823edccca61deb0afa912470392c90a7c65cf3095",
-    "size": 209189
   },
   {
     "name": "Tachiyomi: MurimScan",
@@ -18339,25 +18054,6 @@
     "size": 228061
   },
   {
-    "name": "Tachiyomi: Noxen Scans",
-    "pkg": "eu.kanade.tachiyomi.extension.en.noxenscans",
-    "apk": "tachiyomi-en.noxenscans-v1.4.32.apk",
-    "lang": "en",
-    "code": 32,
-    "version": "1.4.32",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Noxen Scans",
-        "lang": "en",
-        "id": "3116973119218453326",
-        "baseUrl": "https://noxenscan.com"
-      }
-    ],
-    "sha256": "07c7edb14c47c1741864366db46aa14c0f6b6fb07cb93497d3d9bfd691cecf50",
-    "size": 243997
-  },
-  {
     "name": "Tachiyomi: NoyAcg",
     "pkg": "eu.kanade.tachiyomi.extension.zh.noyacg",
     "apk": "tachiyomi-zh.noyacg-v1.4.4.apk",
@@ -18470,25 +18166,6 @@
     ],
     "sha256": "069b29c1ee71e14c19bd46d83aac2c60644176f50957b637e525a1b50b55a7bd",
     "size": 244989
-  },
-  {
-    "name": "Tachiyomi: OTruyen",
-    "pkg": "eu.kanade.tachiyomi.extension.vi.otruyen",
-    "apk": "tachiyomi-vi.otruyen-v1.4.2.apk",
-    "lang": "vi",
-    "code": 2,
-    "version": "1.4.2",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "OTruyen",
-        "lang": "vi",
-        "id": "8070757025584294717",
-        "baseUrl": "https://otruyen.cc"
-      }
-    ],
-    "sha256": "c979e55d936060c4105c29af56dc2e60c9037918d9a7df52c9ce67f4beae09b1",
-    "size": 205445
   },
   {
     "name": "Tachiyomi: OctopusManga",
@@ -21020,25 +20697,6 @@
     "size": 185877
   },
   {
-    "name": "Tachiyomi: Roxinha",
-    "pkg": "eu.kanade.tachiyomi.extension.pt.roxinha",
-    "apk": "tachiyomi-pt.roxinha-v1.4.2.apk",
-    "lang": "pt-BR",
-    "code": 2,
-    "version": "1.4.2",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Roxinha",
-        "lang": "pt-BR",
-        "id": "3961079268907869519",
-        "baseUrl": "https://roxinha.online"
-      }
-    ],
-    "sha256": "da90370696d1ff7c3cb8ec72690b93e14744e0f16bdfad90ca12919e33c4839b",
-    "size": 199361
-  },
-  {
     "name": "Tachiyomi: RuMIX",
     "pkg": "eu.kanade.tachiyomi.extension.ru.rumix",
     "apk": "tachiyomi-ru.rumix-v1.4.42.apk",
@@ -21328,25 +20986,6 @@
     ],
     "sha256": "ffb4a751c1a2982b57a67e9736c98d9b43496f49d327dfd8d761fac0690add3c",
     "size": 183793
-  },
-  {
-    "name": "Tachiyomi: ScansFR",
-    "pkg": "eu.kanade.tachiyomi.extension.fr.scansfr",
-    "apk": "tachiyomi-fr.scansfr-v1.4.3.apk",
-    "lang": "fr",
-    "code": 3,
-    "version": "1.4.3",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "ScansFR",
-        "lang": "fr",
-        "id": "2639384491930845930",
-        "baseUrl": "https://scansfr.com"
-      }
-    ],
-    "sha256": "85c2afd21a3a049818d0dbf958e3f643d15e2a46bdc5bc91e9ad2fd9bfb584bf",
-    "size": 249673
   },
   {
     "name": "Tachiyomi: ScansGG",
@@ -23738,25 +23377,6 @@
     ],
     "sha256": "b09c84405cb2d1b180ce9fead4e68e82aab1a79d93393d5312bf2dcd6e33a092",
     "size": 201637
-  },
-  {
-    "name": "Tachiyomi: TruyenMM",
-    "pkg": "eu.kanade.tachiyomi.extension.vi.truyenmm",
-    "apk": "tachiyomi-vi.truyenmm-v1.4.2.apk",
-    "lang": "vi",
-    "code": 2,
-    "version": "1.4.2",
-    "nsfw": 1,
-    "sources": [
-      {
-        "name": "TruyenMM",
-        "lang": "vi",
-        "id": "4711592264872296686",
-        "baseUrl": "https://truyenmmhayr.com"
-      }
-    ],
-    "sha256": "8e635ec062c87fed7b456883912a406768bbf25d5aa93248ba76b581f3028ad9",
-    "size": 200825
   },
   {
     "name": "Tachiyomi: TruyenQQ",
@@ -26232,24 +25852,5 @@
     ],
     "sha256": "e39cabc10d4ca7ae9fe8534552b0170b2e8f1fa530aad961844f97679276b7ff",
     "size": 226549
-  },
-  {
-    "name": "Tachiyomi: ÇaprazManga",
-    "pkg": "eu.kanade.tachiyomi.extension.tr.caprazmanga",
-    "apk": "tachiyomi-tr.caprazmanga-v1.4.52.apk",
-    "lang": "tr",
-    "code": 52,
-    "version": "1.4.52",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "ÇaprazManga",
-        "lang": "tr",
-        "id": "7298383099057828683",
-        "baseUrl": "https://caprazmanga.com"
-      }
-    ],
-    "sha256": "1efcd2d31bbf89c902c27c2dad83d1098280c0433fbe3ad51fa44e39d2119a5e",
-    "size": 267576
   }
 ]

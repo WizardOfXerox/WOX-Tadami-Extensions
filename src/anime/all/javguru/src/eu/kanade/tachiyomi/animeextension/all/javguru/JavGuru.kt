@@ -251,7 +251,7 @@ class JavGuru :
         }
     }
 
-    override fun relatedAnimeListParse(response: Response): List<SAnime> {
+    fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.useAsJsoup()
         return document.select("div.woo-sc-related-posts li").map { element ->
             SAnime.create().apply {
@@ -318,7 +318,7 @@ class JavGuru :
             val rtype = RTYPE_REGEX.find(script)?.groupValues?.get(1) ?: "x"
             val keys = KEYS_REGEX.find(script)?.groupValues?.get(1)
                 ?.split(",")
-                ?.map { it.trim().removeSurrounding("'").removeSurrounding(""") }
+                ?.map { it.trim().removeSurrounding("'").removeSurrounding("\"") }
                 ?: return null
 
             val element = iframeDocument.getElementById(cid) ?: return null
@@ -450,12 +450,12 @@ class JavGuru :
     companion object {
         const val PREFIX_ID = "id:"
 
-        private val IFRAME_B64_REGEX = Regex("iframe_url\\":\\"([^\\"]+)\\")
-        private val CID_REGEX = Regex("cid:\\s*['\"]([^'\"]+)['\"]")
-        private val BASE_REGEX = Regex("base:\\s*['\"]([^'\"]+)['\"]")
-        private val RTYPE_REGEX = Regex("rtype:\\s*['\"]([^'\"]+)['\"]")
-        private val KEYS_REGEX = Regex("keys:\\s*\\[([^\\]]+)\\]")
-        private val PAGINATION_REGEX = Regex("/page/(\\d+)")
+        private val IFRAME_B64_REGEX = Regex("""iframe_url":"([^"]+)""")
+        private val CID_REGEX = Regex("""cid:\s*['"]([^'"]+)['"]""")
+        private val BASE_REGEX = Regex("""base:\s*['"]([^'"]+)['"]""")
+        private val RTYPE_REGEX = Regex("""rtype:\s*['"]([^'"]+)['"]""")
+        private val KEYS_REGEX = Regex("""keys:\s*\[([^\]]+)\]""")
+        private val PAGINATION_REGEX = Regex("""/page/(\d+)""")
 
         private val DATE_FORMATTER by lazy {
             SimpleDateFormat("MMMM d, yyyy", Locale.US)

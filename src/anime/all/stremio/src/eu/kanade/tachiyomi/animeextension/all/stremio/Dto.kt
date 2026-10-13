@@ -2,13 +2,11 @@
 
 package eu.kanade.tachiyomi.animeextension.all.stremio
 
-import eu.kanade.tachiyomi.animesource.model.FetchType
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
-import extensions.utils.Source
-import extensions.utils.toJsonString
-import extensions.utils.tryParse
+import keiyoushi.utils.toJsonString
+import keiyoushi.utils.tryParse
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -212,7 +210,6 @@ data class StreamDto(
     val url: String? = null,
     val behaviorHints: BehaviorHintDto? = null,
 ) {
-    context(source: Source)
     fun toVideo(serverUrl: String?, hosterData: String): Video? {
         val (type, id) = hosterData.split("-", limit = 2)
         val videoData = VideoData(

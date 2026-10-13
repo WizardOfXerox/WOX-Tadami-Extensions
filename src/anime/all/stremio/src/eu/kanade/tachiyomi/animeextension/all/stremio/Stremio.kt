@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.animeextension.all.stremio
 
+import android.app.Application
 import android.content.SharedPreferences
 import android.text.InputType
 import android.util.Log
@@ -9,27 +10,17 @@ import eu.kanade.tachiyomi.animeextension.all.stremio.addon.dto.AddonDto
 import eu.kanade.tachiyomi.animeextension.all.stremio.addon.dto.AddonResource
 import eu.kanade.tachiyomi.animeextension.all.stremio.addon.dto.CatalogDto
 import eu.kanade.tachiyomi.animeextension.all.stremio.addon.dto.ExtraType
+import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
-import eu.kanade.tachiyomi.animesource.model.FetchType
-import eu.kanade.tachiyomi.animesource.model.Hoster
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Track
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.network.get
-import eu.kanade.tachiyomi.network.post
+import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.util.parallelCatchingFlatMap
-import extensions.utils.LazyMutable
-import extensions.utils.Source
-import extensions.utils.addEditTextPreference
-import extensions.utils.addSwitchPreference
-import extensions.utils.delegate
-import extensions.utils.firstInstance
-import extensions.utils.getSwitchPreference
-import extensions.utils.parseAs
-import extensions.utils.toRequestBody
+import keiyoushi.utils.*
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,23 +32,29 @@ import kotlinx.serialization.json.putJsonArray
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.text.StringSubstitutor
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 import kotlin.collections.any
 import kotlin.collections.orEmpty
 
-class Stremio : Source() {
-    override val migration: SharedPreferences.() -> Unit = {
+class Stremio : AnimeHttpSource(), ConfigurableAnimeSource {
+    val migration: SharedPreferences.() -> Unit = {
         val addons = getString(ADDONS_KEY, ADDONS_DEFAULT)!!
             .replace(" ", "\n")
         edit().putString(ADDONS_KEY, addons).commit()
     }
 
-    override var baseUrl by LazyMutable { preferences.webUIUrl }
+    override var baseUrl = "https://web.stremio.com"
 
     override val lang = "all"
 
     override val name = "Stremio"
 
-    override val supportsLatest = false
+    override val supportsLatest = true
+
+    private val preferences: SharedPreferences by lazy {
+        Injekt.get<Application>().getSharedPreferences("source_$id", 0x0000)
+    }
 
     private val addonDelegate = preferences.delegate(ADDONS_KEY, ADDONS_DEFAULT)
     private val authKeyDelegate = preferences.delegate(AUTHKEY_KEY, "")
@@ -69,14 +66,14 @@ class Stremio : Source() {
     // ============================== Popular ===============================
 
     override suspend fun getPopularAnime(page: Int): AnimesPage {
-        val popularCatalog = addonManager.getAddons().firstNotNullOfOrNull { addon ->
+        val popularCatalog = addonManager.getAddons(this).firstNotNullOfOrNull { addon ->
             addon.manifest.catalogs.firstOrNull { catalog ->
                 catalog.extra.orEmpty().none { it.isRequired == true }
             }?.copy(transportUrl = addon.getTransportUrl().toString())
         } ?: throw Exception("No valid catalog addons found")
 
         try {
-            setCatalogList(addonManager.getAddons())
+            setCatalogList(addonManager.getAddons(this))
         } catch (_: Exception) { }
 
         return getSearchAnime(
@@ -434,7 +431,7 @@ class Stremio : Source() {
     override suspend fun getAnimeDetails(anime: SAnime): SAnime {
         val (_, type, id) = anime.url.getUrlParts()
 
-        val validAddons = addonManager.getAddons().filter {
+        val validAddons = addonManager.getAddons(this).filter {
             it.manifest.isValidResource(AddonResource.META, type, id)
         }
 
@@ -474,10 +471,10 @@ class Stremio : Source() {
             .build().toString()
     }
 
-    override suspend fun getSeasonList(anime: SAnime): List<SAnime> {
+    suspend fun getSeasonList(anime: SAnime): List<SAnime> {
         val (_, type, id) = anime.url.getUrlParts()
 
-        val validAddons = addonManager.getAddons().filter {
+        val validAddons = addonManager.getAddons(this).filter {
             it.manifest.isValidResource(AddonResource.META, type, id)
         }
 
@@ -526,7 +523,7 @@ class Stremio : Source() {
             )
         }
 
-        val validAddons = addonManager.getAddons().filter {
+        val validAddons = addonManager.getAddons(this).filter {
             it.manifest.isValidResource(AddonResource.META, type, id)
         }
 
@@ -573,10 +570,10 @@ class Stremio : Source() {
 
     // ============================ Video Links =============================
 
-    override suspend fun getHosterList(episode: SEpisode): List<Hoster> {
+    suspend fun getHosterList(episode: SEpisode): List<Hoster> {
         val (_, type, id) = episode.url.getUrlParts()
 
-        return addonManager.getAddons()
+        return addonManager.getAddons(this)
             .filter { it.manifest.isValidResource(AddonResource.STREAM, type, id) }
             .map { addon ->
                 val url = addon.getTransportUrl().newBuilder().apply {
@@ -594,18 +591,28 @@ class Stremio : Source() {
             }
     }
 
-    override suspend fun getVideoList(hoster: Hoster): List<Video> {
-        val serverUrl = preferences.serverUrl.takeIf { it.isNotEmpty() }
+    override suspend fun getVideoList(episode: SEpisode): List<Video> {
+        return getHosterList(episode).flatMap { hoster ->
+            try {
+                getVideoList(hoster)
+            } catch (_: Exception) {
+                emptyList()
+            }
+        }
+    }
+
+    suspend fun getVideoList(hoster: Hoster): List<Video> {
+        val serverUrl = preferences.getString("server_url", "")?.takeIf { it.isNotEmpty() }
 
         val videoList = client.get(hoster.hosterUrl, headers)
             .parseAs<StreamResultDto>()
             .streams.mapNotNull { v -> v.toVideo(serverUrl, hoster.internalData) }
 
-        val videoLimit = preferences.videoLimit.toInt()
+        val videoLimit = (preferences.getString("video_limit", "0") ?: "0").toInt()
         return if (videoLimit == 0) videoList else videoList.take(videoLimit)
     }
 
-    override suspend fun resolveVideo(video: Video): Video? {
+    suspend fun resolveVideo(video: Video): Video? {
         val data = video.internalData.parseAs<VideoData>()
         val subtitleList = getSubtitleList(data)
 
@@ -615,7 +622,7 @@ class Stremio : Source() {
     }
 
     private suspend fun getSubtitleList(videoData: VideoData): List<Track> {
-        return addonManager.getAddons()
+        return addonManager.getAddons(this)
             .filter { it.manifest.isValidResource(AddonResource.SUBTITLES, videoData.type, videoData.id) }
             .parallelCatchingFlatMap { addon ->
                 val hints = buildList(3) {
@@ -660,6 +667,16 @@ class Stremio : Source() {
         return url.split("-", limit = 3)
     }
 
+    override fun popularAnimeRequest(page: Int): okhttp3.Request = throw UnsupportedOperationException()
+    override fun popularAnimeParse(response: okhttp3.Response): AnimesPage = throw UnsupportedOperationException()
+    override fun latestUpdatesRequest(page: Int): okhttp3.Request = throw UnsupportedOperationException()
+    override fun latestUpdatesParse(response: okhttp3.Response): AnimesPage = throw UnsupportedOperationException()
+    override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): okhttp3.Request = throw UnsupportedOperationException()
+    override fun searchAnimeParse(response: okhttp3.Response): AnimesPage = throw UnsupportedOperationException()
+    override fun animeDetailsParse(response: okhttp3.Response): SAnime = throw UnsupportedOperationException()
+    override fun episodeListParse(response: okhttp3.Response): List<SEpisode> = throw UnsupportedOperationException()
+    override fun videoListParse(response: okhttp3.Response): List<Video> = throw UnsupportedOperationException()
+
     companion object {
         const val API_URL = "https://api.strem.io"
         private const val LIBRARY_PAGE_SIZE = 100
@@ -703,14 +720,14 @@ class Stremio : Source() {
         private val STRING_SUBSTITUTOR = StringSubstitutor(SUBSTITUTE_VALUES, "{", "}").apply {
             isEnableUndefinedVariableException = true
         }
-        private val SUBSTITUTE_DIALOG_MESSAGE = $$"""
+        private val SUBSTITUTE_DIALOG_MESSAGE = """
         |Supported placeholders:
         |- {name}: Episode name
         |- {episodeNumber}: Episode number
         |- {seasonNumber}: Season number
         |- {description}: Episode description
-        |If you wish to place some text between curly brackets, place the escape character "$"
-        |before the opening curly bracket, e.g. ${name}.
+        |If you wish to place some text between curly brackets, place the escape character "${'$'}"
+        |before the opening curly bracket, e.g. ${'$'}{name}.
         """.trimMargin()
 
         private const val PREF_EPISODE_NAME_TEMPLATE_KEY = "pref_episode_name_template"
@@ -769,241 +786,19 @@ class Stremio : Source() {
 
     var loginJob: Job? = null
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        val logOutSummary: (String) -> String = {
-            if (it.isBlank()) {
-                "Currently not logged in"
-            } else {
-                "Press to log out"
-            }
+        val addonsPref = androidx.preference.EditTextPreference(screen.context).apply {
+            key = ADDONS_KEY
+            title = "Stremio Addon URLs"
+            summary = "Addon URLs separated by newlines"
+            setDefaultValue(ADDONS_DEFAULT)
         }
-        val logOutPref = screen.getSwitchPreference(
-            key = "_unused",
-            default = false,
-            title = "Log out",
-            summary = logOutSummary(preferences.authKey),
-            restartRequired = true,
-            enabled = preferences.authKey.isNotBlank(),
-        ) { pref, _ ->
-            pref.setEnabled(false)
-            pref.summary = logOutSummary("")
-
-            preferences.clearCredentials()
-            preferences.clearLogin()
-
-            false
+        val authKeyPref = androidx.preference.EditTextPreference(screen.context).apply {
+            key = AUTHKEY_KEY
+            title = "Stremio User Auth Key"
+            summary = "Stremio Auth Key"
+            setDefaultValue("")
         }
-
-        val getLibrarySummary: (String) -> String = {
-            if (it.isBlank()) {
-                "Currently not logged in"
-            } else {
-                "Please keep disabled if not used to reduce number of requests"
-            }
-        }
-        val getLibraryPref = screen.getSwitchPreference(
-            key = PREF_FETCH_LIBRARY_KEY,
-            default = PREF_FETCH_LIBRARY_DEFAULT,
-            title = "Fetch library",
-            summary = getLibrarySummary(preferences.authKey),
-            enabled = preferences.authKey.isNotBlank(),
-        )
-
-        val webUiSummary: (String) -> String = { it.ifBlank { "WebUI url (used only for WebView)" } }
-        screen.addEditTextPreference(
-            key = WEBUI_URL_KEY,
-            title = "WebUI Url",
-            default = WEBUI_URL_DEFAULT,
-            summary = webUiSummary(baseUrl),
-            getSummary = webUiSummary,
-            dialogMessage = "The address must not end with a forward slash.",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI,
-            validate = { it.toHttpUrlOrNull() != null && !it.endsWith("/") },
-            validationMessage = { "The URL is invalid, malformed, or ends with a slash" },
-        ) { baseUrl = it }
-
-        val serverUrlSummary: (String) -> String = { it.ifBlank { "Server url for torrent streams (optional)" } }
-        screen.addEditTextPreference(
-            key = SERVER_URL_KEY,
-            title = "Server Url",
-            default = SERVER_URL_DEFAULT,
-            summary = serverUrlSummary(preferences.serverUrl),
-            getSummary = serverUrlSummary,
-            dialogMessage = "The address must not end with a forward slash.",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI,
-            validate = { it.toHttpUrlOrNull() != null && !it.endsWith("/") },
-            validationMessage = { "The URL is invalid, malformed, or ends with a slash" },
-        )
-
-        val isValidAddon: (String) -> Boolean = {
-            it.endsWith("/manifest.json") &&
-                (it.startsWith("stremio://") || it.startsWith("http"))
-        }
-        screen.addEditTextPreference(
-            key = ADDONS_KEY,
-            default = ADDONS_DEFAULT,
-            title = "Addons",
-            summary = "Manually specify addons, overrides addons from logged in user",
-            dialogMessage = "Separate manifest urls with a newline",
-            validate = {
-                val urls = it.split("\n")
-                urls.all(isValidAddon)
-            },
-            validationMessage = {
-                val urls = it.split("\n")
-                val invalidUrl = urls.firstOrNull { url -> !isValidAddon(url) } ?: it
-                "'$invalidUrl' is not a valid stremio addon"
-            },
-        )
-
-        fun onCompleteLogin(result: Boolean) {
-            logOutPref.setEnabled(result)
-            logOutPref.summary = logOutSummary(if (result) "unused" else "")
-            getLibraryPref.setEnabled(result)
-            getLibraryPref.summary = getLibrarySummary(if (result) "unused" else "")
-
-            if (!result) {
-                preferences.clearCredentials()
-                preferences.clearLogin()
-            }
-        }
-
-        fun logIn() {
-            logOutPref.setEnabled(false)
-            logOutPref.summary = "Loading..."
-            preferences.clearCredentials()
-
-            loginJob?.cancel()
-            loginJob = CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val body = buildJsonObject {
-                        put("email", preferences.email)
-                        put("facebook", false)
-                        put("password", preferences.password)
-                        put("type", "Login")
-                    }.toRequestBody()
-
-                    val loginDto = client.post("$API_URL/api/login", body = body).parseAs<ResultDto<LoginDto>>()
-                    val authKey = loginDto.result.authKey
-
-                    displayToast("Login successful")
-                    handler.post {
-                        preferences.authKey = authKey
-                        onCompleteLogin(true)
-                    }
-                } catch (e: Exception) {
-                    if (e is CancellationException) throw e
-
-                    Log.e(LOG_TAG, "Failed to login", e)
-                    displayToast("Login failed")
-                    handler.post {
-                        onCompleteLogin(false)
-                    }
-                }
-            }
-        }
-
-        val emailSummary: (String) -> String = { it.ifBlank { "Log in with account (optional)" } }
-        screen.addEditTextPreference(
-            key = EMAIL_KEY,
-            title = "Email",
-            default = EMAIL_DEFAULT,
-            summary = emailSummary(preferences.email),
-            getSummary = emailSummary,
-            dialogMessage = "Email address",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
-        ) {
-            if (preferences.password.isNotBlank()) {
-                logIn()
-            }
-        }
-
-        val passwordSummary: (String) -> String = {
-            if (it.isBlank()) "The user account password" else "•".repeat(it.length)
-        }
-        screen.addEditTextPreference(
-            key = PASSWORD_KEY,
-            title = "Password",
-            default = PASSWORD_DEFAULT,
-            summary = passwordSummary(preferences.password),
-            getSummary = passwordSummary,
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD,
-        ) {
-            if (preferences.email.isNotBlank()) {
-                logIn()
-            }
-        }
-
-        screen.addEditTextPreference(
-            key = PREF_EPISODE_NAME_TEMPLATE_KEY,
-            title = "Episode name format",
-            summary = "Customize how episode names appear",
-            inputType = InputType.TYPE_CLASS_TEXT,
-            default = PREF_EPISODE_NAME_TEMPLATE_DEFAULT,
-            dialogMessage = SUBSTITUTE_DIALOG_MESSAGE,
-            validate = {
-                try {
-                    STRING_SUBSTITUTOR.replace(it)
-                    true
-                } catch (_: IllegalArgumentException) {
-                    false
-                }
-            },
-            validationMessage = { "Invalid episode name format" },
-        )
-
-        screen.addEditTextPreference(
-            key = PREF_SCANLATOR_NAME_TEMPLATE_KEY,
-            title = "Scanlator format",
-            summary = "Customize how scanlator appear",
-            inputType = InputType.TYPE_CLASS_TEXT,
-            default = PREF_SCANLATOR_NAME_TEMPLATE_DEFAULT,
-            dialogMessage = SUBSTITUTE_DIALOG_MESSAGE,
-            validate = {
-                try {
-                    STRING_SUBSTITUTOR.replace(it)
-                    true
-                } catch (_: IllegalArgumentException) {
-                    false
-                }
-            },
-            validationMessage = { "Invalid scanlator format" },
-        )
-
-        screen.addSwitchPreference(
-            key = PREF_SPLIT_SEASONS_KEY,
-            default = PREF_SPLIT_SEASONS_DEFAULT,
-            title = "Split seasons",
-            summary = "Split seasons into its own entry",
-        )
-
-        screen.addSwitchPreference(
-            key = PREF_CONCAT_NAMES_KEY,
-            default = PREF_CONCAT_NAMES_DEFAULT,
-            title = "Concatenate series and season names",
-            summary = "",
-        )
-
-        val limitSummary: (String) -> String = { if (it == "0") "No limit" else "Limit: $it" }
-        screen.addEditTextPreference(
-            key = PREF_VIDEO_LIMIT_KEY,
-            default = PREF_VIDEO_LIMIT_DEFAULT,
-            title = "Limit number of videos from hosters",
-            summary = limitSummary(preferences.videoLimit),
-            getSummary = limitSummary,
-            dialogMessage = "0 means no limit",
-            inputType = InputType.TYPE_CLASS_NUMBER,
-            validate = {
-                if (it.toIntOrNull() == null) {
-                    false
-                } else {
-                    it.toInt() > -1
-                }
-            },
-            validationMessage = { "Limit must be a number equal or greater to 0" },
-            allowBlank = false,
-        )
-
-        screen.addPreference(logOutPref)
-        screen.addPreference(getLibraryPref)
+        screen.addPreference(addonsPref)
+        screen.addPreference(authKeyPref)
     }
 }

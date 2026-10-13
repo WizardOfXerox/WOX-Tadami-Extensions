@@ -2,11 +2,11 @@ package eu.kanade.tachiyomi.animeextension.all.javgg
 
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
-import aniyomi.lib.vidhideextractor.VidHideExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
-import aniyomi.lib.youruploadextractor.YourUploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
+import eu.kanade.tachiyomi.lib.vidhideextractor.VidHideExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
+import eu.kanade.tachiyomi.lib.youruploadextractor.YourUploadExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -34,7 +34,7 @@ class Javgg :
 
     override val supportsLatest = true
 
-    override val supportsRelatedAnimes = false
+    val supportsRelatedAnimes = false
 
     private val preferences by getPreferencesLazy()
 
@@ -126,7 +126,7 @@ class Javgg :
         return AnimesPage(animeList, nextPage)
     }
 
-    override fun String.stripKeywordForRelatedAnimes(): List<String> {
+    fun String.stripKeywordForRelatedAnimes(): List<String> {
         val regexWhitespace = Regex("\\s+")
         val regexSpecialCharacters =
             Regex("([-!~#$%^&*+_|/\\\\,?:;'“”‘’\"<>(){}\\[\\]。・～：—！？、―«»《》〘〙【】「」｜]|\\s-|-\\s|\\s\\.|\\.\\s)")
@@ -184,7 +184,7 @@ class Javgg :
                 VidHideExtractor(client, cleanHeaders).videosFromUrl(url)
             }
 
-            embedUrl.contains("voe") -> VoeExtractor(client, headers).videosFromUrl(url)
+            embedUrl.contains("voe") -> VoeExtractor(client).videosFromUrl(url)
 
             embedUrl.contains("yourupload") || embedUrl.contains("upload") -> YourUploadExtractor(client).videoFromUrl(url, headers = headers)
 

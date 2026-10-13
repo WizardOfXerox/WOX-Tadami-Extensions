@@ -480,26 +480,6 @@
     "size": 182062
   },
   {
-    "name": "Aniyomi: AnimeBum",
-    "pkg": "eu.kanade.tachiyomi.animeextension.es.animebum",
-    "apk": "aniyomi-es.animebum-v14.26.apk",
-    "lang": "es",
-    "code": 26,
-    "version": "14.26",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "AnimeBum",
-        "lang": "es",
-        "id": "8233706727551070437",
-        "baseUrl": "https://animebum.net"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animebum.png",
-    "sha256": "f50461a1dd2d22cab1ebcd16f41e84a05728dfa9cb0d4e2d4ce9d6fd9b75a53e",
-    "size": 689481
-  },
-  {
     "name": "Aniyomi: AnimeFenix",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
     "apk": "aniyomi-es.animefenix-v14.74.apk",
@@ -538,26 +518,6 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.animegg.png",
     "sha256": "4e1b2d11805e8c768d9c0c54c1a34c9a2cb6fbcc079e7c5319e5665ceef34475",
     "size": 110168
-  },
-  {
-    "name": "Aniyomi: AnimeID",
-    "pkg": "eu.kanade.tachiyomi.animeextension.es.animeid",
-    "apk": "aniyomi-es.animeid-v14.26.apk",
-    "lang": "es",
-    "code": 26,
-    "version": "14.26",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "AnimeID",
-        "lang": "es",
-        "id": "3757015232925755985",
-        "baseUrl": "https://animeid.to"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeid.png",
-    "sha256": "47e02b18d8c96340ca761a0c3129c4d6de1e1f64276fa0f692e76c78e363c49e",
-    "size": 272314
   },
   {
     "name": "Aniyomi: AnimeIndo",
@@ -1120,26 +1080,6 @@
     "size": 187260
   },
   {
-    "name": "Aniyomi: AnimesROLL",
-    "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesroll",
-    "apk": "aniyomi-pt.animesroll-v14.8.apk",
-    "lang": "pt-BR",
-    "code": 8,
-    "version": "14.8",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Animes ROLL",
-        "lang": "pt-BR",
-        "id": "734961575978606843",
-        "baseUrl": "https://animesroll.com"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesroll.png",
-    "sha256": "a1f442c3b468d43e60e3b44a66ae65b621d63166122ee095a862bac6527b422e",
-    "size": 197213
-  },
-  {
     "name": "Aniyomi: Animevost",
     "pkg": "eu.kanade.tachiyomi.animeextension.ru.animevost",
     "apk": "aniyomi-ru.animevost-v14.10.apk",
@@ -1524,26 +1464,6 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.dashflix.png",
     "sha256": "b871147f544223a45669c9f293ac697716aff1eda5c101e7b3e45938a75d31b0",
     "size": 177763
-  },
-  {
-    "name": "Aniyomi: DarkMahou",
-    "pkg": "eu.kanade.tachiyomi.animeextension.pt.darkmahou",
-    "apk": "aniyomi-pt.darkmahou-v14.19.apk",
-    "lang": "pt-BR",
-    "code": 19,
-    "version": "14.19",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "DarkMahou (Torrent)",
-        "lang": "pt-BR",
-        "id": "59748104323952005",
-        "baseUrl": "https://darkmahou.org"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.darkmahou.png",
-    "sha256": "e0ff548f8b0da73cea72aecd280bf08a7bda98b03fd00234ea62f050502cdb3b",
-    "size": 196565
   },
   {
     "name": "Aniyomi: DattebayoBR",
@@ -2360,10 +2280,10 @@
   {
     "name": "Aniyomi: Jav Guru",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.javguru",
-    "apk": "aniyomi-all.javguru-v14.43.apk",
+    "apk": "aniyomi-all.javguru-v14.52.apk",
     "lang": "all",
-    "code": 43,
-    "version": "14.43",
+    "code": 52,
+    "version": "14.52",
     "nsfw": 1,
     "sources": [
       {
@@ -2374,15 +2294,16 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javguru.png",
-    "sha256": null
+    "sha256": "8d694ff2f7b4dcd411357daad2870733d9b633f0c651d8df984d063175d1fd79",
+    "size": 140469
   },
   {
     "name": "Aniyomi: JavGG",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
-    "apk": "aniyomi-all.javgg-v14.19.apk",
+    "apk": "aniyomi-all.javgg-v14.28.apk",
     "lang": "all",
-    "code": 19,
-    "version": "14.19",
+    "code": 28,
+    "version": "14.28",
     "nsfw": 1,
     "sources": [
       {
@@ -2393,7 +2314,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javgg.png",
-    "sha256": null
+    "sha256": "d740fc096e76341ef6054e1d344cbfcf8f9eba1bf571e270909d94483bff7eb9",
+    "size": 144039
   },
   {
     "name": "Aniyomi: JetAnime",
@@ -2698,8 +2620,8 @@
   {
     "name": "Aniyomi: Loklok",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.loklok",
-    "code": 1,
-    "apk": "aniyomi-all.loklok-v14.1.apk",
+    "code": 9,
+    "apk": "aniyomi-all.loklok-v14.9.apk",
     "lang": "all",
     "sources": [
       {
@@ -2710,29 +2632,10 @@
       }
     ],
     "nsfw": 0,
-    "version": "14.1",
+    "version": "14.9",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.loklok.png",
-    "sha256": null
-  },
-  {
-    "name": "Aniyomi: LoveFlix",
-    "pkg": "eu.kanade.tachiyomi.animeextension.pt.loveflix",
-    "code": 1,
-    "apk": "aniyomi-pt.loveflix-v14.1.apk",
-    "lang": "pt",
-    "sources": [
-      {
-        "name": "LoveFlix",
-        "lang": "pt",
-        "id": "5682935566643963833",
-        "baseUrl": "https://loveflix.net"
-      }
-    ],
-    "nsfw": 0,
-    "version": "14.1",
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.loveflix.png",
-    "sha256": "08785bb362f46f80395a41835a4f31dfccac3e5afe6e811b2d12f59a3f9fdd63",
-    "size": 143596
+    "sha256": "569fb9cc36d2e108dadee6786585bc726a35fa413bd6112d5dfe968c9840878d",
+    "size": 148692
   },
   {
     "name": "Aniyomi: LuciferDonghua",
@@ -2857,10 +2760,10 @@
   {
     "name": "Aniyomi: MissAV",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.missav",
-    "apk": "aniyomi-all.missav-v14.27.apk",
+    "apk": "aniyomi-all.missav-v14.36.apk",
     "lang": "all",
-    "code": 27,
-    "version": "14.27",
+    "code": 36,
+    "version": "14.36",
     "nsfw": 1,
     "sources": [
       {
@@ -2871,7 +2774,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.missav.png",
-    "sha256": null
+    "sha256": "dacb5910b600a3617137d45d60e0efcaa4071753d435e79acccd3febfb8b4298",
+    "size": 174543
   },
   {
     "name": "Aniyomi: Moflix-Stream",
@@ -2952,26 +2856,6 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.myrunningman.png",
     "sha256": "1b741553989152d35d0730f2415121036191a01f9bbdbcada1dd242c72b8be32",
     "size": 165046
-  },
-  {
-    "name": "Aniyomi: MyKdrama",
-    "pkg": "eu.kanade.tachiyomi.animeextension.fr.mykdrama",
-    "apk": "aniyomi-fr.mykdrama-v14.16.apk",
-    "lang": "fr",
-    "code": 16,
-    "version": "14.16",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "MyKdrama",
-        "lang": "fr",
-        "id": "7657190496536415953",
-        "baseUrl": "http://mykdrama.co"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.fr.mykdrama.png",
-    "sha256": "ff9287cdcc335018df2128a00c95681509245d4d049c0060699e8fdb3e78184f",
-    "size": 196114
   },
   {
     "name": "Aniyomi: MyReadingManga",
@@ -3368,10 +3252,10 @@
   {
     "name": "Aniyomi: PTorrent (Torrent)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.ptorrent",
-    "apk": "aniyomi-all.ptorrent-v14.4.apk",
+    "apk": "aniyomi-all.ptorrent-v14.12.apk",
     "lang": "all",
-    "code": 4,
-    "version": "14.4",
+    "code": 12,
+    "version": "14.12",
     "nsfw": 1,
     "sources": [
       {
@@ -3382,7 +3266,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.ptorrent.png",
-    "sha256": null
+    "sha256": "128cc9a22fc20a4ee21cce0836dae635a13ff1aee9e768fde9efb13e7e914960",
+    "size": 70924
   },
   {
     "name": "Aniyomi: Pandrama",
@@ -3527,8 +3412,8 @@
   {
     "name": "Aniyomi: Pornhub",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.pornhub",
-    "code": 3,
-    "apk": "aniyomi-all.pornhub-v14.3.apk",
+    "code": 11,
+    "apk": "aniyomi-all.pornhub-v14.11.apk",
     "lang": "all",
     "sources": [
       {
@@ -3539,29 +3424,10 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.3",
+    "version": "14.11",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.pornhub.png",
-    "sha256": null
-  },
-  {
-    "name": "Aniyomi: Q1N",
-    "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesgratis",
-    "apk": "aniyomi-pt.animesgratis-v14.37.apk",
-    "lang": "pt-BR",
-    "code": 37,
-    "version": "14.37",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Q1N",
-        "lang": "pt-BR",
-        "id": "2969482460524685571",
-        "baseUrl": "https://q1n.net"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.animesgratis.png",
-    "sha256": "243e2e1c2475b63f8028f2ce10848af10afd6a9a7b598e00567bdc47607098d9",
-    "size": 190783
+    "sha256": "e91ea70c78779183c40d49a0f6d78796b2e0205f47a8e5de4dee6582db298357",
+    "size": 124415
   },
   {
     "name": "Aniyomi: Re:Anime",
@@ -3722,26 +3588,6 @@
     "size": 934260
   },
   {
-    "name": "Aniyomi: SeuFilme",
-    "pkg": "eu.kanade.tachiyomi.animeextension.pt.seufilme",
-    "code": 1,
-    "apk": "aniyomi-pt.seufilme-v14.1.apk",
-    "lang": "pt",
-    "sources": [
-      {
-        "name": "SeuFilme",
-        "lang": "pt",
-        "id": "1378959309870604659",
-        "baseUrl": "https://seufilme.net"
-      }
-    ],
-    "nsfw": 0,
-    "version": "14.1",
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.pt.seufilme.png",
-    "sha256": "09b09437cb015b5a52e09638b4fd06910bd462836020e9614a154dac8f1a0696",
-    "size": 143596
-  },
-  {
     "name": "Aniyomi: SmartAnimes",
     "pkg": "eu.kanade.tachiyomi.animeextension.pt.smartanimes",
     "apk": "aniyomi-pt.smartanimes-v14.8.apk",
@@ -3822,10 +3668,10 @@
   {
     "name": "Aniyomi: Stremio",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.stremio",
-    "apk": "aniyomi-all.stremio-v14.9.apk",
+    "apk": "aniyomi-all.stremio-v14.10.apk",
     "lang": "all",
-    "code": 9,
-    "version": "14.9",
+    "code": 10,
+    "version": "14.10",
     "nsfw": 0,
     "sources": [
       {
@@ -3836,7 +3682,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.stremio.png",
-    "sha256": null
+    "sha256": "5b2e8ef9de8bf2bffade3e2e03cac091e6ab8ecdb332168604bdf8184852129e",
+    "size": 625756
   },
   {
     "name": "Aniyomi: Subsplease",
@@ -4038,10 +3885,10 @@
   {
     "name": "Aniyomi: Torrentio (Torrent / Debrid)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.torrentio",
-    "apk": "aniyomi-all.torrentio-v14.8.apk",
+    "apk": "aniyomi-all.torrentio-v14.16.apk",
     "lang": "all",
-    "code": 8,
-    "version": "14.8",
+    "code": 16,
+    "version": "14.16",
     "nsfw": 0,
     "sources": [
       {
@@ -4052,15 +3899,16 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.torrentio.png",
-    "sha256": null
+    "sha256": "08682ce297217df6e3f9cbe69741989e159bb2705cf79646495d8ca00159139f",
+    "size": 111938
   },
   {
     "name": "Aniyomi: Torrentio Anime (Torrent / Debrid)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.torrentioanime",
-    "apk": "aniyomi-all.torrentioanime-v14.19.apk",
+    "apk": "aniyomi-all.torrentioanime-v14.27.apk",
     "lang": "all",
-    "code": 19,
-    "version": "14.19",
+    "code": 27,
+    "version": "14.27",
     "nsfw": 0,
     "sources": [
       {
@@ -4071,7 +3919,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.torrentioanime.png",
-    "sha256": null
+    "sha256": "9d15a2097868a643dbfeba07885780fd48b8b8a1592eaa0fa08dc64040f2b2b6",
+    "size": 147485
   },
   {
     "name": "Aniyomi: Tuktuk Cinema",
@@ -4172,26 +4021,6 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.uk.ufdub.png",
     "sha256": "3c8c2565eb749ff7117fccea65b29f141664dcd64f4edadf001e11a026cec73e",
     "size": 120209
-  },
-  {
-    "name": "Aniyomi: UHD Movies",
-    "pkg": "eu.kanade.tachiyomi.animeextension.en.uhdmovies",
-    "apk": "aniyomi-en.uhdmovies-v14.19.apk",
-    "lang": "en",
-    "code": 19,
-    "version": "14.19",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "UHD Movies",
-        "lang": "en",
-        "id": "582068848290425167",
-        "baseUrl": "https://uhdmovies.vip"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.uhdmovies.png",
-    "sha256": "c63f9b572c9703946b7e7fcc282606086bf481fbd36675d0bf985c5577b24c64",
-    "size": 145251
   },
   {
     "name": "Aniyomi: UnderHentai",
@@ -4576,8 +4405,8 @@
   {
     "name": "Aniyomi: Xnxx (Custom)",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.xnxx",
-    "code": 4,
-    "apk": "aniyomi-all.xnxx-v14.4.apk",
+    "code": 12,
+    "apk": "aniyomi-all.xnxx-v14.12.apk",
     "lang": "all",
     "sources": [
       {
@@ -4588,17 +4417,18 @@
       }
     ],
     "nsfw": 1,
-    "version": "14.4",
+    "version": "14.12",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.xnxx.png",
-    "sha256": null
+    "sha256": "92ae8662adbc3596cd564ccfae8765164226524d8fe1f68c6cad9e7797daa13d",
+    "size": 92500
   },
   {
     "name": "Aniyomi: Xvideos",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.xvideos",
-    "apk": "aniyomi-all.xvideos-v14.3.apk",
+    "apk": "aniyomi-all.xvideos-v14.11.apk",
     "lang": "all",
-    "code": 3,
-    "version": "14.3",
+    "code": 11,
+    "version": "14.11",
     "nsfw": 1,
     "sources": [
       {
@@ -4609,7 +4439,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.xvideos.png",
-    "sha256": null
+    "sha256": "067ab123466282da696ffacd0ce295ab4476af74a7b0c057d94bad605471764d",
+    "size": 54006
   },
   {
     "name": "Aniyomi: YummyAnime",

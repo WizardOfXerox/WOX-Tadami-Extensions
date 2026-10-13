@@ -65,37 +65,37 @@ class Torrentio :
     }
 
     // ============================== JustWatch Api Query ======================
-    private fun justWatchQuery(): String = $$"""
+    private fun justWatchQuery(): String = """
             query GetPopularTitles(
-              $country: Country!,
-              $first: Int!,
-              $language: Language!,
-              $offset: Int,
-              $searchQuery: String,
-              $packages: [String!]!,
-              $objectTypes: [ObjectType!]!,
-              $popularTitlesSortBy: PopularTitlesSorting!,
-              $releaseYear: IntFilter
+              ${'$'}country: Country!,
+              ${'$'}first: Int!,
+              ${'$'}language: Language!,
+              ${'$'}offset: Int,
+              ${'$'}searchQuery: String,
+              ${'$'}packages: [String!]!,
+              ${'$'}objectTypes: [ObjectType!]!,
+              ${'$'}popularTitlesSortBy: PopularTitlesSorting!,
+              ${'$'}releaseYear: IntFilter
             ) {
               popularTitles(
-                country: $country
-                first: $first
-                offset: $offset
-                sortBy: $popularTitlesSortBy
+                country: ${'$'}country
+                first: ${'$'}first
+                offset: ${'$'}offset
+                sortBy: ${'$'}popularTitlesSortBy
                 filter: {
-                  objectTypes: $objectTypes,
-                  searchQuery: $searchQuery,
-                  packages: $packages,
+                  objectTypes: ${'$'}objectTypes,
+                  searchQuery: ${'$'}searchQuery,
+                  packages: ${'$'}packages,
                   genres: [],
                   excludeGenres: [],
-                  releaseYear: $releaseYear
+                  releaseYear: ${'$'}releaseYear
                 }
               ) {
                 edges {
                   node {
                     id
                     objectType
-                    content(country: $country, language: $language) {
+                    content(country: ${'$'}country, language: ${'$'}language) {
                       fullPath
                       title
                       shortDescription
@@ -104,7 +104,7 @@ class Torrentio :
                       }
                       posterUrl
                       genres {
-                        translation(language: $language)
+                        translation(language: ${'$'}language)
                       }
                       credits {
                         name
@@ -255,9 +255,9 @@ class Torrentio :
     // override suspend fun getAnimeDetails(anime: SAnime): SAnime = throw UnsupportedOperationException()
 
     override suspend fun getAnimeDetails(anime: SAnime): SAnime {
-        val query = $$"""
-            query GetUrlTitleDetails($fullPath: String!, $country: Country!, $language: Language!) {
-              urlV2(fullPath: $fullPath) {
+        val query = """
+            query GetUrlTitleDetails(${'$'}fullPath: String!, ${'$'}country: Country!, ${'$'}language: Language!) {
+              urlV2(fullPath: ${'$'}fullPath) {
                 node {
                   ...TitleDetails
                 }
@@ -268,7 +268,7 @@ class Torrentio :
               ... on MovieOrShowOrSeason {
                 id
                 objectType
-                content(country: $country, language: $language) {
+                content(country: ${'$'}country, language: ${'$'}language) {
                   title
                   shortDescription
                   externalIds {
@@ -276,7 +276,7 @@ class Torrentio :
                   }
                   posterUrl
                   genres {
-                    translation(language: $language)
+                    translation(language: ${'$'}language)
                   }
                 }
               }
