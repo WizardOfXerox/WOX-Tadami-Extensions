@@ -25,7 +25,7 @@ enum class AddonResource {
 
     companion object {
         fun fromString(value: String): AddonResource {
-            return AddonResource.entries.find { it.name.equals(value, ignoreCase = true) } ?: UNSUPPORTED
+            return AddonResource.values().find { it.name.equals(value, ignoreCase = true) } ?: UNSUPPORTED
         }
     }
 }

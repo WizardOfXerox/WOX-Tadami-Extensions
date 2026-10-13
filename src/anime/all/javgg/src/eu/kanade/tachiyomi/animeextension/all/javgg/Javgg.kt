@@ -87,12 +87,12 @@ class Javgg :
         return animeDetails
     }
 
-    override fun popularAnimeRequest(page: Int) = GET("$baseUrl/trending/page/$page", headers)
+    override fun popularAnimeRequest(page: Int) = GET("$baseUrl/category/jav-censored-all/page/$page/", headers)
 
     override fun popularAnimeParse(response: Response): AnimesPage {
         val document = response.asJsoup()
         val elements = document.select("article[id*=post-]")
-        val nextPage = document.select("#nextpagination").any()
+        val nextPage = document.select("#nextpagination, a.next, a.next.page-numbers").any()
         val animeList = elements.map { element ->
             SAnime.create().apply {
                 setUrlWithoutDomain(element.selectFirst("a")!!.attr("abs:href"))
@@ -105,7 +105,7 @@ class Javgg :
 
     override fun latestUpdatesParse(response: Response) = popularAnimeParse(response)
 
-    override fun latestUpdatesRequest(page: Int) = GET("$baseUrl/new-post/page/$page", headers)
+    override fun latestUpdatesRequest(page: Int) = GET("$baseUrl/page/$page/", headers)
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request = when {
         query.isNotBlank() -> GET("$baseUrl/jav/page/$page?s=$query", headers)

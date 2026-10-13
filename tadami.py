@@ -618,33 +618,67 @@ def sync_category(cat: str, dist_dir: Path):
     missing = 0
 
     for it in items:
-        apk_name = it.get("apk", "")
-        clean_apk_name = apk_name.replace("-debug.apk", ".apk")
-        it["apk"] = clean_apk_name
+        pkg = it.get("pkg", "")
+        pkg_id = pkg.split(".")[-1]
+        lang = it.get("lang", "")
+        app_prefix = "aniyomi" if cat == "anime" else "tachiyomi"
+        expected_prefix = f"{app_prefix}-{lang}.{pkg_id}"
+        pattern = f"{expected_prefix}-v*.apk"
 
-        apk_path = apk_dir / clean_apk_name
-        if not apk_path.exists():
-            # Check if root dist has it
-            root_path = dist_dir / clean_apk_name
-            if root_path.exists():
-                shutil.copy2(root_path, apk_path)
-            else:
-                # Check if there is an alternative version on disk matching the extension prefix
-                prefix = clean_apk_name.rsplit("-v", 1)[0] if "-v" in clean_apk_name else clean_apk_name
-                matches = list(apk_dir.glob(f"{prefix}*.apk"))
-                if matches:
-                    matched = sorted(matches, key=lambda p: p.stat().st_mtime, reverse=True)[0]
-                    it["apk"] = matched.name
-                    apk_path = matched
-                    # Extract version from filename
-                    m = re.search(r"-v([\d\.]+)\.apk", matched.name)
-                    if m:
-                        it["version"] = m.group(1)
-                        if "." in m.group(1):
-                            it["code"] = int(m.group(1).split(".")[-1])
-                    print(f"[+] Auto-linked {it.get('pkg')} to existing APK: {matched.name}")
+        # Find matching APKs in apk_dir or dist_dir
+        matches = list(apk_dir.glob(pattern))
+        dist_matches = list(dist_dir.glob(pattern))
+        for dm in dist_matches:
+            dest = apk_dir / dm.name
+            if not dest.exists():
+                shutil.copy2(dm, dest)
+            if dest not in matches:
+                matches.append(dest)
+
+        if matches:
+            def get_ver_code(p):
+                m = re.search(r"-v([\d\.]+)\.apk", p.name)
+                if m and "." in m.group(1):
+                    try:
+                        return (int(m.group(1).split(".")[-1]), p.stat().st_mtime)
+                    except ValueError:
+                        pass
+                return (0, p.stat().st_mtime)
+
+            matched = sorted(matches, key=get_ver_code, reverse=True)[0]
+            it["apk"] = matched.name
+            apk_path = matched
+            m = re.search(r"-v([\d\.]+)\.apk", matched.name)
+            if m:
+                it["version"] = m.group(1)
+                if "." in m.group(1):
+                    try:
+                        it["code"] = int(m.group(1).split(".")[-1])
+                    except ValueError:
+                        pass
+        else:
+            clean_apk_name = it.get("apk", "").replace("-debug.apk", ".apk")
+            it["apk"] = clean_apk_name
+            apk_path = apk_dir / clean_apk_name
+            if not apk_path.exists():
+                root_path = dist_dir / clean_apk_name
+                if root_path.exists():
+                    shutil.copy2(root_path, apk_path)
                 else:
-                    missing += 1
+                    prefix = clean_apk_name.rsplit("-v", 1)[0] if "-v" in clean_apk_name else clean_apk_name
+                    pattern_fb = f"{prefix}-v*.apk" if "-v" in clean_apk_name else f"{prefix}*.apk"
+                    matches_fb = list(apk_dir.glob(pattern_fb))
+                    if matches_fb:
+                        matched = sorted(matches_fb, key=lambda p: p.stat().st_mtime, reverse=True)[0]
+                        it["apk"] = matched.name
+                        apk_path = matched
+                        m = re.search(r"-v([\d\.]+)\.apk", matched.name)
+                        if m:
+                            it["version"] = m.group(1)
+                            if "." in m.group(1):
+                                it["code"] = int(m.group(1).split(".")[-1])
+                    else:
+                        missing += 1
 
         if apk_path.exists():
             it["sha256"] = sha256_file(apk_path)

@@ -48,9 +48,8 @@ class Xnxx : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
     // ============================== Popular Anime ==============================
 
     override fun popularAnimeRequest(page: Int): Request {
-        val dateStr = SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(Date())
         val pageIndex = page - 1
-        return GET("$baseUrl/best/$dateStr/$pageIndex", headers)
+        return GET("$baseUrl/best/$pageIndex", headers)
     }
 
     override fun popularAnimeSelector(): String = "div.thumb-block[id^=video_], div.thumb-block.video"

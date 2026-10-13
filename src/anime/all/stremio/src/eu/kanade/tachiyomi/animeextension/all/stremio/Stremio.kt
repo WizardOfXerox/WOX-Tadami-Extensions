@@ -688,7 +688,7 @@ class Stremio : AnimeHttpSource(), ConfigurableAnimeSource {
         private const val SERVER_URL_DEFAULT = ""
 
         const val ADDONS_KEY = "addons"
-        const val ADDONS_DEFAULT = ""
+        const val ADDONS_DEFAULT = "https://v3-cinemeta.strem.io/manifest.json"
 
         private const val EMAIL_KEY = "email"
         private const val EMAIL_DEFAULT = ""

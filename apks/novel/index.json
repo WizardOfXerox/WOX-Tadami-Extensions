@@ -14,10 +14,10 @@
     "name": "Akknovel",
     "site": "https://www.akknovel.com/",
     "lang": "English",
-    "version": 1000000,
+    "version": 1000001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/akknovel.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/akknovel/icon.png",
-    "versionCode": 1000100
+    "versionCode": 1000101
   },
   {
     "id": "allnovel",
@@ -895,10 +895,10 @@
     "name": "Mistmint Haven",
     "site": "https://www.mistminthaven.com/",
     "lang": "English",
-    "version": 1000000,
+    "version": 1000001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/mistminthaven.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/mistminthaven/icon.png",
-    "versionCode": 1000100
+    "versionCode": 1000101
   },
   {
     "id": "nova",
@@ -1216,10 +1216,10 @@
     "name": "Ocean Tales",
     "site": "https://oceantales.com/",
     "lang": "English",
-    "version": 1000000,
+    "version": 1000001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/oceantales.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/oceantales/icon.png",
-    "versionCode": 1000100
+    "versionCode": 1000101
   },
   {
     "id": "pasteltales",
