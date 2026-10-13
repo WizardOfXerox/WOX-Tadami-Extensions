@@ -2058,6 +2058,25 @@
     "sha256": "397c5856520c767666fbb07bc011edc2a904f0f18a446c57308499c8f20d2d4e"
   },
   {
+    "name": "Aniyomi: Hentaigasm",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaigasm",
+    "apk": "aniyomi-en.hentaigasm-v14.2.apk",
+    "lang": "en",
+    "code": 2,
+    "version": "14.2",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "Hentaigasm",
+        "lang": "en",
+        "id": "3777722363296111311",
+        "baseUrl": "https://hentaigasm.com"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaigasm.png",
+    "sha256": "0977bc6cbfc3f5724e1d4a73561189dd14856f28e1a3faff258e7fa5b6641016"
+  },
+  {
     "name": "Aniyomi: Hentaijk",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaijk",
     "apk": "aniyomi-es.hentaijk-v14.18.apk",
@@ -3210,6 +3229,25 @@
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.ptorrent.png",
     "sha256": null
+  },
+  {
+    "name": "Aniyomi: Pandrama",
+    "pkg": "eu.kanade.tachiyomi.animeextension.es.pandrama",
+    "apk": "aniyomi-es.pandrama-v14.9.apk",
+    "lang": "es",
+    "code": 9,
+    "version": "14.9",
+    "nsfw": 0,
+    "sources": [
+      {
+        "name": "Pandrama",
+        "lang": "es",
+        "id": "8290662435507939982",
+        "baseUrl": "https://www.pandrama.tv"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.pandrama.png",
+    "sha256": "584dd7e8e3c0cdd66f991e5903872a539e926de5ccb8dce98fe4bc12bbcf3bb4"
   },
   {
     "name": "Aniyomi: PelisForte",

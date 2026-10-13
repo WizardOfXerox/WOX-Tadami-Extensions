@@ -1,145 +1,5 @@
 [
   {
-    "id": "arnovel",
-    "name": "ArNovel",
-    "site": "https://ar-no.com/",
-    "lang": "‎العربية",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/ArNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/arnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "azora",
-    "name": "Azora",
-    "site": "https://azorafly.com",
-    "lang": "‎العربية",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Azora[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azora/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "dilartube",
-    "name": "dilar tube",
-    "site": "https://golden.rest/",
-    "lang": "‎العربية",
-    "version": 1000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/dilartube.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/dilartube/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "freekolnovel",
-    "name": "Free Kol Novel",
-    "site": "https://kolnovel.com",
-    "lang": "‎العربية",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/FreeKolNovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/freekolnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "galaxynovels",
-    "name": "Galaxy Novels",
-    "site": "https://galaxynovels.com/",
-    "lang": "‎العربية",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/galaxynovels.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/galaxynovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "hizomanga",
-    "name": "HizoManga",
-    "site": "https://hizomanga.net/",
-    "lang": "‎العربية",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/HizoManga[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/hizomanga/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "kolnovel",
-    "name": "Kol Novel",
-    "site": "https://kolnovel.com/",
-    "lang": "‎العربية",
-    "version": 1001020,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/KolNovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/kolnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "markazriwayat",
-    "name": "Markazriwayat",
-    "site": "https://markazriwayat.com/",
-    "lang": "‎العربية",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Markazriwayat[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/markazriwayat/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelsparadise",
-    "name": "Novels Paradise",
-    "site": "https://novelsparadise.site/",
-    "lang": "‎العربية",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/NovelsParadise[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/novelsparadise/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "rewayatclub",
-    "name": "Rewayat Club",
-    "site": "https://rewayat.club/",
-    "lang": "‎العربية",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/rewayatclub.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/rewayatclub/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "rewayatfans",
-    "name": "روايات فانز",
-    "site": "https://rewayatfans.com/",
-    "lang": "‎العربية",
-    "version": 3000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/rewayatfans.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/rewayatfans/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "riwyat",
-    "name": "Riwyat",
-    "site": "https://cenele.com/",
-    "lang": "‎العربية",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Riwyat[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/riwyat/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "seanovel",
-    "name": "Seanovel",
-    "site": "https://seanovel.org/",
-    "lang": "‎العربية",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/seanovel.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/seanovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "sunovels",
-    "name": "Sunovels",
-    "site": "https://sunovels.com/",
-    "lang": "‎العربية",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/sunovels.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/sunovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
     "id": "69shu",
     "name": "69书吧",
     "site": "https://www.69shu.xyz",
@@ -150,53 +10,13 @@
     "versionCode": 1000100
   },
   {
-    "id": "ixdzs8",
-    "name": "爱下电子书",
-    "site": "https://ixdzs8.com/",
-    "lang": "中文, 汉语, 漢語",
-    "version": 2002009,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/ixdzs8.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/ixdzs8/favicon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "linovelib_tw",
-    "name": "Linovelib(繁體)",
-    "site": "https://tw.linovelib.com/",
-    "lang": "中文, 汉语, 漢語",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/linovelib_tw.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/linovelib/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novel543",
-    "name": "Novel543",
-    "site": "https://www.novel543.com/",
-    "lang": "中文, 汉语, 漢語",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/novel543.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/novel543/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "quanben",
-    "name": "Quanben",
-    "site": "https://www.quanben.io/",
-    "lang": "中文, 汉语, 漢語",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/Quanben.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/quanben/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "1stkissnovel",
-    "name": "FirstKissNovel",
-    "site": "https://1stkissnovel.org/",
+    "id": "akknovel",
+    "name": "Akknovel",
+    "site": "https://www.akknovel.com/",
     "lang": "English",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FirstKissNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/1stkissnovel/icon.png",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/akknovel.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/akknovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -220,6 +40,36 @@
     "versionCode": 1000100
   },
   {
+    "id": "allnovelread",
+    "name": "AllNovelRead",
+    "site": "https://allnovelread.com/",
+    "lang": "Español",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/AllNovelRead[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/allnovelread/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "arnovel",
+    "name": "ArNovel",
+    "site": "https://ar-no.com/",
+    "lang": "‎العربية",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/ArNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/arnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "azraznovel",
+    "name": "Araz Novel",
+    "site": "https://araznovel.com/",
+    "lang": "Türkçe",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/ArazNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azraznovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "arcane",
     "name": "Arcane Translations",
     "site": "https://arcanetranslations.com/",
@@ -240,13 +90,53 @@
     "versionCode": 1000100
   },
   {
-    "id": "asuralightnovel",
-    "name": "Srank Manga",
-    "site": "https://srankmanga.com/",
-    "lang": "English",
+    "id": "azora",
+    "name": "Azora",
+    "site": "https://azorafly.com",
+    "lang": "‎العربية",
     "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/SrankManga[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/asuralightnovel/icon.png",
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Azora[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azora/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "bacalightnovel",
+    "name": "Baca Light Novel",
+    "site": "https://bacalightnovel.co/",
+    "lang": "Bahasa Indonesia",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/BacaLightNovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/bacalightnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "bakainua",
+    "name": "BakaInUA",
+    "site": "https://baka.in.ua",
+    "lang": "Українська",
+    "version": 3001007,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/ukrainian/bakainua.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/uk/bakainua/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "bllate-api",
+    "name": "Bllate (API)",
+    "site": "https://bllate.org",
+    "lang": "Русский",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Bllate[rulate].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/rulate/bllate-api/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "blogdoamonnovels",
+    "name": "Blog do Amon Novels",
+    "site": "https://www.blogdoamonnovels.com",
+    "lang": "Português",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/blogdoamonnovels.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/blogdoamonnovels/icon.png",
     "versionCode": 1000100
   },
   {
@@ -260,6 +150,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "bookhamster",
+    "name": "Bookhamster",
+    "site": "https://bookhamster.ru",
+    "lang": "Русский",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Bookhamster[ifreedom].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/ifreedom/bookhamster/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "bookriver",
+    "name": "Bookriver",
+    "site": "https://bookriver.ru",
+    "lang": "Русский",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/bookriver.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/bookriver/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "boxnovel",
     "name": "BoxNovel",
     "site": "https://novelnice.com/",
@@ -267,6 +177,36 @@
     "version": 2002002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/BoxNovel[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/boxnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "cpunovel",
+    "name": "CPUnovel",
+    "site": "https://cpunovel.com/",
+    "lang": "English",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/CPUnovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/cpunovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "centralnovel",
+    "name": "Central Novel",
+    "site": "https://centralnovel.com/",
+    "lang": "Português",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/CentralNovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/centralnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "chireads",
+    "name": "Chireads",
+    "site": "https://chireads.com",
+    "lang": "Français",
+    "version": 1000002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/chireads.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/chireads/icon.png",
     "versionCode": 1000100
   },
   {
@@ -290,16 +230,6 @@
     "versionCode": 1000100
   },
   {
-    "id": "cpunovel",
-    "name": "CPUnovel",
-    "site": "https://cpunovel.com/",
-    "lang": "English",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/CPUnovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/cpunovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
     "id": "crimsonscrolls",
     "name": "Crimson Scrolls",
     "site": "https://crimsonscrolls.net",
@@ -307,16 +237,6 @@
     "version": 1000001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/crimsonscrolls.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/crimsonscrolls/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "daoistquest",
-    "name": "Daoist Quest",
-    "site": "https://daoist.quest",
-    "lang": "English",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/DaoistQuest[fictioneer].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/fictioneer/daoistquest/icon.png",
     "versionCode": 1000100
   },
   {
@@ -330,6 +250,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "daoistquest",
+    "name": "Daoist Quest",
+    "site": "https://daoist.quest",
+    "lang": "English",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/DaoistQuest[fictioneer].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/fictioneer/daoistquest/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "DDL.com",
     "name": "Divine Dao Library",
     "site": "https://www.divinedaolibrary.com/",
@@ -337,16 +267,6 @@
     "version": 1001001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/divinedaolibrary.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/divinedaolibrary/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "dragonholic",
-    "name": "Dragonholic",
-    "site": "https://dragonholic.com/",
-    "lang": "English",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Dragonholic[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/dragonholic/icon.png",
     "versionCode": 1000100
   },
   {
@@ -360,6 +280,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "dragonholic",
+    "name": "Dragonholic",
+    "site": "https://dragonholic.com/",
+    "lang": "English",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Dragonholic[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/dragonholic/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "duskblossoms",
     "name": "Dusk Blossoms",
     "site": "https://duskblossoms.com/",
@@ -367,6 +297,26 @@
     "version": 2002000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/DuskBlossoms[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/duskblossoms/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "ekitaplar",
+    "name": "E-KİTAPLAR",
+    "site": "https://e-kitaplar.com/",
+    "lang": "Türkçe",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/EKTAPLAR[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/ekitaplar/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "epiknovel",
+    "name": "EpikNovel",
+    "site": "https://www.epiknovel.com/",
+    "lang": "Türkçe",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/epiknovel.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/tr/epiknovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -390,6 +340,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "eznovels",
+    "name": "EzNovels",
+    "site": "https://eznovels.com",
+    "lang": "Русский",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/EzNovels[hotnovelpub].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/hotnovelpub/eznovels/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "fannovel",
     "name": "FanNovel",
     "site": "https://www.fanmtl.com",
@@ -397,6 +357,16 @@
     "version": 1000005,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FanNovel[readwn].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/fannovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "wuxiamtl",
+    "name": "Fans MTL",
+    "site": "https://www.fanmtl.com",
+    "lang": "English",
+    "version": 1000005,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FansMTL[readwn].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiamtl/icon.png",
     "versionCode": 1000100
   },
   {
@@ -420,6 +390,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "1stkissnovel",
+    "name": "FirstKissNovel",
+    "site": "https://1stkissnovel.org/",
+    "lang": "English",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FirstKissNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/1stkissnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "fortuneeternal",
+    "name": "Fortune Eternal",
+    "site": "https://www.fortuneeternal.com",
+    "lang": "조선말, 한국어",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/korean/FortuneEternal[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/fortuneeternal/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "foxaholic",
     "name": "Foxaholic",
     "site": "https://www.foxaholic.com/",
@@ -440,13 +430,13 @@
     "versionCode": 1000100
   },
   {
-    "id": "FuckNovelpia",
-    "name": "FuckNovelpia",
-    "site": "https://fucknovelpia.com/",
-    "lang": "English",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/fucknovelpia.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/fucknovelpia/icon.png",
+    "id": "freekolnovel",
+    "name": "Free Kol Novel",
+    "site": "https://kolnovel.com",
+    "lang": "‎العربية",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/FreeKolNovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/freekolnovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -457,6 +447,26 @@
     "version": 2002004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FreeWebNovel[readnovelfull].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readnovelfull/fwn.com/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "FuckNovelpia",
+    "name": "FuckNovelpia",
+    "site": "https://fucknovelpia.com/",
+    "lang": "English",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/fucknovelpia.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/fucknovelpia/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "galaxynovels",
+    "name": "Galaxy Novels",
+    "site": "https://galaxynovels.com/",
+    "lang": "‎العربية",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/galaxynovels.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/galaxynovels/icon.png",
     "versionCode": 1000100
   },
   {
@@ -491,6 +501,36 @@
     "versionCode": 1000100
   },
   {
+    "id": "ln.hako",
+    "name": "Hako",
+    "site": "https://ln.hako.vn",
+    "lang": "Tiếng Việt",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/vietnamese/LNHako.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/vi/hakolightnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "harkeneliwood",
+    "name": "HarkenEliwood",
+    "site": "https://harkeneliwood.wordpress.com",
+    "lang": "Français",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/harkeneliwood.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/harkeneliwood/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "HasuTL",
+    "name": "Hasu Translations",
+    "site": "https://hasutl.wordpress.com/",
+    "lang": "Español",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/hasutl.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/hasutl/icon.jpg",
+    "versionCode": 1000100
+  },
+  {
     "id": "hiraethtranslation",
     "name": "Hiraeth Translation",
     "site": "https://hiraethtranslation.com/",
@@ -501,6 +541,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "hizomanga",
+    "name": "HizoManga",
+    "site": "https://hizomanga.net/",
+    "lang": "‎العربية",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/HizoManga[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/hizomanga/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "hyacinthbloom",
     "name": "Hyacinth in Bloom",
     "site": "https://hyacinthbloom.com/",
@@ -508,6 +558,26 @@
     "version": 1001010,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/HyacinthinBloom[lightnovelwp].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/hyacinthbloom/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "illusia",
+    "name": "Illusia",
+    "site": "https://illusia.com.br",
+    "lang": "Português",
+    "version": 1000002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/illusia.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/illusia/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "IDWN.id",
+    "name": "IndoWebNovel",
+    "site": "https://indowebnovel.id/",
+    "lang": "Bahasa Indonesia",
+    "version": 1002003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/indowebnovel.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/id/indowebnovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -531,16 +601,6 @@
     "versionCode": 1000100
   },
   {
-    "id": "inoveltranslation",
-    "name": "iNovelTranslation",
-    "site": "https://inoveltranslation.com",
-    "lang": "English",
-    "version": 1000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/inoveltranslation.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/inoveltranslation/icon.png",
-    "versionCode": 1000100
-  },
-  {
     "id": "ippotranslations",
     "name": "Ippotranslations",
     "site": "https://ippotranslations.com/",
@@ -548,6 +608,16 @@
     "version": 1001010,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Ippotranslations[lightnovelwp].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/ippotranslations/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "jaomix.ru",
+    "name": "Jaomix",
+    "site": "https://jaomix.ru",
+    "lang": "Русский",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/jaomix.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/jaomix/icon.png",
     "versionCode": 1000100
   },
   {
@@ -571,6 +641,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "kisswood",
+    "name": "KissWood",
+    "site": "https://kisswood.eu",
+    "lang": "Français",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/kisswood.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/kisswood/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "knoxt",
     "name": "KnoxT",
     "site": "https://knoxt.space/",
@@ -578,6 +658,36 @@
     "version": 1001010,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/KnoxT[lightnovelwp].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/knoxt/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "kodekslibrary",
+    "name": "Kodeks Library",
+    "site": "https://www.kodekslibrary.com/",
+    "lang": "Türkçe",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/KodeksLibrary[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/kodekslibrary/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "kolnovel",
+    "name": "Kol Novel",
+    "site": "https://kolnovel.com/",
+    "lang": "‎العربية",
+    "version": 1001020,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/KolNovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/kolnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "lnori",
+    "name": "LNORI",
+    "site": "https://lnori.com/",
+    "lang": "English",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/lnori.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/lnori/icon.png",
     "versionCode": 1000100
   },
   {
@@ -601,23 +711,13 @@
     "versionCode": 1000100
   },
   {
-    "id": "lightnovelcave",
-    "name": "LightNovelCave",
-    "site": "https://www.lightnovelcave.com/",
-    "lang": "English",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/LightNovelCave[lightnovelworld].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelworld/lightnovelcave/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "lightnovelpubvip",
-    "name": "LightNovelPub Vip",
-    "site": "https://lightnovelpub.vip/",
-    "lang": "English",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/LightNovelPubVip[lightnovelworld].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelworld/lightnovelpubvip/icon.png",
+    "id": "lightnovelbrasil",
+    "name": "Light Novel Brasil",
+    "site": "https://lightnovelbrasil.com/",
+    "lang": "Português",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/LightNovelBrasil[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/lightnovelbrasil/icon.png",
     "versionCode": 1000100
   },
   {
@@ -641,6 +741,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "lightnovel.vn",
+    "name": "Light Novel VN",
+    "site": "https://hub.ranobe.vn",
+    "lang": "Tiếng Việt",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/vietnamese/lightnovelvn.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/vi/lightnovelvn/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "lightnovelcave",
+    "name": "LightNovelCave",
+    "site": "https://www.lightnovelcave.com/",
+    "lang": "English",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/LightNovelCave[lightnovelworld].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelworld/lightnovelcave/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "lnheaven",
     "name": "LightNovelHeaven",
     "site": "https://lightnovelheaven.com/",
@@ -651,6 +771,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "lightnovelpubvip",
+    "name": "LightNovelPub Vip",
+    "site": "https://lightnovelpub.vip/",
+    "lang": "English",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/LightNovelPubVip[lightnovelworld].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelworld/lightnovelpubvip/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "linovelib_tw",
+    "name": "Linovelib(繁體)",
+    "site": "https://tw.linovelib.com/",
+    "lang": "中文, 汉语, 漢語",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/linovelib_tw.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/linovelib/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "lnmtl",
     "name": "LnMTL",
     "site": "https://lnmtl.com/",
@@ -658,16 +798,6 @@
     "version": 2001001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/lnmtl.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/lnmtl/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "lnori",
-    "name": "LNORI",
-    "site": "https://lnori.com/",
-    "lang": "English",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/lnori.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/lnori/icon.png",
     "versionCode": 1000100
   },
   {
@@ -701,6 +831,56 @@
     "versionCode": 1000100
   },
   {
+    "id": "mtlnovel-es",
+    "name": "MTL Novel (ES)",
+    "site": "https://mtlnovel.me",
+    "lang": "Español",
+    "version": 1001003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/MTLNovel(ES)[mtlnovel].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "mtlnovel-fr",
+    "name": "MTL Novel (FR)",
+    "site": "https://mtlnovel.me",
+    "lang": "Français",
+    "version": 1001003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/MTLNovel(FR)[mtlnovel].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "mtlnovel-id",
+    "name": "MTL Novel (ID)",
+    "site": "https://mtlnovel.me",
+    "lang": "Bahasa Indonesia",
+    "version": 1001003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/MTLNovel(ID)[mtlnovel].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "mtlnovel-pt",
+    "name": "MTL Novel (PT)",
+    "site": "https://mtlnovel.me",
+    "lang": "Português",
+    "version": 1001003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/MTLNovel(PT)[mtlnovel].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "mtlnovel-ru",
+    "name": "MTL Novel (RU)",
+    "site": "https://mtlnovel.me",
+    "lang": "Русский",
+    "version": 1001003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/MTLNovel(RU)[mtlnovel].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "mvlempyr.com",
     "name": "MVLEMPYR",
     "site": "https://www.mvlempyr.io/",
@@ -711,6 +891,56 @@
     "versionCode": 1000100
   },
   {
+    "id": "mangatr",
+    "name": "MangaTR",
+    "site": "https://manga-tr.com/",
+    "lang": "Türkçe",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/MangaTR.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/tr/mangatr/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "markazriwayat",
+    "name": "Markazriwayat",
+    "site": "https://markazriwayat.com/",
+    "lang": "‎العربية",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Markazriwayat[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/markazriwayat/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "massnovel",
+    "name": "MassNovel",
+    "site": "https://massnovel.fr/",
+    "lang": "Français",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/MassNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/massnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "meionovel",
+    "name": "MeioNovel",
+    "site": "https://meionovels.com/",
+    "lang": "Bahasa Indonesia",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/MeioNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/meionovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "mistminthaven",
+    "name": "Mistmint Haven",
+    "site": "https://www.mistminthaven.com/",
+    "lang": "English",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/mistminthaven.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/mistminthaven/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "mysticalmerries",
     "name": "MysticalSeries",
     "site": "https://mysticalmerries.com/",
@@ -718,6 +948,36 @@
     "version": 2002000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/MysticalSeries[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/mysticalmerries/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "nova",
+    "name": "NOVA",
+    "site": "https://novelasligeras.net",
+    "lang": "Español",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/NOVA.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/nova/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "namevt",
+    "name": "Namevt",
+    "site": "https://namevt.com/",
+    "lang": "Türkçe",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/Namevt[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/namevt/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "neobook",
+    "name": "Neobook",
+    "site": "https://neobook.org",
+    "lang": "Русский",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/neobook.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/neobook/icon.png",
     "versionCode": 1000100
   },
   {
@@ -761,6 +1021,87 @@
     "versionCode": 1000100
   },
   {
+    "id": "novelfire",
+    "name": "Novel Fire",
+    "site": "https://novelfire.net/",
+    "lang": "English",
+    "version": 1004003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelfire.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelfire/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelhall",
+    "name": "Novel Hall",
+    "site": "https://novelhall.com/",
+    "lang": "English",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelhall.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelhall/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novel-lucky",
+    "name": "Novel Lucky",
+    "site": "https://novel-lucky.com/",
+    "lang": "ไทย",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/thai/NovelLucky[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novel-lucky/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelmania.com.br",
+    "name": "Novel Mania",
+    "site": "https://novelmania.com.br",
+    "lang": "Português",
+    "version": 2000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/novelmania.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/novelmania/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelninja",
+    "name": "Novel Ninja",
+    "site": "https://novelninja.xyz/",
+    "lang": "English",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/NovelNinja[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novelninja/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelpdf",
+    "name": "Novel PDF",
+    "site": "https://novelpdf.xyz/",
+    "lang": "ไทย",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/thai/NovelPDF[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novelpdf/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelupdates",
+    "name": "Novel Updates",
+    "site": "https://www.novelupdates.com/",
+    "lang": "English",
+    "version": 9009,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelupdates.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelupdates/icon.png",
+    "customCSS": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelupdates/customCSS.css",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novel543",
+    "name": "Novel543",
+    "site": "https://www.novel543.com/",
+    "lang": "中文, 汉语, 漢語",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/novel543.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/novel543/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "novelbuddy",
     "name": "NovelBuddy",
     "site": "https://novelbuddy.me/",
@@ -781,13 +1122,33 @@
     "versionCode": 1000100
   },
   {
-    "id": "novelfire",
-    "name": "Novel Fire",
-    "site": "https://novelfire.net/",
-    "lang": "English",
-    "version": 1004003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelfire.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelfire/icon.png",
+    "id": "novelcool-ru",
+    "name": "NovelCool (RU)",
+    "site": "https://ru.novelcool.com",
+    "lang": "Русский",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/NovelCool(RU)[novelcool].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/novelcool/novelcool/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "noveldeglace",
+    "name": "NovelDeGlace",
+    "site": "https://noveldeglace.com/",
+    "lang": "Français",
+    "version": 1000005,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/noveldeglace.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/noveldeglace/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelfrance",
+    "name": "NovelFrance",
+    "site": "https://novelfrance.fr/",
+    "lang": "Français",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/novelfrance.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/novelfrance/icon.png",
     "versionCode": 1000100
   },
   {
@@ -798,16 +1159,6 @@
     "version": 2002001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/NovelFull[readnovelfull].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readnovelfull/novelfull/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelhall",
-    "name": "Novel Hall",
-    "site": "https://novelhall.com/",
-    "lang": "English",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelhall.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelhall/icon.png",
     "versionCode": 1000100
   },
   {
@@ -831,26 +1182,6 @@
     "versionCode": 1000100
   },
   {
-    "id": "novelight",
-    "name": "Novelight",
-    "site": "https://novelight.net/",
-    "lang": "English",
-    "version": 1001005,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelight.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelight/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelninja",
-    "name": "Novel Ninja",
-    "site": "https://novelninja.xyz/",
-    "lang": "English",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/NovelNinja[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novelninja/icon.png",
-    "versionCode": 1000100
-  },
-  {
     "id": "novelrest",
     "name": "NovelRest",
     "site": "https://novelrest.vercel.app",
@@ -858,6 +1189,26 @@
     "version": 1000000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelrest.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelrest/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "TL",
+    "name": "NovelTL",
+    "site": "https://novel.tl",
+    "lang": "Русский",
+    "version": 1000002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/novelTL.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/noveltl/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "noveltr",
+    "name": "NovelTR",
+    "site": "https://noveltr.com/",
+    "lang": "Türkçe",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/NovelTR[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/noveltr/icon.png",
     "versionCode": 1000100
   },
   {
@@ -871,14 +1222,83 @@
     "versionCode": 1000100
   },
   {
-    "id": "novelupdates",
-    "name": "Novel Updates",
-    "site": "https://www.novelupdates.com/",
+    "id": "novelasligera",
+    "name": "Novelas Ligera",
+    "site": "https://novelasligera.com/",
+    "lang": "Español",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelasligera.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/novelasligera/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelight",
+    "name": "Novelight",
+    "site": "https://novelight.net/",
     "lang": "English",
-    "version": 9009,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelupdates.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelupdates/icon.png",
-    "customCSS": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelupdates/customCSS.css",
+    "version": 1001005,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelight.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelight/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelki.pl",
+    "name": "Novelki",
+    "site": "https://novelki.pl",
+    "lang": "Polski",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/polish/novelki.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pl/novelki/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelsparadise",
+    "name": "Novels Paradise",
+    "site": "https://novelsparadise.site/",
+    "lang": "‎العربية",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/NovelsParadise[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/novelsparadise/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novelyra",
+    "name": "Novelyra",
+    "site": "https://novelyra.com/",
+    "lang": "Español",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelyra.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/novelyra/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "novhell",
+    "name": "Novhell",
+    "site": "https://novhell.org",
+    "lang": "Français",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/novhell.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/novhell/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "oasistranslations",
+    "name": "Oasis Translations",
+    "site": "https://oasistranslations.wordpress.com/",
+    "lang": "Español",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/oasistranslations.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/oasistranslations/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "oceantales",
+    "name": "Ocean Tales",
+    "site": "https://oceantales.com/",
+    "lang": "English",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/oceantales.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/oceantales/icon.png",
     "versionCode": 1000100
   },
   {
@@ -912,6 +1332,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "quanben",
+    "name": "Quanben",
+    "site": "https://www.quanben.io/",
+    "lang": "中文, 汉语, 漢語",
+    "version": 1001001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/Quanben.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/quanben/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "ragnarscans",
+    "name": "Ragnar Scans",
+    "site": "https://ragnarscans.net",
+    "lang": "Türkçe",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/RagnarScans[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/ragnarscans/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "rainofsnow",
     "name": "Rainofsnow",
     "site": "https://rainofsnow.com/",
@@ -919,6 +1359,26 @@
     "version": 1001002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/rainofsnow.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/rainofsnow/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "RNBH.org",
+    "name": "RanobeHub",
+    "site": "https://ranobehub.org",
+    "lang": "Русский",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/ranobehub.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/ranobehub/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "RLIB",
+    "name": "RanobeLib",
+    "site": "https://ranobelib.me",
+    "lang": "Русский",
+    "version": 2002004,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/ranobelib.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/ranobelib/icon.png",
     "versionCode": 1000100
   },
   {
@@ -932,6 +1392,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "ranobes-ru",
+    "name": "Ranobes (RU)",
+    "site": "https://ranobes.com",
+    "lang": "Русский",
+    "version": 2000002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Ranobes(RU)[ranobes].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/ranobes/ranobes/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "ranovel",
     "name": "Ranovel",
     "site": "https://ranovel.com/",
@@ -939,6 +1409,26 @@
     "version": 2002000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Ranovel[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/ranovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "ReLib",
+    "name": "Re:Library",
+    "site": "https://re-library.com",
+    "lang": "English",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/relibrary.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/relibrary/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "rezerowebnovelfr",
+    "name": "Re:Zero Web Novel FR",
+    "site": "https://rezerowebnovelfr.wordpress.com",
+    "lang": "Français",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/rezerowebnovelfr.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/rezerowebnovelfr/icon.png",
     "versionCode": 1000100
   },
   {
@@ -962,13 +1452,23 @@
     "versionCode": 1000100
   },
   {
-    "id": "ReLib",
-    "name": "Re:Library",
-    "site": "https://re-library.com",
-    "lang": "English",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/relibrary.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/relibrary/icon.png",
+    "id": "reinowuxia",
+    "name": "ReinoWuxia",
+    "site": "http://www.reinowuxia.com/",
+    "lang": "Español",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelawuxia.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/reinowuxia/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "ReN",
+    "name": "Renovels",
+    "site": "https://renovels.org",
+    "lang": "Русский",
+    "version": 1000004,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/renovels.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/renovels/icon.png",
     "versionCode": 1000100
   },
   {
@@ -982,6 +1482,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "rewayatclub",
+    "name": "Rewayat Club",
+    "site": "https://rewayat.club/",
+    "lang": "‎العربية",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/rewayatclub.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/rewayatclub/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "riwyat",
+    "name": "Riwyat",
+    "site": "https://cenele.com/",
+    "lang": "‎العربية",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Riwyat[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/riwyat/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "royalroad",
     "name": "Royal Road",
     "site": "https://www.royalroad.com/",
@@ -992,6 +1512,26 @@
     "versionCode": 1000100
   },
   {
+    "id": "rulate-api",
+    "name": "Rulate (API)",
+    "site": "https://tl.rulate.ru",
+    "lang": "Русский",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Rulate[rulate].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/rulate/rulate-api/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "sakura.id",
+    "name": "SakuraNovel",
+    "site": "https://sakuranovel.id/",
+    "lang": "Bahasa Indonesia",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/sakuranovel.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/id/sakuranovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "scribblehub",
     "name": "Scribble Hub",
     "site": "https://www.scribblehub.com/",
@@ -999,6 +1539,36 @@
     "version": 1000002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/scribblehub.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/scribblehub/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "seanovel",
+    "name": "Seanovel",
+    "site": "https://seanovel.org/",
+    "lang": "‎العربية",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/seanovel.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/seanovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "sektenovel",
+    "name": "Sekte Novel",
+    "site": "https://sektenovel.web.id/",
+    "lang": "Bahasa Indonesia",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/SekteNovel[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/sektenovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "skynovels",
+    "name": "SkyNovels",
+    "site": "https://www.skynovels.net/",
+    "lang": "Español",
+    "version": 1001000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/skynovels.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/skynovels/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1022,6 +1592,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "asuralightnovel",
+    "name": "Srank Manga",
+    "site": "https://srankmanga.com/",
+    "lang": "English",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/SrankManga[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/asuralightnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "storyseedling",
     "name": "StorySeedling",
     "site": "https://storyseedling.com/",
@@ -1032,6 +1612,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "sunovels",
+    "name": "Sunovels",
+    "site": "https://sunovels.com/",
+    "lang": "‎العربية",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/sunovels.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/sunovels/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "sweetescape",
     "name": "Sweet Escape",
     "site": "https://sweetescapetranslations.com/",
@@ -1039,6 +1629,26 @@
     "version": 2002000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/SweetEscape[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/sweetescape/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "yomou.syosetu",
+    "name": "Syosetu",
+    "site": "https://yomou.syosetu.com/",
+    "lang": "日本語",
+    "version": 1001004,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/japanese/Syosetu.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/jp/syosetu/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "TCSega",
+    "name": "TC & Sega",
+    "site": "https://teamchmantranslations.com",
+    "lang": "Español",
+    "version": 1001010,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/TC&Sega[lightnovelwp].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/tcsega/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1062,6 +1672,36 @@
     "versionCode": 1000100
   },
   {
+    "id": "tsundoku",
+    "name": "Tsundoku Traduções",
+    "site": "https://tsundoku.com.br",
+    "lang": "Português",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/tsundoku.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/tsundoku/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "tunovelaligera",
+    "name": "TuNovelaLigera",
+    "site": "https://tunovelaligera.com",
+    "lang": "Español",
+    "version": 1002001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/tunovelaligera.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/tunovelaligera/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "turkcelightnovels",
+    "name": "TurkceLightNovels",
+    "site": "https://turkcelightnovels.com/",
+    "lang": "Türkçe",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/TurkceLightNovels[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/turkcelightnovels/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "universalnovel",
     "name": "Universal Novel",
     "site": "https://universalnovel.com/",
@@ -1082,6 +1722,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "morenovel",
+    "name": "Vanovel",
+    "site": "https://vanovel.com/",
+    "lang": "Bahasa Indonesia",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/Vanovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/morenovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "violetlily",
     "name": "Violet Lily",
     "site": "https://violetlilytranslation.com/",
@@ -1089,6 +1739,56 @@
     "version": 2002000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/VioletLily[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/violetlily/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "wbnovel",
+    "name": "WBNovel",
+    "site": "https://wbnovel.com/",
+    "lang": "Bahasa Indonesia",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/WBNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/wbnovel/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "WTRLAB",
+    "name": "WTR-LAB",
+    "site": "https://wtr-lab.com/",
+    "lang": "English",
+    "version": 1001004,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/wtrlab.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/wtrlab/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "warriorlegendtrad",
+    "name": "Warrior Legend Trad",
+    "site": "https://warriorlegendtrad.wordpress.com",
+    "lang": "Français",
+    "version": 1000001,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/warriorlegendtrad.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/warriorlegendtrad/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "WebNovelTraslation",
+    "name": "Web Novel Translation",
+    "site": "https://wntl.net",
+    "lang": "English",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/WebNovelTranslation[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/webnoveltraslation/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "webnoveloku",
+    "name": "WebNovelOku",
+    "site": "https://www.webnoveloku.com/",
+    "lang": "Türkçe",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/WebNovelOku[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/webnoveloku/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1102,13 +1802,13 @@
     "versionCode": 1000100
   },
   {
-    "id": "WebNovelTraslation",
-    "name": "Web Novel Translation",
-    "site": "https://wntl.net",
+    "id": "webnovelunlocked",
+    "name": "Webnovel (Unlocked)",
+    "site": "https://www.webnovel.com",
     "lang": "English",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/WebNovelTranslation[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/webnoveltraslation/icon.png",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/webnovelunlocked.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/webnovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1142,43 +1842,13 @@
     "versionCode": 1000100
   },
   {
-    "id": "WTRLAB",
-    "name": "WTR-LAB",
-    "site": "https://wtr-lab.com/",
-    "lang": "English",
-    "version": 1001004,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/wtrlab.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/wtrlab/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "wuxiacity",
-    "name": "Wuxiafox",
-    "site": "https://www.wuxiafox.com",
-    "lang": "English",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Wuxiafox[readwn].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiacity/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "wuxiamtl",
-    "name": "Fans MTL",
-    "site": "https://www.fanmtl.com",
-    "lang": "English",
-    "version": 1000005,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/FansMTL[readwn].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiamtl/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "wuxiap",
-    "name": "Wuxiabox",
-    "site": "https://www.wuxiabox.com",
-    "lang": "English",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Wuxiabox[readwn].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiap/icon.png",
+    "id": "worldnovel",
+    "name": "WorldNovel",
+    "site": "https://world-novel.fr/",
+    "lang": "Français",
+    "version": 2002000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/WorldNovel[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/worldnovel/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1202,6 +1872,16 @@
     "versionCode": 1000100
   },
   {
+    "id": "wuxialnscantrad",
+    "name": "WuxiaLnScantrad",
+    "site": "https://wuxialnscantrad.wordpress.com",
+    "lang": "Français",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/wuxialnscantrad.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/wuxialnscantrad/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "wuxiaworld.site",
     "name": "WuxiaWorld.Site",
     "site": "https://wuxiaworld.site/",
@@ -1212,133 +1892,23 @@
     "versionCode": 1000100
   },
   {
-    "id": "zetroTL",
-    "name": "Zetro Translation",
-    "site": "https://zetrotranslation.com/",
+    "id": "wuxiap",
+    "name": "Wuxiabox",
+    "site": "https://www.wuxiabox.com",
     "lang": "English",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/ZetroTranslation[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/zetrotl/icon.png",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Wuxiabox[readwn].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiap/icon.png",
     "versionCode": 1000100
   },
   {
-    "id": "chireads",
-    "name": "Chireads",
-    "site": "https://chireads.com",
-    "lang": "Français",
-    "version": 1000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/chireads.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/chireads/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "harkeneliwood",
-    "name": "HarkenEliwood",
-    "site": "https://harkeneliwood.wordpress.com",
-    "lang": "Français",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/harkeneliwood.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/harkeneliwood/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "kisswood",
-    "name": "KissWood",
-    "site": "https://kisswood.eu",
-    "lang": "Français",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/kisswood.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/kisswood/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "massnovel",
-    "name": "MassNovel",
-    "site": "https://massnovel.fr/",
-    "lang": "Français",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/MassNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/massnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mtlnovel-fr",
-    "name": "MTL Novel (FR)",
-    "site": "https://mtlnovel.me",
-    "lang": "Français",
-    "version": 1001003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/MTLNovel(FR)[mtlnovel].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "noveldeglace",
-    "name": "NovelDeGlace",
-    "site": "https://noveldeglace.com/",
-    "lang": "Français",
-    "version": 1000005,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/noveldeglace.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/noveldeglace/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelfrance",
-    "name": "NovelFrance",
-    "site": "https://novelfrance.fr/",
-    "lang": "Français",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/novelfrance.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/novelfrance/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novhell",
-    "name": "Novhell",
-    "site": "https://novhell.org",
-    "lang": "Français",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/novhell.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/novhell/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "rezerowebnovelfr",
-    "name": "Re:Zero Web Novel FR",
-    "site": "https://rezerowebnovelfr.wordpress.com",
-    "lang": "Français",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/rezerowebnovelfr.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/rezerowebnovelfr/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "warriorlegendtrad",
-    "name": "Warrior Legend Trad",
-    "site": "https://warriorlegendtrad.wordpress.com",
-    "lang": "Français",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/warriorlegendtrad.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/warriorlegendtrad/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "worldnovel",
-    "name": "WorldNovel",
-    "site": "https://world-novel.fr/",
-    "lang": "Français",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/WorldNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/worldnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "wuxialnscantrad",
-    "name": "WuxiaLnScantrad",
-    "site": "https://wuxialnscantrad.wordpress.com",
-    "lang": "Français",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/wuxialnscantrad.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/fr/wuxialnscantrad/icon.png",
+    "id": "wuxiacity",
+    "name": "Wuxiafox",
+    "site": "https://www.wuxiafox.com",
+    "lang": "English",
+    "version": 1000003,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/Wuxiafox[readwn].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/readwn/wuxiacity/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1352,233 +1922,33 @@
     "versionCode": 1000100
   },
   {
-    "id": "bacalightnovel",
-    "name": "Baca Light Novel",
-    "site": "https://bacalightnovel.co/",
-    "lang": "Bahasa Indonesia",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/BacaLightNovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/bacalightnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "IDWN.id",
-    "name": "IndoWebNovel",
-    "site": "https://indowebnovel.id/",
-    "lang": "Bahasa Indonesia",
-    "version": 1002003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/indowebnovel.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/id/indowebnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "meionovel",
-    "name": "MeioNovel",
-    "site": "https://meionovels.com/",
-    "lang": "Bahasa Indonesia",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/MeioNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/meionovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "morenovel",
-    "name": "Vanovel",
-    "site": "https://vanovel.com/",
-    "lang": "Bahasa Indonesia",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/Vanovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/morenovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mtlnovel-id",
-    "name": "MTL Novel (ID)",
-    "site": "https://mtlnovel.me",
-    "lang": "Bahasa Indonesia",
-    "version": 1001003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/MTLNovel(ID)[mtlnovel].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "sakura.id",
-    "name": "SakuraNovel",
-    "site": "https://sakuranovel.id/",
-    "lang": "Bahasa Indonesia",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/sakuranovel.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/id/sakuranovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "sektenovel",
-    "name": "Sekte Novel",
-    "site": "https://sektenovel.web.id/",
-    "lang": "Bahasa Indonesia",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/SekteNovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/sektenovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "kakuyomu",
-    "name": "kakuyomu",
-    "site": "https://kakuyomu.jp",
-    "lang": "日本語",
+    "id": "yuukitls",
+    "name": "Yuuki Tls",
+    "site": "https://yuukitls.com/",
+    "lang": "Español",
     "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/japanese/kakuyomu.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/jp/kakuyomu/icon.png",
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/yukitls.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/yuukitls/icon.png",
     "versionCode": 1000100
   },
   {
-    "id": "yomou.syosetu",
-    "name": "Syosetu",
-    "site": "https://yomou.syosetu.com/",
-    "lang": "日本語",
-    "version": 1001004,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/japanese/Syosetu.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/jp/syosetu/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "fortuneeternal",
-    "name": "Fortune Eternal",
-    "site": "https://www.fortuneeternal.com",
-    "lang": "조선말, 한국어",
+    "id": "zetroTL",
+    "name": "Zetro Translation",
+    "site": "https://zetrotranslation.com/",
+    "lang": "English",
     "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/korean/FortuneEternal[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/fortuneeternal/icon.png",
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/ZetroTranslation[madara].js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/zetrotl/icon.png",
     "versionCode": 1000100
   },
   {
-    "id": "novelki.pl",
-    "name": "Novelki",
-    "site": "https://novelki.pl",
-    "lang": "Polski",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/polish/novelki.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pl/novelki/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "blogdoamonnovels",
-    "name": "Blog do Amon Novels",
-    "site": "https://www.blogdoamonnovels.com",
-    "lang": "Português",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/blogdoamonnovels.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/blogdoamonnovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "centralnovel",
-    "name": "Central Novel",
-    "site": "https://centralnovel.com/",
-    "lang": "Português",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/CentralNovel[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/centralnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "illusia",
-    "name": "Illusia",
-    "site": "https://illusia.com.br",
-    "lang": "Português",
+    "id": "dilartube",
+    "name": "dilar tube",
+    "site": "https://golden.rest/",
+    "lang": "‎العربية",
     "version": 1000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/illusia.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/illusia/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "lightnovelbrasil",
-    "name": "Light Novel Brasil",
-    "site": "https://lightnovelbrasil.com/",
-    "lang": "Português",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/LightNovelBrasil[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/lightnovelbrasil/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mtlnovel-pt",
-    "name": "MTL Novel (PT)",
-    "site": "https://mtlnovel.me",
-    "lang": "Português",
-    "version": 1001003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/MTLNovel(PT)[mtlnovel].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelmania.com.br",
-    "name": "Novel Mania",
-    "site": "https://novelmania.com.br",
-    "lang": "Português",
-    "version": 2000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/novelmania.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/novelmania/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "tsundoku",
-    "name": "Tsundoku Traduções",
-    "site": "https://tsundoku.com.br",
-    "lang": "Português",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/tsundoku.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/tsundoku/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "AT",
-    "name": "Автор Тудей",
-    "site": "https://author.today",
-    "lang": "Русский",
-    "version": 1002002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/authortoday.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/authortoday/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "bllate-api",
-    "name": "Bllate (API)",
-    "site": "https://bllate.org",
-    "lang": "Русский",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Bllate[rulate].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/rulate/bllate-api/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "bookhamster",
-    "name": "Bookhamster",
-    "site": "https://bookhamster.ru",
-    "lang": "Русский",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Bookhamster[ifreedom].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/ifreedom/bookhamster/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "bookriver",
-    "name": "Bookriver",
-    "site": "https://bookriver.ru",
-    "lang": "Русский",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/bookriver.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/bookriver/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "eznovels",
-    "name": "EzNovels",
-    "site": "https://eznovels.com",
-    "lang": "Русский",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/EzNovels[hotnovelpub].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/hotnovelpub/eznovels/icon.png",
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/dilartube.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/dilartube/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1592,6 +1962,36 @@
     "versionCode": 1000100
   },
   {
+    "id": "inoveltranslation",
+    "name": "iNovelTranslation",
+    "site": "https://inoveltranslation.com",
+    "lang": "English",
+    "version": 1000002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/inoveltranslation.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/inoveltranslation/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "kakuyomu",
+    "name": "kakuyomu",
+    "site": "https://kakuyomu.jp",
+    "lang": "日本語",
+    "version": 1000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/japanese/kakuyomu.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/jp/kakuyomu/icon.png",
+    "versionCode": 1000100
+  },
+  {
+    "id": "AT",
+    "name": "Автор Тудей",
+    "site": "https://author.today",
+    "lang": "Русский",
+    "version": 1002002,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/authortoday.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/authortoday/icon.png",
+    "versionCode": 1000100
+  },
+  {
     "id": "ifreedom",
     "name": "Свободный Мир Ранобэ",
     "site": "https://ifreedom.su",
@@ -1599,106 +1999,6 @@
     "version": 1001001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/СвободныйМирРанобэ[ifreedom].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/ifreedom/ifreedom/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "jaomix.ru",
-    "name": "Jaomix",
-    "site": "https://jaomix.ru",
-    "lang": "Русский",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/jaomix.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/jaomix/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mtlnovel-ru",
-    "name": "MTL Novel (RU)",
-    "site": "https://mtlnovel.me",
-    "lang": "Русский",
-    "version": 1001003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/MTLNovel(RU)[mtlnovel].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "neobook",
-    "name": "Neobook",
-    "site": "https://neobook.org",
-    "lang": "Русский",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/neobook.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/neobook/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelcool-ru",
-    "name": "NovelCool (RU)",
-    "site": "https://ru.novelcool.com",
-    "lang": "Русский",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/NovelCool(RU)[novelcool].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/novelcool/novelcool/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "ranobes-ru",
-    "name": "Ranobes (RU)",
-    "site": "https://ranobes.com",
-    "lang": "Русский",
-    "version": 2000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Ranobes(RU)[ranobes].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/ranobes/ranobes/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "ReN",
-    "name": "Renovels",
-    "site": "https://renovels.org",
-    "lang": "Русский",
-    "version": 1000004,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/renovels.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/renovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "RLIB",
-    "name": "RanobeLib",
-    "site": "https://ranobelib.me",
-    "lang": "Русский",
-    "version": 2002004,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/ranobelib.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/ranobelib/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "RNBH.org",
-    "name": "RanobeHub",
-    "site": "https://ranobehub.org",
-    "lang": "Русский",
-    "version": 1000003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/ranobehub.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/ranobehub/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "rulate-api",
-    "name": "Rulate (API)",
-    "site": "https://tl.rulate.ru",
-    "lang": "Русский",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/Rulate[rulate].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/rulate/rulate-api/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "TL",
-    "name": "NovelTL",
-    "site": "https://novel.tl",
-    "lang": "Русский",
-    "version": 1000002,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/novelTL.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/noveltl/icon.png",
     "versionCode": 1000100
   },
   {
@@ -1722,313 +2022,23 @@
     "versionCode": 1000100
   },
   {
-    "id": "allnovelread",
-    "name": "AllNovelRead",
-    "site": "https://allnovelread.com/",
-    "lang": "Español",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/AllNovelRead[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/allnovelread/icon.png",
+    "id": "rewayatfans",
+    "name": "روايات فانز",
+    "site": "https://rewayatfans.com/",
+    "lang": "‎العربية",
+    "version": 3000000,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/rewayatfans.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/rewayatfans/icon.png",
     "versionCode": 1000100
   },
   {
-    "id": "HasuTL",
-    "name": "Hasu Translations",
-    "site": "https://hasutl.wordpress.com/",
-    "lang": "Español",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/hasutl.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/hasutl/icon.jpg",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mtlnovel-es",
-    "name": "MTL Novel (ES)",
-    "site": "https://mtlnovel.me",
-    "lang": "Español",
-    "version": 1001003,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/MTLNovel(ES)[mtlnovel].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "nova",
-    "name": "NOVA",
-    "site": "https://novelasligeras.net",
-    "lang": "Español",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/NOVA.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/nova/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelasligera",
-    "name": "Novelas Ligera",
-    "site": "https://novelasligera.com/",
-    "lang": "Español",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelasligera.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/novelasligera/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelyra",
-    "name": "Novelyra",
-    "site": "https://novelyra.com/",
-    "lang": "Español",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelyra.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/novelyra/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "oasistranslations",
-    "name": "Oasis Translations",
-    "site": "https://oasistranslations.wordpress.com/",
-    "lang": "Español",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/oasistranslations.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/oasistranslations/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "reinowuxia",
-    "name": "ReinoWuxia",
-    "site": "http://www.reinowuxia.com/",
-    "lang": "Español",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/novelawuxia.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/reinowuxia/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "skynovels",
-    "name": "SkyNovels",
-    "site": "https://www.skynovels.net/",
-    "lang": "Español",
-    "version": 1001000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/skynovels.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/skynovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "TCSega",
-    "name": "TC & Sega",
-    "site": "https://teamchmantranslations.com",
-    "lang": "Español",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/TC&Sega[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/tcsega/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "tunovelaligera",
-    "name": "TuNovelaLigera",
-    "site": "https://tunovelaligera.com",
-    "lang": "Español",
-    "version": 1002001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/tunovelaligera.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/tunovelaligera/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "yuukitls",
-    "name": "Yuuki Tls",
-    "site": "https://yuukitls.com/",
-    "lang": "Español",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/yukitls.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/es/yuukitls/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novel-lucky",
-    "name": "Novel Lucky",
-    "site": "https://novel-lucky.com/",
-    "lang": "ไทย",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/thai/NovelLucky[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novel-lucky/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "novelpdf",
-    "name": "Novel PDF",
-    "site": "https://novelpdf.xyz/",
-    "lang": "ไทย",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/thai/NovelPDF[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/novelpdf/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "azraznovel",
-    "name": "Araz Novel",
-    "site": "https://araznovel.com/",
-    "lang": "Türkçe",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/ArazNovel[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azraznovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "ekitaplar",
-    "name": "E-KİTAPLAR",
-    "site": "https://e-kitaplar.com/",
-    "lang": "Türkçe",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/EKTAPLAR[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/ekitaplar/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "epiknovel",
-    "name": "EpikNovel",
-    "site": "https://www.epiknovel.com/",
-    "lang": "Türkçe",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/epiknovel.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/tr/epiknovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "kodekslibrary",
-    "name": "Kodeks Library",
-    "site": "https://www.kodekslibrary.com/",
-    "lang": "Türkçe",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/KodeksLibrary[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/kodekslibrary/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mangatr",
-    "name": "MangaTR",
-    "site": "https://manga-tr.com/",
-    "lang": "Türkçe",
-    "version": 1000001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/MangaTR.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/tr/mangatr/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "namevt",
-    "name": "Namevt",
-    "site": "https://namevt.com/",
-    "lang": "Türkçe",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/Namevt[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/namevt/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "noveltr",
-    "name": "NovelTR",
-    "site": "https://noveltr.com/",
-    "lang": "Türkçe",
-    "version": 1001010,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/NovelTR[lightnovelwp].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/noveltr/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "ragnarscans",
-    "name": "Ragnar Scans",
-    "site": "https://ragnarscans.net",
-    "lang": "Türkçe",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/RagnarScans[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/ragnarscans/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "turkcelightnovels",
-    "name": "TurkceLightNovels",
-    "site": "https://turkcelightnovels.com/",
-    "lang": "Türkçe",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/TurkceLightNovels[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/turkcelightnovels/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "webnoveloku",
-    "name": "WebNovelOku",
-    "site": "https://www.webnoveloku.com/",
-    "lang": "Türkçe",
-    "version": 2002000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/WebNovelOku[madara].js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/webnoveloku/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "bakainua",
-    "name": "BakaInUA",
-    "site": "https://baka.in.ua",
-    "lang": "Українська",
-    "version": 3001007,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/ukrainian/bakainua.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/uk/bakainua/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "lightnovel.vn",
-    "name": "Light Novel VN",
-    "site": "https://hub.ranobe.vn",
-    "lang": "Tiếng Việt",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/vietnamese/lightnovelvn.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/vi/lightnovelvn/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "ln.hako",
-    "name": "Hako",
-    "site": "https://ln.hako.vn",
-    "lang": "Tiếng Việt",
-    "version": 1001001,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/vietnamese/LNHako.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/vi/hakolightnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "webnovelunlocked",
-    "name": "Webnovel (Unlocked)",
-    "site": "https://www.webnovel.com",
-    "lang": "English",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/webnovelunlocked.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/webnovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "oceantales",
-    "name": "Ocean Tales",
-    "site": "https://oceantales.com/",
-    "lang": "English",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/oceantales.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/oceantales/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "akknovel",
-    "name": "Akknovel",
-    "site": "https://www.akknovel.com/",
-    "lang": "English",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/akknovel.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/akknovel/icon.png",
-    "versionCode": 1000100
-  },
-  {
-    "id": "mistminthaven",
-    "name": "Mistmint Haven",
-    "site": "https://www.mistminthaven.com/",
-    "lang": "English",
-    "version": 1000000,
-    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/mistminthaven.js",
-    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/mistminthaven/icon.png",
+    "id": "ixdzs8",
+    "name": "爱下电子书",
+    "site": "https://ixdzs8.com/",
+    "lang": "中文, 汉语, 漢語",
+    "version": 2002009,
+    "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/ixdzs8.js",
+    "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/ixdzs8/favicon.png",
     "versionCode": 1000100
   }
 ]
