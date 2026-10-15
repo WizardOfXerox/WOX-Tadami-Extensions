@@ -2154,10 +2154,10 @@
   {
     "name": "Aniyomi: UnderHentai",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.underhentai",
-    "apk": "aniyomi-en.underhentai-v14.1.apk",
+    "apk": "aniyomi-en.underhentai-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -2168,8 +2168,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.underhentai.png",
-    "sha256": "44dcdddc8d4dd2341b253f8a195589aea5d5a5d63faf7102c9db7fcf28ab35f2",
-    "size": 155164
+    "sha256": "b8df396283534caa322690ae88ff437214588032d44f6b48d4509113b02888af",
+    "size": 153903
   },
   {
     "name": "Aniyomi: UniqueStream",
