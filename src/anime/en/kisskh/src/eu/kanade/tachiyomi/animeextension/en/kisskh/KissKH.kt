@@ -1,7 +1,6 @@
 package eu.kanade.tachiyomi.animeextension.en.kisskh
 
 import androidx.preference.PreferenceScreen
-import eu.kanade.tachiyomi.animeextension.BuildConfig
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -55,7 +54,7 @@ class KissKH :
 
     private var subDecryptor by LazyMutable { SubDecryptor(client, headers, baseUrl) }
 
-    override val supportsRelatedAnimes = false
+    val supportsRelatedAnimes = false
 
     /* Popular Animes */
 
@@ -211,14 +210,16 @@ class KissKH :
         val kkey = requestSubKey(id)
         val subData = client.newCall(GET("$baseUrl/api/Sub/$id?kkey=$kkey")).awaitSuccess().bodyString()
 
-        val subList = json.decodeFromString<JsonArray>(subData).parallelCatchingMapNotNull { item ->
-            val suburl = item.jsonObject["src"]?.jsonPrimitive?.content ?: return@parallelCatchingMapNotNull null
+        val subList = json.decodeFromString<JsonArray>(subData).mapNotNull { item ->
+            val suburl = item.jsonObject["src"]?.jsonPrimitive?.content ?: return@mapNotNull null
             val lang = item.jsonObject["label"]?.jsonPrimitive?.content ?: "Unknown"
-            if (suburl.contains(".txt")) {
-                subDecryptor.getSubtitles(suburl, lang)
-            } else {
-                Track(suburl, lang)
-            }
+            runCatching {
+                if (suburl.contains(".txt")) {
+                    subDecryptor.getSubtitles(suburl, lang)
+                } else {
+                    Track(suburl, lang)
+                }
+            }.getOrNull()
         }
 
         return UrlUtils.fixUrl(videoUrl)?.let { videoUrl ->
@@ -232,22 +233,13 @@ class KissKH :
         } ?: emptyList()
     }
 
-    private suspend fun requestVideoKey(id: String): String {
-        val url = "${BuildConfig.KISSKH_API}$id&version=2.8.10"
-        return client.newCall(GET(url, headers)).awaitSuccess().parseAs<Key>().key
+    private fun requestVideoKey(id: String): String {
+        return KissKHKeyGenerator.generateKey(id, isSub = false)
     }
 
-    private suspend fun requestSubKey(id: String): String {
-        val url = "${BuildConfig.KISSKH_SUB_API}$id&version=2.8.10"
-        return client.newCall(GET(url, headers)).awaitSuccess().parseAs<Key>().key
+    private fun requestSubKey(id: String): String {
+        return KissKHKeyGenerator.generateKey(id, isSub = true)
     }
-
-    @Serializable
-    data class Key(
-        val id: String,
-        val version: String,
-        val key: String,
-    )
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
         screen.addListPreference(

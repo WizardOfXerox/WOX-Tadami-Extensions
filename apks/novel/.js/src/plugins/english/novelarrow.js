@@ -1,1 +1,135 @@
-var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((function(a,o){function c(t){try{s(r.next(t))}catch(t){o(t)}}function i(t){try{s(r.throw(t))}catch(t){o(t)}}function s(t){var e;t.done?a(t.value):(e=t.value,e instanceof n?e:new n((function(t){t(e)}))).then(c,i)}s((r=r.apply(t,e||[])).next())}))},e=this&&this.__generator||function(t,e){var n,r,a,o={label:0,sent:function(){if(1&a[0])throw a[1];return a[1]},trys:[],ops:[]},c=Object.create(("function"==typeof Iterator?Iterator:Object).prototype);return c.next=i(0),c.throw=i(1),c.return=i(2),"function"==typeof Symbol&&(c[Symbol.iterator]=function(){return this}),c;function i(i){return function(s){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;c&&(c=0,i[0]&&(o=0)),o;)try{if(n=1,r&&(a=2&i[0]?r.return:i[0]?r.throw||((a=r.return)&&a.call(r),0):r.next)&&!(a=a.call(r,i[1])).done)return a;switch(r=0,a&&(i=[2&i[0],a.value]),i[0]){case 0:case 1:a=i;break;case 4:return o.label++,{value:i[1],done:!1};case 5:o.label++,r=i[1],i=[0];continue;case 7:i=o.ops.pop(),o.trys.pop();continue;default:if(!(a=o.trys,(a=a.length>0&&a[a.length-1])||6!==i[0]&&2!==i[0])){o=0;continue}if(3===i[0]&&(!a||i[1]>a[0]&&i[1]<a[3])){o.label=i[1];break}if(6===i[0]&&o.label<a[1]){o.label=a[1],a=i;break}if(a&&o.label<a[2]){o.label=a[2],o.ops.push(i);break}a[2]&&o.ops.pop(),o.trys.pop();continue}i=e.call(t,o)}catch(t){i=[6,t],r=0}finally{n=a=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,s])}}};Object.defineProperty(exports,"__esModule",{value:!0});var n=require("cheerio"),r=require("@libs/fetch"),a=require("@libs/novelStatus"),o=function(){function o(){this.id="novelarrow",this.name="Novel Arrow",this.icon="src/en/novelarrow/icon.png",this.site="https://novelarrow.com/",this.version="1.0.1"}return o.prototype.popularNovels=function(a){return t(this,void 0,void 0,(function(){var t,o,c,i;return e(this,(function(e){switch(e.label){case 0:return t="".concat(this.site,"novels/latest?page=").concat(a),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:return o=e.sent(),c=(0,n.load)(o),i=[],c("article").each((function(t,e){var n=c(e).find("h2").text().trim(),r=c(e).find("img").attr("src"),a=c(e).find("a").attr("href");n&&a&&i.push({name:n,cover:r,path:a.substring(1)})})),[2,i]}}))}))},o.prototype.parseNovel=function(o){return t(this,void 0,void 0,(function(){var t,c,i,s,u,p,l,h,f,m,v,d,g,y,b,w;return e(this,(function(e){switch(e.label){case 0:return t=this.site+o.replace(/^\//,""),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:c=e.sent(),i=(0,n.load)(c),s=o.replace("novel/","").replace(/^\//,""),(u=i('meta[name="og:novel:genre"], meta[property="og:novel:genre"]').attr("content"))||(p=[],i('meta[property="article:tag"]').each((function(t,e){var n=i(e).attr("content");n&&p.push(n)})),u=p.join(", ")),l=i(".site-reading-copy p").map((function(t,e){return i(e).text().trim()})).get().join("\n\n")||i(".site-reading-copy").text().trim(),h={path:o,name:i('meta[name="og:novel:novel_name"]').attr("content")||i("h1").first().text().trim(),cover:i('meta[property="og:image"]').attr("content"),author:i('meta[name="og:novel:author"]').attr("content")||i('meta[name="author"]').attr("content"),status:"Ongoing"===i('meta[name="og:novel:status"]').attr("content")?a.NovelStatus.Ongoing:a.NovelStatus.Completed,summary:l,genres:u,chapters:[]},f="".concat(this.site,"api-web/novels/").concat(s,"/chapters?sort=asc"),e.label=2;case 2:return e.trys.push([2,4,,5]),[4,(0,r.fetchApi)(f,{headers:{Accept:"application/json"}}).then((function(t){return t.json()}))];case 3:return(m=e.sent())&&m.items&&(h.chapters=m.items.map((function(t){return{name:t.chapter_name,path:"chapter/".concat(s,"/").concat(t.chapter_id),releaseTime:null}}))),[3,5];case 4:for(e.sent(),v=new Map,d=/\\?"chapter_id\\?":\\?"([^"]+)\\?",\\?"chapter_name\\?":\\?"([^"]+)\\?"/g,g=void 0;null!==(g=d.exec(c));)y=g[1],b=g[2].replace(/\\"/g,'"'),w="chapter/".concat(s,"/").concat(y),v.has(w)||v.set(w,{name:b,path:w,releaseTime:null});return h.chapters=Array.from(v.values()),[3,5];case 5:return[2,h]}}))}))},o.prototype.parseChapter=function(a){return t(this,void 0,void 0,(function(){var t,o,c,i,s,u,p,l,h,f;return e(this,(function(e){switch(e.label){case 0:t=a.replace("chapter/","").split("/"),o=t[0],c=t[1],i="".concat(this.site,"api-web/novels/").concat(o,"/chapters/").concat(c),e.label=1;case 1:return e.trys.push([1,3,,5]),[4,(0,r.fetchApi)(i,{headers:{Accept:"application/json","x-track-reading-progress":"false"}}).then((function(t){return t.json()}))];case 2:return(s=e.sent())&&s.item&&s.item.chapterInfo&&s.item.chapterInfo.chapter_content?[2,s.item.chapterInfo.chapter_content]:[3,5];case 3:return e.sent(),[4,(0,r.fetchApi)("".concat(this.site).concat(a)).then((function(t){return t.text()}))];case 4:return u=e.sent(),p=/\\u003ch4\\u003e(.*)\\u003c\/p\\u003e/,(l=u.match(p))?(h=(h=l[0]).replace(/\\u003c/g,"<").replace(/\\u003e/g,">").replace(/\\"/g,'"').replace(/\\n/g,"").replace(/\\t/g,"").replace(/\\r/g,"").replace(/\\\\/g,"\\"),-1!==(f=h.lastIndexOf("</p>"))&&(h=h.substring(0,f+4)),[2,h]):[2,(0,n.load)(u)(".site-reading-copy").html()||"Content not found or premium."];case 5:return[2,"Content not found or premium."]}}))}))},o.prototype.searchNovels=function(a,o){return t(this,void 0,void 0,(function(){var t,c,i,s;return e(this,(function(e){switch(e.label){case 0:return t="".concat(this.site,"novels/search?keyword=").concat(encodeURIComponent(a),"&page=").concat(o),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:return c=e.sent(),i=(0,n.load)(c),s=[],i("article").each((function(t,e){var n=i(e).find("h2").text().trim(),r=i(e).find("img").attr("src"),a=i(e).find("a").attr("href");n&&a&&s.push({name:n,cover:r,path:a.substring(1)})})),[2,s]}}))}))},o}();exports.default=new o;
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+
+const cheerio = require("cheerio");
+const fetch_1 = require("@libs/fetch");
+const defaultCover_1 = require("@libs/defaultCover");
+const novelStatus_1 = require("@libs/novelStatus");
+
+class NovelArrow {
+    constructor() {
+        this.id = "novelarrow";
+        this.name = "Novel Arrow";
+        this.icon = "src/en/novelarrow/icon.png";
+        this.site = "https://novelping.com/";
+        this.version = "2.0.0";
+    }
+
+    popularNovels(page) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.site}sort/popular?page=${page}`;
+            const res = yield (0, fetch_1.fetchApi)(url);
+            const html = yield res.text();
+            const $ = cheerio.load(html);
+
+            const novels = [];
+            $(".row, .col-novel-main, .list-novel .row").each((i, el) => {
+                const link = $(el).find('a[href*="/book/"]').first();
+                const href = link.attr("href");
+                const name = link.attr("title") || link.text().trim();
+                const cover = $(el).find("img").first().attr("src") || $(el).find("img").first().attr("data-src");
+
+                if (href && name && !href.includes("/chapter-") && !novels.some(n => n.name === name)) {
+                    const cleanPath = href.replace(this.site, "").replace(/(^\/+|\/+$)/g, "");
+                    novels.push({
+                        name: name.replace(/\s+/g, " ").trim(),
+                        path: cleanPath,
+                        cover: cover ? (cover.startsWith("http") ? cover : this.site + cover.replace(/^\//, "")) : defaultCover_1.defaultCover
+                    });
+                }
+            });
+            return novels;
+        });
+    }
+
+    parseNovel(novelPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = this.site + novelPath.replace(/(^\/+|\/+$)/g, "");
+            const res = yield (0, fetch_1.fetchApi)(url);
+            const html = yield res.text();
+            const $ = cheerio.load(html);
+
+            const name = $("h1, .novel-title").first().text().trim() || "Untitled";
+            const coverImg = $('meta[property="og:image"]').attr("content") ||
+                             $(".cover img, img.cover, .book-info img").first().attr("src");
+            const cover = coverImg ? (coverImg.startsWith("http") ? coverImg : this.site + coverImg.replace(/^\//, "")) : defaultCover_1.defaultCover;
+            const author = $('meta[name="author"], .author a, .author span').first().text().trim() || "Unknown";
+            const summary = $(".desc-text, .summary, .description").text().trim();
+
+            const chapters = [];
+            $('a[href*="/chapter-"]').each((i, el) => {
+                const cHref = $(el).attr("href");
+                const cName = $(el).text().replace(/\s+/g, " ").trim();
+                if (cHref && cName && !cName.toLowerCase().includes("read now") && !chapters.some(c => c.path === cHref.replace(this.site, ""))) {
+                    const cPath = cHref.replace(this.site, "").replace(/(^\/+|\/+$)/g, "");
+                    chapters.push({
+                        name: cName,
+                        path: cPath,
+                        chapterNumber: chapters.length + 1
+                    });
+                }
+            });
+
+            return {
+                path: novelPath,
+                name,
+                cover,
+                author,
+                summary,
+                status: novelStatus_1.NovelStatus.Ongoing,
+                chapters
+            };
+        });
+    }
+
+    parseChapter(chapterPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = this.site + chapterPath.replace(/(^\/+|\/+$)/g, "");
+            const res = yield (0, fetch_1.fetchApi)(url);
+            const html = yield res.text();
+            const $ = cheerio.load(html);
+
+            $("script, style, noscript, .sharedaddy, .ads, .advertisement").remove();
+            const content = $("#chr-content, #chapter-content, .chr-c").html() || "";
+            return content;
+        });
+    }
+
+    searchNovels(searchTerm, page) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.site}search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`;
+            const res = yield (0, fetch_1.fetchApi)(url);
+            const html = yield res.text();
+            const $ = cheerio.load(html);
+
+            const novels = [];
+            $(".row, .col-novel-main, .list-novel .row").each((i, el) => {
+                const link = $(el).find('a[href*="/book/"]').first();
+                const href = link.attr("href");
+                const name = link.attr("title") || link.text().trim();
+                const cover = $(el).find("img").first().attr("src") || $(el).find("img").first().attr("data-src");
+
+                if (href && name && !href.includes("/chapter-") && !novels.some(n => n.name === name)) {
+                    const cleanPath = href.replace(this.site, "").replace(/(^\/+|\/+$)/g, "");
+                    novels.push({
+                        name: name.replace(/\s+/g, " ").trim(),
+                        path: cleanPath,
+                        cover: cover ? (cover.startsWith("http") ? cover : this.site + cover.replace(/^\//, "")) : defaultCover_1.defaultCover
+                    });
+                }
+            });
+            return novels;
+        });
+    }
+}
+
+exports.default = new NovelArrow();

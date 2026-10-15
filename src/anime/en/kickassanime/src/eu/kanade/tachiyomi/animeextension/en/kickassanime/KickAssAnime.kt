@@ -55,8 +55,10 @@ class KickAssAnime :
 
     override val supportsLatest = true
 
-    private val preferences by getPreferencesLazy {
-        clearBaseUrl()
+    private val preferences by getPreferencesLazy()
+
+    init {
+        preferences.clearBaseUrl()
     }
 
     private val json: Json by injectLazy()
@@ -118,8 +120,8 @@ class KickAssAnime :
             if (firstPage == null || firstPage.result.isEmpty()) continue
 
             val size = firstPage.pages.drop(1).size
-            val otherPagesResults = (1..size).parallelCatchingMapNotNull { idx ->
-                getEpisodeResponse(anime, idx + 1, lang).result
+            val otherPagesResults: List<EpisodeResponseDto.EpisodeDto> = (1..size).mapNotNull { idx ->
+                runCatching { getEpisodeResponse(anime, idx + 1, lang).result }.getOrNull()
             }.flatten()
 
             (firstPage.result + otherPagesResults).map {
@@ -204,7 +206,7 @@ class KickAssAnime :
 
     fun relatedAnimeListRequest(anime: SAnime) = GET(getAnimeUrl(anime))
 
-    override fun relatedAnimeListParse(response: Response): List<SAnime> {
+    fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.asJsoup()
         return document.selectFirst("script:containsData(window.KAA)")?.data()?.let {
             kaaReturnRegex.find(it)?.groupValues?.get(1)
@@ -264,7 +266,7 @@ class KickAssAnime :
                 put("page", page)
                 put("query", query)
                 if (encodedFilters.isNotEmpty()) put("filters", encodedFilters)
-            }.toJsonRequestBody()
+            }.toString().toJsonRequestBody()
 
             POST("$SEARCH_BASE_URL/api/fsearch", body = data, headers = newHeaders)
         }

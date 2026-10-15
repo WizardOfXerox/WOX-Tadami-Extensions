@@ -1,7 +1,7 @@
 ext {
     extName = 'Vostfree'
     extClass = '.Vostfree'
-    extVersionCode = 38
+    extVersionCode = 40
 }
 
 apply from: "$rootDir/common.gradle"
@@ -15,4 +15,3 @@ dependencies {
     implementation(project(':lib:voeextractor'))
     implementation(project(':lib:vudeoextractor'))
 }
-

@@ -1,0 +1,2364 @@
+[
+  {
+    "id": "akknovel",
+    "name": "Akknovel",
+    "lang": "English",
+    "site": "https://www.akknovel.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "allnovel",
+    "name": "AllNovel",
+    "lang": "English",
+    "site": "https://allnovel.org/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403: Forbidden) try to open in webview."
+  },
+  {
+    "id": "arcane",
+    "name": "Arcane Translations",
+    "lang": "English",
+    "site": "https://arcanetranslations.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "69shu",
+    "name": "69书吧",
+    "lang": "中文, 汉语, 漢語",
+    "site": "https://www.69shu.xyz",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "allnovelread",
+    "name": "AllNovelRead",
+    "lang": "Español",
+    "site": "https://allnovelread.com/",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "fetch failed"
+  },
+  {
+    "id": "bacalightnovel",
+    "name": "Baca Light Novel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://bacalightnovel.co/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "azraznovel",
+    "name": "Araz Novel",
+    "lang": "Türkçe",
+    "site": "https://araznovel.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "anf.net",
+    "name": "AllNovelFull",
+    "lang": "English",
+    "site": "https://novgo.net/",
+    "status": "PASS",
+    "novelCount": 33,
+    "chapterCount": 2166,
+    "contentLength": 4657,
+    "sampleSnippet": "Her body was burning with heat as strong as volcanic lava, and the only one who could save her, was the man before her……",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 6871,
+      "url": "https://novgo.net/uploads/thumbs/hidden-marriage-f01a027382-839d75bee8b7477d1e7c2ae2885546ab.jpg"
+    }
+  },
+  {
+    "id": "archiveofourown",
+    "name": "Archive Of Our Own",
+    "lang": "English",
+    "site": "https://archiveofourown.org/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "azora",
+    "name": "Azora",
+    "lang": "‎العربية",
+    "site": "https://azoramoon.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "bookhamster",
+    "name": "Bookhamster",
+    "lang": "Русский",
+    "site": "https://bookhamster.ru",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "blogdoamonnovels",
+    "name": "Blog do Amon Novels",
+    "lang": "Português",
+    "site": "https://www.blogdoamonnovels.com",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 11,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 39503,
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzasTEI3GAXq6_-67j2yWQ5LJufOcUhU4OJ1Ob8lQjdMfmBzgQJu9JX7Ghyphenhypheno2IQmTQkdvQQDHGGSmrdiTv3rUh2AXPLijhJEa-XnUOgEeL8qn5hm0UqmRiI-icqJy8TcA2VdDc1Fbiexw-i7rnaa9S0ObT2dCn16jH6AG5Suck7kdn5tYqj1reGtbJwhE/w240/Capa%20Isekai%20nonbiti%20nouka.jpg"
+    }
+  },
+  {
+    "id": "boxnovel",
+    "name": "BoxNovel",
+    "lang": "English",
+    "site": "https://novelnice.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "bllate-api",
+    "name": "Bllate (API)",
+    "lang": "Русский",
+    "site": "https://bllate.org",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 40,
+    "chapterCount": 333,
+    "contentLength": 39,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 165851,
+      "url": "https://bllate.org/i/book/26/2/13110.jpg"
+    }
+  },
+  {
+    "id": "centralnovel",
+    "name": "Central Novel",
+    "lang": "Português",
+    "site": "https://centralnovel.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "blumeverse",
+    "name": "BlumeVerse",
+    "lang": "English",
+    "site": "https://blume-verse.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 136,
+    "contentLength": 11086,
+    "sampleSnippet": "When I think of Eunho, the first thing that comes to mind is… That incredible face of his — the way he&#8217;d call my n",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 194504,
+      "url": "https://blume-verse.com/wp-content/uploads/2026/06/xxlarge-3.webp"
+    }
+  },
+  {
+    "id": "cpunovel",
+    "name": "CPUnovel",
+    "lang": "English",
+    "site": "https://cpunovel.com/",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "fetch failed"
+  },
+  {
+    "id": "chrysanthemumgarden",
+    "name": "Chrysanthemum Garden",
+    "lang": "English",
+    "site": "https://chrysanthemumgarden.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "citrusaurora",
+    "name": "Citrus Aurora",
+    "lang": "English",
+    "site": "https://citrusaurora.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "daotranslate",
+    "name": "DaoTranslate",
+    "lang": "English",
+    "site": "https://daotranslate.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "daoistquest",
+    "name": "Daoist Quest",
+    "lang": "English",
+    "site": "https://daoist.quest",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "chireads",
+    "name": "Chireads",
+    "lang": "Français",
+    "site": "https://chireads.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "dragontea",
+    "name": "Dragon Tea",
+    "lang": "English",
+    "site": "https://dragontea.ink/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "crimsonscrolls",
+    "name": "Crimson Scrolls",
+    "lang": "English",
+    "site": "https://crimsonscrolls.net",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Unexpected token '<', \"<html><hea\"... is not valid JSON"
+  },
+  {
+    "id": "dragonholic",
+    "name": "Dragonholic",
+    "lang": "English",
+    "site": "https://dragonholic.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "DDL.com",
+    "name": "Divine Dao Library",
+    "lang": "English",
+    "site": "https://www.divinedaolibrary.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "ekitaplar",
+    "name": "E-KİTAPLAR",
+    "lang": "Türkçe",
+    "site": "https://e-kitaplar.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "arnovel",
+    "name": "ArNovel",
+    "lang": "‎العربية",
+    "site": "https://ar-no.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 279,
+    "contentLength": 5918,
+    "sampleSnippet": "اليوم هو يوم سيبقى في ذاكرة عالم الجوجيتسو بأكمله. لقد ظهرت العيون الستة مرة أخرى! داخل القصر الرئيسي لعشيرة غوجو، إحدى ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 20463,
+      "url": "https://ar-no.com/wp-content/uploads/2025/10/HRUOT-193x278.jpg"
+    }
+  },
+  {
+    "id": "duskblossoms",
+    "name": "Dusk Blossoms",
+    "lang": "English",
+    "site": "https://duskblossoms.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 1,
+    "contentLength": 12352,
+    "sampleSnippet": "On the day of her wedding to the man she loved, the villainess Eloise Grinell made up her mind to die. Because in this l",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 17167,
+      "url": "https://duskblossoms.com/wp-content/uploads/2026/10/cover_w480-2026-10-14T222017.502-193x278.jpg"
+    }
+  },
+  {
+    "id": "epiknovel",
+    "name": "EpikNovel",
+    "lang": "Türkçe",
+    "site": "https://www.epiknovel.com/",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 2033,
+    "contentLength": 7518,
+    "sampleSnippet": "Against The God - Giriş Çeviri için Avare, kontrol / düzenleme için Bora arkadaşımıza teşekkürler. Size de keyifli okuma",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/gif",
+      "size": 36657,
+      "url": "https://www.epiknovel.com/upload/cover/5929e018e06d0.gif"
+    }
+  },
+  {
+    "id": "eternalune",
+    "name": "Eternalune",
+    "lang": "English",
+    "site": "https://eternalune.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 110,
+    "contentLength": 10399,
+    "sampleSnippet": "&lt;Part 1&gt; &nbsp; In the early dawn before daybreak, a cart loaded with goods cut through the fog and entered the co",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 11902,
+      "url": "https://eternalune.com/wp-content/uploads/2025/11/The-Whipping-Maid-of-House-Calley-193x278.webp"
+    }
+  },
+  {
+    "id": "etudetranslations",
+    "name": "Etude Translations",
+    "lang": "English",
+    "site": "https://etudetranslations.com/",
+    "status": "PASS",
+    "novelCount": 15,
+    "chapterCount": 148,
+    "contentLength": 11150,
+    "sampleSnippet": "Chapter 1: Perfect Life System TL: YYang “Shen Yuan, let’s end it here.” “Don’t contact me again.” “I hope you find a mo",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 14703,
+      "url": "https://etudetranslations.com/wp-content/uploads/2025/08/After-Becoming-Financially-Free-They-Offered-Their-Loyalty-193x278.jpg"
+    }
+  },
+  {
+    "id": "bookriver",
+    "name": "Bookriver",
+    "lang": "Русский",
+    "site": "https://bookriver.ru",
+    "status": "PASS",
+    "novelCount": 24,
+    "chapterCount": 3,
+    "contentLength": 5385,
+    "sampleSnippet": "— Ваш эмбриончик такой красивый, очень сильный парень! ПГД исследование показало, что это мальчик, и он сейчас пойдёт к ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 282104,
+      "url": "https://storage.bookriver.ru/storage/GB/20/1791034373-46162-sluchainoe-eko-dlya-generala-inna-vronskaya.jpg"
+    }
+  },
+  {
+    "id": "fortuneeternal",
+    "name": "Fortune Eternal",
+    "lang": "조선말, 한국어",
+    "site": "https://www.fortuneeternal.com",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "foxaholic",
+    "name": "Foxaholic",
+    "lang": "English",
+    "site": "https://foxaholic.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "foxteller",
+    "name": "Foxteller",
+    "lang": "English",
+    "site": "https://www.foxteller.com",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "fenrir",
+    "name": "Fenrir Realm",
+    "lang": "English",
+    "site": "https://fenrirealm.com",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 20,
+    "chapterCount": 30,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 313634,
+      "url": "https://fenrirealm.com/storage/5436/28170cf91063c6892501650a56d261c5.jpg"
+    }
+  },
+  {
+    "id": "fictionzone",
+    "name": "Fiction Zone",
+    "lang": "English",
+    "site": "https://fictionzone.net",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 4851,
+    "contentLength": 3770,
+    "sampleSnippet": "Shenxia Empire, Jiangning Province, Xihai City. On the playground of Xihai No. 1 Middle School, several professionals ar",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 14466,
+      "url": "https://cdn.fictionzone.net/insecure/rs:fill:165:250/aHR0cHM6Ly9pbWcuZmljdGlvbnpvbmUubmV0L2ltYWdlcy9ub3ZlbC1jb3ZlcnMvR0pNN0pMTHVkcVpMWWdPLnBuZw.webp"
+    }
+  },
+  {
+    "id": "FWN.com",
+    "name": "Free Web Novel",
+    "lang": "English",
+    "site": "https://freewebnovel.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403: Forbidden) try to open in webview."
+  },
+  {
+    "id": "bakainua",
+    "name": "BakaInUA",
+    "lang": "Українська",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  },
+  {
+    "id": "wuxiamtl",
+    "name": "Fans MTL",
+    "lang": "English",
+    "site": "https://www.fanmtl.com",
+    "status": "PASS",
+    "novelCount": 30,
+    "chapterCount": 1966,
+    "contentLength": 7430,
+    "sampleSnippet": "\"Hoo! Hoo!\" \"Ten thousand thirty thousand two hundred and twenty one!\" \"Ten thousand thirty thousand two hundred and twe",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 52786,
+      "url": "https://www.fanmtl.com/d/file/cover_ke/drkfbsloaoa.jpg"
+    }
+  },
+  {
+    "id": "fannovel",
+    "name": "FanNovel",
+    "lang": "English",
+    "site": "https://www.fanmtl.com",
+    "status": "PASS",
+    "novelCount": 30,
+    "chapterCount": 1966,
+    "contentLength": 7430,
+    "sampleSnippet": "\"Hoo! Hoo!\" \"Ten thousand thirty thousand two hundred and twenty one!\" \"Ten thousand thirty thousand two hundred and twe",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 52786,
+      "url": "https://www.fanmtl.com/d/file/cover_ke/drkfbsloaoa.jpg"
+    }
+  },
+  {
+    "id": "guavaread",
+    "name": "Guavaread",
+    "lang": "English",
+    "site": "https://guavaread.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "ln.hako",
+    "name": "Hako",
+    "lang": "Tiếng Việt",
+    "site": "https://ln.hako.vn",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "freekolnovel",
+    "name": "Free Kol Novel",
+    "lang": "‎العربية",
+    "site": "https://free.kolnovel.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Captcha error, please open in webview (or the website has changed url)"
+  },
+  {
+    "id": "galaxynovels",
+    "name": "Galaxy Novels",
+    "lang": "‎العربية",
+    "site": "https://galaxynovels.com/",
+    "status": "PARSE_CHAPTER_ERROR",
+    "error": "Could not reach site (404)",
+    "novelCount": 20,
+    "chapterCount": 30,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 145884,
+      "url": "https://galaxynovels.com/wp-content/uploads/2026/08/h335.webp"
+    }
+  },
+  {
+    "id": "FuckNovelpia",
+    "name": "FuckNovelpia",
+    "lang": "English",
+    "site": "https://fucknovelpia.com/",
+    "status": "PASS",
+    "novelCount": 24,
+    "chapterCount": 3,
+    "contentLength": 3322,
+    "sampleSnippet": "C1 Authorized assessment chapter for cwd drop and userini prepend under extract tree. Authorized assessment chapter for ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 4792,
+      "url": "https://img.kfcok.net/covers/28084717aea8f6fd0b3145db56db466e35a2e106/cover_thumb.jpg"
+    }
+  },
+  {
+    "id": "galaxytranslations",
+    "name": "Galaxy Translations",
+    "lang": "English",
+    "site": "https://darkstartranslations.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "harkeneliwood",
+    "name": "HarkenEliwood",
+    "lang": "Français",
+    "site": "https://harkeneliwood.wordpress.com",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 100,
+    "contentLength": 1220,
+    "sampleSnippet": "Rain Lexique : Hiérarchie&nbsp;Militaire 上将軍 = Jōshōgun = Général Suprême : le rang de Rain et de Ralphus et le rang mil",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 2966,
+      "url": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/master/public/static/coverNotAvailable.webp"
+    }
+  },
+  {
+    "id": "HasuTL",
+    "name": "Hasu Translations",
+    "lang": "Español",
+    "site": "https://hasutl.wordpress.com/",
+    "status": "PASS",
+    "novelCount": 25,
+    "chapterCount": 1,
+    "contentLength": 101353,
+    "sampleSnippet": "Capítulo 1 Kusanagi Godou, encuentro con un compañero Campione al otro lado del viento del norte Parte 1 Kusanagi Godou ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 102345,
+      "url": "https://hasutl.wordpress.com/wp-content/uploads/2021/02/cover-2.jpg?w=370"
+    }
+  },
+  {
+    "id": "hiraethtranslation",
+    "name": "Hiraeth Translation",
+    "lang": "English",
+    "site": "https://hiraethtranslation.com/",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 80,
+    "contentLength": 14000,
+    "sampleSnippet": "(adsbygoogle = window.adsbygoogle || []).push({}); The spring waters of March began to swell, hundreds of boats racing d",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 36395,
+      "url": "https://hiraethtranslation.com/wp-content/uploads/2025/10/authorimagespace-1-193x278.jpg"
+    }
+  },
+  {
+    "id": "genesistudio",
+    "name": "Genesis",
+    "lang": "English",
+    "site": "https://genesistudio.com",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 245,
+    "chapterCount": 5,
+    "contentLength": 41,
+    "thumbnail": {
+      "ok": false,
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "size": 88,
+      "url": "https://api.genesistudio.com/storage/v1/object/public/directus/c785c347-342a-448f-ae45-a2bb84c31827.png",
+      "reason": "HTTP_400_SIZE_88"
+    }
+  },
+  {
+    "id": "inkitt",
+    "name": "Inkitt",
+    "lang": "English",
+    "site": "https://www.inkitt.com",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Failed to load novels, try opening in webview."
+  },
+  {
+    "id": "hyacinthbloom",
+    "name": "Hyacinth in Bloom",
+    "lang": "English",
+    "site": "https://hyacinthbloom.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 126,
+    "contentLength": 9800,
+    "sampleSnippet": "One day, gates began appearing all over the Earth. No one could explain the phenomenon, and people quickly fell into des",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 15355,
+      "url": "http://i0.wp.com/hyacinthbloom.com/wp-content/uploads/2026/01/Percent-Love.jpg?resize=151,215"
+    }
+  },
+  {
+    "id": "hizomanga",
+    "name": "HizoManga",
+    "lang": "‎العربية",
+    "site": "https://hizomanga.net/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 12,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 17642,
+      "url": "https://hizomanga.net/wp-content/uploads/2026/10/1001335067-193x278.jpg"
+    }
+  },
+  {
+    "id": "ippotranslations",
+    "name": "Ippotranslations",
+    "lang": "English",
+    "site": "https://ippotranslations.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "indratranslations",
+    "name": "Indra Translations",
+    "lang": "English",
+    "site": "https://indratranslations.com",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 1,
+    "thumbnail": {
+      "ok": false,
+      "reason": "NO_COVER"
+    }
+  },
+  {
+    "id": "kdtnovels",
+    "name": "KDT Novels",
+    "lang": "English",
+    "site": "https://kdtnovels.net/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "keopi",
+    "name": "Keopi Translations",
+    "lang": "English",
+    "site": "https://keopitranslations.com",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "IDWN.id",
+    "name": "IndoWebNovel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://indowebnovel.id/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 20,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 318213,
+      "url": "https://indowebnovel.id/wp-content/uploads/2025/10/8DDB5642-D451-491E-8016-EB3D88ECF809.jpeg"
+    }
+  },
+  {
+    "id": "kodekslibrary",
+    "name": "Kodeks Library",
+    "lang": "Türkçe",
+    "site": "https://www.kodekslibrary.com/",
+    "status": "PASS",
+    "novelCount": 8,
+    "chapterCount": 1,
+    "contentLength": 11453,
+    "sampleSnippet": "*** Kodeks Library Çevirmen &#8211; Epi *** &nbsp; Bölüm 1 &#8211; Karlı Arazi Hiç bitmeyecek bir yolda gibiydim. Karla ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 12389,
+      "url": "https://i0.wp.com/www.kodekslibrary.com/wp-content/uploads/2024/09/Beceriksiz-Kahramanin-Donusu.jpg?resize=151,215"
+    }
+  },
+  {
+    "id": "kisswood",
+    "name": "KissWood",
+    "lang": "Français",
+    "site": "https://kisswood.eu",
+    "status": "PASS",
+    "novelCount": 16,
+    "chapterCount": 538,
+    "contentLength": 5994,
+    "sampleSnippet": "Prologue La bataille entre le héros et le roi démon. Cette bataille fut répétée encore et encore dans ce monde. Le roi d",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 2966,
+      "url": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/master/public/static/coverNotAvailable.webp"
+    }
+  },
+  {
+    "id": "lnori",
+    "name": "LNORI",
+    "lang": "English",
+    "site": "https://lnori.com/",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 36,
+    "chapterCount": 305,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 60574,
+      "url": "https://cdn.lnori.com/cover/12040.webp"
+    }
+  },
+  {
+    "id": "knoxt",
+    "name": "KnoxT",
+    "lang": "English",
+    "site": "https://knoxt.space/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 5,
+    "contentLength": 7079,
+    "sampleSnippet": "AUTHOR: Rose &#8230; Zen&#8230;Humans moved here before the solar system collapsed due to a stellar collision, though it",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 5499,
+      "url": "https://i2.wp.com/knoxt.space/wp-content/uploads/2021/08/Hero-saves-Beauty.png?resize=151,215"
+    }
+  },
+  {
+    "id": "libread",
+    "name": "Lib Read",
+    "lang": "English",
+    "site": "https://libread.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 50,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 8072,
+      "url": "https://libread.com/files/article/image/1/1991/1991s.jpg"
+    }
+  },
+  {
+    "id": "lazygirltranslations",
+    "name": "Lazy Girl Translations",
+    "lang": "English",
+    "site": "https://lazygirltranslations.com",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 97,
+    "contentLength": 18258,
+    "sampleSnippet": "Early autumn in the mountains is the season for sleeping. Especially on a morning when fine autumn rain is pattering dow",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 75164,
+      "url": "https://lazygirltranslations.com/wp-content/uploads/2026/03/167697_0.webp"
+    }
+  },
+  {
+    "id": "lightnovelbrasil",
+    "name": "Light Novel Brasil",
+    "lang": "Português",
+    "site": "https://lightnovelbrasil.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "lightnovel.vn",
+    "name": "Light Novel VN",
+    "lang": "Tiếng Việt",
+    "site": "https://lightnovel.vn",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "lightnovelcave",
+    "name": "LightNovelCave",
+    "lang": "English",
+    "site": "https://www.lightnovelcave.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "lightnoveltranslations",
+    "name": "Light Novel Translations",
+    "lang": "English",
+    "site": "https://lightnovelstranslations.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "kolnovel",
+    "name": "Kol Novel",
+    "lang": "‎العربية",
+    "site": "https://kolnovel.com/",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 20,
+    "chapterCount": 737,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 1807228,
+      "url": "https://kolnovel.com/wp-content/uploads/2021/11/IMG_20211123_002409-1.png"
+    }
+  },
+  {
+    "id": "LightNovelUpdates",
+    "name": "Light Novel Updates",
+    "lang": "English",
+    "site": "https://lightnovelupdates.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "linovelib_tw",
+    "name": "Linovelib(繁體)",
+    "lang": "中文, 汉语, 漢語",
+    "site": "https://tw.linovelib.com/",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 620,
+    "contentLength": 673,
+    "sampleSnippet": "無職轉生 ～到了異世界就拿出真本事～ 1 幼年期 — 插圖 台版 轉自 輕之國度 作者：理不盡な孫の手 插畫：シロタカ 譯者：羅尉揚 錄入：zbszsr 圖源：XX小夫君XX 輕之國度 www.lightnovel.cn 僅供個人學習交流使",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 86925,
+      "url": "https://tw.linovelib.com/files/article/image/2/2013/2013s.jpg"
+    }
+  },
+  {
+    "id": "mtlnovel",
+    "name": "MTL Novel",
+    "lang": "English",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mtlnovel-es",
+    "name": "MTL Novel (ES)",
+    "lang": "Español",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mtlnovel-fr",
+    "name": "MTL Novel (FR)",
+    "lang": "Français",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mtlnovel-id",
+    "name": "MTL Novel (ID)",
+    "lang": "Bahasa Indonesia",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mtlnovel-pt",
+    "name": "MTL Novel (PT)",
+    "lang": "Português",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mtlnovel-ru",
+    "name": "MTL Novel (RU)",
+    "lang": "Русский",
+    "site": "https://mtlnovel.me/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mvlempyr.com",
+    "name": "MVLEMPYR",
+    "lang": "English",
+    "site": "https://www.mvlempyr.io/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 1432,
+    "contentLength": 8575,
+    "sampleSnippet": "Ouch! It hurts so much! My head is killing me! The bizarre dream filled with murmurs shattered instantly. Zhou Mingrui, ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 18248,
+      "url": "https://assets.mvlempyr.app/images/600/5.webp"
+    }
+  },
+  {
+    "id": "lnheaven",
+    "name": "LightNovelHeaven",
+    "lang": "English",
+    "site": "https://lightnovelheaven.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 798,
+    "contentLength": 14236,
+    "sampleSnippet": "Chapter 1: Rebirth of a Legend Translator: Atlas Studios Editor: Atlas Studios Headache… A splitting headache was all sh",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 10450,
+      "url": "https://lightnovelheaven.com/wp-content/uploads/2023/09/Rebirth-of-the-Heavenly-Empress-193x278.jpg"
+    }
+  },
+  {
+    "id": "illusia",
+    "name": "Illusia",
+    "lang": "Português",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  },
+  {
+    "id": "lnmtl",
+    "name": "LnMTL",
+    "lang": "English",
+    "site": "https://lnmtl.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 10,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 40052,
+      "url": "https://lnmtl.com/assets/images/novel/1-200.jpg"
+    }
+  },
+  {
+    "id": "massnovel",
+    "name": "MassNovel",
+    "lang": "Français",
+    "site": "https://massnovel.fr/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "markazriwayat",
+    "name": "Markazriwayat",
+    "lang": "‎العربية",
+    "site": "https://markazriwayat.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "mistminthaven",
+    "name": "Mistmint Haven",
+    "lang": "English",
+    "site": "https://www.mistminthaven.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "nova",
+    "name": "NOVA",
+    "lang": "Español",
+    "site": "https://novelasligeras.net",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  },
+  {
+    "id": "mangatr",
+    "name": "MangaTR",
+    "lang": "Türkçe",
+    "site": "https://manga-tr.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "jaomix.ru",
+    "name": "Jaomix",
+    "lang": "Русский",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  },
+  {
+    "id": "noblemtl",
+    "name": "NobleMTL",
+    "lang": "English",
+    "site": "https://noblemtl.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "meionovel",
+    "name": "MeioNovel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://meionovels.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 21,
+    "contentLength": 13477,
+    "sampleSnippet": "Prolog: Penyihir dan Ramuan Cinta yang Menyayat Hati “PERMISI, apakah ini kediaman Penyihir Danau?” Terkejut oleh tamu y",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 37331,
+      "url": "https://meionovels.com/wp-content/uploads/2026/10/hello-i-witchmycrus.jpg"
+    }
+  },
+  {
+    "id": "lullobox",
+    "name": "LulloBox",
+    "lang": "English",
+    "site": "https://lullobox.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 160,
+    "contentLength": 7921,
+    "sampleSnippet": "1. “Damn it.” Her life, everything she had was on the verge of sinking with the Toulon. The wolf prow she once took prid",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 14830,
+      "url": "https://lullobox.com/wp-content/uploads/2025/09/To-You-Whom-I-Dont-Love-That-Much_1629326916-193x278.jpg"
+    }
+  },
+  {
+    "id": "novelhall",
+    "name": "Novel Hall",
+    "lang": "English",
+    "site": "https://novelhall.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "namevt",
+    "name": "Namevt",
+    "lang": "Türkçe",
+    "site": "https://namevt.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 20,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 13155,
+      "url": "https://i2.wp.com/namevt.com/wp-content/uploads/2025/09/1758124521-1429-86__000.jpg?resize=151,215"
+    }
+  },
+  {
+    "id": "novelmania.com.br",
+    "name": "Novel Mania",
+    "lang": "Português",
+    "site": "https://novelmania.com.br",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  },
+  {
+    "id": "novelarrow",
+    "name": "Novel Arrow",
+    "lang": "English",
+    "site": "https://novelarrow.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "novelpdf",
+    "name": "Novel PDF",
+    "lang": "ไทย",
+    "site": "https://novelpdf.xyz/",
+    "status": "PASS",
+    "novelCount": 16,
+    "chapterCount": 130,
+    "contentLength": 3600,
+    "sampleSnippet": "บทที่ 1 ไม่เต็มใจยอมรับ บทที่ 1 ไม่เต็มใจยอมรับ ร่างในชุดขาวราบเรียบสวมชุดคลุมกระโปรง เป็นหญิงรับใช้ที่ดูดีคนหนึ่ง กายค่",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 25582,
+      "url": "https://novelpdf.xyz/wp-content/uploads/2026/10/b51-0e6-193x278.webp"
+    }
+  },
+  {
+    "id": "novelupdates",
+    "name": "Novel Updates",
+    "lang": "English",
+    "site": "https://www.novelupdates.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "novel543",
+    "name": "Novel543",
+    "lang": "中文, 汉语, 漢語",
+    "site": "https://www.novel543.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "novelninja",
+    "name": "Novel Ninja",
+    "lang": "English",
+    "site": "https://novelninja.xyz/",
+    "status": "PASS",
+    "novelCount": 13,
+    "chapterCount": 20,
+    "contentLength": 7206,
+    "sampleSnippet": "When was that, I wonder… Has it already been two years? My name is Wazu. At the time, having just turned fifteen, I was ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 20749,
+      "url": "https://novelninja.xyz/wp-content/uploads/2026/03/that-person-193x278.jpg"
+    }
+  },
+  {
+    "id": "novelbuddy",
+    "name": "NovelBuddy",
+    "lang": "English",
+    "site": "https://novelbuddy.me/",
+    "status": "PASS",
+    "novelCount": 24,
+    "chapterCount": 3956,
+    "contentLength": 17223,
+    "sampleSnippet": "Chapter 1: Starting Over Translator: Hellscythe_ Editor: Hellscythe_ In the dead of night. At Green Bamboo upper-class a",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 42065,
+      "url": "https://rs.novelbuddy.me/covers/reincarnation-of-the-strongest-sword-god.png"
+    }
+  },
+  {
+    "id": "novel-lucky",
+    "name": "Novel Lucky",
+    "lang": "ไทย",
+    "site": "https://novel-lucky.com/",
+    "status": "PASS",
+    "novelCount": 24,
+    "chapterCount": 1200,
+    "contentLength": 7904,
+    "sampleSnippet": "#0ท้ภฝจำคาซ ฬัยศ์ท้าฝไฟะแฬีฝดฉฏ ฆฉยฏย่ภแฉื่ภดซาแฌ็ฉแศฟา 58 ฦั่ศใซดไฟ้ศ ไฟะภาฏาขลี่ภตภ้าศภฝู่ไฟ้ศฏ็ฝิ่ดฦื้ฉไบะซาฏพึ้ฉ ลำเ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 45705,
+      "url": "https://novel-lucky.com/wp-content/uploads/2026/10/46e128d4-0761-423f-a5a9-0a29ae5292ca-193x278.png"
+    }
+  },
+  {
+    "id": "novelfire",
+    "name": "Novel Fire",
+    "lang": "English",
+    "site": "https://novelfire.net/",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 20,
+    "chapterCount": 3215,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 35382,
+      "url": "https://novelfire.net/server-1/shadow-slave.jpg"
+    }
+  },
+  {
+    "id": "novelfrance",
+    "name": "NovelFrance",
+    "lang": "Français",
+    "site": "https://novelfrance.fr/",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Failed to load page (open in web view)"
+  },
+  {
+    "id": "novelfull",
+    "name": "NovelFull",
+    "lang": "English",
+    "site": "https://novelfull.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403: Forbidden) try to open in webview."
+  },
+  {
+    "id": "noicetranslations",
+    "name": "Noice Translations",
+    "lang": "English",
+    "site": "https://noicetranslations.com/",
+    "status": "PASS",
+    "novelCount": 16,
+    "chapterCount": 2,
+    "contentLength": 11129,
+    "sampleSnippet": "Chapter 1: The Opening Move Is Giving the Dragon King a Foot Massage! “Chen Ran, today is the day you die!” With that fu",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 20274,
+      "url": "https://noicetranslations.com/wp-content/uploads/2026/10/1862212s-193x278.webp?crop=1"
+    }
+  },
+  {
+    "id": "neobook",
+    "name": "Neobook",
+    "lang": "Русский",
+    "site": "https://neobook.org",
+    "status": "PASS",
+    "novelCount": 30,
+    "chapterCount": 5,
+    "contentLength": 4831,
+    "sampleSnippet": "PROLOGUE Vincent Barker &nbsp;&nbsp;&nbsp;You know you've really screwed up when everyone's eyes, more or less, are on y",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 49291,
+      "url": "https://s3.twcstorage.ru/neobook-cdn/u/02835e23c0a3b0f13700bb9a66f1e567d6eea417f53b56c11b7d36832330ebd9/f/125893_m_ced4b10c4c7b47e3bcf37c45d5d717e3ae06490464b48dbc85cdfbb6d73c0e31.jpg"
+    }
+  },
+  {
+    "id": "novelrest",
+    "name": "NovelRest",
+    "lang": "English",
+    "site": "https://novelrest.vercel.app",
+    "status": "PASS",
+    "novelCount": 2,
+    "chapterCount": 12,
+    "contentLength": 482,
+    "sampleSnippet": "Table of Contents URL: https://freewebnovel.com/novel/a-regressors-tale-of-cultivation On the way to a company workshop,",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 170436,
+      "url": "https://static.wikia.nocookie.net/regressors-tale-of-cultivation/images/9/9d/Poster1.png/revision/latest?cb=20240220213523"
+    }
+  },
+  {
+    "id": "novelcool-ru",
+    "name": "NovelCool (RU)",
+    "lang": "Русский",
+    "site": "https://ru.novelcool.com",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 556,
+    "contentLength": 9024,
+    "sampleSnippet": "********************** В вилле семьи Сяо повсюду был включен свет. Сегодня у главы семьи, старухи Сяо, был день рождения",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 10450,
+      "url": "https://img.novelcool.com/logo/202203/e8/Powerful_son_in_law1913.jpg"
+    }
+  },
+  {
+    "id": "novelhi",
+    "name": "NovelHi",
+    "lang": "English",
+    "site": "https://novelhi.com/",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 7464,
+    "contentLength": 3908,
+    "sampleSnippet": "Pain. Her head felt like it was about to explode. Her body felt as if it had been run over by a car. The burning pain sp",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 14564,
+      "url": "https://img.novelhi.com/cover/1262260612777097636.webp"
+    }
+  },
+  {
+    "id": "novelib",
+    "name": "NovelLib",
+    "lang": "English",
+    "site": "https://novelib.com",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 5,
+    "contentLength": 9820,
+    "sampleSnippet": "window.pubfuturetag = window.pubfuturetag || [];window.pubfuturetag.push({unit: \"67590942cf4b7e68ab787b6b\", id: \"pf-1279",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 146176,
+      "url": "https://novelib.com/wp-content/uploads/2026/10/xxlarge-4.webp"
+    }
+  },
+  {
+    "id": "novelight",
+    "name": "Novelight",
+    "lang": "English",
+    "site": "https://novelight.net/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 30,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 138205,
+      "url": "https://novelight.net//media/book/poster/2024/10/01/The-Hunter-Wants-to-Live-Quietly.jpg"
+    }
+  },
+  {
+    "id": "TL",
+    "name": "NovelTL",
+    "lang": "Русский",
+    "site": "https://novel.tl",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 40,
+    "chapterCount": 955,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 332274,
+      "url": "https://novel.tl/images/4/4c/works_knbw5_v1_4ab98cc5-40b0-4a61-9097-fcdab4a01c77_Konosuba_Volume_1_Cover.jpg"
+    }
+  },
+  {
+    "id": "novelcool",
+    "name": "NovelCool",
+    "lang": "English",
+    "site": "https://www.novelcool.com",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 2497,
+    "contentLength": 10462,
+    "sampleSnippet": "A frail-looking young man with pale skin and dark circles under his eyes was sitting on a rusty bench across from the po",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 21305,
+      "url": "https://img.novelcool.com/logo/202205/b9/Shadow_Slave4261.jpg"
+    }
+  },
+  {
+    "id": "novelyra",
+    "name": "Novelyra",
+    "lang": "Español",
+    "site": "https://novelyra.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "novelsparadise",
+    "name": "Novels Paradise",
+    "lang": "‎العربية",
+    "site": "https://novelsparadise.site/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "novelki.pl",
+    "name": "Novelki",
+    "lang": "Polski",
+    "site": "https://novelki.pl",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "noveltr",
+    "name": "NovelTR",
+    "lang": "Türkçe",
+    "site": "https://noveltr.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "noveldeglace",
+    "name": "NovelDeGlace",
+    "lang": "Français",
+    "site": "https://noveldeglace.com/",
+    "status": "PASS",
+    "novelCount": 71,
+    "chapterCount": 729,
+    "contentLength": 20208,
+    "sampleSnippet": "function setTextColor(picker) { var x = document.getElementsByClassName('entry-content-chapitre')[0].getElementsByTagNam",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 120687,
+      "url": "https://img.noveldeglace.com/2017/05/Genjitsushugisha-no-Oukokukaizouki_Volume-01_Cover01-212x300.jpeg"
+    }
+  },
+  {
+    "id": "oasistranslations",
+    "name": "Oasis Translations",
+    "lang": "Español",
+    "site": "https://oasistranslations.wordpress.com/",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 12,
+    "chapterCount": 187,
+    "contentLength": 6,
+    "thumbnail": {
+      "ok": false,
+      "reason": "NO_COVER"
+    }
+  },
+  {
+    "id": "penguinsquad",
+    "name": "Penguin Squad",
+    "lang": "English",
+    "site": "https://penguin-squad.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "oceantales",
+    "name": "Ocean Tales",
+    "lang": "English",
+    "site": "https://oceantales.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "novhell",
+    "name": "Novhell",
+    "lang": "Français",
+    "site": "https://novhell.org",
+    "status": "PASS",
+    "novelCount": 5,
+    "chapterCount": 393,
+    "contentLength": 14182,
+    "sampleSnippet": "Chapitre 1 – Le Rubik’s Cube L’histoire humaine n’avait jamais manqué de scientifiques incroyables qui ont changé le mon",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 19518,
+      "url": "https://novhell.org/wp-content/uploads/2022/02/TSW-image-2-2.jpg"
+    }
+  },
+  {
+    "id": "ragnarscans",
+    "name": "Ragnar Scans",
+    "lang": "Türkçe",
+    "site": "https://ragnarscans.net/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "RNBH.org",
+    "name": "RanobeHub",
+    "lang": "Русский",
+    "site": "https://ranobehub.org",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Cannot read properties of undefined (reading 'forEach')"
+  },
+  {
+    "id": "ranobes",
+    "name": "Ranobes",
+    "lang": "English",
+    "site": "https://ranobes.top",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (503) try to open in webview."
+  },
+  {
+    "id": "ranobes-ru",
+    "name": "Ranobes (RU)",
+    "lang": "Русский",
+    "site": "https://ranobes.com",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 25,
+    "contentLength": 5204,
+    "sampleSnippet": "Цзян Хуэй подумала, что хотя книга изображала Ло Бэй исключительно с хорошей стороны, на самом деле она оказалась очень ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 39031,
+      "url": "https://ranobes.com/uploads/posts/2026-10/1791660634_2026.jpg"
+    }
+  },
+  {
+    "id": "ReLib",
+    "name": "Re:Library",
+    "lang": "English",
+    "site": "https://re-library.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "RLIB",
+    "name": "RanobeLib",
+    "lang": "Русский",
+    "site": "https://ranobelib.me",
+    "status": "PASS",
+    "novelCount": 60,
+    "chapterCount": 1110,
+    "contentLength": 5955,
+    "sampleSnippet": "[Есть три способа выжить в разрушенном мире. Сейчас я не смогу вспомнить их все, но один я знаю точно. Тот факт, что вы ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 67108,
+      "url": "https://cover.cdnlibs.org/uploads/cover/omniscient-readers-viewpoint-novel/cover/3b48638c-b4e1-498a-9ea2-2d88b6df245d.jpg"
+    }
+  },
+  {
+    "id": "ranovel",
+    "name": "Ranovel",
+    "lang": "English",
+    "site": "https://ranovel.com/",
+    "status": "PARSE_CHAPTER_ERROR",
+    "error": "Could not reach site (403) try to open in webview.",
+    "novelCount": 10,
+    "chapterCount": 136,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 143934,
+      "url": "https://ranovel.com/wp-content/uploads/2026/03/Only-the-Red-Panda-Daughter-in-law-Receives-Loveresizedimage.png"
+    }
+  },
+  {
+    "id": "pasteltales",
+    "name": "Pastel Tales",
+    "lang": "English",
+    "site": "https://pasteltales.com/",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 24,
+    "contentLength": 2289,
+    "sampleSnippet": "“The Bestia Imperial Family views you as nothing more than livestock for bearing children.” It was a stinging remark tha",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 104944,
+      "url": "https://pasteltales.com/wp-content/uploads/2026/08/cover2-2-193x278.png"
+    }
+  },
+  {
+    "id": "readnovelfull",
+    "name": "ReadNovelFull",
+    "lang": "English",
+    "site": "https://readnovelfull.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 3816,
+    "contentLength": 12453,
+    "sampleSnippet": "Chapter 001: Hell Spirit Grass Lightning flashed through the air and dark clouds covered the sky. A heavy rain was about",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 10387,
+      "url": "https://img.readnovelfull.com/thumb/t-200x89/World-Defying-Dan-God-I9g93loiB3.jpg"
+    }
+  },
+  {
+    "id": "requiemtls",
+    "name": "Requiem Translations",
+    "lang": "English",
+    "site": "https://requiemtls.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "readfrom",
+    "name": "Read From Net",
+    "lang": "English",
+    "site": "https://readfrom.net/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "rezerowebnovelfr",
+    "name": "Re:Zero Web Novel FR",
+    "lang": "Français",
+    "site": "https://rezerowebnovelfr.wordpress.com",
+    "status": "PASS",
+    "novelCount": 3,
+    "chapterCount": 309,
+    "contentLength": 3898,
+    "sampleSnippet": "Arc I – Prologue – « La chaleur résiduelle du commencement&nbsp;» ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ Traduit par : SNUserTL Tradu",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 99557,
+      "url": "https://rezerowebnovelfr.wordpress.com/wp-content/uploads/2021/03/sans-titre-1.png"
+    }
+  },
+  {
+    "id": "riwyat",
+    "name": "Riwyat",
+    "lang": "‎العربية",
+    "site": "https://riwyat.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (404) try to open in webview."
+  },
+  {
+    "id": "royalroad",
+    "name": "Royal Road",
+    "lang": "English",
+    "site": "https://www.royalroad.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "sakura.id",
+    "name": "SakuraNovel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://sakuranovel.id/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "scribblehub",
+    "name": "Scribble Hub",
+    "lang": "English",
+    "site": "https://www.scribblehub.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "ReN",
+    "name": "Renovels",
+    "lang": "Русский",
+    "site": "https://renovels.org",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  },
+  {
+    "id": "sektenovel",
+    "name": "Sekte Novel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://sektenovel.web.id/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "rulate-api",
+    "name": "Rulate (API)",
+    "lang": "Русский",
+    "site": "https://tl.rulate.ru",
+    "status": "POPULAR_FETCH_ERROR",
+    "error": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  },
+  {
+    "id": "quanben",
+    "name": "Quanben",
+    "lang": "中文, 汉语, 漢語",
+    "site": "https://www.quanben.io/",
+    "status": "PARSE_NOVEL_ERROR",
+    "error": "fetch failed",
+    "novelCount": 36,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 7350,
+      "url": "https://img.c0m.io/quanben.io/upload/thumbnail/book_0_999/book_1.jpg"
+    }
+  },
+  {
+    "id": "skynovels",
+    "name": "SkyNovels",
+    "lang": "Español",
+    "site": "https://www.skynovels.net/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 108,
+    "contentLength": 16215,
+    "sampleSnippet": "## **Capítulo 1: El tren de vías de nubes y la azafata elfa** Año 745 del Calendario Radiante. En la ruta de vías de nub",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 58172,
+      "url": "https://api.skynovels.net/api/get-image/4bb5e363-77b2-4812-96aa-72e93404d0a8.webp/novels/false"
+    }
+  },
+  {
+    "id": "seanovel",
+    "name": "Seanovel",
+    "lang": "‎العربية",
+    "site": "https://seanovel.org/",
+    "status": "PASS",
+    "novelCount": 223,
+    "chapterCount": 831,
+    "contentLength": 4836,
+    "sampleSnippet": "الفصل 1- أخبار عاجلة [ عام 2142 ، واشنطن العاصمة] خشخشة خشخشة عندما بدأت الأرض في الاهتزاز ، ألقى ليو سكايشارد نظرة خاطف",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 26914,
+      "url": "https://seanovel.org/api/novel/terra-nova-online-rise-of-the-strongest-player/cover?type=webp"
+    }
+  },
+  {
+    "id": "pawread",
+    "name": "PawRead",
+    "lang": "English",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  },
+  {
+    "id": "sonicmtl",
+    "name": "SonicMTL",
+    "lang": "English",
+    "site": "https://www.sonicmtl.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 2,
+    "contentLength": 5685,
+    "sampleSnippet": "Chapter 001: The Young Master, Gu Changge “Is this really the Taixuan Holy Land, one of the so-called Six Great Sacred L",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 14493,
+      "url": "https://www.sonicmtl.com/wp-content/uploads/2022/01/I-Am-the-Fated-Villain.jpg"
+    }
+  },
+  {
+    "id": "sleeptTLS",
+    "name": "SleepyTranslations",
+    "lang": "English",
+    "site": "https://sleepytranslations.com/",
+    "status": "PASS",
+    "novelCount": 16,
+    "chapterCount": 44,
+    "contentLength": 7881,
+    "sampleSnippet": "Here comes the Empress and her son. The news was the biggest concern of the people of the summer palace these days. The ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 42789,
+      "url": "https://i0.wp.com/sleepytranslations.com/wp-content/uploads/2023/08/xxlarge-3.png?resize=193%2C278&ssl=1"
+    }
+  },
+  {
+    "id": "sunovels",
+    "name": "Sunovels",
+    "lang": "‎العربية",
+    "site": "https://sunovels.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 24,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 6180,
+      "url": "https://sunovels.com/uploads/thumbnail_Gu_Daoist_Master_328fe7f8b7.jpg\\"
+    }
+  },
+  {
+    "id": "yomou.syosetu",
+    "name": "Syosetu",
+    "lang": "日本語",
+    "site": "https://yomou.syosetu.com/",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 662,
+    "contentLength": 2204,
+    "sampleSnippet": "第一話 勇者召喚に巻き込まれた 俺の名前は 向田剛志 ( むこうだつよし ) 。ちなみに２７歳独身だ。 日本の地方都市に住むしがないサラリーマンだった。 それが何でこの中世ヨーロッパみたいな剣と魔法のファンタジー世界にいるのかというと、『勇",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 2966,
+      "url": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/master/public/static/coverNotAvailable.webp"
+    }
+  },
+  {
+    "id": "asuralightnovel",
+    "name": "Srank Manga",
+    "lang": "English",
+    "site": "https://srankmanga.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 519,
+    "contentLength": 7095,
+    "sampleSnippet": "The other day when he drank with Hanho, Sungwoo bragged about his heroic exploits when he was in the army. After that, H",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 9286,
+      "url": "https://srankmanga.com/wp-content/uploads/xianxia-my-disciples-are-insane-193x278-1139364.jpg"
+    }
+  },
+  {
+    "id": "rewayatclub",
+    "name": "Rewayat Club",
+    "lang": "‎العربية",
+    "site": "https://rewayat.club/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 24,
+    "thumbnail": {
+      "ok": false,
+      "status": 404,
+      "contentType": "text/html",
+      "size": 179,
+      "url": "https://api.rewayat.club/ttps://media.rewayat.club/novel/Legend%20Of%20Swordsman/poster/Legend-of-Swordsman.cover.jpg",
+      "reason": "HTTP_404_SIZE_179"
+    }
+  },
+  {
+    "id": "sweetescape",
+    "name": "Sweet Escape",
+    "lang": "English",
+    "site": "https://sweetescapetranslations.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "TCSega",
+    "name": "TC & Sega",
+    "lang": "Español",
+    "site": "https://teamchmantranslations.com",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 21,
+    "chapterCount": 46,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 11861,
+      "url": "https://i2.wp.com/teamchmantranslations.com/wp-content/uploads/2025/02/1739326715-7055-A-Painting-of-the-Villainess-as-a-Young-Lady.jpg?resize=151,215"
+    }
+  },
+  {
+    "id": "tunovelaligera",
+    "name": "TuNovelaLigera",
+    "lang": "Español",
+    "site": "https://tunovelaligera.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "tsundoku",
+    "name": "Tsundoku Traduções",
+    "lang": "Português",
+    "site": "https://tsundoku.com.br",
+    "status": "PARSE_NOVEL_ERROR",
+    "error": "Invalid time value",
+    "novelCount": 48,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 36501,
+      "url": "https://i3.wp.com/tsundoku.com.br/wp-content/uploads/2024/06/capa_vol_12.jpg?resize=285,425"
+    }
+  },
+  {
+    "id": "turkcelightnovels",
+    "name": "TurkceLightNovels",
+    "lang": "Türkçe",
+    "site": "https://turkcelightnovels.com/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "transweaver",
+    "name": "Translation Weaver",
+    "lang": "English",
+    "site": "https://transweaver.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 128,
+    "contentLength": 10073,
+    "sampleSnippet": "&#8220;Wow, outing someone right in the middle of the office. And making our dear secretary uncomfortable too. I can’t l",
+    "thumbnail": {
+      "ok": false,
+      "status": 404,
+      "contentType": "text/html",
+      "size": 548,
+      "url": "https://transweaver.com/wp-content/uploads/2024/07/10-rules.png",
+      "reason": "HTTP_404_SIZE_548"
+    }
+  },
+  {
+    "id": "vandytranslate",
+    "name": "Vandy Translate",
+    "lang": "English",
+    "site": "https://vandytranslate.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "universalnovel",
+    "name": "Universal Novel",
+    "lang": "English",
+    "site": "https://universalnovel.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 20,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 402294,
+      "url": "https://universalnovel.com/wp-content/uploads/2026/08/authorimagespace.jpeg"
+    }
+  },
+  {
+    "id": "storyseedling",
+    "name": "StorySeedling",
+    "lang": "English",
+    "site": "https://storyseedling.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 21,
+    "contentLength": 33570,
+    "sampleSnippet": "About eighty years have passed since I reincarnated as moss. Everyone I’d grown close to, starting with Aurora, has died",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 3189568,
+      "url": "https://i2.wp.com/storyseedling.com/public/images/2026/10/Ants-Against-the-Otherworldly-Invasion.png?f=auto&q=10&w=400&h=400"
+    }
+  },
+  {
+    "id": "translatinotaku",
+    "name": "TranslatinOtaku",
+    "lang": "English",
+    "site": "https://translatinotaku.net/",
+    "status": "PASS",
+    "novelCount": 8,
+    "chapterCount": 28,
+    "contentLength": 7063,
+    "sampleSnippet": "[DO YOU WANT TO PLAY A GAME?] → [YES] [NO (Selected)] ezstandalone.cmd.push(function () { ezstandalone.showAds(110); });",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 15539,
+      "url": "https://translatinotaku.net/wp-content/uploads/2025/07/dimension-cover-193x278.jpg"
+    }
+  },
+  {
+    "id": "warriorlegendtrad",
+    "name": "Warrior Legend Trad",
+    "lang": "Français",
+    "site": "https://warriorlegendtrad.wordpress.com",
+    "status": "PASS",
+    "novelCount": 14,
+    "chapterCount": 36,
+    "contentLength": 4529,
+    "sampleSnippet": "Tendou Aoi jouait au VRMMO [Genesis Frontier] depuis la sortie du jeu. Elle a survécu à la bataille de la ‘premier mise ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 35589,
+      "url": "https://warriorlegendtrad.wordpress.com/wp-content/uploads/2023/05/sans-titre.jpeg?w=263"
+    }
+  },
+  {
+    "id": "webnovel",
+    "name": "Webnovel",
+    "lang": "English",
+    "site": "https://www.webnovel.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "wbnovel",
+    "name": "WBNovel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://wbnovel.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 70,
+    "contentLength": 15187,
+    "sampleSnippet": "“Begitulah keadaannya.” “Kamu harus bersiap setelah kamu kembali.” Sutradara yang mengenakan seragam hitam, menyilangkan",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 8928,
+      "url": "https://wbnovel.com/wp-content/uploads/2025/07/Creating-Heavenly-Laws-193x278.webp"
+    }
+  },
+  {
+    "id": "webnovelunlocked",
+    "name": "Webnovel (Unlocked)",
+    "lang": "English",
+    "site": "https://www.webnovel.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "morenovel",
+    "name": "Vanovel",
+    "lang": "Bahasa Indonesia",
+    "site": "https://vanovel.com/",
+    "status": "PARSE_CHAPTER_ERROR",
+    "error": "Could not reach site (403) try to open in webview.",
+    "novelCount": 16,
+    "chapterCount": 100,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 16174,
+      "url": "https://vanovel.com/wp-content/uploads/2025/09/Dual-Cultivation-193x278.webp"
+    }
+  },
+  {
+    "id": "whitemoonlightnovels",
+    "name": "White Moonlight Novels",
+    "lang": "English",
+    "site": "https://whitemoonlightnovels.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "worldnovel",
+    "name": "WorldNovel",
+    "lang": "Français",
+    "site": "https://world-novel.fr/",
+    "status": "CLOUDFLARE_BLOCKED",
+    "error": "Could not reach site (403) try to open in webview."
+  },
+  {
+    "id": "wooksteahouse",
+    "name": "Wook's Teahouse",
+    "lang": "English",
+    "site": "https://wooksteahouse.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "WTRLAB",
+    "name": "WTR-LAB",
+    "lang": "English",
+    "site": "https://wtr-lab.com/",
+    "status": "PARSE_CHAPTER_ERROR",
+    "error": "Cannot read properties of undefined (reading 'data')",
+    "novelCount": 10,
+    "chapterCount": 126,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 810743,
+      "url": "https://img.wtr-lab.com/cdn/series/8ym4euwqTRUODGKR2D527v3u2I3T8IdMvXUSzjQNzHY.png?w=600&h=800"
+    }
+  },
+  {
+    "id": "wuxiaspace",
+    "name": "Wuxia Space",
+    "lang": "English",
+    "site": "https://www.wuxiaspot.com",
+    "status": "PASS",
+    "novelCount": 30,
+    "chapterCount": 246,
+    "contentLength": 14023,
+    "sampleSnippet": "The Evil Soul Master is actually myself! Author: Zhe Xiaolong He was reincarnated in Douluo Continent, and the timeline ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 8695,
+      "url": "https://www.wuxiaspot.com/d/file/cover_qb/vqekr3plz2d.jpg"
+    }
+  },
+  {
+    "id": "WebNovelTraslation",
+    "name": "Web Novel Translation",
+    "lang": "English",
+    "site": "https://webnoveltranslations.com/",
+    "status": "PASS",
+    "novelCount": 12,
+    "chapterCount": 31,
+    "contentLength": 13655,
+    "sampleSnippet": "&lt;Prologue&gt; &nbsp; “Welcome to Fantasia! We pray that the Goddess of Fortune’s blessing be with you, and we have a ",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 28421,
+      "url": "https://webnoveltranslations.com/wp-content/uploads/2026/03/RNG-Gamer-193x278.jpg"
+    }
+  },
+  {
+    "id": "wuxialnscantrad",
+    "name": "WuxiaLnScantrad",
+    "lang": "Français",
+    "site": "https://wuxialnscantrad.wordpress.com",
+    "status": "PASS",
+    "novelCount": 5,
+    "chapterCount": 97,
+    "contentLength": 13381,
+    "sampleSnippet": "Chapitre 1 – Nuit pluvieuse (Partie 1) On pouvait entendre le bruit de la pluie de la maison. Vivian plaça soigneusement",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 2966,
+      "url": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/master/public/static/coverNotAvailable.webp"
+    }
+  },
+  {
+    "id": "wuxiaworld",
+    "name": "Wuxia World",
+    "lang": "English",
+    "site": "https://www.wuxiaworld.com/",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 357,
+    "contentLength": 8118,
+    "sampleSnippet": "Volume 1: Chapter 1 – The First Chapter Early morning. It’s so bright that I had to open my lazy eyelids. Why does my ho",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 11460,
+      "url": "https://cdn.wuxiaworld.com/images/covers/col.webp?v=d7e2f2f18c3349f1069dc6bf1d249e8da84ec62b"
+    }
+  },
+  {
+    "id": "wuxiacity",
+    "name": "Wuxiafox",
+    "lang": "English",
+    "site": "https://www.wuxiafox.com",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "zetroTL",
+    "name": "Zetro Translation",
+    "lang": "English",
+    "site": "https://zetrotranslation.com/",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "witchculttranslations",
+    "name": "Witch Cult Translations",
+    "lang": "English",
+    "site": "https://witchculttranslation.com",
+    "status": "PASS",
+    "novelCount": 1,
+    "chapterCount": 450,
+    "contentLength": 27992,
+    "sampleSnippet": "Arc 5, Chapter 1 – “It Always Starts With a Visitor” &nbsp; ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ ※ All rights belong to Tappei Nagatsuk",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 1411719,
+      "url": "https://witchculttranslation.com/wp-content/uploads/2026/04/Untitled.jpg?x88237"
+    }
+  },
+  {
+    "id": "wuxiap",
+    "name": "Wuxiabox",
+    "lang": "English",
+    "site": "https://www.wuxiabox.com",
+    "status": "PASS",
+    "novelCount": 30,
+    "chapterCount": 3015,
+    "contentLength": 4762,
+    "sampleSnippet": "\"Ding! Congratulations on your successful binding of the Hundred Times cultivation system!\" \"Ding! You have taken a step",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 23768,
+      "url": "https://www.wuxiabox.com/d/file/coverb/A-Hundred-Times-Training-System-Instantly-Upgrades-999-213x300.jpg"
+    }
+  },
+  {
+    "id": "ficbook",
+    "name": "ficbook",
+    "lang": "Русский",
+    "site": "https://ficbook.net",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "webnoveloku",
+    "name": "WebNovelOku",
+    "lang": "Türkçe",
+    "site": "https://www.webnoveloku.com/",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 7,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 47723,
+      "url": "https://www.webnoveloku.com/wp-content/uploads/2026/03/late-night-tales-of-the-capital-193x278.png"
+    }
+  },
+  {
+    "id": "kakuyomu",
+    "name": "kakuyomu",
+    "lang": "日本語",
+    "site": "https://kakuyomu.jp",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "dilartube",
+    "name": "dilar tube",
+    "lang": "‎العربية",
+    "site": "https://golden.rest/",
+    "status": "PASS",
+    "novelCount": 1,
+    "chapterCount": 42,
+    "contentLength": 14623,
+    "sampleSnippet": "الفصل ١ هونجيارابوبو [صراخ] استيقظت مونيكا إيفريت التي كانت نائمة علي مكتبها ، قلمها في يدها اليُمني و مجموعة من الأوراق",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 817921,
+      "url": "https://golden.rest/uploads/manga/cover/5333/IMG_20251018_203611_993.jpg"
+    }
+  },
+  {
+    "id": "wuxiaworld.site",
+    "name": "WuxiaWorld.Site",
+    "lang": "English",
+    "site": "https://wuxiaworld.site/",
+    "status": "PASS",
+    "novelCount": 10,
+    "chapterCount": 138,
+    "contentLength": 9581,
+    "sampleSnippet": "Chapter 1 – 1 1 Becoming the Small Wife of the Crown Prince Chapter 1: Chapter 1: Becoming the Small Wife of the Crown P",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "size": 13040,
+      "url": "https://wuxiaworld.site/wp-content/uploads/2025/05/thumb_681dcc9977d7b-193x278."
+    }
+  },
+  {
+    "id": "zelluloza",
+    "name": "Целлюлоза",
+    "lang": "Русский",
+    "site": "https://zelluloza.ru",
+    "status": "POPULAR_EMPTY"
+  },
+  {
+    "id": "xiaowaz",
+    "name": "Xiaowaz",
+    "lang": "Français",
+    "site": "https://xiaowaz.fr",
+    "status": "CHAPTER_CONTENT_EMPTY",
+    "novelCount": 5,
+    "chapterCount": 175,
+    "contentLength": 0,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 30752,
+      "url": "https://xiaowaz.fr/wp-content/uploads/2018/07/Monster-Level-Up.jpg"
+    }
+  },
+  {
+    "id": "TopLiba",
+    "name": "ТопЛиба",
+    "lang": "Русский",
+    "site": "https://topliba.com",
+    "status": "NO_CHAPTERS_FOUND",
+    "novelCount": 24,
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 44543,
+      "url": "https://topliba.com/covers/720298.jpg"
+    }
+  },
+  {
+    "id": "AT",
+    "name": "Автор Тудей",
+    "lang": "Русский",
+    "site": "https://author.today",
+    "status": "PASS",
+    "novelCount": 25,
+    "chapterCount": 15,
+    "contentLength": 15853,
+    "sampleSnippet": "— Твою-то ма-а-ать… — вполне по-семейному, по-Николински, и уж совершенно точно в духе стальной Оксаны Палны, среагирова",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 9710,
+      "url": "https://cm.author.today/content/2026/09/29/2a8100aea58844eb9a2f04852a9ae4de.jpg?width=153&height=200&rmode=max&format=webp"
+    }
+  },
+  {
+    "id": "inoveltranslation",
+    "name": "iNovelTranslation",
+    "lang": "English",
+    "site": "https://inoveltranslation.com",
+    "status": "PASS",
+    "novelCount": 50,
+    "chapterCount": 4,
+    "contentLength": 8059,
+    "sampleSnippet": "The man seemed to have a particular fondness for the iron sword. His gaze never left it. \"My name is Fang Chen. What's y",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 565134,
+      "url": "https://inoveltranslation.com/api/media/file/Side-Character-Transmigrations-The-Final-Boss-is-No-Joke.png"
+    }
+  },
+  {
+    "id": "ixdzs8",
+    "name": "爱下电子书",
+    "lang": "中文, 汉语, 漢語",
+    "site": "https://ixdzs8.com/",
+    "status": "PASS",
+    "novelCount": 20,
+    "chapterCount": 1361,
+    "contentLength": 79,
+    "sampleSnippet": "Error: Could not find chapter content at https://ixdzs8.com/read/396056/p1.html",
+    "thumbnail": {
+      "ok": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "size": 70335,
+      "url": "https://img22.ixdzs.com/f1/d2/f1d206a8184feddd0e6830f9cce3821f.jpg"
+    }
+  },
+  {
+    "id": "ifreedom",
+    "name": "Свободный Мир Ранобэ",
+    "lang": "Русский",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  },
+  {
+    "id": "rewayatfans",
+    "name": "روايات فانز",
+    "lang": "‎العربية",
+    "status": "TIMEOUT",
+    "error": "TIMEOUT_15S"
+  }
+]

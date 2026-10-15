@@ -264,7 +264,7 @@
     "name": "Divine Dao Library",
     "site": "https://www.divinedaolibrary.com/",
     "lang": "English",
-    "version": 1001001,
+    "version": 2000000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/divinedaolibrary.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/divinedaolibrary/icon.png",
     "versionCode": 1000100
@@ -895,7 +895,7 @@
     "name": "Mistmint Haven",
     "site": "https://www.mistminthaven.com/",
     "lang": "English",
-    "version": 1000001,
+    "version": 2000000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/mistminthaven.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/mistminthaven/icon.png",
     "versionCode": 1000101
@@ -955,7 +955,7 @@
     "name": "Novel Arrow",
     "site": "https://novelarrow.com/",
     "lang": "English",
-    "version": 1000001,
+    "version": 2000000,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/novelarrow.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/novelarrow/icon.png",
     "versionCode": 1000100
@@ -1576,7 +1576,7 @@
     "name": "Tsundoku Traduções",
     "site": "https://tsundoku.com.br",
     "lang": "Português",
-    "version": 1000001,
+    "version": 1000002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/tsundoku.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/pt-br/tsundoku/icon.png",
     "versionCode": 1000100
@@ -1646,7 +1646,7 @@
     "name": "WTR-LAB",
     "site": "https://wtr-lab.com/",
     "lang": "English",
-    "version": 1001004,
+    "version": 1001005,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/wtrlab.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/en/wtrlab/icon.png",
     "versionCode": 1000100

@@ -1,9 +1,16 @@
 ext {
     extName = 'KissKH'
     extClass = '.KissKH'
-    extVersionCode = 5
+    extVersionCode = 13
     isNsfw = true
 }
 
 apply from: "$rootDir/common.gradle"
+
+android {
+    defaultConfig {
+        buildConfigField "String", "KISSKH_API", "\"https://kisskh.co/api/DramaList/Episode/\""
+        buildConfigField "String", "KISSKH_SUB_API", "\"https://kisskh.co/api/Subtitles/\""
+    }
+}
 

@@ -4,6 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class SearchHvsResponse(
+    val data: List<HitsModel> = emptyList(),
+)
+
+@Serializable
 data class HitsModel(
     val id: Long? = null,
     val name: String = "",

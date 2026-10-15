@@ -1,0 +1,1987 @@
+{
+  "timestamp": 1792026626.340611,
+  "target": "anime",
+  "total": 219,
+  "duration_s": 26.32,
+  "stats": {
+    "anime": {
+      "CLOUDFLARE_PROTECTED": 104,
+      "LIVE_CONFIRMED": 111,
+      "DEAD_PARKED_DOMAIN": 1,
+      "HTTP_ERROR": 3
+    }
+  },
+  "results": [
+    {
+      "name": "Aniyomi: SupJav",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.supjav",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://supjav.com"
+    },
+    {
+      "name": "Aniyomi: Loklok",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.loklok",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 API Verified (JSON payload)",
+      "base_url": "https://loklok.com"
+    },
+    {
+      "name": "Aniyomi: Jav Guru",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.javguru",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://jav.guru"
+    },
+    {
+      "name": "Aniyomi: MyReadingManga",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.myreadingmanga",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://myreadingmanga.info"
+    },
+    {
+      "name": "Aniyomi: ArabAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.arabanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.arabanime.net"
+    },
+    {
+      "name": "Aniyomi: Anime Blkom",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.animeblkom",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeblkom.net"
+    },
+    {
+      "name": "Aniyomi: MissAV",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.missav",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://missav.live"
+    },
+    {
+      "name": "Aniyomi: FASELHD",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.faselhd",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.faselhds.biz"
+    },
+    {
+      "name": "Aniyomi: DASHFLIX",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.dashflix",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 404,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://dashflix.top"
+    },
+    {
+      "name": "Aniyomi: Google Drive",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.googledrive",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 400,
+      "detail": "HTTP 400 Scraper OK ('title')",
+      "base_url": "https://accounts.google.com/v3/signin/identifier"
+    },
+    {
+      "name": "Aniyomi: Pornhub",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.pornhub",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('videos')",
+      "base_url": "https://www.pornhub.com"
+    },
+    {
+      "name": "Aniyomi: Anime4up",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.anime4up",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://w1.anime4up.rest"
+    },
+    {
+      "name": "Aniyomi: Jable",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.jable",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://jable.tv"
+    },
+    {
+      "name": "Aniyomi: Anime-Base",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.animebase",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://anime-base.net"
+    },
+    {
+      "name": "Aniyomi: Subsplease",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.subsplease",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 API Verified (JSON payload)",
+      "base_url": "https://subsplease.org"
+    },
+    {
+      "name": "Aniyomi: Animerco",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.animerco",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://zeta.animerco.org"
+    },
+    {
+      "name": "Aniyomi: Ted",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.ted",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('div')",
+      "base_url": "https://www.ted.com"
+    },
+    {
+      "name": "Aniyomi: Torrentio (Torrent / Debrid)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.torrentio",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://torrentio.strem.fun"
+    },
+    {
+      "name": "Aniyomi: Torrentio Anime (Torrent / Debrid)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.torrentioanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://torrentio.strem.fun"
+    },
+    {
+      "name": "Aniyomi: Debrid Index",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.debridindex",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 500,
+      "detail": "HTTP 500 API Verified (JSON payload)",
+      "base_url": "https://torrentio.strem.fun"
+    },
+    {
+      "name": "Aniyomi: AnimeXin",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.animexin",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animexin.dev"
+    },
+    {
+      "name": "Aniyomi: Hentai Torrent (Torrent)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.hentaitorrent",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.hentaitorrents.com"
+    },
+    {
+      "name": "Aniyomi: PTorrent (Torrent)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.ptorrent",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.ptorrents.com"
+    },
+    {
+      "name": "Aniyomi: Moflix-Stream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.moflixstream",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://moflix-stream.xyz"
+    },
+    {
+      "name": "Aniyomi: Twitch",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.twitch",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://twitchtracker.com"
+    },
+    {
+      "name": "Aniyomi: Nyaa (Torrent)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.nyaatorrent",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://nyaa.si/"
+    },
+    {
+      "name": "Aniyomi: AniZone",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.anizone",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anizone.to"
+    },
+    {
+      "name": "Aniyomi: Anichi",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.anichi",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('poster')",
+      "base_url": "https://anichi.to"
+    },
+    {
+      "name": "Aniyomi: Stremio",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.stremio",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://app.strem.io/shell-v4.4"
+    },
+    {
+      "name": "Aniyomi: LMAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.lmanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://lmanime.com"
+    },
+    {
+      "name": "Aniyomi: FilmPalast",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.filmpalast",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('liste')",
+      "base_url": "https://filmpalast.to"
+    },
+    {
+      "name": "Aniyomi: Xnxx (Custom)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.xnxx",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('video')",
+      "base_url": "https://www.xnxx.com"
+    },
+    {
+      "name": "Aniyomi: Xvideos",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.xvideos",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('content')",
+      "base_url": "https://www.xvideos.com"
+    },
+    {
+      "name": "Aniyomi: AnimePahe",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animepahe",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animepahe.pw"
+    },
+    {
+      "name": "Aniyomi: Cimaleek",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.cimaleek",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('film_list-wrap')",
+      "base_url": "https://m.cimaleek.pw"
+    },
+    {
+      "name": "Aniyomi: Animenosub",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animenosub",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animenosub.to"
+    },
+    {
+      "name": "Aniyomi: AnimeOnsen",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.animeonsen",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animeonsen.xyz"
+    },
+    {
+      "name": "Aniyomi: AniWorld",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.aniworld",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://aniworld.to"
+    },
+    {
+      "name": "Aniyomi: Anikoto",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.anikoto",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://anikototv.to"
+    },
+    {
+      "name": "Aniyomi: StreamingCommunity",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.streamingcommunity",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://streamingunity.fun"
+    },
+    {
+      "name": "Aniyomi: BLZone",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.blzone",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://blzone.net"
+    },
+    {
+      "name": "Aniyomi: Kool",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.kool",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.kool.to"
+    },
+    {
+      "name": "Aniyomi: hanime.tv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hanime.tv"
+    },
+    {
+      "name": "Aniyomi: Newgrounds",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.newgrounds",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 403,
+      "detail": "HTTP 403 Scraper OK ('title')",
+      "base_url": "https://www.newgrounds.com"
+    },
+    {
+      "name": "Aniyomi: AnimeSogo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animesogo",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('anime')",
+      "base_url": "https://animesogo.to"
+    },
+    {
+      "name": "Aniyomi: JavGG",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 404,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://javgg.net"
+    },
+    {
+      "name": "Aniyomi: AniDB",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.anidb",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://anilab.so"
+    },
+    {
+      "name": "Aniyomi: AniList",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.anilist",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anilist.co"
+    },
+    {
+      "name": "Aniyomi: AnimeGG",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animegg",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://www.animegg.org"
+    },
+    {
+      "name": "Aniyomi: AllAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.allanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://allmanga.to/anime"
+    },
+    {
+      "name": "Aniyomi: WIT ANIME",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.witanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://www.witanime.net"
+    },
+    {
+      "name": "Aniyomi: Egy Dead",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.egydead",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('movieItem')",
+      "base_url": "https://tv10.egydead.live/h3"
+    },
+    {
+      "name": "Aniyomi: AnimeToast",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.animetoast",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animetoast.cc"
+    },
+    {
+      "name": "Aniyomi: Anime-Stream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.animestream",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anime-stream.to"
+    },
+    {
+      "name": "Aniyomi: KissKH",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.kisskh",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://kisskh.ovh"
+    },
+    {
+      "name": "Aniyomi: Anime-Loads",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.animeloads",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.anime-loads.org"
+    },
+    {
+      "name": "Aniyomi: Iwara",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.iwara",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.iwara.tv"
+    },
+    {
+      "name": "Aniyomi: SuperStream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.superstream",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://showbox.shegu.net/api/api_client/index/"
+    },
+    {
+      "name": "Aniyomi: Anikage",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.anikage",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anikage.cc"
+    },
+    {
+      "name": "Aniyomi: AV1Encodes",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.av1encodes",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://av1encodes.com"
+    },
+    {
+      "name": "Aniyomi: Kinoking",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.kinoking",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('poster')",
+      "base_url": "https://kinoking.cc"
+    },
+    {
+      "name": "Aniyomi: Xhamster",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.xhamster",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('video-thumb__image-container')",
+      "base_url": "https://xhamster.com"
+    },
+    {
+      "name": "Aniyomi: Tuktuk Cinema",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.tuktukcinema",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://tuktukhd.com"
+    },
+    {
+      "name": "Aniyomi: Miruro.tv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.miruro",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.miruro.tv"
+    },
+    {
+      "name": "Aniyomi: HexaWatch",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hexawatch",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://hexa.su"
+    },
+    {
+      "name": "Aniyomi: Okanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.okanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://ww3.okanime.xyz"
+    },
+    {
+      "name": "Aniyomi: RouVideo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.rouvideo",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://rou.video/home"
+    },
+    {
+      "name": "Aniyomi: AnimeTake",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animetake",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animetake.tv"
+    },
+    {
+      "name": "Aniyomi: Serienstream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.de.serienstream",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('div')",
+      "base_url": "http://186.2.175.5"
+    },
+    {
+      "name": "Aniyomi: 123Anime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.onetwothreeanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://123animehub.cc"
+    },
+    {
+      "name": "Aniyomi: Torbox",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.torbox",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 401,
+      "detail": "HTTP 401 API Verified (JSON payload)",
+      "base_url": "https://api.torbox.app"
+    },
+    {
+      "name": "Aniyomi: AnimeKai (Unoriginal)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.kotokai",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('anime')",
+      "base_url": "https://animekaitv.to"
+    },
+    {
+      "name": "Aniyomi: DonghuaStream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.donghuastream",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://donghuastream.org"
+    },
+    {
+      "name": "Aniyomi: Hentai Haven",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaihaven",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hentaihaven.com"
+    },
+    {
+      "name": "Aniyomi: AnimeOnline.Ninja",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animeonlineninja",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://ver.animeonline.ninja"
+    },
+    {
+      "name": "Aniyomi: LuciferDonghua",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.luciferdonghua",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://luciferdonghua.in"
+    },
+    {
+      "name": "Aniyomi: My Running Man",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.myrunningman",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.myrunningman.com"
+    },
+    {
+      "name": "Aniyomi: Re:Anime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.reanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://reanime.to"
+    },
+    {
+      "name": "Aniyomi: HentaiMama",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaimama",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hentaimama.io"
+    },
+    {
+      "name": "Aniyomi: Hentai.ht",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaiht",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hentai.ht"
+    },
+    {
+      "name": "Aniyomi: Animeyt",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animeyt",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://ytanime.tv"
+    },
+    {
+      "name": "Aniyomi: AnimeLatinoHD",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animelatinohd",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animelatinohd.com"
+    },
+    {
+      "name": "Aniyomi: KimoiTV",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.kimoitv",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('media')",
+      "base_url": "https://kimoitv.com"
+    },
+    {
+      "name": "Aniyomi: AsiaLiveAction",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.asialiveaction",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://asialiveaction.com"
+    },
+    {
+      "name": "Aniyomi: AnimeKhor",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animekhor",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animekhor.org"
+    },
+    {
+      "name": "Aniyomi: Hstream (Custom)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hstream",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://hstream.moe"
+    },
+    {
+      "name": "Aniyomi: Cine24h",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.cine24h",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://cine24h.online"
+    },
+    {
+      "name": "Aniyomi: Rule34Video",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.rule34video",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://rule34video.com"
+    },
+    {
+      "name": "Aniyomi: JPFilms",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.jpfilms",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 404,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://kodasusaka.com"
+    },
+    {
+      "name": "Aniyomi: HentaiCity",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaicity",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('video')",
+      "base_url": "https://www.hentaicity.com"
+    },
+    {
+      "name": "Aniyomi: KickAssAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.kickassanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://kaa.lt"
+    },
+    {
+      "name": "Aniyomi: DeTodoPeliculas",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.detodopeliculas",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 503,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://detodopeliculas.nu"
+    },
+    {
+      "name": "Aniyomi: Myanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.myanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('main')",
+      "base_url": "https://myanime.live"
+    },
+    {
+      "name": "Aniyomi: Mapple",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.mapple",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://mapple.fun"
+    },
+    {
+      "name": "Aniyomi: WcoForever",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcoforever",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wcoforever.net"
+    },
+    {
+      "name": "Aniyomi: AnimeAv1",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animeav1",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeav1.com"
+    },
+    {
+      "name": "Aniyomi: Jkanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.jkanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://jkanime.net"
+    },
+    {
+      "name": "Aniyomi: PinoyMoviePedia",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.pinoymoviepedia",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://pinoymoviepedia.ru"
+    },
+    {
+      "name": "Aniyomi: UnderHentai",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.underhentai",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.underhentai.net"
+    },
+    {
+      "name": "Aniyomi: az-animex",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.azanimex",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.az-animex.com"
+    },
+    {
+      "name": "Aniyomi: haho.moe",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hahomoe",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://haho.moe"
+    },
+    {
+      "name": "Aniyomi: WcoAnimeDub",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcoanimedub",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wcoanimedub.tv"
+    },
+    {
+      "name": "Aniyomi: Cuevana",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.cuevana",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://wv3.cuevana3.eu"
+    },
+    {
+      "name": "Aniyomi: WcoAnimeSub",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcoanimesub",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wcoanimesub.tv"
+    },
+    {
+      "name": "Aniyomi: AnimeMovil",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animemovil",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://tvanime.tv"
+    },
+    {
+      "name": "Aniyomi: Katanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.katanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://katanime.net"
+    },
+    {
+      "name": "Aniyomi: AnimeParadise",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.animeparadise",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 API Verified (JSON payload)",
+      "base_url": "https://www.animeparadise.moe"
+    },
+    {
+      "name": "Aniyomi: WcoTv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcotv",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wco.tv"
+    },
+    {
+      "name": "Aniyomi: Gnula",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.gnula",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://gnula.life"
+    },
+    {
+      "name": "Aniyomi: Anoboye",
+      "pkg": "eu.kanade.tachiyomi.animeextension.all.anoboye",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('postbody')",
+      "base_url": "https://anoboye.com"
+    },
+    {
+      "name": "Aniyomi: asia2tv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ar.asia2tv",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('postmovie-photo')",
+      "base_url": "https://ww1.asia2tv.pw"
+    },
+    {
+      "name": "Aniyomi: SoloLatino",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.sololatino",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://sololatino.net"
+    },
+    {
+      "name": "Aniyomi: MetroSeries",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.metroseries",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www3.seriesmetro.net"
+    },
+    {
+      "name": "Aniyomi: Doramasyt",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.doramasyt",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.doramasyt.com"
+    },
+    {
+      "name": "Aniyomi: Wcofun",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcofun",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wcoflix.tv"
+    },
+    {
+      "name": "Aniyomi: AnimeYT.es",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animeytes",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeyt.cc"
+    },
+    {
+      "name": "Aniyomi: WCOStream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.wcostream",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.wcostream.tv"
+    },
+    {
+      "name": "Aniyomi: Hackstore",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.hackstore",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.hackstore.fo"
+    },
+    {
+      "name": "Aniyomi: French Anime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.frenchanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://french-anime.com"
+    },
+    {
+      "name": "Aniyomi: Zonaleros",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.zonaleros",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.zona-leros.com"
+    },
+    {
+      "name": "Aniyomi: Animejl",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animejl",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.anime-jl.net"
+    },
+    {
+      "name": "Aniyomi: HomeCine",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.homecine",
+      "type": "anime",
+      "status": "DEAD_PARKED_DOMAIN",
+      "code": 200,
+      "detail": "Domain expired/parked by registrar",
+      "base_url": "https://homecine.cc"
+    },
+    {
+      "name": "Aniyomi: Samato",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.samatodenvideos",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://samatoden.blogspot.com"
+    },
+    {
+      "name": "Aniyomi: FRAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.franime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://franime.fr"
+    },
+    {
+      "name": "Aniyomi: FlixLatam",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.flixlatam",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://flixlatam.com"
+    },
+    {
+      "name": "Aniyomi: Latanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.latanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('row')",
+      "base_url": "https://latanime.org"
+    },
+    {
+      "name": "Aniyomi: PelisPlusPh",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.pelisplusph",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('Posters-link')",
+      "base_url": "https://pelisplushd.la"
+    },
+    {
+      "name": "Aniyomi: PelisPlusTo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.pelisplusto",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://tioplus.app"
+    },
+    {
+      "name": "Aniyomi: TioanimeH",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.tioanimeh",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://tioanime.com"
+    },
+    {
+      "name": "Aniyomi: SeriesKao",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.serieskao",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Catalog Verified (DOM layout)",
+      "base_url": "https://serieskao.top"
+    },
+    {
+      "name": "Aniyomi: Cineplus123",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.cineplus123",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://cineplus123.org"
+    },
+    {
+      "name": "Aniyomi: Pandrama",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.pandrama",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 410,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.pandrama.tv"
+    },
+    {
+      "name": "Aniyomi: CineCalidad",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.cinecalidad",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('custom')",
+      "base_url": "https://www.cinecalidad.am"
+    },
+    {
+      "name": "Aniyomi: Hentaila",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaila",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hentaila.com"
+    },
+    {
+      "name": "Aniyomi: MonosChinos",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.monoschinos",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://vww.monoschinos2.net"
+    },
+    {
+      "name": "Aniyomi: MundoDonghua",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.mundodonghua",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('md-card-grid')",
+      "base_url": "https://www.mundodonghua.com"
+    },
+    {
+      "name": "Aniyomi: Hentaijk",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaijk",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('list')",
+      "base_url": "https://hentaijk.com"
+    },
+    {
+      "name": "Aniyomi: PelisPlusHD",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.pelisplushd",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('Posters-link')",
+      "base_url": "https://pelisplushd.bz"
+    },
+    {
+      "name": "Aniyomi: LACartoons",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.lacartoons",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('pagination')",
+      "base_url": "https://www.lacartoons.com"
+    },
+    {
+      "name": "Aniyomi: HDS",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.hds",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://on1.hds.quest"
+    },
+    {
+      "name": "Aniyomi: BeatZ Anime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.beatzanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('top-views-card')",
+      "base_url": "https://www.beatz-anime.net"
+    },
+    {
+      "name": "Aniyomi: AnimeFenix",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('right')",
+      "base_url": "https://tvanime.tv"
+    },
+    {
+      "name": "Aniyomi: Oppai Stream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.oppaistream",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://oppai.stream"
+    },
+    {
+      "name": "Aniyomi: LegionAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.legionanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 API Verified (JSON payload)",
+      "base_url": "https://legionanime.club/api"
+    },
+    {
+      "name": "Aniyomi: VerAnimes",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.veranimes",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('pag')",
+      "base_url": "https://wwv.veranimes.net"
+    },
+    {
+      "name": "Aniyomi: VerPelisTop",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.verpelistop",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('featured-titles')",
+      "base_url": "https://www1.verpelis.top"
+    },
+    {
+      "name": "Aniyomi: HentaiTk",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaitk",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('post-header')",
+      "base_url": "https://hentaitk.net"
+    },
+    {
+      "name": "Aniyomi: MhdFlix",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.mhdflix",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://ww1.mhdflix.com"
+    },
+    {
+      "name": "Aniyomi: zeroanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.zeroanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Catalog Verified (DOM layout)",
+      "base_url": "https://www4.zeroanime.xyz"
+    },
+    {
+      "name": "Aniyomi: VeoHentai",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.veohentai",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 404,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://veohentai.com"
+    },
+    {
+      "name": "Aniyomi: LocoPelis",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.locopelis",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.locopelis.com"
+    },
+    {
+      "name": "Aniyomi: PelisForte",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.pelisforte",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www2.pelisforte.se"
+    },
+    {
+      "name": "Aniyomi: Hentaigasm",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaigasm",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://hentaigasm.com"
+    },
+    {
+      "name": "Aniyomi: Anime-Sama",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.animesama",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anime-sama.to"
+    },
+    {
+      "name": "Aniyomi: OtakuDesu",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.otakudesu",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://otakudesu.blog"
+    },
+    {
+      "name": "Aniyomi: Kuronime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.kuronime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Catalog Verified (DOM layout)",
+      "base_url": "https://kuronime.net"
+    },
+    {
+      "name": "Aniyomi: DattebayoBR",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.dattebayobr",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.dattebayo-br.com"
+    },
+    {
+      "name": "Aniyomi: AnimeIndo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.animeindo",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeindo.skin"
+    },
+    {
+      "name": "Aniyomi: EnNovelas (Dead)",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.ennovelas",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('block-post')",
+      "base_url": "https://l.ennovelas-tv.com"
+    },
+    {
+      "name": "Aniyomi: Doramogo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.doramogo",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://coa4kcontent.imweb.me"
+    },
+    {
+      "name": "Aniyomi: Pi Fansubs",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.pifansubs",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://pifansubs.club"
+    },
+    {
+      "name": "Aniyomi: Goyabu",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.goyabu",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://goyabu.io"
+    },
+    {
+      "name": "Aniyomi: OgladajAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pl.ogladajanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://ogladajanime.pl"
+    },
+    {
+      "name": "Aniyomi: VVVVID",
+      "pkg": "eu.kanade.tachiyomi.animeextension.it.vvvvid",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 503,
+      "detail": "HTTP 503 Scraper OK ('title')",
+      "base_url": "https://www.vvvvid.it"
+    },
+    {
+      "name": "Aniyomi: SushiAnimes",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.sushianimes",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://sushianimes.com.br"
+    },
+    {
+      "name": "Aniyomi: SmartAnimes",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.smartanimes",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://smartanimes.net"
+    },
+    {
+      "name": "Aniyomi: Muito Hentai",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.muitohentai",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.muitohentai.com"
+    },
+    {
+      "name": "Aniyomi: Anime Fire",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animefire",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animefire.io"
+    },
+    {
+      "name": "Aniyomi: Vostfree",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.vostfree",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://ipv4.vostfree.ws"
+    },
+    {
+      "name": "Aniyomi: Wbijam",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pl.wbijam",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('a')",
+      "base_url": "https://wbijam.pl"
+    },
+    {
+      "name": "Aniyomi: Animes Online CC",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesonlinecc",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animesonlinecc.to"
+    },
+    {
+      "name": "Aniyomi: TR Anime Izle",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.tranimeizle",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.tranimeizle.io"
+    },
+    {
+      "name": "Aniyomi: Animeler",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.animeler",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeler.pw"
+    },
+    {
+      "name": "Aniyomi: Anime Saturn",
+      "pkg": "eu.kanade.tachiyomi.animeextension.it.animesaturn",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('ac')",
+      "base_url": "https://www.animemars.org"
+    },
+    {
+      "name": "Aniyomi: Anitube",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.anitube",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.anitube.vip"
+    },
+    {
+      "name": "Aniyomi: Kuramanime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.kuramanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://v8.kuramanime.tel"
+    },
+    {
+      "name": "Aniyomi: Hentai Saturn",
+      "pkg": "eu.kanade.tachiyomi.animeextension.it.hentaisaturn",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Catalog Verified (DOM layout)",
+      "base_url": "https://www.hentaisaturn.tv"
+    },
+    {
+      "name": "Aniyomi: Türk Anime TV",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.turkanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Catalog Verified (DOM layout)",
+      "base_url": "https://www.turkanime.tv"
+    },
+    {
+      "name": "Aniyomi: AnimesDrive",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesdrive",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animesdrive.online"
+    },
+    {
+      "name": "Aniyomi: HentaiZM",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.hentaizm",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://hentaizm.com"
+    },
+    {
+      "name": "Aniyomi: Anizm",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.anizm",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anizm.net"
+    },
+    {
+      "name": "Aniyomi: Cycity",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.cycity",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('card')",
+      "base_url": "https://www.cycani.org"
+    },
+    {
+      "name": "Aniyomi: Anikyuu",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.anikyuu",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anikyuu.to"
+    },
+    {
+      "name": "Aniyomi: AnimeUnity",
+      "pkg": "eu.kanade.tachiyomi.animeextension.it.animeunity",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animeunity.so"
+    },
+    {
+      "name": "Aniyomi: Anime1.me",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.anime1",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://anime1.me"
+    },
+    {
+      "name": "Aniyomi: desu-online",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pl.desuonline",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://desu-online.pl"
+    },
+    {
+      "name": "Aniyomi: Samehadaku",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.samehadaku",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://v2.samehadaku.how"
+    },
+    {
+      "name": "Aniyomi: iyf",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.iyf",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('anime')",
+      "base_url": "https://www.iyf.tv"
+    },
+    {
+      "name": "Aniyomi: JetAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.fr.jetanime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://ssl.jetanimes.com"
+    },
+    {
+      "name": "Aniyomi: Hanime1.me",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.hanime1",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://hanime1.me"
+    },
+    {
+      "name": "Aniyomi: Donghua no Sekai",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.donghuanosekai",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://donghuanosekai.com"
+    },
+    {
+      "name": "Aniyomi: Aniweek",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ko.aniweek",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Verified (SPA Webapp shell)",
+      "base_url": "https://aniweek.com"
+    },
+    {
+      "name": "Aniyomi: Nivod",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.nivod",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://www.nivod.cc"
+    },
+    {
+      "name": "Aniyomi: Anime Srbija",
+      "pkg": "eu.kanade.tachiyomi.animeextension.sr.animesrbija",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animesrbija.com"
+    },
+    {
+      "name": "Aniyomi: ANIMEWORLD.tv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.it.animeworld",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://www.animeworld.ac"
+    },
+    {
+      "name": "Aniyomi: Animevost",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ru.animevost",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://animevost.org"
+    },
+    {
+      "name": "Aniyomi: Xfani",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.xfani",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://next.xifanacg.com"
+    },
+    {
+      "name": "Aniyomi: AnimeIto",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeito",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animesonline.io"
+    },
+    {
+      "name": "Aniyomi: YummyAnime",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ru.yummyanime",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://ru.yummyani.me"
+    },
+    {
+      "name": "Aniyomi: UniqueStream",
+      "pkg": "eu.kanade.tachiyomi.animeextension.en.uniquestream",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://uniquestream.net"
+    },
+    {
+      "name": "Aniyomi: TRAnimeCI",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.tranimeci",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://tranimaci.com"
+    },
+    {
+      "name": "Aniyomi: Xiaoxintv",
+      "pkg": "eu.kanade.tachiyomi.animeextension.zh.xiaoxintv",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://xiaoheimi.cc"
+    },
+    {
+      "name": "Aniyomi: AnimeQ",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeq",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 403,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animeq.blog"
+    },
+    {
+      "name": "Aniyomi: AnimeBalkan",
+      "pkg": "eu.kanade.tachiyomi.animeextension.sr.animebalkan",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://animebalkan.org"
+    },
+    {
+      "name": "Aniyomi: UFDub",
+      "pkg": "eu.kanade.tachiyomi.animeextension.uk.ufdub",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://ufdub.com/anime"
+    },
+    {
+      "name": "Aniyomi: Animelib",
+      "pkg": "eu.kanade.tachiyomi.animeextension.ru.animelib",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('manga')",
+      "base_url": "https://animelib.org/ru"
+    },
+    {
+      "name": "Aniyomi: BetterAnimeIo",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.betteranimeio",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://betteranime.io"
+    },
+    {
+      "name": "Aniyomi: AsyaAnimeleri",
+      "pkg": "eu.kanade.tachiyomi.animeextension.tr.asyaanimeleri",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://asyaanimeleri.top"
+    },
+    {
+      "name": "Aniyomi: AnimesOnlineCloud",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesonlinecloud",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://animesonline.cloud"
+    },
+    {
+      "name": "Aniyomi: MiniOppai",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.minioppai",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://minioppai.org"
+    },
+    {
+      "name": "Aniyomi: AnimePlayer",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeplayer",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://anreyalp.vip"
+    },
+    {
+      "name": "Aniyomi: Docchi",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pl.docchi",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 API Verified (JSON payload)",
+      "base_url": "https://docchi.pl"
+    },
+    {
+      "name": "Aniyomi: Animes Digital",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animesdigital",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://animesdigital.org"
+    },
+    {
+      "name": "Aniyomi: UAKino",
+      "pkg": "eu.kanade.tachiyomi.animeextension.uk.uakino",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('item')",
+      "base_url": "https://uakino.best"
+    },
+    {
+      "name": "Aniyomi: FilmesOnlineSH",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.filmesonlinesh",
+      "type": "anime",
+      "status": "LIVE_CONFIRMED",
+      "code": 200,
+      "detail": "HTTP 200 Scraper OK ('article')",
+      "base_url": "https://filmesonline.sh"
+    },
+    {
+      "name": "Aniyomi: VerAni.me",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.veranime",
+      "type": "anime",
+      "status": "CLOUDFLARE_PROTECTED",
+      "code": 200,
+      "detail": "Cloudflare Shield active (cloudflare)",
+      "base_url": "https://verani.me"
+    },
+    {
+      "name": "Aniyomi: AnimePlay",
+      "pkg": "eu.kanade.tachiyomi.animeextension.pt.animeplay",
+      "type": "anime",
+      "status": "HTTP_ERROR",
+      "code": 404,
+      "detail": "HTTP 404 Not Found (catalog route and fallback paths exhausted)",
+      "base_url": "https://animeplay.cloud"
+    },
+    {
+      "name": "Aniyomi: Doramasflix",
+      "pkg": "eu.kanade.tachiyomi.animeextension.es.doramasflix",
+      "type": "anime",
+      "status": "HTTP_ERROR",
+      "code": 504,
+      "detail": "Gateway Timeout (WAF Slowdown)",
+      "base_url": "https://doramasflix.in"
+    },
+    {
+      "name": "Aniyomi: NimeGami",
+      "pkg": "eu.kanade.tachiyomi.animeextension.id.nimegami",
+      "type": "anime",
+      "status": "HTTP_ERROR",
+      "code": 504,
+      "detail": "Gateway Timeout (WAF Slowdown)",
+      "base_url": "https://nimegami.id"
+    }
+  ]
+}

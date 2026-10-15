@@ -17,7 +17,8 @@ class BetterAnimeIoExtractor(
 
             if (videoResponse.status == "success") {
                 videoResponse.play.map { video ->
-                    Video(video.src, video.sizeText, video.src)
+                    val cleanUrl = video.src.trimEnd('\\').trim()
+                    Video(cleanUrl, video.sizeText, cleanUrl)
                 }
             } else {
                 emptyList()

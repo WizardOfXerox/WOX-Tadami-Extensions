@@ -34,7 +34,7 @@ class HomeCine :
 
     override val name = "HomeCine"
 
-    override val baseUrl = "https://homecine.cc"
+    override val baseUrl = "https://homecine.to"
 
     override val lang = "es"
 

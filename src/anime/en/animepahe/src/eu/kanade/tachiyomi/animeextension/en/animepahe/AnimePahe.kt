@@ -1,6 +1,7 @@
 package eu.kanade.tachiyomi.animeextension.en.animepahe
 
 import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
 import eu.kanade.tachiyomi.animeextension.en.animepahe.dto.EpisodeDto
 import eu.kanade.tachiyomi.animeextension.en.animepahe.dto.LatestAnimeDto
@@ -16,7 +17,6 @@ import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
-import keiyoushi.utils.addEditTextPreference
 import keiyoushi.utils.addListPreference
 import keiyoushi.utils.addSwitchPreference
 import keiyoushi.utils.getPreferencesLazy
@@ -240,7 +240,7 @@ class AnimePahe :
     // =============================== Relation/Suggestions ===============================
     fun relatedAnimeListRequest(anime: SAnime) = animeDetailsRequest(anime)
 
-    override fun relatedAnimeListParse(response: Response): List<SAnime> {
+    fun relatedAnimeListParse(response: Response): List<SAnime> {
         val document = response.useAsJsoup()
         val relationAnimes = document.select("div.anime-content div.anime-relation .mx-n1")
         val recommendationAnimes = document.select("div.anime-content div.anime-recommendation .mx-n1")
@@ -424,31 +424,54 @@ class AnimePahe :
 
     // ============================== Settings ==============================
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        screen.addListPreference(
-            key = PREF_DOMAIN_KEY,
-            title = PREF_DOMAIN_TITLE,
-            entries = PREF_DOMAIN_ENTRIES,
-            entryValues = PREF_DOMAIN_VALUES,
-            default = PREF_DOMAIN_DEFAULT,
-            summary = "%s",
-            restartRequired = true,
-        )
-        screen.addListPreference(
-            key = PREF_QUALITY_KEY,
-            title = PREF_QUALITY_TITLE,
-            entries = PREF_QUALITY_ENTRIES,
-            entryValues = PREF_QUALITY_ENTRIES,
-            default = PREF_QUALITY_DEFAULT,
-            summary = "%s",
-        )
-        screen.addListPreference(
-            key = PREF_SUB_KEY,
-            title = PREF_SUB_TITLE,
-            entries = PREF_SUB_ENTRIES,
-            entryValues = PREF_SUB_VALUES,
-            default = PREF_SUB_DEFAULT,
-            summary = "%s",
-        )
+        ListPreference(screen.context).apply {
+            key = PREF_DOMAIN_KEY
+            title = PREF_DOMAIN_TITLE
+            entries = PREF_DOMAIN_ENTRIES.toTypedArray()
+            entryValues = PREF_DOMAIN_VALUES.toTypedArray()
+            setDefaultValue(PREF_DOMAIN_DEFAULT)
+            summary = "%s"
+
+            setOnPreferenceChangeListener { _, newValue ->
+                val selected = newValue as String
+                val index = findIndexOfValue(selected)
+                val entry = entryValues[index] as String
+                preferences.edit().putString(key, entry).commit()
+            }
+        }.also(screen::addPreference)
+
+        ListPreference(screen.context).apply {
+            key = PREF_QUALITY_KEY
+            title = PREF_QUALITY_TITLE
+            entries = PREF_QUALITY_ENTRIES.toTypedArray()
+            entryValues = PREF_QUALITY_ENTRIES.toTypedArray()
+            setDefaultValue(PREF_QUALITY_DEFAULT)
+            summary = "%s"
+
+            setOnPreferenceChangeListener { _, newValue ->
+                val selected = newValue as String
+                val index = findIndexOfValue(selected)
+                val entry = entryValues[index] as String
+                preferences.edit().putString(key, entry).commit()
+            }
+        }.also(screen::addPreference)
+
+        ListPreference(screen.context).apply {
+            key = PREF_SUB_KEY
+            title = PREF_SUB_TITLE
+            entries = PREF_SUB_ENTRIES.toTypedArray()
+            entryValues = PREF_SUB_VALUES.toTypedArray()
+            setDefaultValue(PREF_SUB_DEFAULT)
+            summary = "%s"
+
+            setOnPreferenceChangeListener { _, newValue ->
+                val selected = newValue as String
+                val index = findIndexOfValue(selected)
+                val entry = entryValues[index] as String
+                preferences.edit().putString(key, entry).commit()
+            }
+        }.also(screen::addPreference)
+
         screen.addSwitchPreference(
             key = PREF_SHOW_SITE_NUMBER_KEY,
             title = PREF_SHOW_SITE_NUMBER_TITLE,
@@ -467,20 +490,23 @@ class AnimePahe :
             summary = PREF_AV1_SUMMARY,
             default = PREF_AV1_DEFAULT,
         )
-        screen.addEditTextPreference(
-            key = PREF_CF_UA_KEY,
-            title = PREF_CF_UA_TITLE,
-            summary = PREF_CF_UA_SUMMARY,
-            default = PREF_CF_UA_DEFAULT,
-            onChange = { preference, newValue ->
-                if (newValue.isBlank()) {
-                    (preference as EditTextPreference).text = PREF_CF_UA_DEFAULT
+
+        EditTextPreference(screen.context).apply {
+            key = PREF_CF_UA_KEY
+            title = PREF_CF_UA_TITLE
+            summary = PREF_CF_UA_SUMMARY
+            setDefaultValue(PREF_CF_UA_DEFAULT)
+            dialogTitle = PREF_CF_UA_TITLE
+
+            setOnPreferenceChangeListener { _, newValue ->
+                val text = newValue as? String
+                if (text.isNullOrBlank()) {
                     false
                 } else {
-                    true
+                    preferences.edit().putString(key, text).commit()
                 }
-            },
-        )
+            }
+        }.also(screen::addPreference)
     }
 
     // ============================= Utilities ==============================

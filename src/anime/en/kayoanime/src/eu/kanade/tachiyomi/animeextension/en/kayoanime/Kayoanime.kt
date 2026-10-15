@@ -65,8 +65,8 @@ class Kayoanime :
         latestPost = ""
         layout = ""
         settings = ""
-        currentReferer = "https://kayoanime.com/ongoing-animes/"
-        GET("$baseUrl/ongoing-animes/")
+        currentReferer = "$baseUrl/category/ongoing-anime/"
+        GET("$baseUrl/category/ongoing-anime/")
     } else {
         val formBody = FormBody.Builder()
             .add("action", "tie_archives_load_more")
@@ -130,7 +130,7 @@ class Kayoanime :
         title = element.selectFirst("h2.post-title")!!.text().substringBefore(" Episode")
     }
 
-    override fun popularAnimeNextPageSelector(): String = "div.pages-nav > a[data-text=load more]"
+    override fun popularAnimeNextPageSelector(): String = "div.pages-nav > a"
 
     // =============================== Latest ===============================
 
@@ -344,9 +344,9 @@ class Kayoanime :
                     POST(postUrl, body = body, headers = postHeaders),
                 ).execute()
 
-                val parsed = response.parseAs<GDrivePostResponse> {
-                    JSON_REGEX.find(it)!!.groupValues[1]
-                }
+                val rawBody = response.body.string()
+                val jsonStr = JSON_REGEX.find(rawBody)?.groupValues?.get(1) ?: rawBody
+                val parsed = jsonStr.parseAs<GDrivePostResponse>()
 
                 if (parsed.items == null) throw Exception("Failed to load items, please log in to google drive through webview")
                 parsed.items.forEachIndexed { index, it ->

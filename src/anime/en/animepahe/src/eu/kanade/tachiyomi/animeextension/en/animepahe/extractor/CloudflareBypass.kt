@@ -35,12 +35,12 @@ class CloudflareBypass {
 
         // We MUST jump to the Main Thread because WebView is UI-bound
         Handler(Looper.getMainLooper()).post {
-            webView = WebView(applicationContext)
-            webView.settings.javaScriptEnabled = true
-            webView.settings.domStorageEnabled = true
-            webView.settings.userAgentString = userAgentToUse
+            val wv = WebView(applicationContext)
+            wv.settings.javaScriptEnabled = true
+            wv.settings.domStorageEnabled = true
+            wv.settings.userAgentString = userAgentToUse
 
-            webView.webViewClient = object : WebViewClient() {
+            wv.webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView, loadedUrl: String) {
                     pollForClearance(pageUrl, userAgentToUse, cancelled) { bypassResult ->
                         result = bypassResult
@@ -50,7 +50,8 @@ class CloudflareBypass {
             }
 
             CookieManager.getInstance().setCookie(pageUrl, "")
-            webView.loadUrl(pageUrl)
+            wv.loadUrl(pageUrl)
+            webView = wv
         }
 
         // Wait here for up to 30 seconds

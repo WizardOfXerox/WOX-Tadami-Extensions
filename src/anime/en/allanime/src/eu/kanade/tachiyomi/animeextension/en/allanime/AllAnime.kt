@@ -5,13 +5,6 @@ import android.util.Base64
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.gogostreamextractor.GogoStreamExtractor
-import aniyomi.lib.mp4uploadextractor.Mp4uploadExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamlareextractor.StreamlareExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
 import eu.kanade.tachiyomi.animeextension.en.allanime.extractors.AllAnimeExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
@@ -20,6 +13,13 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.gogostreamextractor.GogoStreamExtractor
+import eu.kanade.tachiyomi.lib.mp4uploadextractor.Mp4uploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamlareextractor.StreamlareExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.awaitSuccess
@@ -172,7 +172,7 @@ class AllAnime :
         return buildPost(data)
     }
 
-    override fun relatedAnimeListParse(response: Response): List<SAnime> = parseAnime(response).animes
+    fun relatedAnimeListParse(response: Response): List<SAnime> = parseAnime(response).animes
 
     // ============================== Filters ===============================
 
@@ -346,7 +346,7 @@ class AllAnime :
 
         // Fetch and cache the endpoint BEFORE the parallel processing
         val iframeEndpoint = runCatching {
-            client.newCall(GET("${preferences.siteUrl}/getVersion")).awaitSuccess()
+            client.newCall(GET("${preferences.siteUrl}/getVersion")).execute()
                 .parseAs<AllAnimeExtractor.VersionResponse>()
                 .episodeIframeHead
         }.getOrDefault(FALLBACK_PLAYER_DOMAIN)
@@ -522,7 +522,7 @@ class AllAnime :
 
         // 3. Derive the AES-GCM key: SHA-256("${DECRYPT_SECRET}:v${versionByte}")
         val keyBytes = MessageDigest.getInstance(DECRYPT_KEY_ALGO)
-            .digest("${DECRYPT_SECRET}:v$versionByte".toByteArray(Charsets.UTF_8))
+            .digest("$DECRYPT_SECRET:v$versionByte".toByteArray(Charsets.UTF_8))
 
         // 4. Initialize the AES-GCM Cipher
         val cipher = Cipher.getInstance(DECRYPT_CIPHER_ALGO)

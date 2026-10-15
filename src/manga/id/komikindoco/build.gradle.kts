@@ -6,13 +6,13 @@ plugins {
 
 keiyoushi {
     name = "KomikIndo.co"
-    versionCode = 6
+    versionCode = 7
     contentWarning = ContentWarning.NSFW // or MIXED, please confirm
     libVersion = "1.4"
     theme = "mangathemesia"
 
     source {
         lang = "id"
-        baseUrl = "https://komiksin.net"
+        baseUrl = "https://komikindo.ch"
     }
 }

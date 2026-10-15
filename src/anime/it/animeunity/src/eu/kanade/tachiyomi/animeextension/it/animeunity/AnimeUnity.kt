@@ -23,7 +23,6 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
 import okhttp3.Response
-import uy.kohesive.injekt.injectLazy
 import java.text.SimpleDateFormat
 
 class AnimeUnity :
@@ -39,22 +38,23 @@ class AnimeUnity :
 
     override val supportsLatest = true
 
-    private val json: Json by injectLazy()
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
 
     private val preferences by getPreferencesLazy()
 
     // ============================== Popular ===============================
 
     override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/top-anime?popular=true&page=$page", headers = headers)
-
+ 
     override fun popularAnimeParse(response: Response): AnimesPage {
-        val parsed =
-            response.parseAs<AnimeResponse> {
-                it
-                    .substringAfter("top-anime animes=\"")
-                    .substringBefore("\"></top-anime>")
-                    .replace("&quot;", "\"")
-            }
+        val rawJson = response.body.string()
+            .substringAfter("top-anime animes=\"")
+            .substringBefore("\"></top-anime>")
+            .replace("&quot;", "\"")
+        val parsed = json.decodeFromString<AnimeResponse>(rawJson)
 
         val animeList =
             parsed.data.map { ani ->

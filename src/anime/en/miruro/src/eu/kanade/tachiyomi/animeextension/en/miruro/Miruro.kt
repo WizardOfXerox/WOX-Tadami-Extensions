@@ -6,16 +6,6 @@ import android.os.Looper
 import android.util.Base64
 import android.util.Log
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.anilib.AniLib
-import aniyomi.lib.anilib.DescriptionOptions
-import aniyomi.lib.anilib.FillerType
-import aniyomi.lib.anilib.MediaCoverImage
-import aniyomi.lib.anilib.MediaSnapshot
-import aniyomi.lib.anilib.MediaStudios
-import aniyomi.lib.anilib.MediaTitle
-import aniyomi.lib.anilib.StudioEdge
-import aniyomi.lib.anilib.StudioNode
-import aniyomi.lib.anilib.buildDescription
 import eu.kanade.tachiyomi.animeextension.BuildConfig
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
@@ -24,6 +14,16 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.anilib.AniLib
+import eu.kanade.tachiyomi.lib.anilib.DescriptionOptions
+import eu.kanade.tachiyomi.lib.anilib.FillerType
+import eu.kanade.tachiyomi.lib.anilib.MediaCoverImage
+import eu.kanade.tachiyomi.lib.anilib.MediaSnapshot
+import eu.kanade.tachiyomi.lib.anilib.MediaStudios
+import eu.kanade.tachiyomi.lib.anilib.MediaTitle
+import eu.kanade.tachiyomi.lib.anilib.StudioEdge
+import eu.kanade.tachiyomi.lib.anilib.StudioNode
+import eu.kanade.tachiyomi.lib.anilib.buildDescription
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.await
 import eu.kanade.tachiyomi.network.awaitSuccess
@@ -31,9 +31,7 @@ import eu.kanade.tachiyomi.network.interceptor.rateLimitHost
 import keiyoushi.utils.LazyMutable
 import keiyoushi.utils.addListPreference
 import keiyoushi.utils.addSwitchPreference
-import keiyoushi.utils.decodeHex
 import keiyoushi.utils.delegate
-import keiyoushi.utils.getListPreference
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -717,6 +715,13 @@ class Miruro :
         private const val MAX_FETCH_ATTEMPTS = 3
         private const val ANIME_META_CACHE_CAP = 16
         private const val PREF_CACHED_CONFIG_KEY = "cached_config_json"
+
+        private fun String.decodeHex(): ByteArray {
+            check(length % 2 == 0) { "Must have an even length" }
+            return chunked(2)
+                .map { it.toInt(16).toByte() }
+                .toByteArray()
+        }
 
         private val PIPE_KEY = "71951034f8fbcf53d89db52ceb3dc22c".decodeHex()
         private val PROXY_KEY = "a54d389c18527d9fd3e7f0643e27edbe".decodeHex()
@@ -2033,6 +2038,28 @@ class Miruro :
             default = PREF_INCLUDE_NSFW_DEFAULT,
             summary = "Includes adult/NSFW anime in search and browse results. Note: Miruro providers seldom have fully NSFW anime (hentai) available regardless of this setting.",
         )
+    }
+
+    private fun PreferenceScreen.getListPreference(
+        key: String,
+        title: String,
+        entries: List<String>,
+        entryValues: List<String>,
+        default: String,
+        summary: String,
+        onChange: (androidx.preference.ListPreference, String) -> Boolean,
+    ): androidx.preference.ListPreference {
+        return androidx.preference.ListPreference(context).apply {
+            this.key = key
+            this.title = title
+            this.entries = entries.toTypedArray()
+            this.entryValues = entryValues.toTypedArray()
+            this.setDefaultValue(default)
+            this.summary = summary
+            setOnPreferenceChangeListener { pref, newValue ->
+                onChange(pref as androidx.preference.ListPreference, newValue as String)
+            }
+        }
     }
 
     // ============================== Helpers ==============================

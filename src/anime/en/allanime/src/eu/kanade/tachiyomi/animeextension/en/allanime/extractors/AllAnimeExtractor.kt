@@ -1,8 +1,8 @@
 package eu.kanade.tachiyomi.animeextension.en.allanime.extractors
 
-import aniyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.animesource.model.Track
 import eu.kanade.tachiyomi.animesource.model.Video
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import keiyoushi.utils.parallelCatchingFlatMap
@@ -37,10 +37,10 @@ class AllAnimeExtractor(private val client: OkHttpClient, private val headers: H
         }
     }
 
-    suspend fun videoFromUrl(url: String, name: String, endPoint: String): List<Video> {
+    fun videoFromUrl(url: String, name: String, endPoint: String): List<Video> {
         val linkJson = client.newCall(
             GET(endPoint + url.replace("/clock?", "/clock.json?")),
-        ).awaitSuccess()
+        ).execute()
             .parseAs<VideoLink>()
 
         return linkJson.links.parallelCatchingFlatMap { link ->

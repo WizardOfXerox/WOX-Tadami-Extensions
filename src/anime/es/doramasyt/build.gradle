@@ -1,7 +1,7 @@
 ext {
     extName = 'Doramasyt'
     extClass = '.Doramasyt'
-    extVersionCode = 37
+    extVersionCode = 45
 }
 
 apply from: "$rootDir/common.gradle"
@@ -16,5 +16,5 @@ dependencies {
     implementation(project(':lib:doodextractor'))
     implementation(project(':lib:mixdropextractor'))
     implementation(project(':lib:universalextractor'))
+    implementation(project(':lib:luluextractor'))
 }
-

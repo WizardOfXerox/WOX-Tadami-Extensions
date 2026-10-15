@@ -1,17 +1,7 @@
 package eu.kanade.tachiyomi.animeextension.es.doramasyt
 
-import android.util.Base64
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.mixdropextractor.MixDropExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamtapeextractor.StreamTapeExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
-import aniyomi.lib.universalextractor.UniversalExtractor
-import aniyomi.lib.uqloadextractor.UqloadExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -19,10 +9,19 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.luluextractor.LuluExtractor
+import eu.kanade.tachiyomi.lib.mixdropextractor.MixDropExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamtapeextractor.StreamTapeExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
+import eu.kanade.tachiyomi.lib.universalextractor.UniversalExtractor
+import eu.kanade.tachiyomi.lib.uqloadextractor.UqloadExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.catchingFlatMapBlocking
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import keiyoushi.utils.parseAs
@@ -30,6 +29,7 @@ import okhttp3.FormBody
 import okhttp3.Request
 import okhttp3.Response
 import org.jsoup.nodes.Element
+import java.net.URLEncoder
 import kotlin.math.ceil
 
 class Doramasyt :
@@ -63,6 +63,7 @@ class Doramasyt :
             "DoodStream",
             "MixDrop",
             "Streamtape",
+            "LuluStream",
         )
     }
 
@@ -124,7 +125,7 @@ class Doramasyt :
         val detail = getEpisodeDetails(capListLink, token, referer)
         val total = detail.eps.size
         val perPage = detail.perpage ?: return emptyList()
-        val pages = (total / perPage).ceilPage()
+        val pages = (total.toDouble() / perPage).ceilPage()
 
         return (1..pages).parallelCatchingFlatMapBlocking {
             getEpisodePage(detail.paginateUrl ?: "", it, token, referer).caps.mapIndexed { idx, ep ->
@@ -175,14 +176,35 @@ class Doramasyt :
 
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
-        return document.select("[data-player]")
-            .map { String(Base64.decode(it.attr("data-player"), Base64.DEFAULT)) }
-            .catchingFlatMapBlocking { serverVideoResolver(it) }
+        val buttons = document.select("button[data-player], a[data-player], [data-player]")
+        val dataKey = document.selectFirst(".player")?.attr("data-key") ?: "$baseUrl/reproductor?video="
+
+        return buttons.parallelCatchingFlatMapBlocking { element ->
+            val playerRaw = element.attr("data-player")
+            if (playerRaw.isBlank()) return@parallelCatchingFlatMapBlocking emptyList()
+
+            val playerName = element.text().trim()
+            val reproductorUrl = "$dataKey$playerRaw&player=${URLEncoder.encode(playerName, "UTF-8")}"
+
+            val iframeUrl = runCatching {
+                val req = Request.Builder()
+                    .url(reproductorUrl)
+                    .header("Referer", response.request.url.toString())
+                    .build()
+                client.newCall(req).execute().asJsoup().selectFirst("iframe")?.attr("abs:src")
+            }.getOrNull()
+
+            if (!iframeUrl.isNullOrBlank()) {
+                serverVideoResolver(iframeUrl)
+            } else {
+                emptyList()
+            }
+        }
     }
 
     override fun getFilterList(): AnimeFilterList = DoramasytFilters.FILTER_LIST
 
-    private val voeExtractor by lazy { VoeExtractor(client, headers) }
+    private val voeExtractor by lazy { VoeExtractor(client) }
     private val streamwishExtractor by lazy { StreamWishExtractor(client, headers) }
     private val filemoonExtractor by lazy { FilemoonExtractor(client) }
     private val mixdropExtractor by lazy { MixDropExtractor(client) }
@@ -190,19 +212,20 @@ class Doramasyt :
     private val streamTapeExtractor by lazy { StreamTapeExtractor(client) }
     private val uqloadExtractor by lazy { UqloadExtractor(client) }
     private val okruExtractor by lazy { OkruExtractor(client) }
+    private val luluExtractor by lazy { LuluExtractor(client, headers) }
     private val universalExtractor by lazy { UniversalExtractor(client) }
 
-    private suspend fun serverVideoResolver(url: String): List<Video> {
+    private fun serverVideoResolver(url: String): List<Video> {
         val embedUrl = url.lowercase()
         return when {
             embedUrl.contains("voe") -> voeExtractor.videosFromUrl(url)
             embedUrl.contains("uqload") -> uqloadExtractor.videosFromUrl(url)
             embedUrl.contains("ok.ru") || embedUrl.contains("okru") -> okruExtractor.videosFromUrl(url)
-            embedUrl.contains("filemoon") || embedUrl.contains("moonplayer") -> filemoonExtractor.videosFromUrl(url, prefix = "Filemoon:")
-            embedUrl.contains("wishembed") || embedUrl.contains("streamwish") || embedUrl.contains("strwish") || embedUrl.contains("wish") || embedUrl.contains("wishfast") -> streamwishExtractor.videosFromUrl(url, videoNameGen = { "StreamWish:$it" })
+            embedUrl.contains("filemoon") || embedUrl.contains("moonplayer") || embedUrl.contains("byse") -> filemoonExtractor.videosFromUrl(url, prefix = "Filemoon:")
+            embedUrl.contains("wishembed") || embedUrl.contains("streamwish") || embedUrl.contains("strwish") || embedUrl.contains("wish") || embedUrl.contains("wishfast") || embedUrl.contains("filelions") || embedUrl.contains("lion") -> streamwishExtractor.videosFromUrl(url, videoNameGen = { "StreamWish:$it" })
             embedUrl.contains("streamtape") || embedUrl.contains("stp") || embedUrl.contains("stape") -> streamTapeExtractor.videosFromUrl(url)
-            embedUrl.contains("doodstream") || embedUrl.contains("dood.") || embedUrl.contains("ds2play") || embedUrl.contains("doods.") -> doodExtractor.videosFromUrl(url)
-            embedUrl.contains("filelions") || embedUrl.contains("lion") -> streamwishExtractor.videosFromUrl(url, videoNameGen = { "FileLions:$it" })
+            embedUrl.contains("doodstream") || embedUrl.contains("dood.") || embedUrl.contains("ds2play") || embedUrl.contains("doods.") || embedUrl.contains("doood") -> doodExtractor.videosFromUrl(url)
+            embedUrl.contains("lulu") -> luluExtractor.videosFromUrl(url, prefix = "LuluStream:")
             embedUrl.contains("mix") -> mixdropExtractor.videosFromUrl(url)
             else -> universalExtractor.videosFromUrl(url, headers)
         }

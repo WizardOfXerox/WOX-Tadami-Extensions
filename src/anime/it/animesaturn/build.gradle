@@ -1,8 +1,11 @@
 ext {
     extName = 'Anime Saturn'
     extClass = '.AnimeSaturn'
-    extVersionCode = 11
+    extVersionCode = 19
 }
 
 apply from: "$rootDir/common.gradle"
 
+dependencies {
+    implementation(project(':lib:playlistutils'))
+}

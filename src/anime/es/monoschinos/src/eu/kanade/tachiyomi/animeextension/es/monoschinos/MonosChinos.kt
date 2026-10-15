@@ -3,17 +3,6 @@ package eu.kanade.tachiyomi.animeextension.es.monoschinos
 import android.util.Base64
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.luluextractor.LuluExtractor
-import aniyomi.lib.mixdropextractor.MixDropExtractor
-import aniyomi.lib.mp4uploadextractor.Mp4uploadExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamtapeextractor.StreamTapeExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
-import aniyomi.lib.universalextractor.UniversalExtractor
-import aniyomi.lib.uqloadextractor.UqloadExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -21,11 +10,21 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.luluextractor.LuluExtractor
+import eu.kanade.tachiyomi.lib.mixdropextractor.MixDropExtractor
+import eu.kanade.tachiyomi.lib.mp4uploadextractor.Mp4uploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamtapeextractor.StreamTapeExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
+import eu.kanade.tachiyomi.lib.universalextractor.UniversalExtractor
+import eu.kanade.tachiyomi.lib.uqloadextractor.UqloadExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.catchingFlatMapBlocking
 import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.parseAs
+import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import okhttp3.FormBody
 import okhttp3.Request
 import okhttp3.Response
@@ -36,7 +35,7 @@ class MonosChinos :
     ConfigurableAnimeSource {
 
     override val name = "MonosChinos"
-    override val baseUrl = "https://monoschinos.st"
+    override val baseUrl = "https://vww.monoschinos2.net"
     override val id = 6957694006954649296
     override val lang = "es"
     override val supportsLatest = true
@@ -65,7 +64,6 @@ class MonosChinos :
         )
 
         private val EPISODE_SLUG_REGEX = Regex("-episodio-(\\d+|[\\d.]+)$")
-        private val SUB_ES_REGEX = Regex("-sub-espanol$")
         private val QUALITY_REGEX = Regex("""(\d+)p""")
     }
 
@@ -76,10 +74,10 @@ class MonosChinos :
     override fun popularAnimeParse(response: Response): AnimesPage {
         val document = response.asJsoup()
         val elements = document.select("li.ficha_efecto a")
-        val nextPage = document.selectFirst(".pagination a:has(span:containsOwn(»))") != null
+        val nextPage = document.selectFirst(".pagination a:has(span:containsOwn(»)), .pagination a:contains(»)") != null
         val animeList = elements.mapNotNull { element ->
             SAnime.create().apply {
-                title = element.selectFirst("h3")?.text() ?: return@mapNotNull null
+                title = element.selectFirst("h3")?.text()?.trim() ?: return@mapNotNull null
                 thumbnail_url = element.selectFirst("img")?.getImageUrl()
                 setUrlWithoutDomain(element.attr("abs:href"))
             }
@@ -96,27 +94,27 @@ class MonosChinos :
 
     override fun latestUpdatesParse(response: Response): AnimesPage {
         val document = response.asJsoup()
-        val episodeItems = document.select("ul.row.row-cols-xl-4.row-cols-lg-4.row-cols-md-3.row-cols-2 > li.col.mb-4")
+        val episodeItems = document.select("li.col.mb-4:has(a[href*='/ver/'])")
         val animeList = episodeItems.mapNotNull { item ->
-            val episodeLink = item.selectFirst("a") ?: return@mapNotNull null
+            val episodeLink = item.selectFirst("a[href*='/ver/']") ?: return@mapNotNull null
             val episodeUrl = episodeLink.attr("abs:href")
 
             val episodeSlug = episodeUrl.substringAfter("/ver/").substringBefore("?")
             val animeSlugBase = episodeSlug.replace(EPISODE_SLUG_REGEX, "")
-            val animeUrl = "/anime/$animeSlugBase-sub-espanol"
+            val animeUrl = "/anime/$animeSlugBase"
 
-            val animeTitle = item.selectFirst("h2.fs-5")?.text() ?: return@mapNotNull null
-            val genre = item.selectFirst("span.text-muted")?.text() ?: ""
+            val animeTitle = item.selectFirst("h2")?.text()?.trim() ?: return@mapNotNull null
+            val genre = item.selectFirst("span.text-muted")?.text()?.trim() ?: ""
 
             SAnime.create().apply {
                 title = animeTitle
                 setUrlWithoutDomain(animeUrl)
                 description = genre
-                thumbnail_url = item.selectFirst("img.lazy")?.getImageUrl()
+                thumbnail_url = item.selectFirst("img")?.getImageUrl()
             }
         }
 
-        val nextPage = document.selectFirst(".pagination a:has(span:containsOwn(»))") != null
+        val nextPage = document.selectFirst(".pagination a:has(span:containsOwn(»)), .pagination a:contains(»)") != null
         return AnimesPage(animeList, nextPage)
     }
 
@@ -125,7 +123,7 @@ class MonosChinos :
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
         val params = Filters.getSearchParameters(filters)
         return when {
-            query.isNotBlank() -> GET("$baseUrl/buscar?q=$query&p=$page", headers)
+            query.isNotBlank() -> GET("$baseUrl/animes?buscar=$query&p=$page", headers)
             params.filter.isNotBlank() -> GET("$baseUrl/animes${params.getQuery()}&p=$page", headers)
             else -> popularAnimeRequest(page)
         }
@@ -138,15 +136,15 @@ class MonosChinos :
     override fun animeDetailsParse(response: Response): SAnime {
         val document = response.asJsoup()
         return SAnime.create().apply {
-            title = document.selectFirst("h1.fs-2.text-capitalize.text-light")?.text() ?: ""
-            description = document.selectFirst("#profile-tab-pane .mb-3 p")?.text()
-            genre = document.select("#profile-tab-pane .badge.bg-secondary").joinToString { it.text() }
-            thumbnail_url = document.selectFirst(".d-none.d-sm-flex img.lazy")?.getImageUrl()
+            title = document.selectFirst("h1")?.text()?.trim() ?: ""
+            description = document.selectFirst("#profile-tab-pane .mb-3 p, #profile-tab-pane p, .sinopsis")?.text()?.trim()
+            genre = document.select("#profile-tab-pane .badge.bg-secondary, a.badge").joinToString { it.text().trim() }
+            thumbnail_url = document.selectFirst(".d-none.d-sm-flex img, img.lazy[data-src*='/anime/']")?.getImageUrl()
             status = run {
-                val estadoElement = document.selectFirst(".col:has(.text-muted:contains(Estado)) div.ms-2 div:last-child")
-                when (estadoElement?.text()) {
-                    "Estreno", "En emisión" -> SAnime.ONGOING
-                    "Finalizado" -> SAnime.COMPLETED
+                val fullText = document.text()
+                when {
+                    fullText.contains("Estreno") || fullText.contains("En emisión") -> SAnime.ONGOING
+                    fullText.contains("Finalizado") -> SAnime.COMPLETED
                     else -> SAnime.UNKNOWN
                 }
             }
@@ -157,96 +155,103 @@ class MonosChinos :
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val document = response.asJsoup()
-        val referer = document.location()
-
-        val ajaxUrl = document.selectFirst("section.caplist")?.attr("data-ajax")?.let {
-            if (it.startsWith("http")) it else baseUrl + it
-        } ?: return emptyList()
-
-        val csrfToken = document.selectFirst("meta[name='csrf-token']")?.attr("content") ?: ""
-
-        val episodeSlug = document.selectFirst("a[href^='/ver/']")?.attr("href")
-            ?.substringAfter("/ver/")
-            ?.substringBefore("-episodio-")
-            ?: run {
-                val animeSlug = referer.substringAfter("/anime/").substringBefore("?").substringBefore("#")
-                animeSlug.replace(SUB_ES_REGEX, "")
-            }
-        if (episodeSlug.isBlank()) return emptyList()
-
+        val caplist = document.selectFirst("section.caplist")
         val episodes = mutableListOf<SEpisode>()
-        var currentPage = 1
-        var hasMore = true
-        val maxPages = 200
 
-        while (hasMore && currentPage <= maxPages) {
-            val paginatedUrl = if (currentPage == 1) {
-                ajaxUrl
-            } else {
-                val separator = if (ajaxUrl.contains("?")) "&" else "?"
-                "$ajaxUrl${separator}page=$currentPage"
-            }
+        if (caplist != null && caplist.hasAttr("data-i") && caplist.hasAttr("data-u")) {
+            val dataI = caplist.attr("data-i")
+            val dataU = caplist.attr("data-u")
+            val dataE = caplist.attr("data-e").toIntOrNull() ?: 1
+            val totalPages = (dataE + 49) / 50
+            val referer = response.request.url.toString()
 
-            val formBody = FormBody.Builder()
-                .add("_token", csrfToken)
-                .build()
+            for (page in 1..totalPages) {
+                val formBody = FormBody.Builder()
+                    .add("acc", "episodes")
+                    .add("i", dataI)
+                    .add("u", dataU)
+                    .add("p", page.toString())
+                    .build()
 
-            val request = Request.Builder()
-                .url(paginatedUrl)
-                .post(formBody)
-                .header("Referer", referer)
-                .header("X-Requested-With", "XMLHttpRequest")
-                .header("Accept", "application/json, text/javascript, */*; q=0.01")
-                .build()
+                val request = Request.Builder()
+                    .url("$baseUrl/ajax_pagination")
+                    .post(formBody)
+                    .header("Referer", referer)
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .build()
 
-            val json = try {
-                client.newCall(request).execute().parseAs<EpisodesDto>()
-            } catch (_: Exception) {
-                break
-            }
+                val pageDoc = runCatching {
+                    client.newCall(request).execute().asJsoup()
+                }.getOrNull() ?: break
 
-            for (obj in json.eps) {
-                val numStr = obj.num.toString()
-                if (numStr.isBlank()) continue
+                val epLinks = pageDoc.select("a[href*='/ver/']")
+                for (link in epLinks) {
+                    val href = link.attr("abs:href")
+                    val epNumStr = href.substringAfterLast("-episodio-", "")
+                    val epNum = epNumStr.toFloatOrNull() ?: continue
+                    val titleText = link.selectFirst("h2")?.ownText()?.trim().takeIf { !it.isNullOrBlank() }
+                        ?: "Episodio $epNumStr"
 
-                val episodeNumber = numStr.toFloatOrNull() ?: continue
-
-                val urlNumber = if (episodeNumber % 1 == 0f) {
-                    episodeNumber.toInt().toString()
-                } else {
-                    numStr
+                    episodes.add(
+                        SEpisode.create().apply {
+                            name = titleText
+                            episode_number = epNum
+                            setUrlWithoutDomain(href)
+                        },
+                    )
                 }
-
-                episodes.add(
-                    SEpisode.create().apply {
-                        name = if (episodeNumber % 1 == 0f) {
-                            "Episodio ${episodeNumber.toInt()}"
-                        } else {
-                            "Episodio $numStr"
-                        }
-                        episode_number = episodeNumber
-                        setUrlWithoutDomain("/ver/$episodeSlug-episodio-$urlNumber")
-                    },
-                )
-            }
-
-            val perpage = json.perpage?.toInt() ?: 0
-
-            if (perpage == 0 || json.eps.size < perpage) {
-                hasMore = false
-            } else {
-                currentPage++
             }
         }
 
-        return episodes.sortedByDescending { it.episode_number }
+        if (episodes.isEmpty()) {
+            val epLinks = document.select("a[href*='/ver/']")
+            for (link in epLinks) {
+                val href = link.attr("abs:href")
+                val epNumStr = href.substringAfterLast("-episodio-", "")
+                val epNum = epNumStr.toFloatOrNull() ?: continue
+                episodes.add(
+                    SEpisode.create().apply {
+                        name = "Episodio $epNumStr"
+                        episode_number = epNum
+                        setUrlWithoutDomain(href)
+                    },
+                )
+            }
+        }
+
+        return episodes.distinctBy { it.url }.sortedByDescending { it.episode_number }
     }
 
     // ====================== VIDEOS ======================
 
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
-        val serverButtons = document.select("button.play-video[data-player]")
+        var serverButtons = document.select("button.play-video[data-player]")
+        if (serverButtons.isEmpty()) {
+            val encryptData = document.selectFirst(".opt[data-encrypt]")?.attr("data-encrypt")
+            if (!encryptData.isNullOrBlank()) {
+                val formBody = FormBody.Builder()
+                    .add("acc", "opt")
+                    .add("i", encryptData)
+                    .build()
+
+                val req = Request.Builder()
+                    .url("$baseUrl/ajax_pagination")
+                    .post(formBody)
+                    .header("Referer", response.request.url.toString())
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .build()
+
+                val optDoc = runCatching {
+                    client.newCall(req).execute().asJsoup()
+                }.getOrNull()
+
+                if (optDoc != null) {
+                    serverButtons = optDoc.select("button.play-video[data-player]")
+                }
+            }
+        }
+
         return serverButtons.mapNotNull { button ->
             val encoded = button.attr("data-player")
             if (encoded.isBlank()) return@mapNotNull null
@@ -261,7 +266,7 @@ class MonosChinos :
                 ?: ""
 
             serverName to decodedUrl
-        }.catchingFlatMapBlocking { (serverName, url) ->
+        }.parallelCatchingFlatMapBlocking { (serverName, url) ->
             serverVideoResolver(url, serverName)
         }
     }
@@ -283,17 +288,17 @@ class MonosChinos :
     private val conventions = listOf(
         "voe" to listOf("voe", "tubelessceliolymph", "simpulumlamerop", "urochsunloath", "nathanfromsubject", "yip.", "metagnathtuggers", "donaldlineelse"),
         "okru" to listOf("ok.ru", "okru"),
-        "filemoon" to listOf("filemoon", "moonplayer", "moviesm4u", "files.im", "filemoon.sx"),
+        "filemoon" to listOf("filemoon", "moonplayer", "moviesm4u", "files.im", "filemoon.sx", "bysesukior", "byse"),
         "uqload" to listOf("uqload"),
         "mp4upload" to listOf("mp4upload"),
-        "streamwish" to listOf("wishembed", "streamwish", "strwish", "wish", "kswplayer", "swhoi", "multimovies", "uqloads", "neko-stream", "swdyu", "iplayerhls", "streamgg"),
-        "doodstream" to listOf("doodstream", "dood.", "ds2play", "doods.", "ds2video", "dooood", "d000d", "d0000d"),
+        "streamwish" to listOf("wishembed", "streamwish", "strwish", "wish", "kswplayer", "swhoi", "multimovies", "uqloads", "neko-stream", "swdyu", "iplayerhls", "streamgg", "filelions", "vidhide"),
+        "doodstream" to listOf("doodstream", "dood.", "ds2play", "doods.", "ds2video", "dooood", "d000d", "d0000d", "dooodster"),
         "mixdrop" to listOf("mixdrop"),
         "streamtape" to listOf("streamtape", "stp", "stape", "shavetape"),
         "lulu" to listOf("luluvdo", "lulu", "lulustream"),
     )
 
-    private suspend fun serverVideoResolver(url: String, serverName: String = ""): List<Video> {
+    private fun serverVideoResolver(url: String, serverName: String = ""): List<Video> {
         val source = url.lowercase()
         val serverKey = serverName.lowercase()
 
@@ -307,8 +312,15 @@ class MonosChinos :
 
         val effectiveMatched = matched ?: when {
             serverKey.contains("dood") -> "doodstream"
-            serverKey.contains("filemoon") -> "filemoon"
+            serverKey.contains("filemoon") || serverKey.contains("byse") -> "filemoon"
             serverKey.contains("lulu") -> "lulu"
+            serverKey.contains("streamwish") || serverKey.contains("vidhide") || serverKey.contains("filelions") -> "streamwish"
+            serverKey.contains("voe") -> "voe"
+            serverKey.contains("uqload") -> "uqload"
+            serverKey.contains("mp4upload") -> "mp4upload"
+            serverKey.contains("mixdrop") -> "mixdrop"
+            serverKey.contains("okru") -> "okru"
+            serverKey.contains("streamtape") -> "streamtape"
             else -> null
         }
 

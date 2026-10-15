@@ -2,13 +2,13 @@ package eu.kanade.tachiyomi.animeextension.en.miruro
 
 import android.util.Base64
 import android.util.Log
-import aniyomi.lib.cloudflareinterceptor.CloudflareInterceptor
-import aniyomi.lib.m3u8server.M3u8Integration
-import aniyomi.lib.megacloudextractor.MegaCloudExtractor
-import aniyomi.lib.omniembedextractor.OmniEmbedExtractor
-import aniyomi.lib.rapidcloudextractor.RapidCloudExtractor
 import eu.kanade.tachiyomi.animesource.model.Track
 import eu.kanade.tachiyomi.animesource.model.Video
+import eu.kanade.tachiyomi.lib.cloudflareinterceptor.CloudflareInterceptor
+import eu.kanade.tachiyomi.lib.m3u8server.M3u8Integration
+import eu.kanade.tachiyomi.lib.megacloudextractor.MegaCloudExtractor
+import eu.kanade.tachiyomi.lib.omniembedextractor.OmniEmbedExtractor
+import eu.kanade.tachiyomi.lib.rapidcloudextractor.RapidCloudExtractor
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -187,7 +187,7 @@ class MiruroExtractor(
     private val m3u8Integration by lazy { M3u8Integration(mediaClient, mediaClientFallback) }
 
     private val megaCloudExtractor by lazy {
-        MegaCloudExtractor(mediaClient, headers, MEGACLOUD_API_PLACEHOLDER)
+        MegaCloudExtractor(mediaClient, headers, preferences)
     }
 
     private val rapidCloudExtractor by lazy {
@@ -355,7 +355,6 @@ class MiruroExtractor(
                     url = embedUrl,
                     type = "Multi",
                     name = qualityLabel,
-                    withM3u8Server = false,
                 )
             }.onFailure {
                 Log.w(TAG, "MegaCloud extraction failed: ${it.message}")
@@ -369,9 +368,9 @@ class MiruroExtractor(
 
             else -> {
                 embedExtractor.extractVideos(
-                    embedUrl = embedUrl,
-                    qualityLabel = qualityLabel,
-                    subtitles = subtitles,
+                    url = embedUrl,
+                    prefix = qualityLabel,
+                    subtitleList = subtitles,
                 )
             }
         }

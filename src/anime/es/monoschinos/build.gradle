@@ -1,7 +1,7 @@
 ext {
     extName = 'MonosChinos'
     extClass = '.MonosChinos'
-    extVersionCode = 53
+    extVersionCode = 61
 }
 
 apply from: "$rootDir/common.gradle"
@@ -19,4 +19,3 @@ dependencies {
     implementation(project(':lib:universalextractor'))
     implementation(project(':lib:luluextractor'))
 }
-

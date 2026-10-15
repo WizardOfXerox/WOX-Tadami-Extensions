@@ -498,12 +498,16 @@ def cmd_build(args):
             pkg_id = f"eu.kanade.tachiyomi.animeextension.{lang}.{name}"
             bg_path = ANIME_DIR / "src" / lang / name / "build.gradle"
             code = 1
-            if bg_path.exists():
-                m = re.search(r"extVersionCode\s*=\s*(\d+)", bg_path.read_text(encoding="utf-8"))
+            m_apk = re.search(r"-v14\.(\d+)\.apk", clean_name)
+            if m_apk:
+                code = int(m_apk.group(1))
+            elif bg_path.exists():
+                m = re.search(r"(?:extVersionCode|overrideVersionCode)\s*=\s*(\d+)", bg_path.read_text(encoding="utf-8"))
                 if m:
                     code = int(m.group(1))
             ver_name = f"14.{code}"
 
+            found = False
             for it in items:
                 if it.get("pkg") == pkg_id:
                     it["apk"] = clean_name
@@ -511,8 +515,65 @@ def cmd_build(args):
                     it["version"] = ver_name
                     it["sha256"] = sha256_file(dest_apk)
                     it["size"] = dest_apk.stat().st_size
+                    if not it.get("icon"):
+                        it["icon"] = f"https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/{pkg_id}.png"
                     print(f"[+] Updated manifest entry for {pkg_id} -> {clean_name} (v{ver_name}, code {code})")
+                    found = True
                     break
+
+            if not found:
+                ext_name = name.capitalize()
+                is_nsfw = 0
+                if bg_path.exists():
+                    bg_txt = bg_path.read_text(encoding="utf-8")
+                    m_name = re.search(r"extName\s*=\s*['\"]([^'\"]+)['\"]", bg_txt)
+                    if m_name:
+                        ext_name = m_name.group(1)
+                    if "isNsfw = true" in bg_txt:
+                        is_nsfw = 1
+                base_url = ""
+                src_name = ext_name
+                for kt in (ANIME_DIR / "src" / lang / name).glob("**/*.kt"):
+                    kt_txt = kt.read_text(encoding="utf-8", errors="ignore")
+                    m_url = re.search(r'override\s+val\s+baseUrl\s*=\s*"([^"]+)"', kt_txt)
+                    if m_url:
+                        base_url = m_url.group(1)
+                    m_sname = re.search(r'override\s+val\s+name\s*=\s*"([^"]+)"', kt_txt)
+                    if m_sname:
+                        src_name = m_sname.group(1)
+                    if base_url:
+                        break
+
+                key = f"{src_name.lower()}/{lang}/1".encode("utf-8")
+                digest = hashlib.md5(key).digest()
+                res_id = 0
+                for b in digest[:8]:
+                    res_id = (res_id << 8) | b
+                src_id = str(res_id & 0x7fffffffffffffff)
+
+                new_entry = {
+                    "name": f"Aniyomi: {ext_name}",
+                    "pkg": pkg_id,
+                    "apk": clean_name,
+                    "lang": lang,
+                    "code": code,
+                    "version": ver_name,
+                    "nsfw": is_nsfw,
+                    "sources": [
+                        {
+                            "name": src_name,
+                            "lang": lang,
+                            "id": src_id,
+                            "baseUrl": base_url
+                        }
+                    ],
+                    "icon": f"https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/{pkg_id}.png",
+                    "sha256": sha256_file(dest_apk),
+                    "size": dest_apk.stat().st_size
+                }
+                items.append(new_entry)
+                items.sort(key=lambda x: x["pkg"])
+                print(f"[+] Added new manifest entry for {pkg_id} -> {clean_name} (v{ver_name}, code {code})")
 
             min_index_path.write_text(json.dumps(items, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
 
@@ -593,6 +654,22 @@ def sync_category(cat: str, dist_dir: Path):
             js_path = ROOT_DIR / rel_path
             if not js_path.exists():
                 missing += 1
+            else:
+                try:
+                    content = js_path.read_text(encoding="utf-8", errors="ignore")
+                    m = re.search(r'this\.version\s*=\s*["\']([\d\.]+)["\']', content)
+                    if m:
+                        semver = m.group(1)
+                        parts = [int(p) for p in semver.split(".")]
+                        while len(parts) < 3:
+                            parts.append(0)
+                        int_ver = parts[0] * 1000000 + parts[1] * 1000 + parts[2]
+                        if isinstance(it.get("version"), int):
+                            it["version"] = max(it.get("version", 0), int_ver)
+                        else:
+                            it["version"] = int_ver
+                except Exception:
+                    pass
             cleaned.append(it)
 
         # Sync plugins.min.json and plugins.json if present
@@ -683,6 +760,10 @@ def sync_category(cat: str, dist_dir: Path):
         if apk_path.exists():
             it["sha256"] = sha256_file(apk_path)
             it["size"] = apk_path.stat().st_size
+
+        icon_file = dist_dir / "icon" / f"{pkg}.png"
+        if icon_file.exists() and not it.get("icon"):
+            it["icon"] = f"https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/{cat}/icon/{pkg}.png"
 
         cleaned.append(it)
 

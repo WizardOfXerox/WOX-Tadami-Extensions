@@ -23,7 +23,14 @@ abstract class Zazamanga : Madara() {
         return GET(url, request.headers)
     }
 
-    override fun imageRequest(page: Page): Request = GET(page.imageUrl!!, headers)
+    private val imageHeaders by lazy {
+        headersBuilder()
+            .set("Referer", "$baseUrl/")
+            .set("Origin", baseUrl)
+            .build()
+    }
+
+    override fun imageRequest(page: Page): Request = GET(page.imageUrl!!, imageHeaders)
 
     override fun imageFromElement(element: Element): String? = when {
         element.hasAttr("data-src") -> element.attr("data-src")

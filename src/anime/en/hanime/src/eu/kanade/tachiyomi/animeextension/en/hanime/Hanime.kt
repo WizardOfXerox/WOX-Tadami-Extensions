@@ -3,7 +3,6 @@ package eu.kanade.tachiyomi.animeextension.en.hanime
 import android.text.InputType
 import android.util.Log
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
@@ -12,14 +11,13 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.playlistutils.PlaylistUtils
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.await
-import keiyoushi.utils.addEditTextPreference
 import keiyoushi.utils.addListPreference
 import keiyoushi.utils.addSwitchPreference
 import keiyoushi.utils.bodyString
 import keiyoushi.utils.getPreferencesLazy
-import keiyoushi.utils.parallelFlatMap
 import keiyoushi.utils.parseAs
 import keiyoushi.utils.useAsJsoup
 import kotlinx.coroutines.Dispatchers
@@ -181,14 +179,18 @@ class Hanime :
                     }
                 }.build()
 
-                val response = client.newCall(GET("$cdnBaseUrl/api/v10/search_hvs", searchHeaders)).await()
+                val response = client.newCall(GET("$cdnBaseUrl/api/v11/search_hvs", searchHeaders)).await()
                 val result = response.use { resp ->
                     val jsonLine = resp.body.string()
                     if (jsonLine.isEmpty()) {
                         Log.w(TAG, "fetchSearchHits() — search API returned empty body")
                         emptyList()
                     } else {
-                        jsonLine.parseAs<List<HitsModel>>()
+                        runCatching {
+                            jsonLine.parseAs<SearchHvsResponse>().data
+                        }.getOrElse {
+                            jsonLine.parseAs<List<HitsModel>>()
+                        }
                     }
                 }
                 cachedSearchHits = result
@@ -493,9 +495,9 @@ class Hanime :
         val servers = videoModel.videosManifest?.servers ?: return emptyList()
         val playerHeaders = videoHeaders()
 
-        return servers.parallelFlatMap { server ->
+        return servers.flatMap { server ->
             val filtered = server.streams.filter { it.kind != "premium_alert" && it.url.contains(".m3u8") }
-            filtered.parallelFlatMap { stream ->
+            filtered.flatMap { stream ->
                 try {
                     playlistUtils.extractFromHls(
                         playlistUrl = stream.url,
@@ -627,10 +629,10 @@ class Hanime :
         val playerHeaders = videoHeaders()
         val servers = manifestData.videosManifest.servers
 
-        return servers.parallelFlatMap { server ->
+        return servers.flatMap { server ->
             val includePremium = preferences.getBoolean(PREF_PREMIUM_STREAMS_KEY, PREF_PREMIUM_STREAMS_DEFAULT)
             val guestStreams = server.streams.filter { (it.isGuestAllowed == true || (includePremium && it.isMemberAllowed == true)) && it.url.contains(".m3u8") }
-            guestStreams.parallelFlatMap { stream ->
+            guestStreams.flatMap { stream ->
                 runCatching {
                     playlistUtils.extractFromHls(
                         playlistUrl = stream.url,
@@ -1094,7 +1096,7 @@ class Hanime :
 
     companion object {
         private const val TAG = "Hanime"
-        private const val DEFAULT_CDN_BASE_URL = "https://cached.freeanimehentai.net"
+        private const val DEFAULT_CDN_BASE_URL = "https://guest.freeanimehentai.net"
 
         private const val PREF_QUALITY_KEY = "preferred_quality"
         private const val PREF_QUALITY_DEFAULT = "1080p"
@@ -1201,16 +1203,17 @@ class Hanime :
         )
 
         // Custom CDN Domain
-        screen.addEditTextPreference(
-            key = PREF_CUSTOM_CDN_KEY,
-            default = PREF_CUSTOM_CDN_DEFAULT,
-            title = "Custom CDN domain",
-            summary = "Leave empty for default: $DEFAULT_CDN_BASE_URL",
-            dialogMessage = "Enter custom CDN domain URL (leave empty for default: $DEFAULT_CDN_BASE_URL)",
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI,
-            validate = { it.isBlank() || it.toHttpUrlOrNull() != null },
-            validationMessage = { "Must be a valid HTTP/HTTPS URL or empty" },
-        )
+        androidx.preference.EditTextPreference(screen.context).apply {
+            key = PREF_CUSTOM_CDN_KEY
+            setDefaultValue(PREF_CUSTOM_CDN_DEFAULT)
+            title = "Custom CDN domain"
+            summary = "Leave empty for default: $DEFAULT_CDN_BASE_URL"
+            dialogMessage = "Enter custom CDN domain URL (leave empty for default: $DEFAULT_CDN_BASE_URL)"
+            setOnPreferenceChangeListener { _, newValue ->
+                val str = newValue as? String ?: ""
+                str.isBlank() || str.toHttpUrlOrNull() != null
+            }
+        }.also(screen::addPreference)
 
         // Episode Title Format
         screen.addListPreference(

@@ -3,17 +3,6 @@ package eu.kanade.tachiyomi.animeextension.es.latanime
 import android.util.Base64
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.mixdropextractor.MixDropExtractor
-import aniyomi.lib.mp4uploadextractor.Mp4uploadExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
-import aniyomi.lib.universalextractor.UniversalExtractor
-import aniyomi.lib.uqloadextractor.UqloadExtractor
-import aniyomi.lib.vidguardextractor.VidGuardExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
-import aniyomi.lib.youruploadextractor.YourUploadExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
@@ -21,9 +10,19 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.mixdropextractor.MixDropExtractor
+import eu.kanade.tachiyomi.lib.mp4uploadextractor.Mp4uploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
+import eu.kanade.tachiyomi.lib.universalextractor.UniversalExtractor
+import eu.kanade.tachiyomi.lib.uqloadextractor.UqloadExtractor
+import eu.kanade.tachiyomi.lib.vidguardextractor.VidGuardExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
+import eu.kanade.tachiyomi.lib.youruploadextractor.YourUploadExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.catchingFlatMapBlocking
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -283,7 +282,7 @@ class Latanime :
     /*--------------------------------Video extractors------------------------------------*/
     private val okruExtractor by lazy { OkruExtractor(client) }
     private val mp4uploadExtractor by lazy { Mp4uploadExtractor(client) }
-    private val voeExtractor by lazy { VoeExtractor(client, headers) }
+    private val voeExtractor by lazy { VoeExtractor(client) }
     private val uqloadExtractor by lazy { UqloadExtractor(client) }
     private val doodExtractor by lazy { DoodExtractor(client) }
     private val yourUploadExtractor by lazy { YourUploadExtractor(client) }
@@ -324,7 +323,7 @@ class Latanime :
                         else -> emptyList()
                     }
                 }
-                val universal = unmatched.catchingFlatMapBlocking { (_, serverTitle, url) ->
+                val universal = unmatched.parallelCatchingFlatMapBlocking { (_, serverTitle, url) ->
                     val prefix = "$serverTitle - "
                     universalExtractor.videosFromUrl(url, headers, prefix = "$prefix ")
                 }
@@ -335,10 +334,10 @@ class Latanime :
     private val conventions = listOf(
         "voe" to listOf("voe", "tubelessceliolymph", "simpulumlamerop", "urochsunloath", "nathanfromsubject", "yip.", "metagnathtuggers", "donaldlineelse"),
         "okru" to listOf("ok.ru", "okru"),
-        "filemoon" to listOf("filemoon", "moonplayer", "moviesm4u", "files.im"),
+        "filemoon" to listOf("filemoon", "moonplayer", "moviesm4u", "files.im", "byse", "bysekoze"),
         "mp4upload" to listOf("mp4upload", "mp4"),
         "uqload" to listOf("uqload"),
-        "doodstream" to listOf("doodstream", "dood.", "ds2play", "doods.", "ds2video", "dooood", "d000d", "d0000d"),
+        "doodstream" to listOf("doodstream", "dood.", "ds2play", "doods.", "ds2video", "dooood", "d000d", "d0000d", "playmogo", "dsvplay"),
         "yourupload" to listOf("yourupload", "upload"),
         "streamwish" to listOf("wishembed", "streamwish", "strwish", "wish", "Kswplayer", "Swhoi", "Multimovies", "Uqloads", "neko-stream", "swdyu", "iplayerhls", "streamgg"),
         "vidguard" to listOf("vembed", "guard", "listeamed", "bembed", "vgfplay"),

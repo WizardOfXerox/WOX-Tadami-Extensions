@@ -1,1 +1,123 @@
-var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((function(a,o){function c(t){try{s(r.next(t))}catch(t){o(t)}}function i(t){try{s(r.throw(t))}catch(t){o(t)}}function s(t){var e;t.done?a(t.value):(e=t.value,e instanceof n?e:new n((function(t){t(e)}))).then(c,i)}s((r=r.apply(t,e||[])).next())}))},e=this&&this.__generator||function(t,e){var n,r,a,o={label:0,sent:function(){if(1&a[0])throw a[1];return a[1]},trys:[],ops:[]},c=Object.create(("function"==typeof Iterator?Iterator:Object).prototype);return c.next=i(0),c.throw=i(1),c.return=i(2),"function"==typeof Symbol&&(c[Symbol.iterator]=function(){return this}),c;function i(i){return function(s){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;c&&(c=0,i[0]&&(o=0)),o;)try{if(n=1,r&&(a=2&i[0]?r.return:i[0]?r.throw||((a=r.return)&&a.call(r),0):r.next)&&!(a=a.call(r,i[1])).done)return a;switch(r=0,a&&(i=[2&i[0],a.value]),i[0]){case 0:case 1:a=i;break;case 4:return o.label++,{value:i[1],done:!1};case 5:o.label++,r=i[1],i=[0];continue;case 7:i=o.ops.pop(),o.trys.pop();continue;default:if(!(a=o.trys,(a=a.length>0&&a[a.length-1])||6!==i[0]&&2!==i[0])){o=0;continue}if(3===i[0]&&(!a||i[1]>a[0]&&i[1]<a[3])){o.label=i[1];break}if(6===i[0]&&o.label<a[1]){o.label=a[1],a=i;break}if(a&&o.label<a[2]){o.label=a[2],o.ops.push(i);break}a[2]&&o.ops.pop(),o.trys.pop();continue}i=e.call(t,o)}catch(t){i=[6,t],r=0}finally{n=a=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,s])}}};Object.defineProperty(exports,"__esModule",{value:!0});var n=require("cheerio"),r=require("@libs/fetch"),a=require("@libs/novelStatus"),o=function(){function o(){this.id="mistminthaven",this.name="Mistmint Haven",this.icon="src/en/mistminthaven/icon.png",this.site="https://www.mistminthaven.com/",this.version = "1.0.1"}return o.prototype.popularNovels=function(a){return t(this,void 0,void 0,(function(){var t,o,c,i;return e(this,(function(e){switch(e.label){case 0:return t="".concat(this.site,"novels?page=").concat(a),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:return o=e.sent(),c=(0,n.load)(o),i=[],c("article, div.novel-item").each((function(t,e){var n=c(e).find("h2, h3, a.title").text().trim(),r=c(e).find("img").attr("src"),a=c(e).find("a").attr("href");n&&a&&i.push({name:n,cover:r,path:a.replace(this.site,"")})})),[2,i]}}))}))},o.prototype.parseNovel=function(o){return t(this,void 0,void 0,(function(){var t,c,i,s,u,p,l,h;return e(this,(function(e){switch(e.label){case 0:return t=this.site+o.replace(/^\//,""),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:c=e.sent(),i=(0,n.load)(c),l=i("div.summary, div.description").text().trim(),h={path:o,name:i("h1").first().text().trim(),cover:i('meta[property="og:image"]').attr("content"),author:i('meta[name="author"]').attr("content")||"Unknown",status:a.NovelStatus.Ongoing,summary:l,genres:"",chapters:[]},i("ul.chapters li a, div.chapter-list a").each((function(t,e){var n=i(e).text().trim(),r=i(e).attr("href");n&&r&&h.chapters.push({name:n,path:r.replace(this.site,""),releaseTime:null})})),[2,h]}}))}))},o.prototype.parseChapter=function(a){return t(this,void 0,void 0,(function(){var t,o,c;return e(this,(function(e){switch(e.label){case 0:return t=this.site+a.replace(/^\//,""),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:return o=e.sent(),c=(0,n.load)(o),[2,c("div.reader-content, div.entry-content, div.epcontent").html()||"Content not found."]}}))}))},o.prototype.searchNovels=function(a,o){return t(this,void 0,void 0,(function(){var t,c,i,s;return e(this,(function(e){switch(e.label){case 0:return t="".concat(this.site,"?s=").concat(encodeURIComponent(a),"&page=").concat(o),[4,(0,r.fetchApi)(t).then((function(t){return t.text()}))];case 1:return c=e.sent(),i=(0,n.load)(c),s=[],i("article, div.novel-item").each((function(t,e){var n=i(e).find("h2, h3, a.title").text().trim(),r=i(e).find("img").attr("src"),a=i(e).find("a").attr("href");n&&a&&s.push({name:n,cover:r,path:a.replace(this.site,"")})})),[2,s]}}))}))},o}();exports.default=new o;
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+
+const fetch_1 = require("@libs/fetch");
+const defaultCover_1 = require("@libs/defaultCover");
+const novelStatus_1 = require("@libs/novelStatus");
+
+class MistmintHaven {
+    constructor() {
+        this.id = "mistminthaven";
+        this.name = "Mistmint Haven";
+        this.icon = "src/en/mistminthaven/icon.png";
+        this.site = "https://www.mistminthaven.com/";
+        this.apiSite = "https://api.mistminthaven.com/api/";
+        this.version = "2.0.0";
+    }
+
+    popularNovels(page) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.apiSite}novel?page=${page}&limit=20`;
+            const res = yield (0, fetch_1.fetchApi)(url, {
+                headers: { "Content-Type": "application/json", "type": "reader" }
+            });
+            const json = yield res.json();
+            const list = json.data || [];
+            return list.map(item => ({
+                name: item.title || "Untitled",
+                path: item.slug,
+                cover: item.avatarUrl || defaultCover_1.defaultCover
+            }));
+        });
+    }
+
+    parseNovel(novelPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const slug = novelPath.replace(/(^\/+|\/+$)/g, "");
+            const novelRes = yield (0, fetch_1.fetchApi)(`${this.apiSite}novel/slug/${slug}`, {
+                headers: { "type": "reader" }
+            });
+            const novelJson = yield novelRes.json();
+            const n = novelJson.data || {};
+
+            const chRes = yield (0, fetch_1.fetchApi)(`${this.apiSite}novels/slug/${slug}/chapters`, {
+                headers: { "type": "reader" }
+            });
+            const chJson = yield chRes.json();
+            const volumes = chJson.data || [];
+
+            const chapters = [];
+            for (const vol of volumes) {
+                const volChapters = vol.chapters || [];
+                for (const ch of volChapters) {
+                    chapters.push({
+                        name: ch.title || `Chapter ${ch.chapterNumber || chapters.length + 1}`,
+                        path: `${slug}/${ch.slug}`,
+                        chapterNumber: Number(ch.chapterNumber) || (chapters.length + 1),
+                        releaseTime: ch.createdAt
+                    });
+                }
+            }
+
+            let status = novelStatus_1.NovelStatus.Unknown;
+            if (n.status === 1) status = novelStatus_1.NovelStatus.Ongoing;
+            else if (n.status === 2) status = novelStatus_1.NovelStatus.Completed;
+
+            const genres = (n.genres || []).map(g => g.name).join(", ");
+
+            return {
+                path: slug,
+                name: n.title || "Untitled",
+                cover: n.avatarUrl || defaultCover_1.defaultCover,
+                author: n.author || "Unknown",
+                summary: n.description || "",
+                genres,
+                status,
+                chapters
+            };
+        });
+    }
+
+    parseChapter(chapterPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const parts = chapterPath.replace(/(^\/+|\/+$)/g, "").split("/");
+            const novelSlug = parts[0];
+            const chapterSlug = parts[1];
+
+            const url = `${this.apiSite}chapters/${novelSlug}/${chapterSlug}/content`;
+            const res = yield (0, fetch_1.fetchApi)(url, {
+                headers: { "type": "reader" }
+            });
+            const json = yield res.json();
+            const data = json.data || {};
+            return data.content || "Content not found.";
+        });
+    }
+
+    searchNovels(searchTerm, page) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.apiSite}novel?search=${encodeURIComponent(searchTerm)}&page=${page}&limit=20`;
+            const res = yield (0, fetch_1.fetchApi)(url, {
+                headers: { "Content-Type": "application/json", "type": "reader" }
+            });
+            const json = yield res.json();
+            const list = json.data || [];
+            return list.map(item => ({
+                name: item.title || "Untitled",
+                path: item.slug,
+                cover: item.avatarUrl || defaultCover_1.defaultCover
+            }));
+        });
+    }
+}
+
+exports.default = new MistmintHaven();

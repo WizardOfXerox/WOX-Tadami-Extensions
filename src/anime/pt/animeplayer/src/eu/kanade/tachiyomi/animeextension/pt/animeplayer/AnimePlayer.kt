@@ -17,7 +17,7 @@ class AnimePlayer :
     DooPlay(
         "pt-BR",
         "AnimePlayer",
-        "https://animeplayer.com.br",
+        "https://anreyalp.vip",
     ) {
 
     // ============================== Popular ===============================
