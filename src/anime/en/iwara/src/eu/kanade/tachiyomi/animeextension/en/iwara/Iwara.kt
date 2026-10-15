@@ -10,6 +10,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONArray
@@ -34,8 +35,11 @@ class Iwara : AnimeHttpSource() {
 
     override val supportsLatest = true
 
+    override val client: OkHttpClient = network.cloudflareClient.newBuilder()
+        .build()
+
     override fun headersBuilder(): Headers.Builder = Headers.Builder()
-        .add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        .add("User-Agent", "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36")
         .add("Origin", baseUrl)
         .add("Referer", "$baseUrl/")
 
@@ -185,24 +189,53 @@ class Iwara : AnimeHttpSource() {
 
         val fileResponse = client.newCall(fileRequest).execute()
         if (!fileResponse.isSuccessful) {
+            fileResponse.close()
             return emptyList()
         }
 
-        val array = JSONArray(fileResponse.body.string())
+        val responseBody = fileResponse.body.string()
+        fileResponse.close()
+
+        val array = JSONArray(responseBody)
         val videoList = mutableListOf<Video>()
+        val videoHeaders = headersBuilder()
+            .set("Origin", baseUrl)
+            .set("Referer", "$baseUrl/")
+            .build()
 
         for (i in 0 until array.length()) {
             val item = array.getJSONObject(i)
             val name = item.optString("name", "Source")
             val src = item.optJSONObject("src") ?: continue
             val view = src.optString("view")
-            if (view.isBlank()) continue
+            val download = src.optString("download")
+            val chosenUrl = if (view.isNotBlank()) view else download
+            if (chosenUrl.isBlank()) continue
 
-            val fullUrl = if (view.startsWith("//")) "https:$view" else view
-            videoList.add(Video(fullUrl, name, fullUrl, headers = headers))
+            val fullUrl = if (chosenUrl.startsWith("//")) "https:$chosenUrl" else chosenUrl
+            val qualityLabel = when (name.lowercase()) {
+                "source" -> "Source (Original)"
+                "preview" -> "Preview"
+                else -> if (name.endsWith("p")) name else "${name}p"
+            }
+            videoList.add(Video(fullUrl, qualityLabel, fullUrl, headers = videoHeaders))
         }
 
         return videoList
+    }
+
+    override fun List<Video>.sort(): List<Video> {
+        return this.sortedWith(
+            compareByDescending {
+                when {
+                    it.quality.contains("Source") -> 1080
+                    it.quality.contains("540") -> 540
+                    it.quality.contains("360") -> 360
+                    it.quality.contains("Preview") -> 1
+                    else -> 0
+                }
+            }
+        )
     }
 
     override fun videoUrlParse(response: Response): String = throw UnsupportedOperationException()

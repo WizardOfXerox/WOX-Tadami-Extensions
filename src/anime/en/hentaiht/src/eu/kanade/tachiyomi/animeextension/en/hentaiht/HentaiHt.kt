@@ -18,7 +18,9 @@ import keiyoushi.utils.getPreferencesLazy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import okhttp3.Cookie
 import okhttp3.Headers
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -59,9 +61,14 @@ class HentaiHt :
                     .header("Origin", baseUrl)
                     .header("Referer", "$baseUrl/")
                     .header("User-Agent", USER_AGENT)
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
                     .build()
-                val res = network.client.newCall(req).execute()
-                val cookieHeaders = res.headers("Set-Cookie")
+                val res = network.cloudflareClient.newCall(req).execute()
+                val cookieHeaders = res.headers.values("Set-Cookie")
+                val httpUrl = baseUrl.toHttpUrl()
+                val cookies = Cookie.parseAll(httpUrl, res.headers)
+                client.cookieJar.saveFromResponse(httpUrl, cookies)
                 for (c in cookieHeaders) {
                     if (c.contains("__Secure-hht_age")) {
                         ageCookie = c.substringBefore(";")
@@ -73,7 +80,7 @@ class HentaiHt :
         }
     }
 
-    override val client: OkHttpClient = network.client.newBuilder()
+    override val client: OkHttpClient = network.cloudflareClient.newBuilder()
         .addInterceptor { chain ->
             val orig = chain.request()
             if (orig.url.host.contains("hentai.ht")) {
@@ -83,6 +90,7 @@ class HentaiHt :
                 val builder = orig.newBuilder()
                     .header("Referer", "$baseUrl/")
                     .header("User-Agent", USER_AGENT)
+                    .header("Accept", "application/json")
                 ageCookie?.let { builder.header("Cookie", it) }
                 val response = chain.proceed(builder.build())
                 if (response.code == 403 && !orig.url.encodedPath.contains("age-confirmation")) {
@@ -91,6 +99,7 @@ class HentaiHt :
                     val retryBuilder = orig.newBuilder()
                         .header("Referer", "$baseUrl/")
                         .header("User-Agent", USER_AGENT)
+                        .header("Accept", "application/json")
                     ageCookie?.let { retryBuilder.header("Cookie", it) }
                     return@addInterceptor chain.proceed(retryBuilder.build())
                 }
@@ -103,6 +112,7 @@ class HentaiHt :
     override fun headersBuilder(): Headers.Builder = super.headersBuilder()
         .add("Referer", "$baseUrl/")
         .add("User-Agent", USER_AGENT)
+        .add("Accept", "application/json")
 
     // ======================= Popular Anime =======================
 
@@ -355,7 +365,7 @@ class HentaiHt :
     }
 
     companion object {
-        private const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        private const val USER_AGENT = "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
         private const val PREF_LANG_KEY = "preferred_sub_language"
     }
 

@@ -258,8 +258,12 @@ class HentaiHaven :
         for (source in sources) {
             val src = source.src ?: continue
             if (src.contains(".m3u8")) {
+                videoList.add(Video(src, "Hentai Haven - Auto (Master)", src, headers = videoHeaders))
                 val hlsVideos = playlistUtils.extractFromHls(
-                    src,
+                    playlistUrl = src,
+                    referer = "$baseUrl/",
+                    masterHeaders = videoHeaders,
+                    videoHeaders = videoHeaders,
                     videoNameGen = { q -> "Hentai Haven - $q" }
                 )
                 videoList.addAll(hlsVideos)
@@ -269,6 +273,16 @@ class HentaiHaven :
         }
 
         return videoList
+    }
+
+    override fun List<Video>.sort(): List<Video> {
+        val quality = preferences.getString(PREF_QUALITY_KEY, "1080") ?: "1080"
+        return this.sortedWith(
+            compareBy(
+                { it.quality.contains(quality) },
+                { it.quality.contains("Auto") || it.quality.contains("Master") },
+            )
+        ).reversed()
     }
 
     override fun videoListSelector(): String =

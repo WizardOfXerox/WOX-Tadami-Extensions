@@ -27,7 +27,9 @@ import kotlinx.coroutines.withContext
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.util.Locale
@@ -66,8 +68,8 @@ class Hanime :
 
     /** Headers for video stream requests (m3u8, segments, AES key). */
     private fun videoHeaders(): Headers = headers.newBuilder()
-        .set("Referer", "https://player.hanime.tv/")
-        .set("Origin", "https://player.hanime.tv")
+        .set("Referer", "https://hanime.tv/")
+        .set("Origin", "https://hanime.tv")
         .build()
 
     @Volatile
@@ -431,11 +433,104 @@ class Hanime :
     // ── Video List ─────────────────────────────────────────────────────
 
     override suspend fun getVideoList(episode: SEpisode): List<Video> {
+        val slug = extractSlugFromUrl(episode.url)
+        val handshakeVideos = fetchVideoListHandshake(slug)
+        if (handshakeVideos.isNotEmpty()) {
+            return handshakeVideos
+        }
         setAuthCookie()
         return if (authCookie != null) {
             fetchVideoListPremium(episode)
         } else {
             fetchVideoListWithSignature(episode)
+        }
+    }
+
+    /**
+     * Fetch video streams using the modern Astro player handshake API (v11).
+     *
+     * Flow:
+     * 1. Fetch ephemeral CSRF token from ct.hanime.tv
+     * 2. Encrypt handshake payload {"timestamp_unix":..., "directive":"htv_player_handshake", "slug":...}
+     *    using AES-256-GCM with key SHA256("htv-insecure-handshake-v1") and AAD "htv-insecure-v1"
+     * 3. Send POST request to auth.hanime.tv/api/v11/handshake with web2 signature headers
+     * 4. Decrypt the returned x-token header (same AES-256-GCM cipher) to extract direct HLS stream paths
+     * 5. Parse HLS streams via PlaylistUtils
+     */
+    private suspend fun fetchVideoListHandshake(slug: String): List<Video> {
+        return try {
+            // 1. Fetch CSRF token
+            val csrfReq = GET("https://ct.hanime.tv/csrf-token", headers)
+            val csrfResp = client.newCall(csrfReq).await()
+            val csrfToken = csrfResp.use {
+                it.bodyString().parseAs<CsrfTokenResponse>().csrfToken
+            }
+
+            // 2. Compute signature
+            val signature = ensureSignatureProvider().getSignature()
+
+            // 3. Encrypt handshake token
+            val encryptedToken = HanimeHandshakeCrypto.encryptHandshake(slug)
+            val postBody = """{"token":"$encryptedToken"}""".toRequestBody("application/json".toMediaType())
+
+            val reqBuilder = Request.Builder()
+                .url("https://auth.hanime.tv/api/v11/handshake")
+                .post(postBody)
+                .headers(headers)
+                .header("Origin", baseUrl)
+                .header("Referer", "$baseUrl/")
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .header("x-signature", signature.signature)
+                .header("x-time", signature.time)
+                .header("x-signature-version", "web2")
+
+            if (!csrfToken.isNullOrBlank()) {
+                reqBuilder.header("x-csrf-token", csrfToken)
+            }
+
+            val handshakeResp = client.newCall(reqBuilder.build()).await()
+            val xToken = handshakeResp.header("x-token") ?: handshakeResp.headers("x-token").firstOrNull()
+            handshakeResp.close()
+
+            if (xToken.isNullOrBlank()) {
+                Log.w(TAG, "Handshake response missing x-token header for slug: $slug")
+                return emptyList()
+            }
+
+            // 4. Decrypt token to get stream sources
+            val decrypted = HanimeHandshakeCrypto.decryptToken(xToken) ?: return emptyList()
+            val playerHeaders = videoHeaders()
+
+            val videos = mutableListOf<Video>()
+            for (source in decrypted.sources) {
+                val src = source.src ?: continue
+                if (src.isBlank() || source.kind == "promotion") continue
+
+                val streamUrl = if (src.startsWith("http")) src else "$baseUrl$src"
+                val qualityLabel = source.label ?: (source.height?.let { "${it}p" } ?: "Video")
+
+                try {
+                    val extracted = playlistUtils.extractFromHls(
+                        playlistUrl = streamUrl,
+                        masterHeaders = playerHeaders,
+                        videoHeaders = playerHeaders,
+                        videoNameGen = { q -> "Hanime - $q" },
+                    )
+                    if (extracted.isNotEmpty()) {
+                        videos.addAll(extracted)
+                    } else {
+                        videos.add(Video(streamUrl, "Hanime - $qualityLabel", streamUrl, headers = playerHeaders))
+                    }
+                } catch (e: Exception) {
+                    Log.w(TAG, "Playlist extraction failed for $streamUrl: ${e.message}")
+                    videos.add(Video(streamUrl, "Hanime - $qualityLabel", streamUrl, headers = playerHeaders))
+                }
+            }
+            videos
+        } catch (e: Exception) {
+            Log.e(TAG, "fetchVideoListHandshake failed for $slug: ${e.message}", e)
+            emptyList()
         }
     }
 
@@ -720,57 +815,84 @@ class Hanime :
 
     // ── Episode List ───────────────────────────────────────────────────
 
+    override suspend fun getEpisodeList(anime: SAnime): List<SEpisode> {
+        return try {
+            val allHits = fetchSearchHits()
+            val slug = extractSlugFromUrl(anime.url)
+            val targetHit = allHits.firstOrNull { it.slug == slug }
+            val seriesName = getTitle(targetHit?.name ?: anime.title)
+            val titleFormat = preferences.getString(PREF_EP_TITLE_FORMAT_KEY, PREF_EP_TITLE_FORMAT_DEFAULT) ?: PREF_EP_TITLE_FORMAT_DEFAULT
+
+            val matchingHits = allHits.filter { getTitle(it.name) == seriesName }
+                .sortedBy { it.releasedAtUnix ?: it.createdAtUnix ?: 0L }
+
+            if (matchingHits.isNotEmpty()) {
+                matchingHits.mapIndexed { idx, it ->
+                    SEpisode.create().apply {
+                        episode_number = idx + 1f
+                        name = formatEpisodeTitle(it.name, seriesName, idx, titleFormat)
+                        date_upload = (it.releasedAtUnix ?: it.createdAtUnix ?: 0) * 1000
+                        url = "/videos/hentai/${it.slug}?hvid=${it.id}"
+                    }
+                }.reversed()
+            } else {
+                listOf(
+                    SEpisode.create().apply {
+                        episode_number = 1f
+                        name = "Episode 1"
+                        date_upload = (targetHit?.releasedAtUnix ?: 0) * 1000
+                        val hvidParam = targetHit?.id?.let { "&hvid=$it" } ?: ""
+                        url = "/videos/hentai/$slug$hvidParam"
+                    }
+                )
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "getEpisodeList fallback: ${e.message}")
+            super.getEpisodeList(anime)
+        }
+    }
+
     override fun episodeListRequest(anime: SAnime): Request {
-        val slug = anime.url.substringAfterLast("/")
-        return GET("$baseUrl/api/v8/video?id=$slug", headers)
+        val slug = extractSlugFromUrl(anime.url)
+        return GET("$baseUrl/videos/hentai/$slug", headers)
     }
 
     override fun episodeListParse(response: Response): List<SEpisode> {
-        val responseString = response.bodyString().ifEmpty { return emptyList() }
-        val videoModel = responseString.parseAs<VideoModel>()
-
-        val currentSeriesName = getTitle(videoModel.hentaiVideo?.name ?: "")
-        val allFranchiseVideos = videoModel.hentaiFranchiseHentaiVideos ?: return emptyList()
-        val titleFormat = preferences.getString(PREF_EP_TITLE_FORMAT_KEY, PREF_EP_TITLE_FORMAT_DEFAULT) ?: PREF_EP_TITLE_FORMAT_DEFAULT
-
-        val seriesVideos = allFranchiseVideos
-            .filter { getTitle(it.name ?: "") == currentSeriesName }
-
-        if (seriesVideos.isEmpty()) {
-            // No matching series found in franchise; return just the current video as a single episode
-            val currentVideo = videoModel.hentaiVideo ?: return emptyList()
-            return listOf(
-                SEpisode.create().apply {
-                    episode_number = 1f
-                    name = formatEpisodeTitle(currentVideo.name, currentSeriesName, 0, titleFormat)
-                    date_upload = (currentVideo.releasedAtUnix ?: 0) * 1000
-                    val hvidParam = currentVideo.id?.let { id -> "&hvid=$id" } ?: ""
-                    setUrlWithoutDomain("$baseUrl/api/v8/video?id=${currentVideo.slug}$hvidParam")
-                },
-            )
-        }
-
-        return seriesVideos.mapIndexed { idx, it ->
+        val slug = extractSlugFromUrl(response.request.url.toString())
+        return listOf(
             SEpisode.create().apply {
-                episode_number = idx + 1f
-                name = formatEpisodeTitle(it.name, currentSeriesName, idx, titleFormat)
-                date_upload = (it.releasedAtUnix ?: 0) * 1000
-                val hvidParam = it.id?.let { id -> "&hvid=$id" } ?: ""
-                url = "$baseUrl/api/v8/video?id=${it.slug}$hvidParam"
+                episode_number = 1f
+                name = "Episode 1"
+                url = "/videos/hentai/$slug"
             }
-        }.reversed()
+        )
     }
 
     // ── URL Helpers ───────────────────────────────────────────────────
 
     /** Extract the `hvid` query parameter from an episode URL, or null if absent. */
     private fun extractHvIdFromUrl(url: String): Long? {
-        val hvidParam = url.substringAfter("&hvid=", missingDelimiterValue = "").substringBefore("&")
+        val hvidParam = url.substringAfter("&hvid=", missingDelimiterValue = "")
+            .substringAfter("?hvid=", missingDelimiterValue = "")
+            .substringBefore("&")
         return hvidParam.toLongOrNull()
     }
 
-    /** Extract the slug (id query parameter) from an episode URL. */
-    private fun extractSlugFromUrl(url: String): String = url.substringAfter("id=").substringBefore("&")
+    /** Extract the slug from an episode URL. */
+    private fun extractSlugFromUrl(url: String): String {
+        return when {
+            url.contains("/videos/hentai/") -> {
+                url.substringAfter("/videos/hentai/").substringBefore("?").substringBefore("&")
+            }
+            url.contains("?id=") -> {
+                url.substringAfter("?id=").substringBefore("&")
+            }
+            url.contains("&id=") -> {
+                url.substringAfter("&id=").substringBefore("&")
+            }
+            else -> url.substringAfterLast("/").substringBefore("?").substringBefore("&")
+        }
+    }
 
     // ── Auth ───────────────────────────────────────────────────────────
 

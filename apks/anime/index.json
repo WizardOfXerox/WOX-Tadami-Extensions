@@ -1654,10 +1654,10 @@
   {
     "name": "Aniyomi: hanime.tv",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hanime",
-    "apk": "aniyomi-en.hanime-v14.29.apk",
+    "apk": "aniyomi-en.hanime-v14.30.apk",
     "lang": "en",
-    "code": 29,
-    "version": "14.29",
+    "code": 30,
+    "version": "14.30",
     "nsfw": 1,
     "sources": [
       {
@@ -1668,8 +1668,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hanime.png",
-    "sha256": "913657d5508b65f4aea1b43377c2221e1423ba473c679aeb98587ed533f25516",
-    "size": 400057
+    "sha256": "01033e526e864ce10c7c2facc005aa5ae8b5e6705ace08d734addb36532e7898",
+    "size": 414041
   },
   {
     "name": "Aniyomi: HentaiCity",
@@ -1714,10 +1714,10 @@
   {
     "name": "Aniyomi: Hentai Haven",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaihaven",
-    "apk": "aniyomi-en.hentaihaven-v14.1.apk",
+    "apk": "aniyomi-en.hentaihaven-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1728,16 +1728,16 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaihaven.png",
-    "sha256": "d9ae1079aa48ebe2378a151dd5af34d64973d55e56d4ddd821a74499b787fc7d",
-    "size": 156280
+    "sha256": "294d2835067fa2bd7b6fd7aa8862aedc3d0927c73281e99bde45998582ce136c",
+    "size": 163304
   },
   {
     "name": "Aniyomi: Hentai.ht",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaiht",
-    "apk": "aniyomi-en.hentaiht-v14.1.apk",
+    "apk": "aniyomi-en.hentaiht-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1748,8 +1748,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaiht.png",
-    "sha256": "f54b534fd3de4b0df3ee77827d422cb11d89e023e340ad2962a325cb9b24b1c1",
-    "size": 113807
+    "sha256": "3bb5a38dcb7612e8f480471ab0ae72ac4ec710b9a1ca472147b857dbddc0ba2a",
+    "size": 120538
   },
   {
     "name": "Aniyomi: HentaiMama",
@@ -1814,10 +1814,10 @@
   {
     "name": "Aniyomi: Iwara",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.iwara",
-    "apk": "aniyomi-en.iwara-v14.1.apk",
+    "apk": "aniyomi-en.iwara-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1828,8 +1828,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.iwara.png",
-    "sha256": "1c5a9177fa75fb0f52c61063c0835f938c7210d095e57717b9dbe48ef03dba95",
-    "size": 176258
+    "sha256": "29afdfb2429882aa429e379a22d1423c1e833adb4939db63c198f54f03292e2f",
+    "size": 184178
   },
   {
     "name": "Aniyomi: JPFilms",
