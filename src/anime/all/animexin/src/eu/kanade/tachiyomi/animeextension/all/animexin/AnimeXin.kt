@@ -76,7 +76,7 @@ class AnimeXin :
 
             url.contains("dailymotion") -> dailymotionExtractor.videosFromUrl(url, prefix)
 
-            url.contains("dood") -> doodExtractor.videosFromUrl(url, name)
+            url.contains("dood") || url.contains("playmogo") -> doodExtractor.videosFromUrl(url, name)
 
             url.contains("gdriveplayer") -> {
                 val gdriveHeaders = headersBuilder()

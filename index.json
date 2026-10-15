@@ -22,10 +22,10 @@
   {
     "name": "Aniyomi: AnimeXin",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.animexin",
-    "apk": "aniyomi-all.animexin-v14.30.apk",
+    "apk": "aniyomi-all.animexin-v14.31.apk",
     "lang": "all",
-    "code": 30,
-    "version": "14.30",
+    "code": 31,
+    "version": "14.31",
     "nsfw": 0,
     "sources": [
       {
@@ -36,8 +36,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.animexin.png",
-    "sha256": "fa6215526c528b0de483464398c65cdf984117883250cc9e0ee91d834c27d69c",
-    "size": 271044
+    "sha256": "1308a2be7dd325113a8c925cfa3fa716b19e2f867afeb809380d9a73247bb63c",
+    "size": 271676
   },
   {
     "name": "Aniyomi: AniZone",
