@@ -82,28 +82,44 @@ class YouTubeExtractor(private val client: OkHttpClient) {
         val ytResponse = client.newCall(POST(playerUrl, headers, body)).execute()
             .let { json.decodeFromString<YoutubeResponse>(it.body.string()) }
 
-        val formats = ytResponse.streamingData.adaptiveFormats
-
-        // Get Audio
-        val audioTracks = formats.filter { it.mimeType.startsWith("audio/webm") }
-            .map { Track(it.url, it.audioQuality!! + " (${formatBits(it.averageBitrate!!)}ps)") }
+        val videoList = mutableListOf<Video>()
 
         // Get Subtitles
         val subs = ytResponse.captions?.renderer?.captionTracks?.map {
             Track(it.baseUrl, it.label)
         } ?: emptyList()
 
-        // Get videos, finally
-        return formats.filter { it.mimeType.startsWith("video/mp4") }.map {
-            val codecs = it.mimeType.substringAfter("codecs=\"").substringBefore("\"")
-            Video(
-                it.url,
-                prefix + it.qualityLabel.orEmpty() + " ($codecs)",
-                it.url,
-                subtitleTracks = subs,
-                audioTracks = audioTracks,
+        // 1. Prioritize muxed formats (contain audio + video in single stream)
+        ytResponse.streamingData.formats?.filter { it.mimeType.startsWith("video/mp4") }?.forEach {
+            videoList.add(
+                Video(
+                    it.url,
+                    prefix + it.qualityLabel.orEmpty(),
+                    it.url,
+                    subtitleTracks = subs,
+                ),
             )
         }
+
+        // 2. Adaptive formats
+        val adaptive = ytResponse.streamingData.adaptiveFormats ?: emptyList()
+        val audioTracks = adaptive.filter { it.mimeType.startsWith("audio/webm") }
+            .map { Track(it.url, it.audioQuality!! + " (${formatBits(it.averageBitrate!!)}ps)") }
+
+        adaptive.filter { it.mimeType.startsWith("video/mp4") }.forEach {
+            val codecs = it.mimeType.substringAfter("codecs=\"").substringBefore("\"")
+            videoList.add(
+                Video(
+                    it.url,
+                    prefix + it.qualityLabel.orEmpty() + " ($codecs)",
+                    it.url,
+                    subtitleTracks = subs,
+                    audioTracks = audioTracks,
+                ),
+            )
+        }
+
+        return videoList
     }
 
     @SuppressLint("DefaultLocale")
@@ -123,12 +139,15 @@ class YouTubeExtractor(private val client: OkHttpClient) {
 
     @Serializable
     data class YoutubeResponse(
-        val streamingData: AdaptiveDto,
+        val streamingData: StreamingDataDto,
         val captions: CaptionsDto? = null,
     )
 
     @Serializable
-    data class AdaptiveDto(val adaptiveFormats: List<TrackDto>)
+    data class StreamingDataDto(
+        val formats: List<TrackDto>? = null,
+        val adaptiveFormats: List<TrackDto>? = null,
+    )
 
     @Serializable
     data class TrackDto(

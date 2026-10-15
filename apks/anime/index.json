@@ -36,8 +36,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.animexin.png",
-    "sha256": "1308a2be7dd325113a8c925cfa3fa716b19e2f867afeb809380d9a73247bb63c",
-    "size": 271676
+    "sha256": "76e62af4f8558d3560cac5fb07f42376be0d4b4929e1e619def6e522db6de0c9",
+    "size": 367533
   },
   {
     "name": "Aniyomi: AniZone",
@@ -248,8 +248,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.lmanime.png",
-    "sha256": "84268958baa2a482028273530d17e23265a8a5725381957fdc2b76018080f0ed",
-    "size": 192586
+    "sha256": "6dbd3fea3aee718b09c2b3a4fd95bf0e0e8e2c71cd56cafc8f17ebc4869cccc7",
+    "size": 146231
   },
   {
     "name": "Aniyomi: Loklok",
@@ -1994,10 +1994,10 @@
   {
     "name": "Aniyomi: Myanime",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.myanime",
-    "apk": "aniyomi-en.myanime-v14.15.apk",
+    "apk": "aniyomi-en.myanime-v14.16.apk",
     "lang": "en",
-    "code": 15,
-    "version": "14.15",
+    "code": 16,
+    "version": "14.16",
     "nsfw": 0,
     "sources": [
       {
@@ -2008,8 +2008,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.myanime.png",
-    "sha256": "7191a80e98fef53638822b42390ccb8b5b18d0a059df780c675d3ca5905f372b",
-    "size": 210846
+    "sha256": "ec7f1ac2852b234479619ba0a49699bf1693d2729e7afe0c0e541be5762117a4",
+    "size": 164631
   },
   {
     "name": "Aniyomi: My Running Man",

@@ -85,27 +85,12 @@ class YouTubeExtractor(private val client: OkHttpClient) {
         val responseObject = json.decodeFromString<JsonObject>(postResponse.body.string())
         val videoList = mutableListOf<Video>()
 
-        val formats = responseObject["streamingData"]!!
-            .jsonObject["adaptiveFormats"]!!
-            .jsonArray
+        val streamingData = responseObject["streamingData"]?.jsonObject
+        val muxedFormats = streamingData?.get("formats")?.jsonArray ?: kotlinx.serialization.json.JsonArray(emptyList())
+        val adaptiveFormats = streamingData?.get("adaptiveFormats")?.jsonArray ?: kotlinx.serialization.json.JsonArray(emptyList())
 
         val audioTracks = mutableListOf<Track>()
         val subtitleTracks = mutableListOf<Track>()
-
-        // Get Audio
-        for (format in formats) {
-            if (format.jsonObject["mimeType"]!!.jsonPrimitive.content.startsWith("audio/webm")) {
-                runCatching {
-                    audioTracks.add(
-                        Track(
-                            format.jsonObject["url"]!!.jsonPrimitive.content,
-                            format.jsonObject["audioQuality"]!!.jsonPrimitive.content +
-                                " (${formatBits(format.jsonObject["averageBitrate"]!!.jsonPrimitive.long)}ps)",
-                        ),
-                    )
-                }
-            }
-        }
 
         // Get Subtitles
         if (responseObject.containsKey("captions")) {
@@ -127,8 +112,40 @@ class YouTubeExtractor(private val client: OkHttpClient) {
             }
         }
 
-        // List formats
-        for (format in formats) {
+        // 1. Muxed formats (contain audio + video combined)
+        for (format in muxedFormats) {
+            val mimeType = format.jsonObject["mimeType"]?.jsonPrimitive?.content ?: ""
+            if (mimeType.startsWith("video/mp4")) {
+                val quality = format.jsonObject["qualityLabel"]?.jsonPrimitive?.content ?: "720p"
+                val url = format.jsonObject["url"]?.jsonPrimitive?.content ?: continue
+                videoList.add(
+                    Video(
+                        url,
+                        "$prefix$quality",
+                        url,
+                        subtitleTracks = subtitleTracks,
+                    ),
+                )
+            }
+        }
+
+        // Get Audio
+        for (format in adaptiveFormats) {
+            if (format.jsonObject["mimeType"]!!.jsonPrimitive.content.startsWith("audio/webm")) {
+                runCatching {
+                    audioTracks.add(
+                        Track(
+                            format.jsonObject["url"]!!.jsonPrimitive.content,
+                            format.jsonObject["audioQuality"]!!.jsonPrimitive.content +
+                                " (${formatBits(format.jsonObject["averageBitrate"]!!.jsonPrimitive.long)}ps)",
+                        ),
+                    )
+                }
+            }
+        }
+
+        // 2. Adaptive formats fallback
+        for (format in adaptiveFormats) {
             val mimeType = format.jsonObject["mimeType"]!!.jsonPrimitive.content
             if (mimeType.startsWith("video/mp4")) {
                 videoList.add(
