@@ -2314,10 +2314,10 @@
   {
     "name": "Aniyomi: AnimeAv1",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.animeav1",
-    "apk": "aniyomi-es.animeav1-v14.4.apk",
+    "apk": "aniyomi-es.animeav1-v14.5.apk",
     "lang": "es",
-    "code": 4,
-    "version": "14.4",
+    "code": 5,
+    "version": "14.5",
     "nsfw": 0,
     "sources": [
       {
@@ -2328,8 +2328,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animeav1.png",
-    "sha256": "0568ce6a97cece88dd73cdd1581e3655e23117e26242a50230bf86cf2f3a4adc",
-    "size": 160570
+    "sha256": "6a7a1136b6af3895bb589b01a54f2c8b89b230c43007ca4c3d3ce5204d75d99f",
+    "size": 115359
   },
   {
     "name": "Aniyomi: AnimeFenix",
