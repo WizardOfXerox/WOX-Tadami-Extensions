@@ -1754,10 +1754,10 @@
   {
     "name": "Aniyomi: Hentai.ht",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaiht",
-    "apk": "aniyomi-en.hentaiht-v14.2.apk",
+    "apk": "aniyomi-en.hentaiht-v14.3.apk",
     "lang": "en",
-    "code": 2,
-    "version": "14.2",
+    "code": 3,
+    "version": "14.3",
     "nsfw": 1,
     "sources": [
       {
@@ -1768,8 +1768,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaiht.png",
-    "sha256": "3bb5a38dcb7612e8f480471ab0ae72ac4ec710b9a1ca472147b857dbddc0ba2a",
-    "size": 120538
+    "sha256": "16424cdf4290817d3b34da8abf3a9cfcc71ecf8faa1f8b230112ce15d109cdb6",
+    "size": 121532
   },
   {
     "name": "Aniyomi: HentaiMama",

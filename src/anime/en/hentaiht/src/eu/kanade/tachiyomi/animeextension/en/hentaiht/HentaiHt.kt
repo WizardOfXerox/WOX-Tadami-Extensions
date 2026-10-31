@@ -21,11 +21,13 @@ import kotlinx.serialization.json.Json
 import okhttp3.Cookie
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.RequestBody
 import okhttp3.Response
+import okio.BufferedSink
 import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -50,28 +52,39 @@ class HentaiHt :
     }
 
     @Volatile
-    private var ageCookie: String? = null
+    private var ageCookie: String? = preferences.getString(PREF_AGE_COOKIE_KEY, null)
 
     private fun refreshAgeCookie() {
         synchronized(this) {
             try {
+                val jsonMediaType = "application/json".toMediaType()
+                val jsonBody = object : RequestBody() {
+                    override fun contentType(): MediaType = jsonMediaType
+                    override fun contentLength(): Long = 2L
+                    override fun writeTo(sink: BufferedSink) {
+                        sink.writeUtf8("{}")
+                    }
+                }
                 val req = Request.Builder()
                     .url("$baseUrl/api/v1/age-confirmation")
-                    .post("{}".toRequestBody("application/json".toMediaType()))
+                    .post(jsonBody)
                     .header("Origin", baseUrl)
                     .header("Referer", "$baseUrl/")
                     .header("User-Agent", USER_AGENT)
                     .header("Accept", "application/json")
-                    .header("Content-Type", "application/json")
                     .build()
-                val res = network.cloudflareClient.newCall(req).execute()
+                val res = network.client.newCall(req).execute()
                 val cookieHeaders = res.headers.values("Set-Cookie")
                 val httpUrl = baseUrl.toHttpUrl()
                 val cookies = Cookie.parseAll(httpUrl, res.headers)
                 client.cookieJar.saveFromResponse(httpUrl, cookies)
+                network.client.cookieJar.saveFromResponse(httpUrl, cookies)
+                network.cloudflareClient.cookieJar.saveFromResponse(httpUrl, cookies)
                 for (c in cookieHeaders) {
                     if (c.contains("__Secure-hht_age")) {
-                        ageCookie = c.substringBefore(";")
+                        val cookieVal = c.substringBefore(";")
+                        ageCookie = cookieVal
+                        preferences.edit().putString(PREF_AGE_COOKIE_KEY, cookieVal).apply()
                         break
                     }
                 }
@@ -80,7 +93,7 @@ class HentaiHt :
         }
     }
 
-    override val client: OkHttpClient = network.cloudflareClient.newBuilder()
+    override val client: OkHttpClient = network.client.newBuilder()
         .addInterceptor { chain ->
             val orig = chain.request()
             if (orig.url.host.contains("hentai.ht")) {
@@ -91,7 +104,12 @@ class HentaiHt :
                     .header("Referer", "$baseUrl/")
                     .header("User-Agent", USER_AGENT)
                     .header("Accept", "application/json")
-                ageCookie?.let { builder.header("Cookie", it) }
+                val cookie = ageCookie
+                if (cookie != null) {
+                    val cur = orig.header("Cookie")
+                    val merged = if (cur != null && !cur.contains("__Secure-hht_age")) "$cur; $cookie" else cookie
+                    builder.header("Cookie", merged)
+                }
                 val response = chain.proceed(builder.build())
                 if (response.code == 403 && !orig.url.encodedPath.contains("age-confirmation")) {
                     response.close()
@@ -100,8 +118,21 @@ class HentaiHt :
                         .header("Referer", "$baseUrl/")
                         .header("User-Agent", USER_AGENT)
                         .header("Accept", "application/json")
-                    ageCookie?.let { retryBuilder.header("Cookie", it) }
-                    return@addInterceptor chain.proceed(retryBuilder.build())
+                    val retryCookie = ageCookie
+                    if (retryCookie != null) {
+                        val cur = orig.header("Cookie")
+                        val merged = if (cur != null && !cur.contains("__Secure-hht_age")) "$cur; $retryCookie" else retryCookie
+                        retryBuilder.header("Cookie", merged)
+                    }
+                    val retryResponse = chain.proceed(retryBuilder.build())
+                    if (retryResponse.code in listOf(403, 503) && retryResponse.header("Server") in listOf("cloudflare", "cloudflare-nginx")) {
+                        val peekBody = runCatching { retryResponse.peekBody(512).string() }.getOrDefault("")
+                        if (!peekBody.contains("age_confirmation_required")) {
+                            retryResponse.close()
+                            return@addInterceptor network.cloudflareClient.newCall(retryBuilder.build()).execute()
+                        }
+                    }
+                    return@addInterceptor retryResponse
                 }
                 return@addInterceptor response
             }
@@ -367,6 +398,7 @@ class HentaiHt :
     companion object {
         private const val USER_AGENT = "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
         private const val PREF_LANG_KEY = "preferred_sub_language"
+        private const val PREF_AGE_COOKIE_KEY = "age_confirmation_cookie"
     }
 
     // ======================= Data Transfer Objects =======================
