@@ -1,0 +1,8 @@
+ext {
+    extName = 'ForcedCinema'
+    extClass = '.ForcedCinema'
+    extVersionCode = 1
+    isNsfw = true
+}
+
+apply from: "$rootDir/common.gradle"

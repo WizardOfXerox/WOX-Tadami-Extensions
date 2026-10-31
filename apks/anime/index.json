@@ -1632,6 +1632,26 @@
     "size": 274955
   },
   {
+    "name": "Aniyomi: ForcedCinema",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.forcedcinema",
+    "apk": "aniyomi-en.forcedcinema-v14.1.apk",
+    "lang": "en",
+    "code": 1,
+    "version": "14.1",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "ForcedCinema",
+        "lang": "en",
+        "id": "8402137284989668139",
+        "baseUrl": "https://forcedcinema.net"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.forcedcinema.png",
+    "sha256": "6954ed7247566593a4b37c8a5ad96328047abe0ad749812d7bb9f2c137d7c801",
+    "size": 90461
+  },
+  {
     "name": "Aniyomi: haho.moe",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hahomoe",
     "apk": "aniyomi-en.hahomoe-v14.10.apk",
@@ -1850,6 +1870,26 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.jpfilms.png",
     "sha256": "f97bb6659156ac94623f99bbea47e90368ac09cd5614c6003ae7aa404e1bac39",
     "size": 185560
+  },
+  {
+    "name": "Aniyomi: Kayoanime",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.kayoanime",
+    "apk": "aniyomi-en.kayoanime-v14.21.apk",
+    "lang": "en",
+    "code": 21,
+    "version": "14.21",
+    "nsfw": 0,
+    "sources": [
+      {
+        "name": "Kayoanime",
+        "lang": "en",
+        "id": "203922289858257167",
+        "baseUrl": "https://kayoanime.com"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kayoanime.png",
+    "sha256": "a91c5ebb5288a83cbbd4418679ae3159ae55a892455f12e783402ebcf280480a",
+    "size": 115049
   },
   {
     "name": "Aniyomi: KickAssAnime",
@@ -2112,6 +2152,26 @@
     "size": 4955954
   },
   {
+    "name": "Aniyomi: RoughPorn",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.roughpornme",
+    "apk": "aniyomi-en.roughpornme-v14.1.apk",
+    "lang": "en",
+    "code": 1,
+    "version": "14.1",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "RoughPorn",
+        "lang": "en",
+        "id": "7731164529501323206",
+        "baseUrl": "https://roughporn.me"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.roughpornme.png",
+    "sha256": "827249a689a31772f04f9db8fac9fd1b0953012a92ab54e368000c13b9c9c2dd",
+    "size": 82989
+  },
+  {
     "name": "Aniyomi: Rule34Video",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.rule34video",
     "apk": "aniyomi-en.rule34video-v14.10.apk",
@@ -2130,6 +2190,26 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.rule34video.png",
     "sha256": "a1f854d3d4ee306cf19513ebe71d95e979ee998f281760911d842a2baba3efbe",
     "size": 125819
+  },
+  {
+    "name": "Aniyomi: SickR",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.sickr",
+    "apk": "aniyomi-en.sickr-v14.1.apk",
+    "lang": "en",
+    "code": 1,
+    "version": "14.1",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "SickR",
+        "lang": "en",
+        "id": "5627819450366603340",
+        "baseUrl": "https://sick-r.com"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.sickr.png",
+    "sha256": "0023bc9bac32100019c4d586218fa472e92c343c8cdec751aac05995f0e58c6c",
+    "size": 83183
   },
   {
     "name": "Aniyomi: SuperStream",
@@ -4642,25 +4722,5 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.xiaoxintv.png",
     "sha256": "bf1a92f9616477882c802796df06204ba0f4da55e875cb154d70614db0b72368",
     "size": 151905
-  },
-  {
-    "name": "Aniyomi: Kayoanime",
-    "pkg": "eu.kanade.tachiyomi.animeextension.en.kayoanime",
-    "apk": "aniyomi-en.kayoanime-v14.21.apk",
-    "lang": "en",
-    "code": 21,
-    "version": "14.21",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Kayoanime",
-        "lang": "en",
-        "id": "203922289858257167",
-        "baseUrl": "https://kayoanime.com"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kayoanime.png",
-    "sha256": "a91c5ebb5288a83cbbd4418679ae3159ae55a892455f12e783402ebcf280480a",
-    "size": 115049
   }
 ]
