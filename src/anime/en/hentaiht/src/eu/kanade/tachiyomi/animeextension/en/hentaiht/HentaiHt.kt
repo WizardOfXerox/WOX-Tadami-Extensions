@@ -3,7 +3,10 @@ package eu.kanade.tachiyomi.animeextension.en.hentaiht
 import android.content.SharedPreferences
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
+import eu.kanade.tachiyomi.animeextension.en.hentaiht.HentaiHtFilters.SortFilter
+import eu.kanade.tachiyomi.animeextension.en.hentaiht.HentaiHtFilters.StudioFilter
 import eu.kanade.tachiyomi.animeextension.en.hentaiht.HentaiHtFilters.TagFilter
+import eu.kanade.tachiyomi.animeextension.en.hentaiht.HentaiHtFilters.YearFilter
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -178,16 +181,35 @@ class HentaiHt :
             return GET("$baseUrl/api/v1/catalog/search?q=$encodedQuery", headers)
         }
 
-        var tagParam = ""
+        val urlBuilder = "$baseUrl/api/v1/catalog?page=$page".toHttpUrl().newBuilder()
+
         for (filter in filters) {
-            if (filter is TagFilter) {
-                if (filter.selected.isNotBlank()) {
-                    tagParam = "&tag=" + URLEncoder.encode(filter.selected, "UTF-8")
+            when (filter) {
+                is SortFilter -> {
+                    if (filter.selected.isNotBlank()) {
+                        urlBuilder.addQueryParameter("sort", filter.selected)
+                    }
                 }
+                is TagFilter -> {
+                    if (filter.selected.isNotBlank()) {
+                        urlBuilder.addQueryParameter("tag", filter.selected)
+                    }
+                }
+                is StudioFilter -> {
+                    if (filter.selected.isNotBlank()) {
+                        urlBuilder.addQueryParameter("studio", filter.selected)
+                    }
+                }
+                is YearFilter -> {
+                    if (filter.selected.isNotBlank()) {
+                        urlBuilder.addQueryParameter("year", filter.selected)
+                    }
+                }
+                else -> {}
             }
         }
 
-        return GET("$baseUrl/api/v1/catalog?page=$page$tagParam", headers)
+        return GET(urlBuilder.build(), headers)
     }
 
     override fun searchAnimeParse(response: Response): AnimesPage {
@@ -351,7 +373,10 @@ class HentaiHt :
     // ======================= Filters =======================
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
-        TagFilter("Tag", HentaiHtFilters.TAGS)
+        SortFilter(),
+        TagFilter("Tag", HentaiHtFilters.TAGS),
+        StudioFilter("Studio", HentaiHtFilters.STUDIOS),
+        YearFilter("Year", HentaiHtFilters.YEARS),
     )
 
     // ======================= Preferences =======================

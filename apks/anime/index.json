@@ -1634,10 +1634,10 @@
   {
     "name": "Aniyomi: ForcedCinema",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.forcedcinema",
-    "apk": "aniyomi-en.forcedcinema-v14.1.apk",
+    "apk": "aniyomi-en.forcedcinema-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1648,8 +1648,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.forcedcinema.png",
-    "sha256": "6954ed7247566593a4b37c8a5ad96328047abe0ad749812d7bb9f2c137d7c801",
-    "size": 90461
+    "sha256": "6ea8bc425018cc537a7d2349e6aa490a55526b486497760affe7cf5ae5b7e34b",
+    "size": 94607
   },
   {
     "name": "Aniyomi: haho.moe",
@@ -1754,10 +1754,10 @@
   {
     "name": "Aniyomi: Hentai.ht",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaiht",
-    "apk": "aniyomi-en.hentaiht-v14.3.apk",
+    "apk": "aniyomi-en.hentaiht-v14.4.apk",
     "lang": "en",
-    "code": 3,
-    "version": "14.3",
+    "code": 4,
+    "version": "14.4",
     "nsfw": 1,
     "sources": [
       {
@@ -1768,8 +1768,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaiht.png",
-    "sha256": "16424cdf4290817d3b34da8abf3a9cfcc71ecf8faa1f8b230112ce15d109cdb6",
-    "size": 121532
+    "sha256": "01badba3d523f09129f7e279ea2c873616f5172b11ef74b9a75d1dbd8dcfe7a3",
+    "size": 124168
   },
   {
     "name": "Aniyomi: HentaiMama",
@@ -2154,10 +2154,10 @@
   {
     "name": "Aniyomi: RoughPorn",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.roughpornme",
-    "apk": "aniyomi-en.roughpornme-v14.1.apk",
+    "apk": "aniyomi-en.roughpornme-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -2168,8 +2168,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.roughpornme.png",
-    "sha256": "827249a689a31772f04f9db8fac9fd1b0953012a92ab54e368000c13b9c9c2dd",
-    "size": 82989
+    "sha256": "5e9ae714246f61d3ca358123934a3d05fdfc7e9fc3013bd76d017a8a32bed98c",
+    "size": 89211
   },
   {
     "name": "Aniyomi: Rule34Video",
@@ -2194,10 +2194,10 @@
   {
     "name": "Aniyomi: SickR",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.sickr",
-    "apk": "aniyomi-en.sickr-v14.1.apk",
+    "apk": "aniyomi-en.sickr-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -2208,8 +2208,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.sickr.png",
-    "sha256": "0023bc9bac32100019c4d586218fa472e92c343c8cdec751aac05995f0e58c6c",
-    "size": 83183
+    "sha256": "19ab450e8abd2ddc90839edad049b3141f87b2a31a2d09f6889cd1759b9686ce",
+    "size": 90843
   },
   {
     "name": "Aniyomi: SuperStream",

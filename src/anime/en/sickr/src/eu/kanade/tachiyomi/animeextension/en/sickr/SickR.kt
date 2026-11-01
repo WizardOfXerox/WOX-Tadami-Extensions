@@ -63,13 +63,14 @@ class SickR : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
             val pageParam = if (page > 1) "&from_videos=$page" else ""
             return GET("$baseUrl/search/?q=$q$pageParam", headers)
         }
-        var path = "latest-updates"
+        var slug = ""
         filters.forEach { f ->
             when (f) {
-                is CategoryFilter -> if (f.state != 0) path = f.toPath()
+                is SickRFilters.CategoryFilter -> slug = f.selectedSlug
                 else -> {}
             }
         }
+        val path = if (slug.isNotBlank()) "categories/$slug" else "latest-updates"
         return GET("$baseUrl/$path/$page/", headers)
     }
 
@@ -159,16 +160,8 @@ class SickR : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
         AnimeFilter.Header("Search ignores filters"),
-        CategoryFilter(),
+        SickRFilters.CategoryFilter(),
     )
-
-    class CategoryFilter : AnimeFilter.Select<String>(
-        "Category",
-        arrayOf("All", "Teen", "Incest", "BDSM", "Torture", "Voyeur", "Gangbang"),
-    ) {
-        private val paths = arrayOf("", "teen", "incest", "bdsm", "torture", "voyeur", "gangbang")
-        fun toPath() = "categories/${paths[state]}"
-    }
 
     // ─── Preferences ──────────────────────────────────────────────────────────
 

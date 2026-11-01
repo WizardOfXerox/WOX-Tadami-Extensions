@@ -62,19 +62,19 @@ class RoughPornMe : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
             return GET("$baseUrl/en/search/$page/?q=${query.trim().replace(" ", "+")}", headers)
         }
         var catId = "112853074"
-        var catName = "Brazil"
+        var catSlug = "Brazil"
         var sortMode = "popular"
         filters.forEach { f ->
             when (f) {
-                is CategoryFilter -> {
-                    catId = f.currentId()
-                    catName = f.currentName()
+                is RoughPornMeFilters.CategoryFilter -> {
+                    catId = f.selectedId
+                    catSlug = f.selectedSlug
                 }
-                is SortFilter -> sortMode = f.toSortMode()
+                is RoughPornMeFilters.SortFilter -> sortMode = f.toSortMode()
                 else -> {}
             }
         }
-        return GET("$baseUrl/en/category/$catId/$catName/$sortMode/$page/", headers)
+        return GET("$baseUrl/en/category/$catId/$catSlug/$sortMode/$page/", headers)
     }
 
     override fun searchAnimeSelector() = popularAnimeSelector()
@@ -159,43 +159,11 @@ class RoughPornMe : ParsedAnimeHttpSource(), ConfigurableAnimeSource {
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
         AnimeFilter.Header("Search ignores filters"),
-        SortFilter(),
-        CategoryFilter(),
+        RoughPornMeFilters.SortFilter(),
+        RoughPornMeFilters.CategoryFilter(),
     )
-
-    class SortFilter : AnimeFilter.Select<String>(
-        "Sort",
-        arrayOf("Popular", "Latest", "Trending"),
-    ) {
-        fun toSortMode() = when (state) {
-            1 -> "latest"
-            2 -> "trending"
-            else -> "popular"
-        }
-    }
-
-    class CategoryFilter : AnimeFilter.Select<String>(
-        "Category",
-        CATEGORY_NAMES.toTypedArray(),
-    ) {
-        fun currentId() = CATEGORY_IDS[state]
-        fun currentName() = CATEGORY_NAMES[state]
-    }
 
     // ─── Preferences ──────────────────────────────────────────────────────────
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {}
-
-    companion object {
-        val CATEGORY_NAMES = listOf(
-            "Brazil", "European", "Latina", "Ebony", "Teacher",
-            "Socks", "Pregnant", "Femdom", "Erotic", "Filipina",
-            "Cheerleader", "Compilation", "Handjob", "Office", "Mistress",
-        )
-        val CATEGORY_IDS = listOf(
-            "112853074", "115408978", "118489170", "115212370", "123011154",
-            "121241682", "120586322", "115605586", "115343442", "116129874",
-            "114294866", "113770578", "117375058", "119603282", "118882386",
-        )
-    }
 }

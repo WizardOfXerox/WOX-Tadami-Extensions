@@ -61,10 +61,13 @@ class ForcedCinema : AnimeHttpSource(), ConfigurableAnimeSource {
         }
         filters.forEach { filter ->
             when (filter) {
-                is CategoryFilter -> if (filter.state != 0) {
-                    url.addQueryParameter("categories", filter.toUriPart())
+                is ForcedCinemaFilters.CategoryFilter -> if (filter.selectedId > 0) {
+                    url.addQueryParameter("categories", filter.selectedId.toString())
                 }
-                is SortFilter -> {
+                is ForcedCinemaFilters.TagFilter -> if (filter.selectedId > 0) {
+                    url.addQueryParameter("tags", filter.selectedId.toString())
+                }
+                is ForcedCinemaFilters.SortFilter -> {
                     url.addQueryParameter("orderby", filter.toOrderBy())
                     url.addQueryParameter("order", filter.toOrder())
                 }
@@ -144,31 +147,11 @@ class ForcedCinema : AnimeHttpSource(), ConfigurableAnimeSource {
     // ─── Filters ──────────────────────────────────────────────────────────────
 
     override fun getFilterList(): AnimeFilterList = AnimeFilterList(
-        SortFilter(),
-        CategoryFilter(),
+        AnimeFilter.Header("Search ignores filters"),
+        ForcedCinemaFilters.SortFilter(),
+        ForcedCinemaFilters.CategoryFilter(),
+        ForcedCinemaFilters.TagFilter(),
     )
-
-    class SortFilter : AnimeFilter.Select<String>(
-        "Sort By",
-        arrayOf("Newest", "Oldest", "Title A-Z", "Title Z-A"),
-    ) {
-        fun toOrderBy() = when (state) {
-            2, 3 -> "title"
-            else -> "date"
-        }
-        fun toOrder() = when (state) {
-            1, 2 -> "asc"
-            else -> "desc"
-        }
-    }
-
-    class CategoryFilter : AnimeFilter.Select<String>(
-        "Category",
-        arrayOf("All", "Rape", "Forced", "BDSM", "Torture", "Incest"),
-    ) {
-        private val ids = arrayOf("", "rape", "forced", "bdsm", "torture", "incest")
-        fun toUriPart(): String = ids[state]
-    }
 
     // ─── Preferences ──────────────────────────────────────────────────────────
 
