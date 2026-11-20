@@ -21,6 +21,7 @@ import urllib.request
 import urllib.error
 import urllib.parse
 import gzip
+import zlib
 from pathlib import Path
 
 # Ensure UTF-8 output on all operating systems and consoles
@@ -470,11 +471,9 @@ def cmd_build(args):
         built_apk = apks[0]
         clean_name = built_apk.name.replace("-debug.apk", ".apk")
         dest_apk = DIST_ANIME / "apk" / clean_name
-        dest_root_apk = DIST_ANIME / clean_name
 
         dest_apk.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(built_apk, dest_apk)
-        shutil.copy2(built_apk, dest_root_apk)
         print(f"[+] Copied sanitized distribution APK: {dest_apk.name}")
 
         # Extract icon
@@ -517,6 +516,13 @@ def cmd_build(args):
                     it["size"] = dest_apk.stat().st_size
                     if not it.get("icon"):
                         it["icon"] = f"https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/{pkg_id}.png"
+                    if len(it.get("sources", [])) == 1:
+                        for kt in (ANIME_DIR / "src" / lang / name).glob("**/*.kt"):
+                            kt_txt = kt.read_text(encoding="utf-8", errors="ignore")
+                            m_url = re.search(r'override\s+val\s+baseUrl\s*=\s*"([^"]+)"', kt_txt)
+                            if m_url:
+                                it["sources"][0]["baseUrl"] = m_url.group(1)
+                                break
                     print(f"[+] Updated manifest entry for {pkg_id} -> {clean_name} (v{ver_name}, code {code})")
                     found = True
                     break
@@ -608,12 +614,27 @@ def cmd_build(args):
             items = json.loads(min_index_path.read_text(encoding="utf-8"))
             pkg_id = f"eu.kanade.tachiyomi.extension.{lang}.{name}"
             bg_path = MANGA_DIR / "src" / lang / name / "build.gradle.kts"
+            bg_txt = bg_path.read_text(encoding="utf-8") if bg_path.exists() else ""
             code = 1
-            if bg_path.exists():
-                m = re.search(r"versionCode\s*=\s*(\d+)", bg_path.read_text(encoding="utf-8"))
+            ver_name = "1.4.1"
+            m_apk = re.search(r"-v(\d+\.\d+)\.(\d+)\.apk", clean_name)
+            if m_apk:
+                code = int(m_apk.group(2))
+                ver_name = f"{m_apk.group(1)}.{code}"
+            elif bg_txt:
+                m = re.search(r"versionCode\s*=\s*(\d+)", bg_txt)
                 if m:
                     code = int(m.group(1))
-            ver_name = f"1.4.{code}"
+                    ver_name = f"1.4.{code}"
+
+            primary_base_url = None
+            if bg_txt:
+                source_blocks = len(re.findall(r"\bsource\s*\{", bg_txt))
+                has_mirrors = "mirrors(" in bg_txt
+                if source_blocks <= 1 or has_mirrors:
+                    m_url = re.search(r'baseUrl\s*=\s*"([^"]+)"', bg_txt) or re.search(r'mirrors\s*\(\s*"([^"]+)"', bg_txt, re.S)
+                    if m_url:
+                        primary_base_url = m_url.group(1)
 
             for it in items:
                 if it.get("pkg") == pkg_id:
@@ -622,6 +643,11 @@ def cmd_build(args):
                     it["version"] = ver_name
                     it["sha256"] = sha256_file(dest_apk)
                     it["size"] = dest_apk.stat().st_size
+                    if primary_base_url:
+                        new_host = urllib.parse.urlparse(primary_base_url).netloc
+                        for s in it.get("sources", []):
+                            if urllib.parse.urlparse(s.get("baseUrl", "")).netloc != new_host:
+                                s["baseUrl"] = primary_base_url
                     print(f"[+] Updated manifest entry for {pkg_id} -> {clean_name} (v{ver_name}, code {code})")
                     break
 
@@ -942,7 +968,14 @@ def extract_anime_rules():
                     if not p_m:
                         p_m = re.search(r'popularAnimeRequest[^\n\{]*\{[^\}]*GET\("(?:\$baseUrl)?([^"]*)"', code)
                     if p_m:
-                        path = p_m.group(1).replace('$page', '1').replace('${page}', '1')
+                        raw_p = p_m.group(1)
+                        api_m = re.search(r'val\s+(?:baseApiUrl|apiUrl)\s*=\s*"([^"]+)"', code)
+                        if api_m:
+                            raw_p = raw_p.replace('$baseApiUrl', api_m.group(1)).replace('${baseApiUrl}', api_m.group(1))
+                            raw_p = raw_p.replace('$apiUrl', api_m.group(1)).replace('${apiUrl}', api_m.group(1))
+                        raw_p = raw_p.replace('$page', '1').replace('${page}', '1').replace('$offset', '0').replace('${offset}', '0')
+                        raw_p = re.sub(r'\$\{[^}]+\}', '0', raw_p)
+                        path = "" if ('$' in raw_p or ' ' in raw_p) else raw_p
                     sel = ""
                     s_m = re.search(r'popularAnimeParse[^\n\{]*\{[^\}]*select\("([^"]+)"\)', code)
                     if not s_m:
@@ -1046,9 +1079,24 @@ def extract_manga_rules():
                 theme_m = re.search(r'id\("multisrc\.([^"]+)"\)', txt)
             theme = theme_m.group(1).lower() if theme_m else ""
             theme_info = MULTISRC_MAP.get(theme, {})
+            path = theme_info.get("path", "")
+            for r_sub, _, r_files in os.walk(root):
+                for rf in r_files:
+                    if rf.endswith(".kt"):
+                        try:
+                            kt_txt = open(os.path.join(r_sub, rf), "r", encoding="utf-8", errors="ignore").read()
+                        except Exception:
+                            continue
+                        m_dir = re.search(r'override\s+val\s+(?:mangaSubString|mangaUrlDirectory)\s*=\s*"([^"]+)"', kt_txt)
+                        if m_dir and "/manga" in path:
+                            path = path.replace("/manga", "/" + m_dir.group(1).lstrip("/"), 1)
+                            break
+                else:
+                    continue
+                break
             rules[pkg] = {
                 "theme": theme,
-                "path": theme_info.get("path", ""),
+                "path": path,
                 "selector": theme_info.get("selector", "")
             }
     return rules
@@ -1082,12 +1130,20 @@ def extract_novel_rules():
                     path = "/rank/list/type/total_total/"
                     sel = "c-card, p-ranklist-item__title, searchkekka_box"
                 else:
-                    m_path = re.search(r'popularNovels[^{]*\{[^\n]*this\.site\s*\+\s*["\']([^"\']+)["\']', txt)
+                    m_pop = re.search(r'popularNovels\s*[=:(][^{]*\{', txt)
+                    pop_scope = txt
+                    if m_pop:
+                        s_idx = m_pop.start()
+                        m_end = re.search(r'\.prototype\.\w+|\basync\s+(?:parseNovel|searchNovels|parseChapter)\b|\b(?:parseNovel|searchNovels|parseChapter)\s*[=:(]', txt[s_idx + 20:])
+                        pop_scope = txt[s_idx:s_idx + 20 + m_end.start()] if m_end else txt[s_idx:s_idx + 1500]
+                    m_path = re.search(r'popularNovels[^{]*\{[^\n]*this\.site\s*\+\s*["\']([^"\']+)["\']', pop_scope)
+                    if not m_path:
+                        m_path = re.search(r'popularNovels[^{]*\{[^\n]*(?:=|return)\s*["\']{2}\.concat\(this\.site,\s*["\']([^"\']+)["\']', pop_scope)
                     if m_path:
                         path = m_path.group(1).replace('${page}', '1').replace('$page', '1')
-                    m_sel = re.search(r'popularNovels[^{]*\{[^\n]*\(\s*["\']([^"\']+)["\']\s*\)\.each', txt)
-                    if m_sel:
-                        sel = m_sel.group(1)
+                    sels = re.findall(r'\(\s*["\']([^"\']+)["\']\s*\)\.each', pop_scope)
+                    if sels:
+                        sel = ", ".join(dict.fromkeys(sels))
                 rules[nid] = {"path": path, "selector": sel or "novel, article, post, title, card"}
     return rules
 
@@ -1192,7 +1248,10 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
             selector = ", ".join(override_sels)
             break
 
-    target_url = f"{base_clean}/{path.lstrip('/')}" if path else base_clean
+    if path.startswith(("http://", "https://")):
+        target_url = path
+    else:
+        target_url = f"{base_clean}/{path.lstrip('/')}" if path else base_clean
 
     req_headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -1202,33 +1261,76 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
         "Referer": f"{base_clean}/"
     }
 
-    def fetch(url):
+    def _decode(raw, enc):
+        enc_l = (enc or '').lower()
+        if raw.startswith(b'\x1f\x8b') or enc_l == 'gzip':
+            try:
+                raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
+            except Exception:
+                try:
+                    raw = gzip.decompress(raw)
+                except Exception:
+                    pass
+        elif enc_l == 'deflate':
+            try:
+                raw = zlib.decompressobj(-zlib.MAX_WBITS).decompress(raw)
+            except Exception:
+                try:
+                    raw = zlib.decompress(raw)
+                except Exception:
+                    pass
+        return raw.decode('utf-8', errors='ignore')
+
+    def fetch(url, hdrs=None):
+        # Plain HTTP client (no TLS/browser fingerprint impersonation): mirrors what the
+        # extension's OkHttp client sees, so results reflect real in-app behaviour.
+        # Non-2xx responses are returned (not raised) so their bodies can be classified.
+        req = urllib.request.Request(url, headers=hdrs or req_headers)
         try:
-            from curl_cffi import requests as cffi_requests
-            r = cffi_requests.get(
-                url,
-                impersonate="chrome124",
-                timeout=timeout,
-                verify=False,
-                headers={"Referer": f"{base_clean}/", "Accept-Language": "en-US,en;q=0.9"}
-            )
-            return r.status_code, dict(r.headers), r.text, r.url
-        except Exception:
-            req = urllib.request.Request(url, headers=req_headers)
             with urllib.request.urlopen(req, timeout=timeout, context=CTX_UNVERIFIED) as resp:
-                raw = resp.read(131072)
-                if raw.startswith(b'\x1f\x8b') or resp.info().get('Content-Encoding') == 'gzip':
-                    try:
-                        raw = gzip.decompress(raw)
-                    except Exception:
-                        pass
-                body = raw.decode('utf-8', errors='ignore')
+                body = _decode(resp.read(262144), resp.info().get('Content-Encoding'))
                 return resp.getcode(), dict(resp.info()), body, resp.geturl()
+        except urllib.error.HTTPError as he:
+            try:
+                raw = he.read(262144)
+            except Exception:
+                raw = b''
+            hdrs_out = dict(he.headers or {})
+            return he.code, hdrs_out, _decode(raw, hdrs_out.get('Content-Encoding')), url
 
     try:
         code, headers, body, final_url = fetch(target_url)
-        server = headers.get('Server', headers.get('server', ''))
-        is_cf_challenge = any(p.search(body) for p in CLOUDFLARE_PATTERNS) or ('cloudflare' in server.lower() and code in (403, 503))
+        if code == 200 and not body.strip():
+            # Some non-English sites return an empty 200 body if Accept-Language is forced to en-US.
+            # App OkHttp requests do not send Accept-Language by default; retry once without it.
+            no_lang_headers = {k: v for k, v in req_headers.items() if k != "Accept-Language"}
+            code, headers, body, final_url = fetch(target_url, no_lang_headers)
+        lower_headers = {k.lower(): v for k, v in headers.items()}
+        server = lower_headers.get('server', '')
+        behind_cf = 'cloudflare' in server.lower() or 'cf-ray' in lower_headers
+
+        # Cloudflare origin errors (520-530): the site behind Cloudflare is down, not "protected".
+        if behind_cf and 520 <= code <= 530:
+            return {"name": name, "pkg": pkg, "type": ext_type, "status": "ORIGIN_DOWN", "code": code, "detail": f"Cloudflare reports origin unreachable (HTTP {code})", "base_url": base_url}
+
+        # AWS WAF JS challenge (e.g., firecross.jp returning HTTP 202 with x-amzn-waf-action)
+        if code == 202 and 'x-amzn-waf-action' in lower_headers:
+            return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": code, "detail": "AWS WAF JS challenge (HTTP 202)", "base_url": base_url}
+
+        # Unfollowed redirects or redirect loops caught via HTTPError (e.g., HTTP 308 loop)
+        if 300 <= code < 400:
+            return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} redirect loop/unfollowed", "base_url": base_url}
+
+        # A real interstitial challenge is only served with a blocking status code.
+        # Pages that merely embed Cloudflare scripts (Turnstile widgets, email obfuscation)
+        # return 200 and must NOT be counted as challenged.
+        is_cf_challenge = code in (403, 429, 503) and (
+            lower_headers.get('cf-mitigated', '').lower() == 'challenge'
+            or any(p.search(body) for p in CLOUDFLARE_PATTERNS)
+            or 'ddos-guard' in server.lower()
+        )
+        if not is_cf_challenge and behind_cf and code in (403, 429):
+            return {"name": name, "pkg": pkg, "type": ext_type, "status": "WAF_BLOCKED", "code": code, "detail": f"Cloudflare firewall rule returned HTTP {code} without an interactive challenge", "base_url": base_url}
 
         # Check external hijack redirect
         if "tiktok.com" in final_url.lower():
@@ -1256,12 +1358,16 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
                         code, headers, body, final_url = fb_code, fb_headers, fb_body, fb_url
                         recovered = True
                         break
-                    elif any(p.search(fb_body) for p in CLOUDFLARE_PATTERNS) or ('cloudflare' in fb_headers.get('Server', '').lower() and fb_code in (403, 503)):
+                    elif fb_code in (403, 429, 503) and (any(p.search(fb_body) for p in CLOUDFLARE_PATTERNS) or {k.lower(): v for k, v in fb_headers.items()}.get('cf-mitigated', '').lower() == 'challenge'):
                         return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": fb_code, "detail": "Fallback route live behind Cloudflare", "base_url": base_url}
                 except Exception:
                     pass
             if not recovered:
                 return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} Not Found (catalog route and fallback paths exhausted)", "base_url": base_url}
+
+        # 3b. Any other non-success status is an error, never a confirmed scrape.
+        if code >= 400:
+            return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code}", "base_url": base_url}
 
         # 4. Check JSON / REST API Response
         stripped = body.strip()

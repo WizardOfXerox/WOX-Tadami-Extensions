@@ -1256,7 +1256,7 @@
     "name": "Quanben",
     "site": "https://www.quanben.io/",
     "lang": "中文, 汉语, 漢語",
-    "version": 1001001,
+    "version": 1001002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/Quanben.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/quanben/icon.png",
     "versionCode": 1000100

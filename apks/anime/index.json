@@ -3700,22 +3700,22 @@
   {
     "name": "Aniyomi: AnimeUnity",
     "pkg": "eu.kanade.tachiyomi.animeextension.it.animeunity",
-    "apk": "aniyomi-it.animeunity-v14.17.apk",
+    "apk": "aniyomi-it.animeunity-v14.18.apk",
     "lang": "it",
-    "code": 17,
-    "version": "14.17",
+    "code": 18,
+    "version": "14.18",
     "nsfw": 0,
     "sources": [
       {
         "name": "AnimeUnity",
         "lang": "it",
         "id": "7762808921754601430",
-        "baseUrl": "https://www.animeunity.so"
+        "baseUrl": "https://animeunity.cx"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.animeunity.png",
-    "sha256": "259eb6101bb8103e015a87a8a239cf47da8ef0158fc6193af496780ce9800ece",
-    "size": 119707
+    "sha256": "a3fdfbc4091490f11a88665945d72027112bd7e33575fb926a742fcb3d1941fd",
+    "size": 120249
   },
   {
     "name": "Aniyomi: ANIMEWORLD.tv",
@@ -4526,22 +4526,22 @@
   {
     "name": "Aniyomi: Türk Anime TV",
     "pkg": "eu.kanade.tachiyomi.animeextension.tr.turkanime",
-    "apk": "aniyomi-tr.turkanime-v14.49.apk",
+    "apk": "aniyomi-tr.turkanime-v14.50.apk",
     "lang": "tr",
-    "code": 49,
-    "version": "14.49",
+    "code": 50,
+    "version": "14.50",
     "nsfw": 0,
     "sources": [
       {
         "name": "Türk Anime TV",
         "lang": "tr",
         "id": "1539162878022626585",
-        "baseUrl": "https://www.turkanime.tv"
+        "baseUrl": "https://turkanime.to"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.turkanime.png",
-    "sha256": "a796c55371005d3aa921f9c8c0fb33b54f45bcc4fa8965b215c0de8ee07590ac",
-    "size": 390903
+    "sha256": "55031b62f6fbf41917f37d7e1c45efff2344e05b99ebbbe6ea6bd7ac4c506dda",
+    "size": 351875
   },
   {
     "name": "Aniyomi: UAKino",

@@ -6,17 +6,17 @@ import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.googledriveextractor.GoogleDriveExtractor
-import aniyomi.lib.mp4uploadextractor.Mp4uploadExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.sendvidextractor.SendvidExtractor
-import aniyomi.lib.sibnetextractor.SibnetExtractor
-import aniyomi.lib.uqloadextractor.UqloadExtractor
-import aniyomi.lib.vkextractor.VkExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
-import aniyomi.lib.vudeoextractor.VudeoExtractor
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.googledriveextractor.GoogleDriveExtractor
+import eu.kanade.tachiyomi.lib.mp4uploadextractor.Mp4uploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.sendvidextractor.SendvidExtractor
+import eu.kanade.tachiyomi.lib.sibnetextractor.SibnetExtractor
+import eu.kanade.tachiyomi.lib.uqloadextractor.UqloadExtractor
+import eu.kanade.tachiyomi.lib.vkextractor.VkExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
+import eu.kanade.tachiyomi.lib.vudeoextractor.VudeoExtractor
 import eu.kanade.tachiyomi.animeextension.tr.turkanime.extractors.AlucardExtractor
 import eu.kanade.tachiyomi.animeextension.tr.turkanime.extractors.EmbedgramExtractor
 import eu.kanade.tachiyomi.animeextension.tr.turkanime.extractors.MVidooExtractor
@@ -35,7 +35,7 @@ import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.util.asJsoup
 import keiyoushi.lib.cryptoaes.CryptoAES
-import keiyoushi.lib.synchrony.Deobfuscator
+import eu.kanade.tachiyomi.lib.synchrony.Deobfuscator
 import keiyoushi.utils.bodyString
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMap
@@ -63,7 +63,7 @@ class TurkAnime :
 
     override val name = "Türk Anime TV"
 
-    override val baseUrl = "https://www.turkanime.tv"
+    override val baseUrl = "https://turkanime.to"
 
     override val lang = "tr"
 
@@ -76,24 +76,27 @@ class TurkAnime :
     // ============================== Popular ===============================
     override fun popularAnimeRequest(page: Int) = GET("$baseUrl/ajax/rankagore?sayfa=$page", xmlHeader)
 
-    override fun popularAnimeSelector() = "div.panel-visible"
+    override fun popularAnimeSelector() = "div.panel-visible, article.panel-card"
 
-    override fun popularAnimeNextPageSelector() = "button.btn-default[data-loading-text*=Sonraki]"
+    override fun popularAnimeNextPageSelector() = "button.btn-default[data-loading-text*=Sonraki], button.btn-default[onclick*=Sayfalama]:not([disabled]):contains(Sonraki)"
 
     override fun popularAnimeFromElement(element: Element): SAnime {
-        val animeTitle = element.selectFirst("div.panel-title > a")!!
+        val animeTitle = element.selectFirst("div.panel-title > a, h2.panel-title > a, span.kart-baslik > a")!!
         val name = animeTitle.attr("title")
+            .ifBlank { animeTitle.text() }
             .substringBefore(" izle")
         val img = element.selectFirst("img.media-object")
-        val animeId = element.selectFirst("a.reactions")!!.attr("data-unique-id")
+        val animeId = element.selectFirst("a.reactions, a[data-unique-id]")?.attr("data-unique-id").orEmpty()
         val animeUrl = animeTitle.attr("abs:href").toHttpUrl()
             .newBuilder()
-            .addQueryParameter("animeId", animeId)
+            .apply {
+                if (animeId.isNotBlank()) addQueryParameter("animeId", animeId)
+            }
             .build().toString()
         return SAnime.create().apply {
             setUrlWithoutDomain(animeUrl)
             title = name
-            thumbnail_url = img?.attr("abs:data-src")
+            thumbnail_url = img?.attr("abs:data-src")?.ifBlank { img.attr("abs:src") }
         }
     }
 
@@ -201,13 +204,14 @@ class TurkAnime :
     // =========================== Anime Details ============================
     override fun animeDetailsParse(document: Document): SAnime {
         val img = document.selectFirst("div.imaj > img.media-object")
-        val studio = document.selectFirst("div#animedetay > table tr:contains(Stüdyo) > td:last-child a")
-        val desc = document.selectFirst("div#animedetay p.ozet")
-        val genres = document.select("div#animedetay > table tr:contains(Anime Türü) > td:last-child a")
+        val studio = document.selectFirst("div#animedetay > table tr:contains(Stüdyo) > td:last-child a, table tr:contains(Stüdyo) > td:last-child a")
+        val desc = document.selectFirst("p.summary, div#animedetay p.ozet")
+        val genres = document.select("div#animedetay > table tr:contains(Anime Türü) > td:last-child a, table tr:contains(Anime Türü) > td:last-child a")
             .ifEmpty { null }
+        val ogImage = document.selectFirst("meta[property=og:image]")?.attr("content")?.ifBlank { null }
         return SAnime.create().apply {
-            title = document.select("div#detayPaylas div.panel-title").text()
-            thumbnail_url = img?.let { "https:" + it.attr("data-src") }
+            title = document.selectFirst("h1.panel-title, div#detayPaylas div.panel-title")?.text().orEmpty()
+            thumbnail_url = ogImage ?: img?.let { it.attr("abs:data-src").ifBlank { it.attr("abs:src") } }
             author = studio?.text()
             description = desc?.text()
             genre = genres?.joinToString { it.text() }
@@ -222,11 +226,11 @@ class TurkAnime :
         return GET("$baseUrl/ajax/bolumler?animeId=$animeId", xmlHeader)
     }
 
-    override fun episodeListSelector() = "ul.menum li"
+    override fun episodeListSelector() = "ul.menum li, ul.bolum-listesi li"
 
     override fun episodeFromElement(element: Element): SEpisode {
-        val a = element.selectFirst("a:has(span.bolumAdi)")!!
-        val title = a.attr("title")
+        val a = element.selectFirst("a:has(span.bolumAdi), a.menum-satir")!!
+        val title = a.attr("title").ifBlank { a.text() }
         val substring = title.substringBefore(". Bölüm")
         val numIdx = substring.indexOfLast { !it.isDigit() } + 1
         val numbers = substring.slice(numIdx..substring.lastIndex)
@@ -243,22 +247,58 @@ class TurkAnime :
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
 
-        val fansubbers = document.select("div#videodetay div.pull-right button")
-        val videoList = if (fansubbers.size == 1) {
-            runBlocking { getVideosFromHosters(document, fansubbers.first()!!.text()) }
+        val newButtons = document.select("button.izle-kaynak-btn[data-source]")
+        val videoList = if (newButtons.isNotEmpty()) {
+            val fansubMap = document.select("button[data-fansub-sec]")
+                .associate { it.attr("data-fansub-sec") to it.text().trim() }
+            val hosterSelection = preferences.getStringSet(PREF_HOSTER_KEY, PREF_HOSTER_DEFAULT).orEmpty()
+            val embedHeaders = headers.newBuilder()
+                .set("Referer", response.request.url.toString())
+                .build()
+
+            newButtons
+                .toList()
+                .filter { it.selectFirst(".izle-kaynak-durum--kirik") == null }
+                .parallelCatchingFlatMapBlocking { btn ->
+                    val rawHoster = btn.text().trim().uppercase()
+                    val normalizedHoster = when (rawHoster) {
+                        "OK.RU" -> "ODNOKLASSNIKI"
+                        "MAIL.RU" -> "MAIL"
+                        else -> rawHoster
+                    }
+                    if (normalizedHoster !in SUPPORTED_HOSTERS) return@parallelCatchingFlatMapBlocking emptyList()
+                    if (hosterSelection.isNotEmpty() && normalizedHoster !in hosterSelection) return@parallelCatchingFlatMapBlocking emptyList()
+
+                    val fansubId = btn.attr("data-fansub")
+                    val subber = fansubMap[fansubId]?.ifBlank { fansubId } ?: fansubId.ifBlank { "Varsayılan" }
+                    val sourceUrl = btn.attr("abs:data-source").takeIf(String::isNotBlank)
+                        ?: return@parallelCatchingFlatMapBlocking emptyList()
+
+                    val embedDoc = client.newCall(GET(sourceUrl, embedHeaders)).awaitSuccess().useAsJsoup()
+                    val hosterLink = embedDoc.selectFirst("iframe[src]")?.attr("abs:src")
+                        ?.takeIf(String::isNotBlank)
+                        ?: return@parallelCatchingFlatMapBlocking emptyList()
+
+                    extractVideosFromHosterLink(hosterLink, normalizedHoster, subber)
+                }
         } else {
-            val allFansubs = PREF_FANSUB_SELECTION_ENTRIES
-            val chosenFansubs = preferences.getStringSet(PREF_FANSUB_SELECTION_KEY, allFansubs.toSet())!!
+            val fansubbers = document.select("div#videodetay div.pull-right button")
+            if (fansubbers.size == 1) {
+                runBlocking { getVideosFromHosters(document, fansubbers.first()!!.text()) }
+            } else {
+                val allFansubs = PREF_FANSUB_SELECTION_ENTRIES
+                val chosenFansubs = preferences.getStringSet(PREF_FANSUB_SELECTION_KEY, allFansubs.toSet())!!
 
-            val filteredSubs = fansubbers.toList().filter {
-                val subName = it.text().substringBeforeLast("BD").trim()
-                chosenFansubs.any(subName::contains) || allFansubs.none(subName::contains)
-            }
+                val filteredSubs = fansubbers.toList().filter {
+                    val subName = it.text().substringBeforeLast("BD").trim()
+                    chosenFansubs.any(subName::contains) || allFansubs.none(subName::contains)
+                }
 
-            filteredSubs.parallelCatchingFlatMapBlocking {
-                val url = it.attr("onclick").trimOnClick()
-                val subDoc = client.newCall(GET(url, xmlHeader)).awaitSuccess().useAsJsoup()
-                getVideosFromHosters(subDoc, it.text())
+                filteredSubs.parallelCatchingFlatMapBlocking {
+                    val url = it.attr("onclick").trimOnClick()
+                    val subDoc = client.newCall(GET(url, xmlHeader)).awaitSuccess().useAsJsoup()
+                    getVideosFromHosters(subDoc, it.text())
+                }
             }
         }
 
@@ -283,15 +323,15 @@ class TurkAnime :
                 }
             }
 
-            hosters.parallelCatchingFlatMap {
+            hosters.toList().parallelCatchingFlatMapBlocking {
                 val hosterName = it.text()
-                if (hosterName !in SUPPORTED_HOSTERS) return@parallelCatchingFlatMap emptyList()
-                if (hosterName !in hosterSelection) return@parallelCatchingFlatMap emptyList()
+                if (hosterName !in SUPPORTED_HOSTERS) return@parallelCatchingFlatMapBlocking emptyList()
+                if (hosterName !in hosterSelection) return@parallelCatchingFlatMapBlocking emptyList()
                 val url = it.attr("onclick").trimOnClick()
                 val videoDoc = client.newCall(GET(url, xmlHeader)).awaitSuccess().useAsJsoup()
                 val src = videoDoc.selectFirst("iframe")?.attr("src")
                     ?.replace("^//".toRegex(), "https://")
-                    ?: return@parallelCatchingFlatMap emptyList()
+                    ?: return@parallelCatchingFlatMapBlocking emptyList()
                 getVideosFromSource(src, hosterName, subber)
             }.let(::addAll)
         }
@@ -308,7 +348,10 @@ class TurkAnime :
             .parseAs<CipherParams>()
 
         val hosterLink = "https:" + decryptParams(cipherParams)
+        return extractVideosFromHosterLink(hosterLink, hosterName, subber)
+    }
 
+    private suspend fun extractVideosFromHosterLink(hosterLink: String, hosterName: String, subber: String): List<Video> {
         return when (hosterName) {
             "ALUCARD(BETA)" -> {
                 AlucardExtractor(client, json, baseUrl).extractVideos(hosterLink, subber)
@@ -328,7 +371,7 @@ class TurkAnime :
 
             "GDRIVE" -> {
                 Regex("""[\w-]{28,}""").find(hosterLink)?.groupValues?.get(0)?.let {
-                    GoogleDriveExtractor(client, headers).videosFromUrl("https://drive.google.com/uc?id=$it", "$subber: Gdrive")
+                    GoogleDriveExtractor(client, headers).videosFromUrl(it, "$subber: Gdrive")
                 }
             }
 

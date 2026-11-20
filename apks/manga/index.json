@@ -1864,21 +1864,21 @@
   {
     "name": "Tachiyomi: Baozi Manhua",
     "pkg": "eu.kanade.tachiyomi.extension.zh.baozimanhua",
-    "apk": "tachiyomi-zh.baozimanhua-v1.4.28.apk",
+    "apk": "tachiyomi-zh.baozimanhua-v1.4.29.apk",
     "lang": "zh",
-    "code": 28,
-    "version": "1.4.28",
+    "code": 29,
+    "version": "1.4.29",
     "nsfw": 0,
     "sources": [
       {
         "name": "包子漫画",
         "lang": "zh",
         "id": "5724751873601868259",
-        "baseUrl": "https://cn.baozimh.com"
+        "baseUrl": "https://cn.webmota.com"
       }
     ],
-    "sha256": "50a486f31cfac47a01d051e6c25cefdf89b25cd86e381bd85c79db5e0bcfdb2a",
-    "size": 235835,
+    "sha256": "92c7b34178276d772bd239f2955b5bb8b9fd36c403d4d68067e0f38bcae1c778",
+    "size": 235839,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.zh.baozimanhua.png"
   },
   {
@@ -3912,21 +3912,21 @@
   {
     "name": "Tachiyomi: DamCoNuong",
     "pkg": "eu.kanade.tachiyomi.extension.vi.damconuong",
-    "apk": "tachiyomi-vi.damconuong-v1.4.7.apk",
+    "apk": "tachiyomi-vi.damconuong-v1.4.8.apk",
     "lang": "vi",
-    "code": 7,
-    "version": "1.4.7",
+    "code": 8,
+    "version": "1.4.8",
     "nsfw": 1,
     "sources": [
       {
         "name": "DamCoNuong",
         "lang": "vi",
         "id": "2680345917627448572",
-        "baseUrl": "https://damconuong.pet"
+        "baseUrl": "https://damconuong.tech"
       }
     ],
-    "sha256": "36a66a610517f8ac0a4b1fa8ded9687f6c5c8e18ba7a8e661c701e88269460e6",
-    "size": 267369,
+    "sha256": "57509acb602f78bc29e193b8508a32f5f168377856cec16ff5909414f9fcbc5b",
+    "size": 267361,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.damconuong.png"
   },
   {
@@ -5848,20 +5848,20 @@
   {
     "name": "Tachiyomi: Fleur Blanche",
     "pkg": "eu.kanade.tachiyomi.extension.pt.fleurblanche",
-    "apk": "tachiyomi-pt.fleurblanche-v1.4.57.apk",
+    "apk": "tachiyomi-pt.fleurblanche-v1.4.58.apk",
     "lang": "pt-BR",
-    "code": 57,
-    "version": "1.4.57",
+    "code": 58,
+    "version": "1.4.58",
     "nsfw": 1,
     "sources": [
       {
         "name": "Fleur Blanche",
         "lang": "pt-BR",
         "id": "2748000026130339026",
-        "baseUrl": "https://fbsquadx.com"
+        "baseUrl": "https://squadxfbs.com"
       }
     ],
-    "sha256": "00d2362e64af111b9655822b300bedb5a7c22060ccbf600efcc661a62286e27f",
+    "sha256": "7ace9e48b46f1f682796be069beb7e4ff8e7770108ff1f81b93f6edc89a83fe9",
     "size": 257600,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.pt.fleurblanche.png"
   },
@@ -9532,123 +9532,123 @@
   {
     "name": "Tachiyomi: Kagane",
     "pkg": "eu.kanade.tachiyomi.extension.all.kagane",
-    "apk": "tachiyomi-all.kagane-v1.4.28.apk",
+    "apk": "tachiyomi-all.kagane-v1.4.29.apk",
     "lang": "all",
-    "code": 28,
-    "version": "1.4.28",
+    "code": 29,
+    "version": "1.4.29",
     "nsfw": 0,
     "sources": [
       {
         "name": "Kagane",
         "lang": "en",
         "id": "4024736764982024684",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ja",
         "id": "1157710231944574609",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ko",
         "id": "1720654391539317254",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "zh",
         "id": "538178062602483073",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "es",
         "id": "6291099060619088371",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "es-419",
         "id": "3249170492103400191",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "fr",
         "id": "6053574930456302165",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "de",
         "id": "253007717341293260",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pt",
         "id": "3281832279225761326",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pt-BR",
         "id": "8929946374100381402",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ru",
         "id": "8751507648303673848",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "it",
         "id": "1471532184931679941",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "id",
         "id": "7702420917357144001",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "vi",
         "id": "8791972639916297003",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "th",
         "id": "2006734767320263070",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pl",
         "id": "1008382500205235233",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "hi",
         "id": "9016992318016575502",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ar",
         "id": "7861921616625741963",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       }
     ],
-    "sha256": "6532ad9258c07d7e5fdfa2e0bd5994a29c560907c60d42ceac8cc2fab466186d",
-    "size": 258933,
+    "sha256": "500f1626e722f23d92bc25eba460125b56ec92c9ffd374881f3c04834f4f8384",
+    "size": 258953,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.all.kagane.png"
   },
   {
@@ -10314,20 +10314,20 @@
   {
     "name": "Tachiyomi: KomikNesia",
     "pkg": "eu.kanade.tachiyomi.extension.id.komiknesia",
-    "apk": "tachiyomi-id.komiknesia-v1.4.1.apk",
+    "apk": "tachiyomi-id.komiknesia-v1.4.2.apk",
     "lang": "id",
-    "code": 1,
-    "version": "1.4.1",
+    "code": 2,
+    "version": "1.4.2",
     "nsfw": 1,
     "sources": [
       {
         "name": "KomikNesia",
         "lang": "id",
         "id": "8916278596443930510",
-        "baseUrl": "https://v1.komiknesiaku.com"
+        "baseUrl": "https://02.komiknesia.asia"
       }
     ],
-    "sha256": "37305763d779a38842d43373ff7c2e8867180d610a1d904a54565d51c3c626b5",
+    "sha256": "0b60c1dc992434a0ca0bb75a35324307f6f30354d24b829d552d42471ffede28",
     "size": 211387,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.komiknesia.png"
   },
@@ -11280,21 +11280,21 @@
   {
     "name": "Tachiyomi: LoppyToon",
     "pkg": "eu.kanade.tachiyomi.extension.vi.loppytoon",
-    "apk": "tachiyomi-vi.loppytoon-v1.4.5.apk",
+    "apk": "tachiyomi-vi.loppytoon-v1.4.6.apk",
     "lang": "vi",
-    "code": 5,
-    "version": "1.4.5",
+    "code": 6,
+    "version": "1.4.6",
     "nsfw": 0,
     "sources": [
       {
         "name": "LoppyToon",
         "lang": "vi",
         "id": "6580420139533147522",
-        "baseUrl": "https://loppytoon.com"
+        "baseUrl": "https://loppytoonn.com"
       }
     ],
-    "sha256": "ea25995244f9aacc6b3be354676df39937e5deda38e34aa48b5da919140a734c",
-    "size": 227285,
+    "sha256": "1c6142f099ed225e1c291acfed670d477d6cec583bd85fee2e76298127eee3f3",
+    "size": 227837,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.loppytoon.png"
   },
   {
@@ -21574,20 +21574,20 @@
   {
     "name": "Tachiyomi: Roseveil",
     "pkg": "eu.kanade.tachiyomi.extension.id.roseveil",
-    "apk": "tachiyomi-id.roseveil-v1.4.47.apk",
+    "apk": "tachiyomi-id.roseveil-v1.4.48.apk",
     "lang": "id",
-    "code": 47,
-    "version": "1.4.47",
+    "code": 48,
+    "version": "1.4.48",
     "nsfw": 0,
     "sources": [
       {
         "name": "Roseveil",
         "lang": "id",
         "id": "5328028029485519937",
-        "baseUrl": "https://roseveil.org"
+        "baseUrl": "https://roseveil.my.id"
       }
     ],
-    "sha256": "51311d84416fe3daa4ad97fab79bafa0c9e26b1fce3f2131943b90b1cc76cbbc",
+    "sha256": "1afbe92d49797cc851f2e244e4f99ff178989223dfc7ff00d006d6da1948cc8c",
     "size": 204793,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.roseveil.png"
   },
@@ -22978,21 +22978,21 @@
   {
     "name": "Tachiyomi: SummerToon",
     "pkg": "eu.kanade.tachiyomi.extension.tr.summertoon",
-    "apk": "tachiyomi-tr.summertoon-v1.4.54.apk",
+    "apk": "tachiyomi-tr.summertoon-v1.4.55.apk",
     "lang": "tr",
-    "code": 54,
-    "version": "1.4.54",
+    "code": 55,
+    "version": "1.4.55",
     "nsfw": 0,
     "sources": [
       {
         "name": "SummerToon",
         "lang": "tr",
         "id": "1346985078461508977",
-        "baseUrl": "https://summertoons.net"
+        "baseUrl": "https://summertoons.org"
       }
     ],
-    "sha256": "29c38e29342c7b4d7b5d819056722d494271a34c8c96e54f3b4aaa32a01b86b9",
-    "size": 255120,
+    "sha256": "fb0feba8e8e7c3673d3ee5d5b5c6044b02837de1920db8ff14fa1e1f788a7edc",
+    "size": 245605,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.tr.summertoon.png"
   },
   {
@@ -25246,21 +25246,21 @@
   {
     "name": "Tachiyomi: WebtoonScan",
     "pkg": "eu.kanade.tachiyomi.extension.en.webtoonscan",
-    "apk": "tachiyomi-en.webtoonscan-v1.4.52.apk",
+    "apk": "tachiyomi-en.webtoonscan-v1.4.53.apk",
     "lang": "en",
-    "code": 52,
-    "version": "1.4.52",
+    "code": 53,
+    "version": "1.4.53",
     "nsfw": 0,
     "sources": [
       {
         "name": "WebtoonScan",
         "lang": "en",
         "id": "3062846066388633553",
-        "baseUrl": "https://webtoonscan.com"
+        "baseUrl": "https://webtoonscan.org"
       }
     ],
-    "sha256": "316032876e3d70c7e0866ac92c4051c4ebf82c0cc7f198ee60aef3fd340a9793",
-    "size": 214908,
+    "sha256": "45f0da6d99c9744d2e10b97456144e1f9355f2e7d5b8caabbe085889efc76abb",
+    "size": 215200,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.en.webtoonscan.png"
   },
   {
@@ -25388,20 +25388,20 @@
   {
     "name": "Tachiyomi: West Manga",
     "pkg": "eu.kanade.tachiyomi.extension.id.westmanga",
-    "apk": "tachiyomi-id.westmanga-v1.4.43.apk",
+    "apk": "tachiyomi-id.westmanga-v1.4.44.apk",
     "lang": "id",
-    "code": 43,
-    "version": "1.4.43",
+    "code": 44,
+    "version": "1.4.44",
     "nsfw": 0,
     "sources": [
       {
         "name": "West Manga",
         "lang": "id",
         "id": "8883916630998758688",
-        "baseUrl": "https://v1.westmanga.cc"
+        "baseUrl": "https://v1.westmanga.my"
       }
     ],
-    "sha256": "23f0ecbd788e7fc8feee8d0f13514dffde1da59e7b7deacd12604b1928b87e85",
+    "sha256": "55c85401ec7e99b88aa373151c7118ce88995a3570875f879621bc4b9831acbc",
     "size": 233579,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.westmanga.png"
   },

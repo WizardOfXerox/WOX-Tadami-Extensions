@@ -4,11 +4,12 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import keiyoushi.utils.bodyString
-import keiyoushi.utils.decodeHexToString
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 
 class MVidooExtractor(private val client: OkHttpClient) {
+    private fun String.decodeHexToString(): String =
+        chunked(2).map { it.toInt(16).toByte() }.toByteArray().toString(Charsets.UTF_8)
     suspend fun videosFromUrl(url: String, prefix: String = ""): List<Video> {
         val body = client.newCall(GET(url)).awaitSuccess().bodyString()
 
