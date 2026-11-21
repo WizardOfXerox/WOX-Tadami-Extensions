@@ -943,46 +943,352 @@ def clean_selector(sel_str):
     sels = extract_all_selectors(sel_str)
     return sels[0] if sels else ""
 
+ANIME_MULTISRC_MAP = {
+    "animestream": {
+        "path": "/anime/?page=1&order=popular",
+        "selector": "bsx, article, uta",
+        "search": {"path": "/page/1/?s={q}", "selector": "bsx, article, listupd"},
+        "filter": {"path": "/anime/?page=1&status=ongoing&order=popular", "selector": "bsx, article, listupd"},
+        "has_filters": True,
+    },
+    "dooplay": {
+        "path": "/movies/",
+        "selector": "item, poster, data",
+        "search": {"path": "/page/1/?s={q}", "selector": "result-item, item, search-page"},
+        "filter": {"path": "/genre/action/", "selector": "item, poster, items"},
+        "has_filters": True,
+    },
+    "zorotheme": {
+        "path": "/most-popular?page=1",
+        "selector": "flw-item, film-poster",
+        "search": {"path": "/search?keyword={q}&page=1", "selector": "flw-item, film-poster"},
+        "filter": {"path": "/filter?type=2&page=1", "selector": "flw-item, film-poster"},
+        "has_filters": True,
+    },
+    "animekaitheme": {
+        "path": "/browser?sort=most_watched&page=1",
+        "selector": "aitem, item, poster",
+        "search": {"path": "/browser?keyword={q}&page=1", "selector": "aitem, item, poster"},
+        "filter": {"path": "/browser?type[]=tv&sort=most_watched&page=1", "selector": "aitem, item, poster"},
+        "has_filters": True,
+    },
+    "anikototheme": {
+        "path": "/filter?sort=most_watched&page=1",
+        "selector": "item, poster, inner",
+        "search": {"path": "/filter?keyword={q}&page=1", "selector": "item, poster, inner"},
+        "filter": {"path": "/filter?sort=most_watched&page=1", "selector": "item, poster, inner"},
+        "has_filters": True,
+    },
+    "dopeflix": {
+        "path": "/movie?page=1",
+        "selector": "flw-item, film-poster",
+        "search": {"path": "/search/{q_dash}?page=1", "selector": "flw-item, film-poster"},
+        "filter": {"path": "/filter?page=1&type=movie", "selector": "flw-item, film-poster"},
+        "has_filters": True,
+    },
+    "yflixtheme": {
+        "path": "/browser?sort=views&page=1",
+        "selector": "item, film-section",
+        "search": {"path": "/browser?keyword={q}&page=1", "selector": "item, film-section"},
+        "filter": {"path": "/browser?sort=trending&page=1", "selector": "item, film-section"},
+        "has_filters": True,
+    },
+    "wcotheme": {
+        "path": "/",
+        "selector": "img, item, recent-release",
+        "search": {"method": "POST", "path": "/search", "data": {"catara": "{q}", "konuara": "series"}, "selector": "cerceve, iccerceve, item"},
+        "filter": {"path": "/search-by-genre", "selector": "ddmcc, genre, item"},
+        "has_filters": True,
+    },
+    "datalifeengine": {
+        "path": "/",
+        "selector": "shortstory, mov, item",
+        "search": {"method": "POST", "path": "/index.php?do=search", "data": {"do": "search", "subaction": "search", "story": "{q}"}, "selector": "shortstory, mov, item"},
+        "has_filters": True,
+    },
+    "pelisplus": {
+        "path": "/peliculas",
+        "selector": "item, poster",
+        "search": {"path": "/search?s={q}", "selector": "item, poster"},
+        "has_filters": True,
+    },
+    "anilist": {
+        "path": "/",
+        "selector": "anime, title",
+        "has_filters": True,
+    },
+}
+
+def _resolve_kt_placeholders(raw, api_url="", is_search=False):
+    raw = raw.replace('$baseApiUrl', api_url).replace('${baseApiUrl}', api_url)
+    raw = raw.replace('$apiUrl', api_url).replace('${apiUrl}', api_url)
+    raw = raw.replace('$searchUrl', api_url).replace('${searchUrl}', api_url)
+    raw = raw.replace('$baseUrl', '').replace('${baseUrl}', '')
+    if is_search:
+        raw = re.sub(r'\$\{(?:query|encodedQuery|searchQuery)[^}]*\}', '{q}', raw)
+        raw = re.sub(r'\$(?:query|encodedQuery|searchQuery)\b', '{q}', raw)
+    raw = raw.replace('$page', '1').replace('${page}', '1').replace('$offset', '0').replace('${offset}', '0')
+    if not is_search:
+        raw = re.sub(r'\$\{[^}]+\}', '0', raw)
+    return raw
+
+def _count_kotlin_filters(code):
+    cls_matches = re.findall(r'\b(?:class|object)\s+\w+[^:\n]*:\s*(?:Anime)?Filter\.(?!Header|Separator)', code)
+    direct_matches = re.findall(r'\b(?:Anime)?Filter\.(?:Select|CheckBox|TriState|Text|Sort|Group)\s*(?:\(|<)', code)
+    if cls_matches:
+        return len(cls_matches)
+    return len(direct_matches)
+
+def _extract_kt_http_builder(body, api_url=""):
+    m = re.search(r'(?:"([^"]*)"|(baseUrl|apiUrl|baseApiUrl|searchUrl))\.toHttpUrl(?:OrNull)?\(\)\.newBuilder\(\)', body)
+    if not m:
+        return None
+    base_part = _resolve_kt_placeholders(m.group(1) if m.group(1) is not None else f"${m.group(2)}", api_url, is_search=True)
+    tail = body[m.end():m.end() + 900]
+    cut_m = re.search(r'\.build\(\)|\bfilters\.forEach|\bfilterList\b', tail)
+    if cut_m:
+        tail = tail[:cut_m.start()]
+    segs = []
+    qparams = []
+    for call_m in re.finditer(r'\.(addPathSegment|addEncodedPathSegments|addQueryParameter)\(\s*([^)]+)\)', tail):
+        kind_c, args_s = call_m.group(1), call_m.group(2).strip()
+        if kind_c in ("addPathSegment", "addEncodedPathSegments"):
+            lit = re.match(r'^"([^"]*)"$', args_s)
+            if lit:
+                segs.append(lit.group(1).strip('/'))
+            elif re.search(r'\b(?:query|encodedQuery|searchQuery)\b', args_s):
+                segs.append('{q}')
+        else:
+            parts = [p.strip() for p in args_s.split(',', 1)]
+            if len(parts) == 2 and parts[0].startswith('"') and parts[0].endswith('"'):
+                k = parts[0][1:-1]
+                v = parts[1]
+                lit_v = re.match(r'^"([^"]*)"$', v)
+                if lit_v:
+                    qparams.append(f"{k}={urllib.parse.quote_plus(lit_v.group(1))}")
+                elif re.search(r'\b(?:query|encodedQuery|searchQuery)\b', v):
+                    qparams.append(f"{k}={{q}}")
+                elif re.search(r'\bpage\b', v):
+                    qparams.append(f"{k}=1")
+    clean_base = base_part.rstrip('/')
+    path_str = "/".join([s for s in segs if s])
+    if clean_base.startswith(("http://", "https://")):
+        url = f"{clean_base}/{path_str}" if path_str else clean_base
+    else:
+        b = "/" + clean_base.lstrip('/') if clean_base else ""
+        url = f"{b}/{path_str}".replace('//', '/') if path_str else (b or "/")
+    if qparams:
+        sep = "&" if "?" in url else "?"
+        url = f"{url}{sep}{'&'.join(qparams)}"
+    if '{q}' not in url and url in ("", "/"):
+        return None
+    return {"method": "GET", "path": url}
+
+def _extract_search_spec_from_body(body, api_url=""):
+    # 1. POST FormBody.Builder(...)
+    form_candidates = []
+    for m in re.finditer(r'POST\(\s*"([^"]+)"[\s\S]{0,650}?FormBody\.Builder\(\)([\s\S]{0,450}?)\.build\(\)', body):
+        raw_url = _resolve_kt_placeholders(m.group(1), api_url, is_search=True)
+        if '$' in raw_url or ' ' in raw_url:
+            continue
+        data = {}
+        uses_q = False
+        for am in re.finditer(r'\.add\(\s*"([^"]+)"\s*,\s*([^)]+)\)', m.group(2)):
+            k, v = am.group(1), am.group(2).strip()
+            if re.search(r'\b(?:query|encodedQuery|searchQuery)\b', v):
+                data[k] = "{q}"
+                uses_q = True
+            elif (lit := re.match(r'^"([^"]*)"$', v)):
+                data[k] = lit.group(1)
+            elif re.search(r'\bpage\b', v):
+                data[k] = "1"
+        if data:
+            form_candidates.append((uses_q, {"method": "POST", "path": raw_url or "/", "data": data}))
+    for uses_q, spec in form_candidates:
+        if uses_q:
+            return spec
+    if len(form_candidates) == 1 and "if (query" not in body and "if(query" not in body:
+        return form_candidates[0][1]
+
+    # 2. Direct GET("...") string literal
+    get_literals = re.findall(r'GET\(\s*"([^"]+)"', body)
+    prioritized = [g for g in get_literals if any(k in g for k in ('query', 'encodedQuery', 'searchQuery'))]
+    for raw_g in prioritized + [g for g in get_literals if g not in prioritized]:
+        resolved = _resolve_kt_placeholders(raw_g, api_url, is_search=True)
+        if '$' not in resolved and ' ' not in resolved and ('{q}' in resolved or len(resolved) > 1):
+            return {"method": "GET", "path": resolved}
+
+    # 3. OkHttp toHttpUrl().newBuilder() chain
+    return _extract_kt_http_builder(body, api_url)
+
+def _extract_kotlin_rules(code, is_anime=True, sibling_filter_code=""):
+    """Extract catalog, search API, and filter metadata from an Aniyomi/Tachiyomi Kotlin source."""
+    kind = "Anime" if is_anime else "Manga"
+    api_m = re.search(r'val\s+(?:baseApiUrl|apiUrl|searchUrl)\s*=\s*"([^"]+)"', code)
+    api_url = api_m.group(1) if api_m else ""
+
+    # Popular / Catalog rule
+    path = ""
+    p_m = re.search(rf'popular{kind}Request[^\n=]*=\s*GET\("(?:\$baseUrl)?([^"]*)"', code)
+    if not p_m:
+        p_m = re.search(rf'popular{kind}Request[^\n\{{]*\{{[^\}}]*GET\("(?:\$baseUrl)?([^"]*)"', code)
+    if p_m:
+        raw_p = _resolve_kt_placeholders(p_m.group(1), api_url, is_search=False)
+        path = "" if ('$' in raw_p or ' ' in raw_p) else raw_p
+
+    sel = ""
+    s_m = re.search(rf'popular{kind}Parse[^\n\{{]*\{{[^\}}]*select\("([^"]+)"\)', code)
+    if not s_m:
+        s_m = re.search(rf'popular{kind}Selector\(\)[^=]*=\s*"([^"]+)"', code)
+    if s_m:
+        sel = s_m.group(1).strip()
+
+    # Search selector
+    search_sel = ""
+    ss_m = re.search(rf'search{kind}Selector\(\)[^=]*=\s*"([^"]+)"', code)
+    if not ss_m:
+        ss_m = re.search(rf'search{kind}Parse[^\n\{{]*\{{[^\}}]*select(?:First)?\("([^"]+)"\)', code)
+    if ss_m:
+        search_sel = ss_m.group(1).strip()
+    eff_search_sel = search_sel or sel
+
+    # Search request spec & capability
+    search_supported = True
+    search_spec = None
+    override_m = re.search(rf'override\s+fun\s+search{kind}Request[\s\S]{{0,2500}}?(?=\n\s*(?:override|private|protected(?:\s+open)?)\s+(?:suspend\s+)?fun\s|\Z)', code)
+    priv_m = re.search(rf'(?:private|protected(?:\s+open)?)\s+fun\s+search{kind}Request[\s\S]{{0,2500}}?(?=\n\s*(?:override|private|protected(?:\s+open)?)\s+(?:suspend\s+)?fun\s|\Z)', code)
+    get_m = re.search(rf'override\s+(?:suspend\s+)?fun\s+(?:get|fetch)Search{kind}[\s\S]{{0,2500}}?(?=\n\s*(?:override|private|protected(?:\s+open)?)\s+(?:suspend\s+)?fun\s|\Z)', code)
+
+    if override_m and "UnsupportedOperationException" in override_m.group(0) and not priv_m and not get_m:
+        search_supported = False
+    else:
+        for cand_m in (priv_m, override_m, get_m):
+            if cand_m:
+                spec = _extract_search_spec_from_body(cand_m.group(0), api_url)
+                if spec:
+                    if eff_search_sel:
+                        spec["selector"] = eff_search_sel
+                    search_spec = spec
+                    break
+
+    # Filter detection & unambiguous static-slug filter route
+    combined_filters = code + "\n" + sibling_filter_code
+    trivial_filters = bool(re.search(rf'fun\s+getFilterList\([^)]*\)[^=]*=\s*(?:emptyList|(?:Anime)?FilterList)\(\s*\)', code))
+    has_filters = (not trivial_filters and "getFilterList" in code) or bool(sibling_filter_code.strip())
+    filter_count = _count_kotlin_filters(combined_filters)
+    if has_filters and filter_count == 0:
+        filter_count = 1
+
+    filter_spec = None
+    search_body_for_filter = (priv_m or override_m).group(0) if (priv_m or override_m) else ""
+    if search_body_for_filter and re.search(r'GET\(\s*"\$baseUrl/\$\{[^}]*toUriPart\(\)[^}]*\}"', search_body_for_filter):
+        for pair_m in re.finditer(r'Pair\(\s*"[^"]+"\s*,\s*"([^"]+)"\s*\)', combined_filters):
+            slug = pair_m.group(1).strip()
+            if slug and re.match(r'^[a-zA-Z0-9_/\-?=&]+$', slug):
+                filter_spec = {"path": f"/{slug.lstrip('/')}", "selector": eff_search_sel}
+                break
+
+    return {
+        "path": path,
+        "selector": sel,
+        "search": search_spec,
+        "search_supported": search_supported,
+        "filter": filter_spec,
+        "has_filters": has_filters,
+        "filter_count": filter_count,
+    }
+
+def _collect_multisrc_filter_counts(multisrc_root):
+    counts = {}
+    if not multisrc_root.exists():
+        return counts
+    for theme_dir in multisrc_root.iterdir():
+        if theme_dir.is_dir():
+            txt = ""
+            for kt in theme_dir.rglob("*.kt"):
+                try:
+                    txt += "\n" + kt.read_text(encoding="utf-8", errors="ignore")
+                except Exception:
+                    pass
+            counts[theme_dir.name.lower()] = _count_kotlin_filters(txt)
+    return counts
+
 def extract_anime_rules():
     rules = {}
+    theme_filter_counts = _collect_multisrc_filter_counts(ANIME_DIR / "lib-multisrc")
     sources_dirs = [ANIME_DIR / "src", ROOT_DIR / "src" / "anime"]
     for sdir in sources_dirs:
         if not sdir.exists():
             continue
         for root, dirs, files in os.walk(sdir):
             dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
-            for f in files:
-                if f.endswith(".kt") and not f.endswith("Filters.kt") and not f.endswith("Dto.kt"):
-                    fpath = os.path.join(root, f)
+            bg_file = "build.gradle" if "build.gradle" in files else ("build.gradle.kts" if "build.gradle.kts" in files else None)
+            theme = ""
+            if bg_file:
+                try:
+                    bg_txt = open(os.path.join(root, bg_file), "r", encoding="utf-8", errors="ignore").read()
+                    tm = re.search(r"themePkg\s*=\s*['\"]([^'\"]+)['\"]", bg_txt)
+                    if not tm:
+                        tm = re.search(r'theme\s*=\s*"([^"]+)"', bg_txt)
+                    if tm:
+                        theme = tm.group(1).lower()
+                except Exception:
+                    pass
+
+            sibling_filter_code = ""
+            main_kts = []
+            for r_sub, _, r_files in os.walk(root):
+                for rf in r_files:
+                    if not rf.endswith(".kt"):
+                        continue
+                    fp_kt = os.path.join(r_sub, rf)
                     try:
-                        with open(fpath, "r", encoding="utf-8", errors="ignore") as fp:
-                            code = fp.read()
+                        kt_txt = open(fp_kt, "r", encoding="utf-8", errors="ignore").read()
                     except Exception:
                         continue
-                    pkg_m = re.search(r'package\s+([a-zA-Z0-9_\.]+)', code)
-                    if not pkg_m:
-                        continue
-                    pkg = pkg_m.group(1)
-                    path = ""
-                    p_m = re.search(r'popularAnimeRequest[^\n=]*=\s*GET\("(?:\$baseUrl)?([^"]*)"', code)
-                    if not p_m:
-                        p_m = re.search(r'popularAnimeRequest[^\n\{]*\{[^\}]*GET\("(?:\$baseUrl)?([^"]*)"', code)
-                    if p_m:
-                        raw_p = p_m.group(1)
-                        api_m = re.search(r'val\s+(?:baseApiUrl|apiUrl)\s*=\s*"([^"]+)"', code)
-                        if api_m:
-                            raw_p = raw_p.replace('$baseApiUrl', api_m.group(1)).replace('${baseApiUrl}', api_m.group(1))
-                            raw_p = raw_p.replace('$apiUrl', api_m.group(1)).replace('${apiUrl}', api_m.group(1))
-                        raw_p = raw_p.replace('$page', '1').replace('${page}', '1').replace('$offset', '0').replace('${offset}', '0')
-                        raw_p = re.sub(r'\$\{[^}]+\}', '0', raw_p)
-                        path = "" if ('$' in raw_p or ' ' in raw_p) else raw_p
-                    sel = ""
-                    s_m = re.search(r'popularAnimeParse[^\n\{]*\{[^\}]*select\("([^"]+)"\)', code)
-                    if not s_m:
-                        s_m = re.search(r'popularAnimeSelector\(\)[^=]*=\s*"([^"]+)"', code)
-                    if s_m:
-                        sel = s_m.group(1).strip()
-                    rules[pkg] = {"path": path, "selector": sel}
+                    if rf.endswith("Filters.kt"):
+                        sibling_filter_code += "\n" + kt_txt
+                    elif not rf.endswith(("Dto.kt", "Constants.kt", "UrlActivity.kt")):
+                        main_kts.append(kt_txt)
+
+            # Collect filter code across subdirs when walking individual packages
+            if not bg_file:
+                continue
+            for code in main_kts:
+                pkg_m = re.search(r'package\s+([a-zA-Z0-9_\.]+)', code)
+                if not pkg_m:
+                    continue
+                pkg = pkg_m.group(1)
+                parsed = _extract_kotlin_rules(code, is_anime=True, sibling_filter_code=sibling_filter_code)
+                if theme and theme in ANIME_MULTISRC_MAP:
+                    base_rule = dict(ANIME_MULTISRC_MAP[theme])
+                    if "search" in base_rule:
+                        base_rule["search"] = dict(base_rule["search"])
+                    if "filter" in base_rule:
+                        base_rule["filter"] = dict(base_rule["filter"])
+                    al_m = re.search(r'override\s+val\s+animeListUrl\s*=\s*"([^"]+)"', code)
+                    if al_m and theme == "animestream":
+                        al_path = "/" + al_m.group(1).strip().strip("/").replace("$baseUrl/", "").lstrip("/")
+                        if base_rule.get("path"):
+                            base_rule["path"] = base_rule["path"].replace("/anime", al_path, 1)
+                        if base_rule.get("filter"):
+                            base_rule["filter"]["path"] = base_rule["filter"]["path"].replace("/anime", al_path, 1)
+                    merged = {
+                        "theme": theme,
+                        "path": parsed["path"] or base_rule.get("path", ""),
+                        "selector": parsed["selector"] or base_rule.get("selector", ""),
+                        "search": parsed["search"] or base_rule.get("search"),
+                        "search_supported": parsed["search_supported"],
+                        "filter": parsed["filter"] or base_rule.get("filter"),
+                        "has_filters": parsed["has_filters"] or base_rule.get("has_filters", False),
+                        "filter_count": max(parsed["filter_count"], theme_filter_counts.get(theme, 0)),
+                    }
+                    if merged["has_filters"] and merged["filter_count"] == 0:
+                        merged["filter_count"] = 1
+                    rules[pkg] = merged
+                else:
+                    parsed["theme"] = theme
+                    rules[pkg] = parsed
     return rules
 
 MULTISRC_MAP = {
@@ -990,47 +1296,165 @@ MULTISRC_MAP = {
     "bilibilicomics": {"path": "/tw/v1/comic", "selector": "comic"},
     "clipstudioreader": {"path": "/", "selector": "item"},
     "colorlibanime": {"path": "/", "selector": "set-bg"},
-    "comiciviewer": {"path": "/ranking/manga", "selector": "series-list-item, item"},
+    "comiciviewer": {
+        "path": "/ranking/manga",
+        "selector": "series-list-item, item",
+        "search": {"path": "/api/search?q={q}&page=1&size=20", "selector": "series, title, result"},
+        "has_filters": True,
+    },
     "eromuse": {"path": "/all-comics/", "selector": "img, comic"},
     "ezmanhwa": {"path": "/series?page=1&perPage=20&sort=popular", "selector": "series"},
     "fansubscat": {"path": "/manga/popular/1", "selector": "manga"},
-    "fmreader": {"path": "/manga-list.html?sort=views", "selector": "thumb, media, thumb-item-flow"},
-    "foolslide": {"path": "/directory/", "selector": "group, title"},
+    "fmreader": {
+        "path": "/manga-list.html?sort=views",
+        "selector": "thumb, media, thumb-item-flow",
+        "search": {"path": "/manga-list.html?name={q}&page=1", "selector": "thumb, media, thumb-item-flow"},
+        "filter": {"path": "/manga-list.html?m_status=1&sort=views&page=1", "selector": "thumb, media, thumb-item-flow"},
+        "has_filters": True,
+    },
+    "foolslide": {
+        "path": "/directory/",
+        "selector": "group, title",
+        "search": {"method": "POST", "path": "/search/", "data": {"search": "{q}"}, "selector": "group, title, element"},
+    },
     "fuzzydoodle": {"path": "/manga?page=1", "selector": "card-real, manga"},
     "galleryadults": {"path": "/random/", "selector": "thumb"},
     "gattsu": {"path": "/", "selector": "lista, meio"},
-    "gigaviewer": {"path": "/series", "selector": "series-list"},
+    "gigaviewer": {
+        "path": "/series",
+        "selector": "series-list",
+        "search": {"path": "/search?q={q}", "selector": "series, search, item"},
+        "has_filters": True,
+    },
     "goda": {"path": "/hots/page/1", "selector": "cardlist, container"},
     "greenshit": {"path": "/obras", "selector": "obra"},
-    "grouple": {"path": "/list?sortType=rate", "selector": "tile"},
-    "guya": {"path": "/api/get_all_series/", "selector": "series"},
-    "heancms": {"path": "/comics", "selector": "comic"},
-    "hentaihand": {"path": "/api/comics", "selector": "comic"},
+    "grouple": {
+        "path": "/list?sortType=rate",
+        "selector": "tile",
+        "search": {"path": "/search/advancedResults?offset=0&q={q}", "selector": "tile, tiles"},
+        "filter": {"path": "/search/advancedResults?offset=0&sortType=RATE", "selector": "tile, tiles"},
+        "has_filters": True,
+    },
+    "guya": {
+        "path": "/api/get_all_series/",
+        "selector": "series",
+        "search": {"path": "/api/get_all_series/", "selector": "slug, title"},
+    },
+    "heancms": {
+        "path": "/comics",
+        "selector": "comic",
+        "search": {"path": "/api/query?query_string={q}&page=1&perPage=20", "selector": "data, series, title"},
+        "has_filters": True,
+    },
+    "hentaihand": {
+        "path": "/api/comics",
+        "selector": "comic",
+        "search": {"path": "/api/comics?q={q}&page=1", "selector": "data, title"},
+        "has_filters": True,
+    },
     "hiper": {"path": "/page/1", "selector": "item"},
-    "iken": {"path": "/manga", "selector": "manga"},
+    "iken": {
+        "path": "/manga",
+        "selector": "manga",
+        "search": {"path": "/api/query?searchTerm={q}&page=1&perPage=18", "selector": "posts, title, slug"},
+        "filter": {"path": "/api/query?orderBy=totalViews&page=1&perPage=18", "selector": "posts, title, slug"},
+        "has_filters": True,
+    },
     "initmanga": {"path": "/", "selector": "manga-item-grid"},
     "kemono": {"path": "/api/v1/creators", "selector": "creator"},
-    "keyoapp": {"path": "/series/", "selector": "grid, group"},
-    "libgroup": {"path": "/api/manga", "selector": "manga"},
+    "keyoapp": {
+        "path": "/series/",
+        "selector": "grid, group",
+        "search": {"path": "/series/?q={q}", "selector": "grid, group"},
+        "filter": {"path": "/series/?order=popular", "selector": "grid, group"},
+        "has_filters": True,
+    },
+    "libgroup": {
+        "path": "/api/manga",
+        "selector": "manga",
+        "search": {"path": "/api/manga?q={q}", "selector": "data, name"},
+        "has_filters": True,
+    },
     "liliana": {"path": "/all-manga/1/?sort=last_update", "selector": "grid"},
-    "madara": {"path": "/manga/page/1/?m_orderby=views", "selector": "page-item-detail, manga__item, post-title"},
-    "madtheme": {"path": "/", "selector": "book-detailed-item"},
-    "manga18": {"path": "/list-manga/1?order_by=views", "selector": "story_item"},
-    "mangabox": {"path": "/manga-list", "selector": "truyen-list, list-truyen-item-wrap, item"},
-    "mangacatalog": {"path": "/", "selector": "flex-col, bg-bg-secondary"},
-    "mangadventure": {"path": "/series?page=1&sort=-views", "selector": "series"},
+    "madara": {
+        "path": "/manga/page/1/?m_orderby=views",
+        "selector": "page-item-detail, manga__item, post-title",
+        "search": {"path": "/?s={q}&post_type=wp-manga", "selector": "c-tabs-item__content, post-title, tab-thumb, page-item-detail"},
+        "filter": {"path": "/?s=&post_type=wp-manga&m_orderby=views&status[]=on-going", "selector": "c-tabs-item__content, post-title, page-item-detail"},
+        "has_filters": True,
+    },
+    "madtheme": {
+        "path": "/",
+        "selector": "book-detailed-item",
+        "search": {"path": "/search?q={q}&page=1", "selector": "book-detailed-item, item"},
+        "has_filters": True,
+    },
+    "manga18": {
+        "path": "/list-manga/1?order_by=views",
+        "selector": "story_item",
+        "search": {"path": "/list-manga/1?search={q}", "selector": "story_item, item"},
+        "has_filters": True,
+    },
+    "mangabox": {
+        "path": "/manga-list",
+        "selector": "truyen-list, list-truyen-item-wrap, item",
+        "search": {"path": "/search/story/{q_under}?page=1", "selector": "story_item, panel-search-story, list-truyen-item-wrap, item"},
+        "filter": {"path": "/manga-list?type=topview&page=1", "selector": "list-truyen-item-wrap, truyen-list, item"},
+        "has_filters": True,
+    },
+    "mangacatalog": {"path": "/", "selector": "flex-col, bg-bg-secondary", "search_supported": False},
+    "mangadventure": {
+        "path": "/series?page=1&sort=-views",
+        "selector": "series",
+        "search": {"path": "/api/v2/series?title={q}", "selector": "results, title"},
+        "has_filters": True,
+    },
     "mangahub": {"path": "/manga", "selector": "media, manga"},
-    "mangareader": {"path": "/filter?sort=views", "selector": "manga-poster, item"},
+    "mangareader": {
+        "path": "/filter?sort=views",
+        "selector": "manga-poster, item",
+        "search": {"path": "/search?keyword={q}&page=1", "selector": "manga-poster, item"},
+        "filter": {"path": "/filter?sort=views&page=1", "selector": "manga-poster, item"},
+        "has_filters": True,
+    },
     "mangataro": {"path": "/manga", "selector": "capitalize, manga"},
-    "mangathemesia": {"path": "/manga/?order=popular", "selector": "bsx, uta, imgu"},
+    "mangathemesia": {
+        "path": "/manga/?order=popular",
+        "selector": "bsx, uta, imgu",
+        "search": {"path": "/manga/?title={q}&page=1", "selector": "bsx, uta, listupd"},
+        "filter": {"path": "/manga/?status=ongoing&order=popular&page=1", "selector": "bsx, uta, listupd"},
+        "has_filters": True,
+    },
     "mangawork": {"path": "/", "selector": "series"},
-    "mangaworld": {"path": "/archive?sort=most_read&page=1", "selector": "comics-grid, entry"},
+    "mangaworld": {
+        "path": "/archive?sort=most_read&page=1",
+        "selector": "comics-grid, entry",
+        "search": {"path": "/archive?keyword={q}&page=1", "selector": "comics-grid, entry"},
+        "filter": {"path": "/archive?sort=most_read&page=1", "selector": "comics-grid, entry"},
+        "has_filters": True,
+    },
     "mangotheme": {"path": "/obras", "selector": "obra"},
-    "manhwaz": {"path": "/?page=1", "selector": "item, slide-top"},
-    "masonry": {"path": "/updates/sort/newest/mpage/1/", "selector": "list-gallery"},
+    "manhwaz": {
+        "path": "/?page=1",
+        "selector": "item, slide-top",
+        "search": {"path": "/search?s={q}&page=1", "selector": "item, slide-top, page-item-detail"},
+        "has_filters": True,
+    },
+    "masonry": {
+        "path": "/updates/sort/newest/mpage/1/",
+        "selector": "list-gallery",
+        "search": {"path": "/search/post/{q}/mpage/1/", "selector": "list-gallery, thumb"},
+        "has_filters": True,
+    },
     "mccms": {"path": "/category/order/hits/page/1", "selector": "comic, img"},
     "mmlook": {"path": "/", "selector": "likedata"},
-    "mmrcms": {"path": "/filterList?sortBy=views&asc=false", "selector": "manga-item, media-body"},
+    "mmrcms": {
+        "path": "/filterList?sortBy=views&asc=false",
+        "selector": "manga-item, media-body",
+        "search": {"path": "/search?query={q}", "selector": "suggestions, value, manga-item"},
+        "filter": {"path": "/filterList?page=1&sortBy=views&asc=false", "selector": "manga-item, media-body"},
+        "has_filters": True,
+    },
     "monochrome": {"path": "/manga", "selector": "manga"},
     "moonlighttl": {"path": "/api/topSerie", "selector": "serie"},
     "multichan": {"path": "/mostfavorites", "selector": "content_row"},
@@ -1039,34 +1463,62 @@ MULTISRC_MAP = {
     "oceanwp": {"path": "/", "selector": "blog-entry"},
     "pam": {"path": "/manga", "selector": "manga"},
     "paprikateam": {"path": "/projets", "selector": "project"},
-    "pizzareader": {"path": "/comics", "selector": "comic"},
+    "pizzareader": {
+        "path": "/comics",
+        "selector": "comic",
+        "search": {"path": "/api/v1/search/{q}", "selector": "comics, title, slug"},
+    },
     "scanreader": {"path": "/bibliotheque/page/1/?sort=views", "selector": "manga-card"},
     "senkuro": {"path": "/", "selector": "manga"},
     "sinmh": {"path": "/list/click/?page=1", "selector": "comic"},
     "spicytheme": {"path": "/", "selector": "comic"},
     "stalkercms": {"path": "/manga", "selector": "manga"},
-    "uzaymanga": {"path": "/", "selector": "manga"},
+    "uzaymanga": {
+        "path": "/",
+        "selector": "manga",
+        "search": {"path": "/manga/__data.json?page=1&x-sveltekit-invalidated=001&search={q}", "selector": "nodes, data"},
+        "has_filters": True,
+    },
     "vercomics": {"path": "/page/1", "selector": "entry"},
-    "wpcomics": {"path": "/?status=all&sort=views", "selector": "items, item"},
-    "wpmangastream": {"path": "/manga/?order=popular", "selector": "bsx"},
-    "zeistmanga": {"path": "/search/label/Manga", "selector": "grid, figure, post"},
-    "zmanga": {"path": "/advanced-search/?order=popular", "selector": "flexbox2-item"}
+    "wpcomics": {
+        "path": "/?status=all&sort=views",
+        "selector": "items, item",
+        "search": {"path": "/tim-truyen?keyword={q}&page=1", "selector": "items, item"},
+        "filter": {"path": "/tim-truyen?status=1&sort=views&page=1", "selector": "items, item"},
+        "has_filters": True,
+    },
+    "wpmangastream": {
+        "path": "/manga/?order=popular",
+        "selector": "bsx",
+        "search": {"path": "/manga/?title={q}&page=1", "selector": "bsx, uta, listupd"},
+        "filter": {"path": "/manga/?status=ongoing&order=popular&page=1", "selector": "bsx, uta, listupd"},
+        "has_filters": True,
+    },
+    "zeistmanga": {
+        "path": "/search/label/Manga",
+        "selector": "grid, figure, post",
+        "search": {"path": "/feeds/posts/default?alt=json&max-results=21&start-index=1&q={q}", "selector": "feed, entry"},
+        "filter": {"path": "/feeds/posts/default/-/Manga?alt=json&max-results=21&start-index=1", "selector": "feed, entry"},
+        "has_filters": True,
+    },
+    "zmanga": {
+        "path": "/advanced-search/?order=popular",
+        "selector": "flexbox2-item",
+        "search": {"path": "/?s={q}", "selector": "flexbox2-item, item"},
+        "filter": {"path": "/advanced-search/?order=popular&status=Ongoing", "selector": "flexbox2-item, item"},
+        "has_filters": True,
+    },
 }
 
-def extract_manga_rules():
+def extract_manga_rules(only_pkgs=None):
     rules = {}
     manga_src = MANGA_DIR / "src"
     if not manga_src.exists():
         return rules
+    theme_filter_counts = _collect_multisrc_filter_counts(MANGA_DIR / "lib-multisrc") if only_pkgs is None else {}
     for root, dirs, files in os.walk(manga_src):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
         if "build.gradle.kts" in files:
-            fpath = os.path.join(root, "build.gradle.kts")
-            try:
-                with open(fpath, "r", encoding="utf-8", errors="ignore") as fp:
-                    txt = fp.read()
-            except Exception:
-                continue
             rel = os.path.relpath(root, manga_src).replace('\\', '/')
             parts = rel.split('/')
             if len(parts) >= 2:
@@ -1074,32 +1526,294 @@ def extract_manga_rules():
                 pkg = f"eu.kanade.tachiyomi.extension.{lang}.{slug}"
             else:
                 continue
+            if only_pkgs is not None and pkg.lower() not in only_pkgs:
+                dirs[:] = []
+                continue
+            fpath = os.path.join(root, "build.gradle.kts")
+            try:
+                with open(fpath, "r", encoding="utf-8", errors="ignore") as fp:
+                    txt = fp.read()
+            except Exception:
+                continue
             theme_m = re.search(r'theme\s*=\s*"([^"]+)"', txt)
             if not theme_m:
                 theme_m = re.search(r'id\("multisrc\.([^"]+)"\)', txt)
             theme = theme_m.group(1).lower() if theme_m else ""
+            if theme and only_pkgs is not None and theme not in theme_filter_counts:
+                tdir = MANGA_DIR / "lib-multisrc" / theme
+                if tdir.is_dir():
+                    ttxt = "\n".join(kt.read_text(encoding="utf-8", errors="ignore") for kt in tdir.rglob("*.kt"))
+                    theme_filter_counts[theme] = _count_kotlin_filters(ttxt)
             theme_info = MULTISRC_MAP.get(theme, {})
-            path = theme_info.get("path", "")
+
+            sibling_filter_code = ""
+            main_kts = []
             for r_sub, _, r_files in os.walk(root):
                 for rf in r_files:
-                    if rf.endswith(".kt"):
-                        try:
-                            kt_txt = open(os.path.join(r_sub, rf), "r", encoding="utf-8", errors="ignore").read()
-                        except Exception:
-                            continue
-                        m_dir = re.search(r'override\s+val\s+(?:mangaSubString|mangaUrlDirectory)\s*=\s*"([^"]+)"', kt_txt)
-                        if m_dir and "/manga" in path:
-                            path = path.replace("/manga", "/" + m_dir.group(1).lstrip("/"), 1)
-                            break
-                else:
-                    continue
-                break
-            rules[pkg] = {
-                "theme": theme,
-                "path": path,
-                "selector": theme_info.get("selector", "")
-            }
+                    if not rf.endswith(".kt"):
+                        continue
+                    try:
+                        kt_txt = open(os.path.join(r_sub, rf), "r", encoding="utf-8", errors="ignore").read()
+                    except Exception:
+                        continue
+                    if rf.endswith("Filters.kt"):
+                        sibling_filter_code += "\n" + kt_txt
+                    elif not rf.endswith(("Dto.kt", "Constants.kt", "UrlActivity.kt")):
+                        main_kts.append(kt_txt)
+
+            combined_kt = "\n".join(main_kts)
+            if theme:
+                path = theme_info.get("path", "")
+                search_spec = dict(theme_info["search"]) if theme_info.get("search") else None
+                filter_spec = dict(theme_info["filter"]) if theme_info.get("filter") else None
+                search_supported = theme_info.get("search_supported", True)
+
+                m_dir = re.search(r'override\s+val\s+(?:mangaSubString|mangaUrlDirectory)\s*=\s*"([^"]+)"', combined_kt)
+                if m_dir:
+                    sub = "/" + m_dir.group(1).lstrip("/")
+                    if "/manga" in path:
+                        path = path.replace("/manga", sub, 1)
+                    if search_spec and "/manga" in search_spec.get("path", ""):
+                        search_spec["path"] = search_spec["path"].replace("/manga", sub, 1)
+                    if filter_spec and "/manga" in filter_spec.get("path", ""):
+                        filter_spec["path"] = filter_spec["path"].replace("/manga", sub, 1)
+
+                m_sp = re.search(r'override\s+val\s+(?:searchPath|searchPathSegment)\s*=\s*"([^"]+)"', combined_kt)
+                if m_sp and search_spec and "/search" in search_spec.get("path", ""):
+                    search_spec["path"] = search_spec["path"].replace("/search", "/" + m_sp.group(1).lstrip("/"), 1)
+
+                m_api = re.search(r'(?:override\s+)?val\s+apiUrl\s*=\s*"(https?://[^"]+)"', combined_kt)
+                if m_api and search_spec and search_spec.get("path", "").startswith("/api/"):
+                    search_spec["path"] = m_api.group(1).rstrip("/") + "/" + search_spec["path"][5:].lstrip("/")
+
+                local_f_cnt = _count_kotlin_filters(combined_kt + "\n" + sibling_filter_code)
+                f_cnt = max(local_f_cnt, theme_filter_counts.get(theme, 0))
+                has_filters = bool(theme_info.get("has_filters") or "getFilterList" in combined_kt or sibling_filter_code.strip())
+                if has_filters and f_cnt == 0:
+                    f_cnt = 1
+
+                rules[pkg] = {
+                    "theme": theme,
+                    "path": path,
+                    "selector": theme_info.get("selector", ""),
+                    "search": search_spec,
+                    "search_supported": search_supported,
+                    "filter": filter_spec,
+                    "has_filters": has_filters,
+                    "filter_count": f_cnt,
+                }
+            else:
+                parsed = _extract_kotlin_rules(combined_kt, is_anime=False, sibling_filter_code=sibling_filter_code) if combined_kt else {}
+                rules[pkg] = {
+                    "theme": "",
+                    "path": "",
+                    "selector": "",
+                    "search": parsed.get("search"),
+                    "search_supported": parsed.get("search_supported", True),
+                    "filter": parsed.get("filter"),
+                    "has_filters": parsed.get("has_filters", False),
+                    "filter_count": parsed.get("filter_count", 0),
+                }
     return rules
+
+NOVEL_TEMPLATE_MAP = {
+    "madara": {
+        "search": {"path": "/?s={q}&post_type=wp-manga", "selector": "c-tabs-item__content, post-title, page-item-detail, tab-thumb"},
+        "filter": {"path": "/?s=&post_type=wp-manga&m_orderby=views", "selector": "c-tabs-item__content, post-title, page-item-detail"},
+        "has_filters": True,
+    },
+    "lightnovelwp": {
+        "search": {"path": "/page/1/?s={q}", "selector": "article, ts-post-image, entry-title, bsx"},
+        "filter": {"path": "/series/?status=ongoing&order=popular", "selector": "article, ts-post-image, entry-title, bsx"},
+        "has_filters": True,
+    },
+    "fictioneer": {
+        "search": {"path": "/?s={q}&post_type=fcn_story", "selector": "card, fcn, story, post"},
+        "has_filters": True,
+    },
+    "mtlnovel": {
+        "search": {"path": "/wp-admin/admin-ajax.php?action=autosuggest&q={q}", "selector": "items, results, name"},
+        "has_filters": True,
+    },
+    "ifreedom": {
+        "search": {"path": "/vse-knigi/?searchname={q}&bpage=1", "selector": "item, book, title"},
+        "has_filters": True,
+    },
+    "readnovelfull": {
+        "search": {"path": "/search?keyword={q}", "selector": "list, row, novel-title, item"},
+        "has_filters": True,
+    },
+    "lightnovelworld": {
+        "search": {"path": "/search", "selector": "search, novel, item"},
+        "has_filters": True,
+    },
+    "readwn": {
+        "search": {"method": "POST", "path": "/e/search/index.php", "data": {"show": "title", "tempid": "1", "tbname": "news", "keyboard": "{q}"}, "selector": "novel-item, item"},
+        "has_filters": True,
+    },
+}
+
+def _extract_balanced_block(text, open_idx, open_ch="{", close_ch="}"):
+    depth = 0
+    in_q = None
+    esc = False
+    for idx in range(open_idx, min(len(text), open_idx + 25000)):
+        ch = text[idx]
+        if in_q:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == in_q:
+                in_q = None
+            continue
+        if ch in ('"', "'", "`"):
+            in_q = ch
+        elif ch == open_ch:
+            depth += 1
+        elif ch == close_ch:
+            depth -= 1
+            if depth == 0:
+                return text[open_idx:idx + 1]
+    return ""
+
+def _parse_js_concat_url(expr, q_var, p_var):
+    """Evaluate minified ES5 this.site + / .concat(...) search URL expressions."""
+    tokens = []
+    i = 0
+    n = len(expr)
+    while i < n:
+        ch = expr[i]
+        if ch in ('"', "'"):
+            qch = ch
+            i += 1
+            buf = []
+            while i < n:
+                c = expr[i]
+                if c == "\\" and i + 1 < n:
+                    buf.append(expr[i + 1])
+                    i += 2
+                elif c == qch:
+                    i += 1
+                    break
+                else:
+                    buf.append(c)
+                    i += 1
+            tokens.append(("str", "".join(buf)))
+        elif expr.startswith("this.site", i) or expr.startswith("this.baseUrl", i):
+            tokens.append(("str", ""))
+            i += 9 if expr.startswith("this.site", i) else 12
+        elif expr.startswith(".concat(", i):
+            i += 8
+        elif expr.startswith("encodeURIComponent(", i) or expr.startswith("encodeURI(", i):
+            prefix_len = 19 if expr.startswith("encodeURIComponent(", i) else 10
+            close = expr.find(")", i + prefix_len)
+            if close == -1:
+                return None
+            inner = expr[i + prefix_len:close].strip()
+            if q_var and re.match(rf'^{re.escape(q_var)}(?:\.trim\(\))?$', inner):
+                tokens.append(("str", "{q}"))
+            else:
+                return None
+            i = close + 1
+        elif ch in " \t\r\n+(),":
+            i += 1
+        else:
+            m_id = re.match(r'[a-zA-Z_$][a-zA-Z0-9_$.]*', expr[i:])
+            if m_id:
+                ident = m_id.group(0)
+                if q_var and ident == q_var:
+                    tokens.append(("str", "{q}"))
+                elif p_var and ident == p_var:
+                    tokens.append(("str", "1"))
+                elif ident in ("this.options.searchPath", "this.searchUrl"):
+                    return None
+                else:
+                    return None
+                i += len(ident)
+            elif expr[i].isdigit():
+                m_num = re.match(r'\d+', expr[i:])
+                tokens.append(("str", m_num.group(0)))
+                i += len(m_num.group(0))
+            else:
+                return None
+    out = "".join(v for _, v in tokens)
+    return out if ('{q}' in out or out.startswith(("http://", "https://", "/"))) else None
+
+def _extract_novel_search_and_filters(txt, fallback_sel):
+    m_cnt = re.search(r'this\.filters\s*=\s*\{', txt)
+    has_filters = False
+    filter_count = 0
+    if m_cnt:
+        blk = _extract_balanced_block(txt, m_cnt.end() - 1)
+        if blk and blk != "{}":
+            has_filters = True
+            filter_count = max(len(re.findall(r'type:\s*[a-zA-Z0-9_$.]*FilterTypes', blk)), 1)
+
+    search_spec = None
+    m_src = re.search(r'searchNovels\s*(?:=\s*(?:async\s+)?)?(?:function\s*)?\(([^)]*)\)\s*\{', txt)
+    if m_src:
+        s_idx = m_src.start()
+        m_end = re.search(r'\.prototype\.\w+|\basync\s+(?:popularNovels|parseNovel|parseChapter)\b|\b(?:popularNovels|parseNovel|parseChapter)\s*[=:(]', txt[s_idx + 20:])
+        scope = txt[s_idx:s_idx + 20 + m_end.start()] if m_end else txt[s_idx:s_idx + 2000]
+
+        outer_params = [p.strip() for p in m_src.group(1).split(',') if p.strip()]
+        inner_m = re.search(r'\breturn\s+\w+\(this,arguments,void 0,\(function\(([^)]*)\)', scope)
+        params = [p.strip() for p in inner_m.group(1).split(',') if p.strip()] if inner_m and inner_m.group(1).strip() else outer_params
+        q_var = params[0] if len(params) >= 1 else None
+        p_var = params[1] if len(params) >= 2 else None
+
+        src_sels = re.findall(r'\(\s*["\']([^"\']+)["\']\s*\)\.each', scope)
+        eff_sel = ", ".join(dict.fromkeys(src_sels)) if src_sels else fallback_sel
+
+        # Case 1: FormData POST (e.g., dilartube)
+        if "FormData" in scope and 'method:"POST"' in scope.replace(" ", ""):
+            m_post = re.search(r'fetchApi\)\(\s*([^,]+),\s*\{\s*method:\s*["\']POST["\']', scope)
+            data = {}
+            for am in re.finditer(r'\.append\(\s*["\']([^"\']+)["\']\s*,\s*([^)]+)\)', scope):
+                k, v = am.group(1), am.group(2).strip()
+                if q_var and v == q_var:
+                    data[k] = "{q}"
+                elif (lit := re.match(r'^["\'](.*)["\']$', v)):
+                    data[k] = lit.group(1)
+            if m_post and data:
+                raw_url = m_post.group(1).strip()
+                url_val = raw_url[1:-1] if len(raw_url) >= 2 and raw_url[0] in ('"', "'") else _parse_js_concat_url(raw_url, q_var, p_var)
+                if url_val:
+                    search_spec = {"method": "POST", "path": url_val, "data": data, "selector": eff_sel}
+
+        # Case 2: Standard GET URL concat / + chain referencing this.site or https://
+        if not search_spec:
+            for u_m in re.finditer(r'(?:""\.concat\(\s*this\.site\b|this\.site\s*\+|["\']https?://[^"\']+["\']\.(?:concat)|\bthis\.site\b\s*\+)', scope):
+                start = u_m.start()
+                # Scan until top-level delimiter (, ; ) ])
+                depth = 0
+                in_q = None
+                esc = False
+                end = start
+                while end < len(scope):
+                    c = scope[end]
+                    if in_q:
+                        if esc: esc = False
+                        elif c == "\\": esc = True
+                        elif c == in_q: in_q = None
+                    else:
+                        if c in ('"', "'"): in_q = c
+                        elif c in "([": depth += 1
+                        elif c in ")]":
+                            if depth == 0:
+                                break
+                            depth -= 1
+                        elif depth == 0 and c in ",;":
+                            break
+                    end += 1
+                expr = scope[start:end].strip()
+                parsed_url = _parse_js_concat_url(expr, q_var, p_var)
+                if parsed_url and '{q}' in parsed_url:
+                    search_spec = {"method": "GET", "path": parsed_url, "selector": eff_sel}
+                    break
+
+    return search_spec, has_filters, filter_count
 
 def extract_novel_rules():
     rules = {}
@@ -1118,15 +1832,20 @@ def extract_novel_rules():
                     continue
                 id_m = re.search(r'this\.id\s*=\s*"([^"]+)"', txt)
                 nid = id_m.group(1).lower() if id_m else f.split('[')[0].lower()
+                tpl_m = re.search(r'\[([^\]]+)\]', f)
+                tpl = tpl_m.group(1).lower() if tpl_m else ""
                 path = ""
                 sel = ""
-                if 'MadaraPlugin' in txt or '[madara]' in f.lower():
+                if 'MadaraPlugin' in txt or tpl == 'madara':
+                    tpl = "madara"
                     path = "/page/1/?s=&post_type=wp-manga"
                     sel = "post-title, page-item-detail, c-tabs-item"
-                elif '[lightnovelwp]' in f.lower() or 'kolnovel' in nid:
+                elif tpl == 'lightnovelwp' or 'kolnovel' in nid:
+                    tpl = "lightnovelwp"
                     path = "/series/"
                     sel = "article, ts-post-image, eplister, series, entry-title"
                 elif 'syosetu' in nid:
+                    tpl = "syosetu"
                     path = "/rank/list/type/total_total/"
                     sel = "c-card, p-ranklist-item__title, searchkekka_box"
                 else:
@@ -1144,7 +1863,31 @@ def extract_novel_rules():
                     sels = re.findall(r'\(\s*["\']([^"\']+)["\']\s*\)\.each', pop_scope)
                     if sels:
                         sel = ", ".join(dict.fromkeys(sels))
-                rules[nid] = {"path": path, "selector": sel or "novel, article, post, title, card"}
+
+                eff_sel = sel or "novel, article, post, title, card"
+                src_spec, has_filters, filter_count = _extract_novel_search_and_filters(txt, eff_sel)
+                flt_spec = None
+                if tpl in NOVEL_TEMPLATE_MAP:
+                    tinfo = NOVEL_TEMPLATE_MAP[tpl]
+                    if not src_spec and tinfo.get("search"):
+                        src_spec = dict(tinfo["search"])
+                    if tinfo.get("filter"):
+                        flt_spec = dict(tinfo["filter"])
+                    has_filters = has_filters or tinfo.get("has_filters", False)
+                if tpl == "syosetu" and not src_spec:
+                    src_spec = {"method": "GET", "path": "/search/search/?word={q}", "selector": "searchkekka_box, novel_h"}
+                    has_filters = True
+
+                rules[nid] = {
+                    "theme": tpl,
+                    "path": path,
+                    "selector": eff_sel,
+                    "search": src_spec,
+                    "search_supported": ("searchNovels" in txt or bool(src_spec)),
+                    "filter": flt_spec,
+                    "has_filters": has_filters,
+                    "filter_count": max(filter_count, 1) if has_filters else 0,
+                }
     return rules
 
 MIRROR_OVERRIDES = {
@@ -1212,7 +1955,230 @@ SELECTOR_OVERRIDES = {
     "debrid": ["stream", "torrentio", "item"],
 }
 
-def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
+BLOCKED_STATUSES = {
+    "CLOUDFLARE_PROTECTED",
+    "WAF_BLOCKED",
+    "DEAD_DOMAIN",
+    "DEAD_PARKED_DOMAIN",
+    "ORIGIN_DOWN",
+    "NO_BASE_URL",
+}
+
+EMPTY_SEARCH_PHRASES = (
+    "no results",
+    "nothing found",
+    "no matches",
+    "0 results",
+    "aucun résultat",
+    "ningún resultado",
+    "tidak ditemukan",
+    "không tìm thấy",
+    "sonuç bulunamadı",
+    "見つかりません",
+    "没有找到",
+    "没有搜索到",
+    "ничего не найдено",
+    "未找到",
+    "查无",
+)
+
+def _decode_http_body(raw, enc):
+    enc_l = (enc or '').lower()
+    if raw.startswith(b'\x1f\x8b') or enc_l == 'gzip':
+        try:
+            raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
+        except Exception:
+            try:
+                raw = gzip.decompress(raw)
+            except Exception:
+                pass
+    elif enc_l == 'deflate':
+        try:
+            raw = zlib.decompressobj(-zlib.MAX_WBITS).decompress(raw)
+        except Exception:
+            try:
+                raw = zlib.decompress(raw)
+            except Exception:
+                pass
+    return raw.decode('utf-8', errors='ignore')
+
+def _build_probe_url(base_clean, path, query="", is_search=False):
+    p = path or ""
+    if is_search:
+        q_enc = urllib.parse.quote_plus(query)
+        q_dash = urllib.parse.quote(query.replace(" ", "-"))
+        q_under = urllib.parse.quote(query.replace(" ", "_"))
+        p = p.replace("{q}", q_enc).replace("{q_dash}", q_dash).replace("{q_under}", q_under)
+    url = p if p.startswith(("http://", "https://")) else (f"{base_clean}/{p.lstrip('/')}" if p else base_clean)
+    return urllib.parse.quote(url, safe=":/?&=%[]+!$()*,;@#~-._")
+
+def _count_json_items(obj):
+    if isinstance(obj, list):
+        return len(obj)
+    if isinstance(obj, dict):
+        for key in ("data", "results", "items", "comics", "novels", "suggestions", "posts", "series", "anime", "manga"):
+            val = obj.get(key)
+            if isinstance(val, list):
+                return len(val)
+            if isinstance(val, dict):
+                for sub_key in ("items", "results", "data", "novels", "manga", "series", "posts"):
+                    if isinstance(val.get(sub_key), list):
+                        return len(val[sub_key])
+        feed = obj.get("feed")
+        if isinstance(feed, dict) and isinstance(feed.get("entry"), list):
+            return len(feed["entry"])
+    return None
+
+def _probe_endpoint(target_url, base_clean, req_headers, timeout, selectors, method="GET", post_data=None, is_sub_probe=False):
+    """Fetch a catalog, search, or filter endpoint and classify HTTP, anti-bot, JSON, and DOM health."""
+    def fetch(url, hdrs=None, use_method="GET", data_dict=None):
+        h = dict(hdrs or req_headers)
+        body_bytes = None
+        if use_method == "POST":
+            body_bytes = urllib.parse.urlencode(data_dict or {}).encode("utf-8")
+            h["Content-Type"] = "application/x-www-form-urlencoded"
+        req = urllib.request.Request(url, data=body_bytes, headers=h, method=use_method)
+        try:
+            with urllib.request.urlopen(req, timeout=timeout, context=CTX_UNVERIFIED) as resp:
+                raw_body = _decode_http_body(resp.read(262144), resp.info().get('Content-Encoding'))
+                return resp.getcode(), dict(resp.info()), raw_body, resp.geturl()
+        except urllib.error.HTTPError as he:
+            try:
+                raw = he.read(262144)
+            except Exception:
+                raw = b''
+            hdrs_out = dict(he.headers or {})
+            return he.code, hdrs_out, _decode_http_body(raw, hdrs_out.get('Content-Encoding')), url
+
+    try:
+        code, headers, body, final_url = fetch(target_url, req_headers, method, post_data)
+        if method == "GET" and code == 200 and not body.strip():
+            # Some non-English sites return an empty 200 body if Accept-Language is forced to en-US.
+            # App OkHttp requests do not send Accept-Language by default; retry once without it.
+            no_lang_headers = {k: v for k, v in req_headers.items() if k != "Accept-Language"}
+            code, headers, body, final_url = fetch(target_url, no_lang_headers, "GET", None)
+
+        lower_headers = {k.lower(): v for k, v in headers.items()}
+        server = lower_headers.get('server', '')
+        behind_cf = 'cloudflare' in server.lower() or 'cf-ray' in lower_headers
+
+        if behind_cf and 520 <= code <= 530:
+            return {"status": "ORIGIN_DOWN", "code": code, "detail": f"Cloudflare reports origin unreachable (HTTP {code})", "url": target_url}
+
+        if code == 202 and 'x-amzn-waf-action' in lower_headers:
+            return {"status": "CLOUDFLARE_PROTECTED", "code": code, "detail": "AWS WAF JS challenge (HTTP 202)", "url": target_url}
+
+        if 300 <= code < 400:
+            return {"status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} redirect loop/unfollowed", "url": target_url}
+
+        is_cf_challenge = code in (403, 429, 503) and (
+            lower_headers.get('cf-mitigated', '').lower() == 'challenge'
+            or any(p.search(body) for p in CLOUDFLARE_PATTERNS)
+            or 'ddos-guard' in server.lower()
+        )
+        if not is_cf_challenge and behind_cf and code in (403, 429):
+            return {"status": "WAF_BLOCKED", "code": code, "detail": f"Cloudflare firewall rule returned HTTP {code} without an interactive challenge", "url": target_url}
+
+        if "tiktok.com" in final_url.lower():
+            return {"status": "DEAD_PARKED_DOMAIN", "code": code, "detail": f"Domain hijacked to {final_url}", "url": target_url}
+
+        if is_cf_challenge:
+            return {"status": "CLOUDFLARE_PROTECTED", "code": code, "detail": f"Cloudflare Shield active ({server or 'Turnstile'})", "url": target_url}
+
+        if len(body) < 30000:
+            if (any(p.search(body) for p in PARKED_PATTERNS) or
+                ("/lander" in body.lower() and len(body) < 1000) or
+                ("window.location" in body.lower() and len(body) < 500) or
+                ("domain" in body.lower() and "sale" in body.lower() and len(body) < 2000 and not any(k in body.lower() for k in ['chapter', 'manga', 'anime', 'novel']))):
+                return {"status": "DEAD_PARKED_DOMAIN", "code": code, "detail": "Domain expired/parked by registrar", "url": target_url}
+
+        if not is_sub_probe and code in (404, 400) and target_url != base_clean:
+            recovered = False
+            for fallback_route in ['', '/manga', '/series', '/comics', '/catalog', '/cataleg', '/mangas', '/seriler/', '/ranobe', '/danh-sach/', '/archive', '/all', '/browse', '/novels']:
+                try:
+                    fb_code, fb_headers, fb_body, fb_url = fetch(f"{base_clean}{fallback_route}")
+                    if fb_code == 200 and len(fb_body) > 2000:
+                        code, headers, body, final_url = fb_code, fb_headers, fb_body, fb_url
+                        lower_headers = {k.lower(): v for k, v in headers.items()}
+                        recovered = True
+                        break
+                    elif fb_code in (403, 429, 503) and (any(p.search(fb_body) for p in CLOUDFLARE_PATTERNS) or {k.lower(): v for k, v in fb_headers.items()}.get('cf-mitigated', '').lower() == 'challenge'):
+                        return {"status": "CLOUDFLARE_PROTECTED", "code": fb_code, "detail": "Fallback route live behind Cloudflare", "url": target_url}
+                except Exception:
+                    pass
+            if not recovered:
+                return {"status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} Not Found (catalog route and fallback paths exhausted)", "url": target_url}
+
+        if code >= 400:
+            return {"status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code}", "url": target_url}
+
+        stripped = body.strip()
+        ctype = lower_headers.get("content-type", "").lower()
+
+        if is_sub_probe:
+            if stripped.startswith(('{', '[')) or "json" in ctype:
+                try:
+                    parsed = json.loads(stripped)
+                except Exception:
+                    return {"status": "API_ERROR", "code": code, "detail": "Invalid JSON payload", "url": target_url}
+                count = _count_json_items(parsed)
+                if isinstance(parsed, dict) and (parsed.get("error") or parsed.get("errors")) and count is None:
+                    return {"status": "API_ERROR", "code": code, "detail": "JSON payload reported error", "url": target_url}
+                cnt_msg = f" ({count} items)" if count is not None else ""
+                return {"status": "OK_JSON", "code": code, "detail": f"HTTP {code} JSON OK{cnt_msg}", "url": target_url}
+
+            matched_sel = [s for s in selectors if s.lower() in body.lower()]
+            if matched_sel:
+                return {"status": "OK_HTML", "code": code, "detail": f"HTTP {code} OK ('{matched_sel[0]}')", "url": target_url}
+
+            is_spa = any(s in body for s in ['__NEXT_DATA__', 'id="__next"', 'id="app"', 'window.__INITIAL_STATE__', 'id="root"'])
+            if is_spa:
+                return {"status": "OK_SPA", "code": code, "detail": f"HTTP {code} SPA Webapp shell", "url": target_url}
+
+            title_m = re.search(r'<title[^>]*>(.*?)</title>', body, re.I | re.S)
+            title_txt = title_m.group(1).lower() if title_m else ""
+            is_404_title = ("404" in title_txt) or ("not found" in title_txt)
+            body_l = body.lower()
+            if len(body) > 1500 and not is_404_title and any(p in body_l for p in EMPTY_SEARCH_PHRASES):
+                return {"status": "OK_EMPTY", "code": code, "detail": f"HTTP {code} Valid Search Page (0 matches for query)", "url": target_url}
+
+            has_structure = bool(re.search(r'<img[^>]+src=', body, re.I) and re.search(r'<a[^>]+href=', body, re.I))
+            if has_structure and len(body) > 4000 and not is_404_title:
+                return {"status": "OK_HTML", "code": code, "detail": f"HTTP {code} OK (DOM results layout)", "url": target_url}
+
+            return {"status": "SELECTOR_DRIFT", "code": code, "detail": f"HTTP {code} live, but search/filter selectors {selectors[:2]} not matched", "url": target_url}
+
+        # Catalog verification mode (default)
+        if stripped.startswith(('{', '[')) or "api" in target_url.lower():
+            return {"status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} API Verified (JSON payload)", "url": target_url}
+
+        matched_sel = [s for s in selectors if s.lower() in body.lower()]
+        if matched_sel:
+            return {"status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Scraper OK ('{matched_sel[0]}')", "url": target_url}
+
+        is_spa = any(s in body for s in ['__NEXT_DATA__', 'id="__next"', 'id="app"', 'window.__INITIAL_STATE__', 'id="root"'])
+        if is_spa:
+            return {"status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Verified (SPA Webapp shell)", "url": target_url}
+
+        has_structure = bool(re.search(r'<img[^>]+src=', body, re.I) and re.search(r'<a[^>]+href=', body, re.I))
+        if has_structure or any(k in body.lower() for k in ['series', 'manga', 'anime', 'chapter', 'episode', '<article', 'post-title', 'thumb', 'novel', 'comic']):
+            return {"status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Catalog Verified (DOM layout)", "url": target_url}
+
+        return {"status": "SELECTOR_DRIFT", "code": code, "detail": f"HTTP {code} live, but selectors {selectors[:2]} not in DOM", "url": target_url}
+
+    except urllib.error.HTTPError as e:
+        if e.code in (403, 503) and ('cloudflare' in (e.headers.get('Server', '')).lower() or e.headers.get('CF-RAY')):
+            return {"status": "CLOUDFLARE_PROTECTED", "code": e.code, "detail": f"Cloudflare Shield active (HTTP {e.code})", "url": target_url}
+        return {"status": "HTTP_ERROR", "code": e.code, "detail": f"HTTP {e.code}: {e.reason}", "url": target_url}
+    except Exception as e:
+        err_msg = str(e)
+        if any(k in err_msg.lower() for k in ['timeout', 'timed out']):
+            return {"status": "HTTP_ERROR", "code": 504, "detail": "Gateway Timeout (WAF Slowdown)", "url": target_url}
+        if any(k in err_msg.lower() for k in ['connection refused', 'getaddrinfo failed', 'name or service not known']):
+            return {"status": "DEAD_DOMAIN", "code": 0, "detail": err_msg, "url": target_url}
+        return {"status": "HTTP_ERROR", "code": 0, "detail": err_msg, "url": target_url}
+
+def probe_extension_scraper(item, ext_type, rules_map, timeout=8, test_search=False, test_filters=False, query="love"):
     name = item.get("name", "")
     pkg = item.get("pkg", item.get("id", ""))
     base_url = ""
@@ -1223,7 +2189,12 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
     else:
         base_url = item.get("site", "")
     if not base_url:
-        return {"name": name, "pkg": pkg, "type": ext_type, "status": "NO_BASE_URL", "code": 0, "detail": "Missing baseUrl"}
+        res = {"name": name, "pkg": pkg, "type": ext_type, "status": "NO_BASE_URL", "code": 0, "detail": "Missing baseUrl"}
+        if test_search:
+            res["search"] = {"status": "SKIPPED_BLOCKED", "code": 0, "url": "", "detail": "Skipped (NO_BASE_URL on catalog)"}
+        if test_filters:
+            res["filters"] = {"status": "SKIPPED_BLOCKED", "code": 0, "url": "", "filter_count": 0, "detail": "Skipped (NO_BASE_URL on catalog)"}
+        return res
 
     # 1. Apply Mirror Overrides (Domain Migrations)
     for old_dom, mirror_url in MIRROR_OVERRIDES.items():
@@ -1248,11 +2219,7 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
             selector = ", ".join(override_sels)
             break
 
-    if path.startswith(("http://", "https://")):
-        target_url = path
-    else:
-        target_url = f"{base_clean}/{path.lstrip('/')}" if path else base_clean
-
+    target_url = _build_probe_url(base_clean, path)
     req_headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -1260,152 +2227,61 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8):
         "Accept-Language": "en-US,en;q=0.9",
         "Referer": f"{base_clean}/"
     }
+    selectors = extract_all_selectors(selector)
+    if not selectors:
+        selectors = ["item", "card", "thumb", "manga", "anime", "series", "post", "title", "entry", "box", "article", "tile", "obra"]
 
-    def _decode(raw, enc):
-        enc_l = (enc or '').lower()
-        if raw.startswith(b'\x1f\x8b') or enc_l == 'gzip':
-            try:
-                raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
-            except Exception:
-                try:
-                    raw = gzip.decompress(raw)
-                except Exception:
-                    pass
-        elif enc_l == 'deflate':
-            try:
-                raw = zlib.decompressobj(-zlib.MAX_WBITS).decompress(raw)
-            except Exception:
-                try:
-                    raw = zlib.decompress(raw)
-                except Exception:
-                    pass
-        return raw.decode('utf-8', errors='ignore')
+    cat_probe = _probe_endpoint(target_url, base_clean, req_headers, timeout, selectors, is_sub_probe=False)
+    res = {
+        "name": name,
+        "pkg": pkg,
+        "type": ext_type,
+        "status": cat_probe["status"],
+        "code": cat_probe["code"],
+        "detail": cat_probe["detail"],
+        "base_url": base_url,
+    }
+    if not (test_search or test_filters):
+        return res
 
-    def fetch(url, hdrs=None):
-        # Plain HTTP client (no TLS/browser fingerprint impersonation): mirrors what the
-        # extension's OkHttp client sees, so results reflect real in-app behaviour.
-        # Non-2xx responses are returned (not raised) so their bodies can be classified.
-        req = urllib.request.Request(url, headers=hdrs or req_headers)
-        try:
-            with urllib.request.urlopen(req, timeout=timeout, context=CTX_UNVERIFIED) as resp:
-                body = _decode(resp.read(262144), resp.info().get('Content-Encoding'))
-                return resp.getcode(), dict(resp.info()), body, resp.geturl()
-        except urllib.error.HTTPError as he:
-            try:
-                raw = he.read(262144)
-            except Exception:
-                raw = b''
-            hdrs_out = dict(he.headers or {})
-            return he.code, hdrs_out, _decode(raw, hdrs_out.get('Content-Encoding')), url
+    res["theme"] = rule.get("theme", "")
+    is_blocked = res["status"] in BLOCKED_STATUSES
 
-    try:
-        code, headers, body, final_url = fetch(target_url)
-        if code == 200 and not body.strip():
-            # Some non-English sites return an empty 200 body if Accept-Language is forced to en-US.
-            # App OkHttp requests do not send Accept-Language by default; retry once without it.
-            no_lang_headers = {k: v for k, v in req_headers.items() if k != "Accept-Language"}
-            code, headers, body, final_url = fetch(target_url, no_lang_headers)
-        lower_headers = {k.lower(): v for k, v in headers.items()}
-        server = lower_headers.get('server', '')
-        behind_cf = 'cloudflare' in server.lower() or 'cf-ray' in lower_headers
+    if test_search:
+        if is_blocked:
+            res["search"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "detail": f"Skipped ({res['status']} on catalog)"}
+        elif rule.get("search_supported") is False:
+            res["search"] = {"status": "SEARCH_UNSUPPORTED", "code": 0, "url": "", "detail": "Extension does not implement search"}
+        elif rule.get("search"):
+            sspec = rule["search"]
+            s_url = _build_probe_url(base_clean, sspec.get("path", ""), query=query, is_search=True)
+            s_method = sspec.get("method", "GET")
+            s_data = None
+            if s_method == "POST" and sspec.get("data"):
+                s_data = {k: (query if v == "{q}" else v) for k, v in sspec["data"].items()}
+            s_sels = extract_all_selectors(sspec.get("selector", "") or selector) or selectors
+            res["search"] = _probe_endpoint(s_url, base_clean, req_headers, timeout, s_sels, method=s_method, post_data=s_data, is_sub_probe=True)
+        else:
+            res["search"] = {"status": "NO_SEARCH_RULE", "code": 0, "url": "", "detail": "Dynamic/unextracted search request"}
 
-        # Cloudflare origin errors (520-530): the site behind Cloudflare is down, not "protected".
-        if behind_cf and 520 <= code <= 530:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "ORIGIN_DOWN", "code": code, "detail": f"Cloudflare reports origin unreachable (HTTP {code})", "base_url": base_url}
+    if test_filters:
+        f_count = rule.get("filter_count", 0)
+        has_filters = bool(rule.get("has_filters") or rule.get("filter") or f_count > 0)
+        if is_blocked:
+            res["filters"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "filter_count": f_count, "detail": f"Skipped ({res['status']} on catalog)"}
+        elif rule.get("filter"):
+            fspec = rule["filter"]
+            f_url = _build_probe_url(base_clean, fspec.get("path", ""))
+            f_sels = extract_all_selectors(fspec.get("selector", "") or selector) or selectors
+            f_res = _probe_endpoint(f_url, base_clean, req_headers, timeout, f_sels, method=fspec.get("method", "GET"), post_data=fspec.get("data"), is_sub_probe=True)
+            f_res["filter_count"] = f_count
+            res["filters"] = f_res
+        elif has_filters:
+            res["filters"] = {"status": "STATIC_ONLY", "code": 0, "url": "", "filter_count": f_count, "detail": f"Filters declared ({f_count}) — dynamic query builder"}
+        else:
+            res["filters"] = {"status": "NO_FILTERS", "code": 0, "url": "", "filter_count": 0, "detail": "No getFilterList / filters defined"}
 
-        # AWS WAF JS challenge (e.g., firecross.jp returning HTTP 202 with x-amzn-waf-action)
-        if code == 202 and 'x-amzn-waf-action' in lower_headers:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": code, "detail": "AWS WAF JS challenge (HTTP 202)", "base_url": base_url}
-
-        # Unfollowed redirects or redirect loops caught via HTTPError (e.g., HTTP 308 loop)
-        if 300 <= code < 400:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} redirect loop/unfollowed", "base_url": base_url}
-
-        # A real interstitial challenge is only served with a blocking status code.
-        # Pages that merely embed Cloudflare scripts (Turnstile widgets, email obfuscation)
-        # return 200 and must NOT be counted as challenged.
-        is_cf_challenge = code in (403, 429, 503) and (
-            lower_headers.get('cf-mitigated', '').lower() == 'challenge'
-            or any(p.search(body) for p in CLOUDFLARE_PATTERNS)
-            or 'ddos-guard' in server.lower()
-        )
-        if not is_cf_challenge and behind_cf and code in (403, 429):
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "WAF_BLOCKED", "code": code, "detail": f"Cloudflare firewall rule returned HTTP {code} without an interactive challenge", "base_url": base_url}
-
-        # Check external hijack redirect
-        if "tiktok.com" in final_url.lower():
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "DEAD_PARKED_DOMAIN", "code": code, "detail": f"Domain hijacked to {final_url}", "base_url": base_url}
-
-        # 1. Check Cloudflare Challenge Platform (Turnstile / Ray ID / DDoS-Guard)
-        if is_cf_challenge:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": code, "detail": f"Cloudflare Shield active ({server or 'Turnstile'})", "base_url": base_url}
-
-        # 2. Check Parked Domain / Registrar Landers
-        if len(body) < 30000:
-            if (any(p.search(body) for p in PARKED_PATTERNS) or
-                ("/lander" in body.lower() and len(body) < 1000) or
-                ("window.location" in body.lower() and len(body) < 500) or
-                ("domain" in body.lower() and "sale" in body.lower() and len(body) < 2000 and not any(k in body.lower() for k in ['chapter', 'manga', 'anime', 'novel']))):
-                return {"name": name, "pkg": pkg, "type": ext_type, "status": "DEAD_PARKED_DOMAIN", "code": code, "detail": "Domain expired/parked by registrar", "base_url": base_url}
-
-        # 3. Catalog Route Fallback Cascade for 404 / 400
-        if code in (404, 400) and target_url != base_clean:
-            recovered = False
-            for fallback_route in ['', '/manga', '/series', '/comics', '/catalog', '/cataleg', '/mangas', '/seriler/', '/ranobe', '/danh-sach/', '/archive', '/all', '/browse', '/novels']:
-                try:
-                    fb_code, fb_headers, fb_body, fb_url = fetch(f"{base_clean}{fallback_route}")
-                    if fb_code == 200 and len(fb_body) > 2000:
-                        code, headers, body, final_url = fb_code, fb_headers, fb_body, fb_url
-                        recovered = True
-                        break
-                    elif fb_code in (403, 429, 503) and (any(p.search(fb_body) for p in CLOUDFLARE_PATTERNS) or {k.lower(): v for k, v in fb_headers.items()}.get('cf-mitigated', '').lower() == 'challenge'):
-                        return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": fb_code, "detail": "Fallback route live behind Cloudflare", "base_url": base_url}
-                except Exception:
-                    pass
-            if not recovered:
-                return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code} Not Found (catalog route and fallback paths exhausted)", "base_url": base_url}
-
-        # 3b. Any other non-success status is an error, never a confirmed scrape.
-        if code >= 400:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": code, "detail": f"HTTP {code}", "base_url": base_url}
-
-        # 4. Check JSON / REST API Response
-        stripped = body.strip()
-        if stripped.startswith(('{', '[')) or "api" in target_url.lower():
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} API Verified (JSON payload)", "base_url": base_url}
-
-        # 5. Check Configured Selectors (with composite fallback splitting)
-        selectors = extract_all_selectors(selector)
-        if not selectors:
-            selectors = ["item", "card", "thumb", "manga", "anime", "series", "post", "title", "entry", "box", "article", "tile", "obra"]
-
-        matched_sel = [s for s in selectors if s.lower() in body.lower()]
-        if matched_sel:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Scraper OK ('{matched_sel[0]}')", "base_url": base_url}
-
-        # 6. Single Page Application (SPA) Containers (Next.js, Vue, Nuxt, React)
-        is_spa = any(s in body for s in ['__NEXT_DATA__', 'id="__next"', 'id="app"', 'window.__INITIAL_STATE__', 'id="root"'])
-        if is_spa:
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Verified (SPA Webapp shell)", "base_url": base_url}
-
-        # 7. Catalog Layout Structural Verification
-        has_structure = bool(re.search(r'<img[^>]+src=', body, re.I) and re.search(r'<a[^>]+href=', body, re.I))
-        if has_structure or any(k in body.lower() for k in ['series', 'manga', 'anime', 'chapter', 'episode', '<article', 'post-title', 'thumb', 'novel', 'comic']):
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "LIVE_CONFIRMED", "code": code, "detail": f"HTTP {code} Catalog Verified (DOM layout)", "base_url": base_url}
-
-        return {"name": name, "pkg": pkg, "type": ext_type, "status": "SELECTOR_DRIFT", "code": code, "detail": f"HTTP {code} live, but selectors {selectors[:2]} not in DOM", "base_url": base_url}
-
-    except urllib.error.HTTPError as e:
-        if e.code in (403, 503) and ('cloudflare' in (e.headers.get('Server', '')).lower() or e.headers.get('CF-RAY')):
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "CLOUDFLARE_PROTECTED", "code": e.code, "detail": f"Cloudflare Shield active (HTTP {e.code})", "base_url": base_url}
-        return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": e.code, "detail": f"HTTP {e.code}: {e.reason}", "base_url": base_url}
-    except Exception as e:
-        err_msg = str(e)
-        if any(k in err_msg.lower() for k in ['timeout', 'timed out']):
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": 504, "detail": "Gateway Timeout (WAF Slowdown)", "base_url": base_url}
-        if any(k in err_msg.lower() for k in ['connection refused', 'getaddrinfo failed', 'name or service not known']):
-            return {"name": name, "pkg": pkg, "type": ext_type, "status": "DEAD_DOMAIN", "code": 0, "detail": err_msg, "base_url": base_url}
-        return {"name": name, "pkg": pkg, "type": ext_type, "status": "HTTP_ERROR", "code": 0, "detail": err_msg, "base_url": base_url}
+    return res
 
 
 def cmd_test(args):
@@ -1413,36 +2289,63 @@ def cmd_test(args):
     workers = getattr(args, "workers", 40)
     timeout = getattr(args, "timeout", 6)
     out_path = getattr(args, "output", None)
+    test_search = getattr(args, "deep", False) or getattr(args, "search", False)
+    test_filters = getattr(args, "deep", False) or getattr(args, "filters", False)
+    pkg_filter = (getattr(args, "pkg", None) or "").strip().lower()
+    query = getattr(args, "query", "love") or "love"
+
+    mode_tags = ["CATALOG"]
+    if test_search:
+        mode_tags.append(f"SEARCH('{query}')")
+    if test_filters:
+        mode_tags.append("FILTERS")
 
     print("\n========================================================")
-    print(f"[*] Deep Testing Scrapers & APIs ({target.upper()})")
+    print(f"[*] Testing Scrapers & APIs ({target.upper()}) [{' + '.join(mode_tags)}]")
     print("========================================================")
 
     t0 = time.time()
-    anime_rules, manga_rules, novel_rules = {}, {}, {}
-    if target in ("anime", "all"):
-        print("[*] Extracting Anime source rules...")
-        anime_rules = extract_anime_rules()
-    if target in ("manga", "all"):
-        print("[*] Extracting Manga source rules...")
-        manga_rules = extract_manga_rules()
-    if target in ("novel", "all"):
-        print("[*] Extracting Novel source rules...")
-        novel_rules = extract_novel_rules()
-
-    tasks = []
+    raw_tasks = []
     if target in ("anime", "all") and (DIST_ANIME / "index.min.json").exists():
         with open(DIST_ANIME / "index.min.json", encoding="utf-8") as f:
             for it in json.load(f):
-                tasks.append((it, "anime", anime_rules))
+                raw_tasks.append((it, "anime"))
     if target in ("manga", "all") and (DIST_MANGA / "index.min.json").exists():
         with open(DIST_MANGA / "index.min.json", encoding="utf-8") as f:
             for it in json.load(f):
-                tasks.append((it, "manga", manga_rules))
+                raw_tasks.append((it, "manga"))
     if target in ("novel", "all") and (DIST_NOVEL / "plugins.min.json").exists():
         with open(DIST_NOVEL / "plugins.min.json", encoding="utf-8") as f:
             for it in json.load(f):
-                tasks.append((it, "novel", novel_rules))
+                raw_tasks.append((it, "novel"))
+
+    if pkg_filter:
+        raw_tasks = [
+            t for t in raw_tasks
+            if pkg_filter in t[0].get("pkg", "").lower()
+            or pkg_filter in t[0].get("id", "").lower()
+            or pkg_filter in t[0].get("name", "").lower()
+        ]
+        if not raw_tasks:
+            print(f"[-] No extensions matched filter '--pkg {pkg_filter}'.")
+            return
+
+    only_pkgs = {it.get("pkg", it.get("id", "")).lower() for it, _ in raw_tasks} if pkg_filter else None
+    cats_present = {cat for _, cat in raw_tasks}
+
+    anime_rules, manga_rules, novel_rules = {}, {}, {}
+    if "anime" in cats_present:
+        print("[*] Extracting Anime source rules...")
+        anime_rules = extract_anime_rules()
+    if "manga" in cats_present:
+        print("[*] Extracting Manga source rules...")
+        manga_rules = extract_manga_rules(only_pkgs=only_pkgs)
+    if "novel" in cats_present:
+        print("[*] Extracting Novel source rules...")
+        novel_rules = extract_novel_rules()
+
+    rules_by_cat = {"anime": anime_rules, "manga": manga_rules, "novel": novel_rules}
+    tasks = [(it, cat, rules_by_cat[cat]) for it, cat in raw_tasks]
 
     total = len(tasks)
     print(f"[*] Dispatching {total} extensions across {workers} concurrent workers (timeout={timeout}s)...")
@@ -1450,7 +2353,10 @@ def cmd_test(args):
     completed = 0
     t_start = time.time()
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(probe_extension_scraper, it, cat, rmap, timeout): (it, cat) for it, cat, rmap in tasks}
+        futures = {
+            pool.submit(probe_extension_scraper, it, cat, rmap, timeout, test_search, test_filters, query): (it, cat)
+            for it, cat, rmap in tasks
+        }
         for future in as_completed(futures):
             results.append(future.result())
             completed += 1
@@ -1460,26 +2366,85 @@ def cmd_test(args):
                 print(f"  -> Progress: {completed}/{total} ({rate:.1f} ext/s)")
 
     stats = {}
+    search_stats = {}
+    filter_stats = {}
     for r in results:
         cat = r["type"]
         st = r["status"]
-        if cat not in stats:
-            stats[cat] = {}
-        stats[cat][st] = stats[cat].get(st, 0) + 1
+        stats.setdefault(cat, {})[st] = stats.get(cat, {}).get(st, 0) + 1
+        if test_search and "search" in r:
+            sst = r["search"]["status"]
+            search_stats.setdefault(cat, {})[sst] = search_stats.get(cat, {}).get(sst, 0) + 1
+        if test_filters and "filters" in r:
+            fst = r["filters"]["status"]
+            filter_stats.setdefault(cat, {})[fst] = filter_stats.get(cat, {}).get(fst, 0) + 1
 
     print("\n" + "=" * 55)
     print("TEST RESULTS SUMMARY:")
     print("=" * 55)
     for cat in sorted(stats.keys()):
-        print(f"\n[{cat.upper()}] ({sum(stats[cat].values())} verified):")
+        cat_total = sum(stats[cat].values())
+        print(f"\n[{cat.upper()} CATALOG] ({cat_total} verified):")
         for st, count in sorted(stats[cat].items(), key=lambda x: x[1], reverse=True):
-            pct = count / sum(stats[cat].values()) * 100
+            pct = count / cat_total * 100
             print(f"  • {st:25s}: {count:4d} ({pct:5.1f}%)")
+        if test_search and cat in search_stats:
+            stotal = sum(search_stats[cat].values())
+            print(f"[{cat.upper()} SEARCH API] ({stotal} checked):")
+            for st, count in sorted(search_stats[cat].items(), key=lambda x: x[1], reverse=True):
+                pct = count / stotal * 100
+                print(f"  • {st:25s}: {count:4d} ({pct:5.1f}%)")
+        if test_filters and cat in filter_stats:
+            ftotal = sum(filter_stats[cat].values())
+            print(f"[{cat.upper()} FILTERS] ({ftotal} checked):")
+            for st, count in sorted(filter_stats[cat].items(), key=lambda x: x[1], reverse=True):
+                pct = count / ftotal * 100
+                print(f"  • {st:25s}: {count:4d} ({pct:5.1f}%)")
+
+    if (test_search or test_filters) and len(results) <= 20:
+        print("\nDETAILED TARGET RESULTS:")
+        for r in sorted(results, key=lambda x: x["pkg"]):
+            print(f"\n  [{r['type'].upper()}] {r['name']} ({r['pkg']}) [theme={r.get('theme') or 'custom'}]")
+            print(f"    Catalog : {r['status']} (HTTP {r['code']}) | {r['detail']} | {r.get('base_url', '')}")
+            if "search" in r:
+                s = r["search"]
+                print(f"    Search  : {s['status']} (HTTP {s['code']}) | {s['detail']} | {s.get('url', '')}")
+            if "filters" in r:
+                fl = r["filters"]
+                print(f"    Filters : {fl['status']} (count={fl.get('filter_count', 0)}, HTTP {fl['code']}) | {fl['detail']} | {fl.get('url', '')}")
+    elif test_search or test_filters:
+        bad_states = {"HTTP_ERROR", "API_ERROR", "SELECTOR_DRIFT"}
+        if test_search:
+            bad_s = [r for r in results if r.get("search", {}).get("status") in bad_states]
+            if bad_s:
+                print(f"\nTOP SEARCH API FAILURES ({len(bad_s)} total, showing up to 15):")
+                for r in bad_s[:15]:
+                    s = r["search"]
+                    print(f"  • [{r['type']}] {r['pkg']} -> {s['status']} (HTTP {s['code']}) | {s['detail']} | {s.get('url', '')}")
+        if test_filters:
+            bad_f = [r for r in results if r.get("filters", {}).get("status") in bad_states]
+            if bad_f:
+                print(f"\nTOP FILTER ENDPOINT FAILURES ({len(bad_f)} total, showing up to 15):")
+                for r in bad_f[:15]:
+                    fl = r["filters"]
+                    print(f"  • [{r['type']}] {r['pkg']} -> {fl['status']} (HTTP {fl['code']}) | {fl['detail']} | {fl.get('url', '')}")
 
     report_file = Path(out_path) if out_path else (ROOT_DIR / "scratch" / f"deep_test_{target}_report.json")
     report_file.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "timestamp": time.time(),
+        "target": target,
+        "total": total,
+        "duration_s": round(time.time() - t0, 2),
+        "stats": stats,
+        "results": results,
+    }
+    if test_search:
+        payload["search_stats"] = search_stats
+    if test_filters:
+        payload["filter_stats"] = filter_stats
     with open(report_file, "w", encoding="utf-8") as f:
-        json.dump({"timestamp": time.time(), "target": target, "total": total, "duration_s": round(time.time() - t0, 2), "stats": stats, "results": results}, f, indent=2, ensure_ascii=False)
+        json.dump(payload, f, indent=2, ensure_ascii=False)
     print(f"\n[+] Full test report saved to: {report_file}\n")
 
 
@@ -1533,6 +2498,11 @@ def main():
     p_test.add_argument("--workers", type=int, default=40, help="Number of concurrent test worker threads")
     p_test.add_argument("--timeout", type=int, default=6, help="Timeout in seconds for each network probe")
     p_test.add_argument("--output", help="Optional path to output JSON report")
+    p_test.add_argument("--deep", action="store_true", help="Run search API and filter checks in addition to catalog check")
+    p_test.add_argument("--search", action="store_true", help="Probe live search endpoints on non-blocked extensions")
+    p_test.add_argument("--filters", action="store_true", help="Probe filter endpoints and audit declared filter lists")
+    p_test.add_argument("--pkg", help="Filter extensions by substring match on package, id, or name")
+    p_test.add_argument("--query", default="love", help="Search term for --search / --deep tests (default: love)")
 
     args = parser.parse_args()
 
