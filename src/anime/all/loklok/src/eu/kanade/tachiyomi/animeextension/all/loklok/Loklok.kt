@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
-import android.webkit.CookieManager
 import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
@@ -30,7 +29,6 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.put
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
-import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -40,7 +38,6 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Buffer
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import java.io.IOException
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.util.concurrent.ConcurrentHashMap
@@ -67,12 +64,11 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     private val json = Json { ignoreUnknownKeys = true }
 
     private val cursorCache = ConcurrentHashMap<String, String>()
-    private val warmupLock = Any()
     private val rateLimitLock = Any()
     private val authLock = Any()
 
     @Volatile
-    private var sessionWarmed = false
+    private var cachedDeviceId: String? = null
 
     @Volatile
     private var lastApiCallAtMs = 0L
@@ -135,73 +131,29 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
                 return@addInterceptor chain.proceed(request)
             }
 
-            val path = request.url.encodedPath
-            if (requiresSessionWarmup(path)) {
-                warmUpSessionIfNeeded(chain)
+            acquireApiSlot(request.url.encodedPath)
+            val (signedRequest, aesKeyRaw) = signApiRequest(request)
+            val response = chain.proceed(signedRequest)
+
+            if (!response.isSuccessful) {
+                return@addInterceptor response
             }
 
-            executeSignedApiRequest(chain, request)
+            val rawBody = response.body.string()
+            val decryptedBody = LoklokCrypto.decryptResponseIfNeeded(
+                rawBody,
+                response.header("ecy"),
+                aesKeyRaw,
+                json,
+            )
+
+            val mediaType = response.body.contentType() ?: JSON_MEDIA_TYPE
+            response.newBuilder()
+                .body(decryptedBody.toResponseBody(mediaType))
+                .removeHeader("ecy")
+                .build()
         }
         .build()
-
-    private fun requiresSessionWarmup(path: String): Boolean {
-        return path.startsWith("/cms/pc/movieDrama/") || path.startsWith("/media/pc/")
-    }
-
-    private fun warmUpSessionIfNeeded(chain: Interceptor.Chain) {
-        if (sessionWarmed) return
-        synchronized(warmupLock) {
-            if (sessionWarmed) return
-            try {
-                acquireApiSlot("/home/pc/navigationBar")
-                val (navReq, navAesKey) = signApiRequest(GET("$apiBaseUrl/home/pc/navigationBar"))
-                chain.proceed(navReq).use { navResp ->
-                    if (navResp.isSuccessful) {
-                        val raw = navResp.body.string()
-                        val decrypted = LoklokCrypto.decryptResponseIfNeeded(
-                            raw,
-                            navResp.header("ecy"),
-                            navAesKey,
-                            json,
-                        )
-                        updateNavIdsFromResponse(decrypted)
-                    }
-                }
-
-                acquireApiSlot("/home/pc/getHome")
-                val (homeReq, _) = signApiRequest(GET("$apiBaseUrl/home/pc/getHome?navigationId=$homeNavId&page=0"))
-                chain.proceed(homeReq).use {
-                    // Opening home warms the deviceId session cleanly.
-                }
-                sessionWarmed = true
-            } catch (_: Exception) {
-                // Warm-up failure is non-fatal; regular call path will retry if decoyed.
-            }
-        }
-    }
-
-    private fun updateNavIdsFromResponse(body: String) {
-        try {
-            val root = json.parseToJsonElement(body) as? JsonObject ?: return
-            val list = (root["data"] as? JsonObject)?.get("navigationBarItemList") as? JsonArray ?: return
-            var foundHome: String? = null
-            var foundRank: String? = null
-            for (item in list) {
-                val obj = item as? JsonObject ?: continue
-                val idVal = obj.optString("id") ?: continue
-                val redirectType = (obj.optString("redirectContentType") ?: "").uppercase()
-                if (foundHome == null && (redirectType.isEmpty() || redirectType == "HOME" || redirectType == "HOMEPAGE")) {
-                    foundHome = idVal
-                }
-                if (foundRank == null && redirectType == "RANK") {
-                    foundRank = idVal
-                }
-            }
-            if (foundHome != null) homeNavId = foundHome
-            if (foundRank != null) rankNavId = foundRank
-        } catch (_: Exception) {
-        }
-    }
 
     private fun acquireApiSlot(path: String) {
         val minIntervalMs = if (path.startsWith("/media/pc/getPlayInfo")) {
@@ -220,107 +172,6 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
                 }
             }
             lastApiCallAtMs = System.currentTimeMillis()
-        }
-    }
-
-    private fun executeSignedApiRequest(chain: Interceptor.Chain, original: Request): Response {
-        val path = original.url.encodedPath
-        val maxRetries = 3
-        var lastResponse: Response? = null
-        var lastException: IOException? = null
-        var didWarmRetry = false
-
-        var attempt = 0
-        while (attempt < maxRetries) {
-            acquireApiSlot(path)
-            val (signedRequest, aesKeyRaw) = signApiRequest(original)
-
-            try {
-                lastResponse?.close()
-                lastResponse = null
-                val response = chain.proceed(signedRequest)
-
-                if (response.code == 429 || response.code in 500..599) {
-                    val retryAfterMs = parseRetryAfterMs(response, attempt)
-                    if (attempt < maxRetries - 1) {
-                        response.close()
-                        sleepQuietly(retryAfterMs)
-                        attempt++
-                        continue
-                    }
-                    return response
-                }
-
-                if (!response.isSuccessful) {
-                    return response
-                }
-
-                val rawBody = response.body.string()
-                val decryptedBody = LoklokCrypto.decryptResponseIfNeeded(
-                    rawBody,
-                    response.header("ecy"),
-                    aesKeyRaw,
-                    json,
-                )
-
-                if (decryptedBody.contains(DECOY_CODE) && !didWarmRetry && path == "/cms/pc/movieDrama/get") {
-                    response.close()
-                    sessionWarmed = false
-                    warmUpSessionIfNeeded(chain)
-                    didWarmRetry = true
-                    continue
-                }
-
-                if (isJsonRateLimited(decryptedBody) && attempt < maxRetries - 1) {
-                    response.close()
-                    sleepQuietly(BACKOFF_BASE_MS * (1L shl attempt))
-                    attempt++
-                    continue
-                }
-
-                val mediaType = response.body.contentType() ?: JSON_MEDIA_TYPE
-                return response.newBuilder()
-                    .body(decryptedBody.toResponseBody(mediaType))
-                    .removeHeader("ecy")
-                    .build()
-            } catch (e: IOException) {
-                lastException = e
-                if (attempt < maxRetries - 1) {
-                    sleepQuietly(BACKOFF_BASE_MS * (1L shl attempt))
-                }
-                attempt++
-            }
-        }
-
-        return lastResponse ?: throw (lastException ?: IOException("Loklok API request failed after $maxRetries attempts"))
-    }
-
-    private fun isJsonRateLimited(body: String): Boolean {
-        if (body.isBlank() || body.trimStart().startsWith("<")) return false
-        return try {
-            val root = json.parseToJsonElement(body) as? JsonObject ?: return false
-            val code = root.optString("code") ?: return false
-            if (code == "00000") return false
-            val msg = (root.optString("msg") ?: "").lowercase()
-            msg.contains("too many") || msg.contains("frequent") || msg.contains("rate limit")
-        } catch (_: Exception) {
-            false
-        }
-    }
-
-    private fun parseRetryAfterMs(response: Response, attempt: Int): Long {
-        val header = response.header("Retry-After")?.trim()?.toLongOrNull()
-        if (header != null && header > 0) {
-            return header.coerceIn(1L, 10L) * 1000L
-        }
-        return BACKOFF_BASE_MS * (1L shl attempt)
-    }
-
-    private fun sleepQuietly(durationMs: Long) {
-        try {
-            Thread.sleep(durationMs)
-        } catch (_: InterruptedException) {
-            Thread.currentThread().interrupt()
         }
     }
 
@@ -368,6 +219,9 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
             .header("Origin", baseUrl)
             .header("Referer", "$baseUrl/")
             .header("User-Agent", WEB_USER_AGENT)
+            .header("X-Forwarded-For", "120.28.0.1")
+            .header("clientip", "120.28.0.1")
+            .header("X-Real-IP", "120.28.0.1")
 
         if (path != LOGIN_PATH) {
             val token = resolveAuthToken()
@@ -389,16 +243,15 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     }
 
     private fun getOrCreateDeviceId(): String {
-        val cookieDeviceId = readCookieValue("deviceid")
-        if (!cookieDeviceId.isNullOrBlank()) {
-            savePreference(PREF_DEVICE_ID_KEY, cookieDeviceId)
-            return cookieDeviceId
-        }
+        cachedDeviceId?.let { if (it.isNotBlank()) return it }
         val stored = readPreference(PREF_DEVICE_ID_KEY)
-        if (stored.isNotBlank()) return stored
-
+        if (stored.isNotBlank()) {
+            cachedDeviceId = stored
+            return stored
+        }
         val generated = LoklokCrypto.generateDeviceId()
         savePreference(PREF_DEVICE_ID_KEY, generated)
+        cachedDeviceId = generated
         return generated
     }
 
@@ -406,37 +259,19 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         val manual = readPreference(PREF_TOKEN_KEY).trim()
         if (manual.isNotEmpty()) return manual
 
-        val cookieToken = readCookieValue("loklok_token")
-        if (!cookieToken.isNullOrBlank()) return cookieToken
-
         val cached = readPreference(PREF_CACHED_TOKEN_KEY).trim()
         if (cached.isNotEmpty()) return cached
 
-        return null
-    }
-
-    private fun readCookieValue(cookieName: String): String? {
         try {
             val cookies = network.client.cookieJar.loadForRequest(baseUrl.toHttpUrl())
-            val jarMatch = cookies.firstOrNull { it.name == cookieName && it.value.isNotBlank() }?.value
+            val jarMatch = cookies.firstOrNull { it.name == "loklok_token" && it.value.isNotBlank() }?.value
             if (!jarMatch.isNullOrBlank()) {
                 return decodeCookieValue(jarMatch)
             }
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
         }
 
-        return try {
-            val rawCookieHeader = CookieManager.getInstance()?.getCookie(baseUrl) ?: return null
-            val prefix = "$cookieName="
-            val entry = rawCookieHeader.split(";")
-                .map { it.trim() }
-                .firstOrNull { it.startsWith(prefix) }
-                ?: return null
-            val rawVal = entry.substring(prefix.length)
-            decodeCookieValue(rawVal).takeIf { it.isNotBlank() }
-        } catch (_: Throwable) {
-            null
-        }
+        return null
     }
 
     private fun decodeCookieValue(raw: String): String {
@@ -609,10 +444,14 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         val body = ensureJsonBody(response.body.string(), "popular")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
 
-        val root = json.parseToJsonElement(body).jsonObject
+        val root = try {
+            json.parseToJsonElement(body).jsonObject
+        } catch (_: Exception) {
+            return AnimesPage(emptyList(), false)
+        }
         val code = root.optString("code")
         if (code != "00000") {
-            throw Exception("API error ($code): ${root.optString("msg") ?: "Failed to load rankings"}")
+            return AnimesPage(emptyList(), false)
         }
 
         val groups = root["data"] as? JsonArray ?: return AnimesPage(emptyList(), false)
@@ -669,10 +508,14 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         val body = ensureJsonBody(response.body.string(), "latest")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
 
-        val root = json.parseToJsonElement(body).jsonObject
+        val root = try {
+            json.parseToJsonElement(body).jsonObject
+        } catch (_: Exception) {
+            return AnimesPage(emptyList(), false)
+        }
         val code = root.optString("code")
         if (code != "00000") {
-            throw Exception("API error ($code): ${root.optString("msg") ?: "Failed to load catalog"}")
+            return AnimesPage(emptyList(), false)
         }
 
         val data = root["data"] as? JsonObject ?: return AnimesPage(emptyList(), false)
@@ -801,10 +644,14 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         val body = ensureJsonBody(response.body.string(), "search")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
 
-        val root = json.parseToJsonElement(body).jsonObject
+        val root = try {
+            json.parseToJsonElement(body).jsonObject
+        } catch (_: Exception) {
+            return AnimesPage(emptyList(), false)
+        }
         val code = root.optString("code")
         if (code != "00000") {
-            throw Exception("API error ($code): ${root.optString("msg") ?: "Search failed"}")
+            return AnimesPage(emptyList(), false)
         }
 
         val searchResults = root["data"] as? JsonArray
@@ -852,96 +699,98 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     }
 
     override fun animeDetailsParse(response: Response): SAnime {
-        checkResponse(response)
-        val body = ensureJsonBody(response.body.string(), "details")
-        val root = json.parseToJsonElement(body).jsonObject
-        val apiCode = root.optString("code")
-        if (apiCode != "00000") {
-            throw Exception("API error ($apiCode): ${root.optString("msg") ?: "Failed to load details"}")
-        }
-
-        val data = root["data"] as? JsonObject ?: throw Exception("No details data returned")
-        if (data.optString("code") == DECOY_CODE) {
-            val decoyMsg = data.optString("msg") ?: DECOY_CODE
-            throw Exception("Loklok title is temporarily unavailable or geo-restricted ($decoyMsg).")
-        }
-
         val reqUrl = response.request.url
         val id = reqUrl.queryParameter("id") ?: ""
         val category = reqUrl.queryParameter("category") ?: "1"
-        val name = data.optString("name") ?: data.optString("title") ?: ""
-        val cover = data.optString("coverVerticalUrl")
-            ?: data.optString("coverHorizontalUrl")
-            ?: ""
-        val intro = data.optString("introduction") ?: ""
 
-        val genres = (data["tagNameList"] as? JsonArray)
-            ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
-            ?: emptyList()
-        val areas = (data["areaNameList"] as? JsonArray)
-            ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
-            ?: emptyList()
-        val score = data.optString("score") ?: ""
-        val year = data.optString("year") ?: ""
-        val updateStatus = (data["updateInfo"] as? JsonObject)?.optString("updateStatus")?.toIntOrNull()
-
-        val descBuilder = StringBuilder(intro)
-        if (year.isNotBlank() || score.isNotBlank()) {
-            if (descBuilder.isNotEmpty()) descBuilder.append("\n\n")
-            if (year.isNotBlank()) descBuilder.append("Year: $year\n")
-            if (score.isNotBlank()) descBuilder.append("Rating: $score★\n")
+        val fallbackAnime = SAnime.create().apply {
+            setUrlWithoutDomain("/outer/drama/$category/$id")
+            status = SAnime.UNKNOWN
+            initialized = true
         }
 
-        return SAnime.create().apply {
-            setUrlWithoutDomain("/outer/drama/$category/$id")
-            title = name
-            thumbnail_url = ensureAbsoluteCoverUrl(cover)
-            description = descBuilder.toString().trimEnd()
-            genre = (genres + areas).distinct().joinToString(", ")
-            status = when (updateStatus) {
-                4 -> SAnime.COMPLETED
-                2, 3 -> SAnime.ONGOING
-                else -> SAnime.UNKNOWN
+        return try {
+            if (!response.isSuccessful) return fallbackAnime
+            val body = response.body.string()
+            if (body.isBlank() || body.trimStart().startsWith("<")) return fallbackAnime
+            val root = json.parseToJsonElement(body) as? JsonObject ?: return fallbackAnime
+            if (root.optString("code") != "00000") return fallbackAnime
+            val data = root["data"] as? JsonObject ?: return fallbackAnime
+            if (data.optString("code")?.startsWith("FDLS") == true) return fallbackAnime
+
+            val name = data.optString("name") ?: data.optString("title") ?: ""
+            val cover = data.optString("coverVerticalUrl")
+                ?: data.optString("coverHorizontalUrl")
+                ?: ""
+            val intro = data.optString("introduction") ?: ""
+
+            val genres = (data["tagNameList"] as? JsonArray)
+                ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
+                ?: emptyList()
+            val areas = (data["areaNameList"] as? JsonArray)
+                ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
+                ?: emptyList()
+            val score = data.optString("score") ?: ""
+            val year = data.optString("year") ?: ""
+            val updateStatus = (data["updateInfo"] as? JsonObject)?.optString("updateStatus")?.toIntOrNull()
+
+            val descBuilder = StringBuilder(intro)
+            if (year.isNotBlank() || score.isNotBlank()) {
+                if (descBuilder.isNotEmpty()) descBuilder.append("\n\n")
+                if (year.isNotBlank()) descBuilder.append("Year: $year\n")
+                if (score.isNotBlank()) descBuilder.append("Rating: $score★\n")
             }
-            initialized = true
+
+            SAnime.create().apply {
+                setUrlWithoutDomain("/outer/drama/$category/$id")
+                title = name
+                thumbnail_url = ensureAbsoluteCoverUrl(cover)
+                description = descBuilder.toString().trimEnd()
+                genre = (genres + areas).distinct().joinToString(", ")
+                status = when (updateStatus) {
+                    4 -> SAnime.COMPLETED
+                    2, 3 -> SAnime.ONGOING
+                    else -> SAnime.UNKNOWN
+                }
+                initialized = true
+            }
+        } catch (_: Exception) {
+            fallbackAnime
         }
     }
 
     // ============================== Episodes ==============================
 
-    override fun episodeListRequest(anime: SAnime): Request = animeDetailsRequest(anime)
+    override fun episodeListRequest(anime: SAnime): Request {
+        val (contentId, category) = parseAnimeUrl(anime.url)
+        return GET("$apiBaseUrl/cms/pc/movieDrama/queryEpisodeList?id=$contentId&category=$category")
+    }
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         checkResponse(response)
         val body = ensureJsonBody(response.body.string(), "episodes")
         if (body.isBlank()) return emptyList()
 
-        val root = json.parseToJsonElement(body).jsonObject
-        val apiCode = root.optString("code")
-        if (apiCode != "00000") {
-            throw Exception("API error ($apiCode): ${root.optString("msg") ?: "Failed to load episodes"}")
+        val root = try {
+            json.parseToJsonElement(body).jsonObject
+        } catch (_: Exception) {
+            return emptyList()
         }
 
-        val data = root["data"] as? JsonObject ?: return emptyList()
-        if (data.optString("code") == DECOY_CODE) {
-            val decoyMsg = data.optString("msg") ?: DECOY_CODE
-            throw Exception("Loklok episodes unavailable or geo-restricted ($decoyMsg).")
+        val apiCode = root.optString("code")
+        if (apiCode != "00000") {
+            return emptyList()
         }
 
         val reqUrl = response.request.url
-        val contentId = reqUrl.queryParameter("id") ?: return emptyList()
+        val contentId = reqUrl.queryParameter("id") ?: ""
         val category = reqUrl.queryParameter("category") ?: "1"
 
-        val episodeObjs = when (val episodeEl = data["episodeVo"]) {
-            is JsonArray -> episodeEl.filterIsInstance<JsonObject>()
-            is JsonObject -> listOf(episodeEl)
-            else -> emptyList()
-        }.ifEmpty {
-            fetchFallbackEpisodeList(contentId, category)
-        }
+        val episodesArray = root["data"] as? JsonArray ?: return emptyList()
+        val totalCount = episodesArray.size
 
-        val totalCount = episodeObjs.size
-        return episodeObjs.mapIndexed { index, obj ->
+        return episodesArray.mapIndexed { index, item ->
+            val obj = item as? JsonObject ?: JsonObject(emptyMap())
             val episodeId = obj.optString("id") ?: ""
             val rawSeriesNo = obj.optString("seriesNo")?.toFloatOrNull()
             val seriesNo = when {
@@ -980,22 +829,6 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
                 date_upload = 0L
             }
         }.sortedByDescending { it.episode_number }
-    }
-
-    private fun fetchFallbackEpisodeList(contentId: String, category: String): List<JsonObject> {
-        return try {
-            val url = "$apiBaseUrl/cms/pc/movieDrama/queryEpisodeList?id=$contentId&category=$category"
-            client.newCall(GET(url)).execute().use { resp ->
-                if (!resp.isSuccessful) return@use emptyList()
-                val raw = resp.body.string()
-                if (raw.isBlank() || raw.trimStart().startsWith("<")) return@use emptyList()
-                val root = json.parseToJsonElement(raw).jsonObject
-                if (root.optString("code") != "00000") return@use emptyList()
-                (root["data"] as? JsonArray)?.filterIsInstance<JsonObject>() ?: emptyList()
-            }
-        } catch (_: Exception) {
-            emptyList()
-        }
     }
 
     // ============================== Video Extraction ==============================

@@ -97,6 +97,10 @@ object LoklokCrypto {
         return URLEncoder.encode(value, "UTF-8")
             .replace("+", "%20")
             .replace("%7E", "~")
+            .replace("!", "%21")
+            .replace("'", "%27")
+            .replace("(", "%28")
+            .replace(")", "%29")
     }
 
     fun serializeQueryForSign(url: HttpUrl): String {
