@@ -9392,21 +9392,21 @@
   {
     "name": "Tachiyomi: Jmanga",
     "pkg": "eu.kanade.tachiyomi.extension.ja.jmanga",
-    "apk": "tachiyomi-ja.jmanga-v1.4.4.apk",
+    "apk": "tachiyomi-ja.jmanga-v1.4.5.apk",
     "lang": "ja",
-    "code": 4,
-    "version": "1.4.4",
+    "code": 5,
+    "version": "1.4.5",
     "nsfw": 0,
     "sources": [
       {
         "name": "Jmanga",
         "lang": "ja",
         "id": "6141590427749684419",
-        "baseUrl": "https://jmanga.media"
+        "baseUrl": "https://jmanga.coach"
       }
     ],
-    "sha256": "6171c4a068d3770604b886eb427efd0b30942457ec2e09f54987d5f5d7f2f88b",
-    "size": 208879,
+    "sha256": "857fcb40797e6a0a9170c519e9e751dc87e72088285860e41d5dceb6fdf86949",
+    "size": 208891,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.ja.jmanga.png"
   },
   {
@@ -24708,21 +24708,21 @@
   {
     "name": "Tachiyomi: UmeTruyen",
     "pkg": "eu.kanade.tachiyomi.extension.vi.umetruyen",
-    "apk": "tachiyomi-vi.umetruyen-v1.4.9.apk",
+    "apk": "tachiyomi-vi.umetruyen-v1.4.10.apk",
     "lang": "vi",
-    "code": 9,
-    "version": "1.4.9",
+    "code": 10,
+    "version": "1.4.10",
     "nsfw": 1,
     "sources": [
       {
         "name": "UmeTruyen",
         "lang": "vi",
         "id": "2473081822885310816",
-        "baseUrl": "https://umetruyenz.org"
+        "baseUrl": "https://umetruyen.com"
       }
     ],
-    "sha256": "b098518c7492009bccae4cdc89ec3ac2140284377f68642813d8632f826be5d8",
-    "size": 175451,
+    "sha256": "9d1746dcae1b8c664d56d5e68c5aad38218b63dd9fab5de6933899505abe8881",
+    "size": 176275,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.umetruyen.png"
   },
   {

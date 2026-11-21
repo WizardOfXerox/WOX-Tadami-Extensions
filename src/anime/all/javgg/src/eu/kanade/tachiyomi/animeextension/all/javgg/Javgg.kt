@@ -2,6 +2,7 @@ package eu.kanade.tachiyomi.animeextension.all.javgg
 
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
+import eu.kanade.tachiyomi.lib.googledriveextractor.GoogleDriveExtractor
 import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
 import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
 import eu.kanade.tachiyomi.lib.vidhideextractor.VidHideExtractor
@@ -71,7 +72,13 @@ class Javgg :
         val document = response.asJsoup()
         val animeDetails = SAnime.create().apply {
             status = SAnime.COMPLETED
-            description = document.selectFirst("#cover")?.text()
+            title = document.selectFirst("h1.entry-title")?.text()?.trim().orEmpty()
+            description = document.selectFirst("#cover, .entry-content p")?.text()
+            thumbnail_url = document.selectFirst(".entry-content img, #cover img")?.let {
+                it.attr("abs:src").ifBlank { it.attr("src") }
+            }
+            val tags = document.select("div.entry-category a, span.tag-links a").joinToString { it.text().trim() }
+            if (tags.isNotBlank()) genre = tags
         }
 
         document.select(".data .boxye2").forEach { element ->
@@ -91,13 +98,29 @@ class Javgg :
 
     override fun popularAnimeParse(response: Response): AnimesPage {
         val document = response.asJsoup()
+        val modernElements = document.select("div.ht_grid_1_5")
+        if (modernElements.isNotEmpty()) {
+            val nextPage = document.select("a.next.page-numbers, #nextpagination").any()
+            val animeList = modernElements.mapNotNull { element ->
+                val titleEl = element.selectFirst("h2.entry-title a, .entry-title a") ?: return@mapNotNull null
+                val href = titleEl.attr("abs:href").ifBlank { element.selectFirst("a.thumbnail-link")?.attr("abs:href").orEmpty() }
+                if (href.isBlank()) return@mapNotNull null
+                SAnime.create().apply {
+                    setUrlWithoutDomain(href)
+                    title = titleEl.text().trim()
+                    thumbnail_url = element.selectFirst(".thumbnail-wrap, img")?.getImageUrl()
+                }
+            }
+            return AnimesPage(animeList, nextPage)
+        }
+
         val elements = document.select("article[id*=post-]")
         val nextPage = document.select("#nextpagination, a.next, a.next.page-numbers").any()
         val animeList = elements.map { element ->
             SAnime.create().apply {
                 setUrlWithoutDomain(element.selectFirst("a")!!.attr("abs:href"))
-                title = element.selectFirst(".data h3")!!.text()
-                thumbnail_url = element.selectFirst(".poster")?.getImageUrl()
+                title = element.selectFirst(".data h3, h2.entry-title")!!.text()
+                thumbnail_url = element.selectFirst(".poster, .thumbnail-wrap")?.getImageUrl()
             }
         }
         return AnimesPage(animeList, nextPage)
@@ -108,14 +131,24 @@ class Javgg :
     override fun latestUpdatesRequest(page: Int) = GET("$baseUrl/page/$page/", headers)
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request = when {
-        query.isNotBlank() -> GET("$baseUrl/jav/page/$page?s=$query", headers)
+        query.isNotBlank() -> {
+            val encoded = android.net.Uri.encode(query)
+            if (page <= 1) {
+                GET("$baseUrl/?s=$encoded", headers)
+            } else {
+                GET("$baseUrl/page/$page/?s=$encoded", headers)
+            }
+        }
         else -> popularAnimeRequest(page)
     }
 
     override fun searchAnimeParse(response: Response): AnimesPage {
         val document = response.asJsoup()
+        if (document.select("div.ht_grid_1_5").isNotEmpty()) {
+            return popularAnimeParse(response)
+        }
         val elements = document.select(".result-item article")
-        val nextPage = document.select("#nextpagination").any()
+        val nextPage = document.select("#nextpagination, a.next.page-numbers").any()
         val animeList = elements.map { element ->
             SAnime.create().apply {
                 setUrlWithoutDomain(element.selectFirst("a")!!.attr("abs:href"))
@@ -145,7 +178,10 @@ class Javgg :
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val document = response.asJsoup()
-        return if (document.select(".dooplay_player_option").any()) {
+        val hasPlayers = document.select(".dooplay_player_option").any() ||
+            document.select("a[href*='drive.google.com/file/d/']").any() ||
+            document.select("[id*=source-player] iframe, .responsive-player iframe").any()
+        return if (hasPlayers) {
             listOf(
                 SEpisode.create().apply {
                     name = "Episode 1"
@@ -160,11 +196,19 @@ class Javgg :
 
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
-        return document.select("[id*=source-player] iframe").parallelCatchingFlatMapBlocking {
+        val dooplayVideos = document.select("[id*=source-player] iframe").parallelCatchingFlatMapBlocking {
             val numOpt = it.closest(".source-box")?.attr("id")?.replace("source-player-", "")
             val serverName = document.select("[data-nume=\"$numOpt\"] .server").attr("data-text")
             serverVideoResolver(serverName, it.attr("src"))
         }
+        val driveExtractor = GoogleDriveExtractor(client, headers)
+        val gdriveVideos = document.select("a[href*='drive.google.com/file/d/']")
+            .mapNotNull { Regex("""/file/d/([a-zA-Z0-9_-]+)""").find(it.attr("href"))?.groupValues?.get(1) }
+            .distinct()
+            .parallelCatchingFlatMapBlocking { fileId ->
+                driveExtractor.videosFromUrl(fileId, "Google Drive")
+            }
+        return dooplayVideos + gdriveVideos
     }
 
     private suspend fun serverVideoResolver(server: String, url: String): List<Video> {

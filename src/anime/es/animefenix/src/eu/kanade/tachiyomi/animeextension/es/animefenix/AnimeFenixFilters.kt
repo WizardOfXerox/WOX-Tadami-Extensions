@@ -2,7 +2,6 @@ package eu.kanade.tachiyomi.animeextension.es.animefenix
 
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
-import java.util.Calendar
 
 object AnimeFenixFilters {
     open class QueryPartFilter(displayName: String, val vals: Array<Pair<String, String>>) :
@@ -10,14 +9,14 @@ object AnimeFenixFilters {
             displayName,
             vals.map { it.first }.toTypedArray(),
         ) {
-        fun toQueryPart(name: String) = vals[state].second.takeIf { it.isNotEmpty() }?.let { "&$name=${vals[state].second}" } ?: run { "" }
+        fun toQueryPart(name: String) = vals[state].second.takeIf { it.isNotEmpty() }?.let { "&$name=${android.net.Uri.encode(vals[state].second)}" } ?: ""
     }
 
     private inline fun <reified R> AnimeFilterList.asQueryPart(name: String): String = (this.getFirst<R>() as QueryPartFilter).toQueryPart(name)
 
     private inline fun <reified R> AnimeFilterList.getFirst(): R = this.filterIsInstance<R>().first()
 
-    private fun String.changePrefix() = this.takeIf { it.startsWith("&") }?.let { this.replaceFirst("&", "?") } ?: run { this }
+    private fun String.changePrefix() = this.takeIf { it.startsWith("&") }?.let { this.replaceFirst("&", "?") } ?: this
 
     data class FilterSearchParams(val filter: String = "") {
         fun getQuery() = filter.changePrefix()
@@ -26,11 +25,10 @@ object AnimeFenixFilters {
     internal fun getSearchParameters(filters: AnimeFilterList): FilterSearchParams {
         if (filters.isEmpty()) return FilterSearchParams()
         return FilterSearchParams(
-            filters.asQueryPart<StateFilter>("estado") +
-                filters.asQueryPart<TypesFilter>("tipo") +
-                filters.asQueryPart<GenresFilter>("genero") +
-                filters.asQueryPart<YearsFilter>("estreno") +
-                filters.asQueryPart<LangFilter>("idioma"),
+            filters.asQueryPart<StateFilter>("status") +
+                filters.asQueryPart<TypesFilter>("type") +
+                filters.asQueryPart<GenresFilter>("genre") +
+                filters.asQueryPart<SortFilter>("sort"),
         )
     }
 
@@ -39,105 +37,121 @@ object AnimeFenixFilters {
         StateFilter(),
         TypesFilter(),
         GenresFilter(),
-        YearsFilter(),
-        LangFilter(),
+        SortFilter(),
     )
 
     class StateFilter : QueryPartFilter("Estado", AnimeFenixFiltersData.STATE)
     class TypesFilter : QueryPartFilter("Tipo", AnimeFenixFiltersData.TYPES)
     class GenresFilter : QueryPartFilter("Género", AnimeFenixFiltersData.GENRES)
-    class YearsFilter : QueryPartFilter("Año", AnimeFenixFiltersData.YEARS)
-    class LangFilter : QueryPartFilter("Idioma", AnimeFenixFiltersData.LANGUAGE)
+    class SortFilter : QueryPartFilter("Orden", AnimeFenixFiltersData.SORT)
 
     private object AnimeFenixFiltersData {
         val STATE = arrayOf(
             Pair("Todos", ""),
-            Pair("Emisión", "2"),
-            Pair("Finalizado", "1"),
-            Pair("Próximamente", "3"),
+            Pair("En emisión", "airing"),
+            Pair("Finalizado", "finished"),
+            Pair("Próximamente", "upcoming"),
         )
 
         val TYPES = arrayOf(
             Pair("Todos", ""),
-            Pair("TV", "1"),
-            Pair("Película", "2"),
-            Pair("OVA", "3"),
-            Pair("Especial", "4"),
-            Pair("Serie", "9"),
-            Pair("Dorama", "11"),
-            Pair("Corto", "14"),
-            Pair("Donghua", "15"),
-            Pair("ONA", "16"),
-            Pair("Live Action", "17"),
-            Pair("Manhwa", "18"),
-            Pair("Teatral", "19"),
+            Pair("TV Anime", "TV Anime"),
+            Pair("Película", "Película"),
+            Pair("OVA", "OVA"),
+            Pair("ONA", "ONA"),
+            Pair("Especial", "Especial"),
+        )
+
+        val SORT = arrayOf(
+            Pair("Predeterminado", ""),
+            Pair("Nombre", "title"),
+            Pair("Mejor valorados", "rating"),
+            Pair("Más recientes", "newest"),
+            Pair("Más antiguos", "oldest"),
         )
 
         val GENRES = arrayOf(
             Pair("Todos", ""),
-            Pair("Acción", "1"),
-            Pair("Escolares", "2"),
-            Pair("Romance", "3"),
-            Pair("Shoujo", "4"),
-            Pair("Comedia", "5"),
-            Pair("Drama", "6"),
-            Pair("Seinen", "7"),
-            Pair("Deportes", "8"),
-            Pair("Shounen", "9"),
-            Pair("Recuentos de la vida", "10"),
-            Pair("Ecchi", "11"),
-            Pair("Sobrenatural", "12"),
-            Pair("Fantasía", "13"),
-            Pair("Magia", "14"),
-            Pair("Superpoderes", "15"),
-            Pair("Demencia", "16"),
-            Pair("Misterio", "17"),
-            Pair("Psicológico", "18"),
-            Pair("Suspenso", "19"),
-            Pair("Ciencia Ficción", "20"),
-            Pair("Mecha", "21"),
-            Pair("Militar", "22"),
-            Pair("Aventuras", "23"),
-            Pair("Historico", "24"),
-            Pair("Infantil", "25"),
-            Pair("Artes Marciales", "26"),
-            Pair("Terror", "27"),
-            Pair("Harem", "28"),
-            Pair("Josei", "29"),
-            Pair("Parodia", "30"),
-            Pair("Policía", "31"),
-            Pair("Juegos", "32"),
-            Pair("Carreras", "33"),
-            Pair("Samurai", "34"),
-            Pair("Espacial", "35"),
-            Pair("Música", "36"),
-            Pair("Yuri", "37"),
-            Pair("Demonios", "38"),
-            Pair("Vampiros", "39"),
-            Pair("Yaoi", "40"),
-            Pair("Humor Negro", "41"),
-            Pair("Crimen", "42"),
-            Pair("Hentai", "43"),
-            Pair("Youtuber", "44"),
-            Pair("MaiNess Random", "45"),
-            Pair("Donghua", "46"),
-            Pair("Horror", "47"),
-            Pair("Sin Censura", "48"),
-            Pair("Gore", "49"),
-            Pair("Live Action", "50"),
-            Pair("Isekai", "51"),
-            Pair("Gourmet", "52"),
-            Pair("spokon", "53"),
-            Pair("Zombies", "54"),
-            Pair("Idols", "55"),
+            Pair("3D", "3d"),
+            Pair("Acción", "accion"),
+            Pair("Ahegao", "ahegao"),
+            Pair("Anal", "anal"),
+            Pair("Antropomórfico", "antropomorfico"),
+            Pair("Artes Marciales", "artes-marciales"),
+            Pair("Aventura", "aventura"),
+            Pair("Bondage", "bondage"),
+            Pair("Carreras", "carreras"),
+            Pair("Casadas", "casadas"),
+            Pair("Chikan", "chikan"),
+            Pair("Ciencia Ficción", "ciencia-ficcion"),
+            Pair("Comedia", "comedia"),
+            Pair("Deportes", "deportes"),
+            Pair("Detectives", "detectives"),
+            Pair("Drama", "drama"),
+            Pair("Ecchi", "ecchi"),
+            Pair("Elenco Adulto", "elenco-adulto"),
+            Pair("Elfas", "elfas"),
+            Pair("Enfermeras", "enfermeras"),
+            Pair("Escolares", "escolares"),
+            Pair("Espacial", "espacial"),
+            Pair("Fantasía", "fantasia"),
+            Pair("Futanari", "futanari"),
+            Pair("Gal", "gal"),
+            Pair("Gore", "gore"),
+            Pair("Gourmet", "gourmet"),
+            Pair("Hardcore", "hardcore"),
+            Pair("Harem", "harem"),
+            Pair("Histórico", "historico"),
+            Pair("Idols (Hombre)", "idols-hombre"),
+            Pair("Idols (Mujer)", "idols-mujer"),
+            Pair("Incesto", "incesto"),
+            Pair("Infantil", "infantil"),
+            Pair("Isekai", "isekai"),
+            Pair("Josei", "josei"),
+            Pair("Juegos Estrategia", "juegos-estrategia"),
+            Pair("Juegos Sexuales", "juegos-sexuales"),
+            Pair("Mahou Shoujo", "mahou-shoujo"),
+            Pair("Maids", "maids"),
+            Pair("Mecha", "mecha"),
+            Pair("Milfs", "milfs"),
+            Pair("Militar", "militar"),
+            Pair("Misterio", "misterio"),
+            Pair("Mitología", "mitologia"),
+            Pair("Música", "musica"),
+            Pair("Netorare", "netorare"),
+            Pair("Ninfomanía", "ninfomania"),
+            Pair("Ninjas", "ninjas"),
+            Pair("Orgías", "orgias"),
+            Pair("Oyakodon", "oyakodon"),
+            Pair("Paizuri", "paizuri"),
+            Pair("Parodia", "parodia"),
+            Pair("Petit", "petit"),
+            Pair("Psicológico", "psicologico"),
+            Pair("Recuentos de la Vida", "recuentos-de-la-vida"),
+            Pair("Romance", "romance"),
+            Pair("Samurái", "samurai"),
+            Pair("Seinen", "seinen"),
+            Pair("Shota", "shota"),
+            Pair("Shoujo", "shoujo"),
+            Pair("Shoujo Ai", "shoujo-ai"),
+            Pair("Shounen", "shounen"),
+            Pair("Shounen Ai", "shounen-ai"),
+            Pair("Sobrenatural", "sobrenatural"),
+            Pair("Softcore", "softcore"),
+            Pair("Succubus", "succubus"),
+            Pair("Superpoderes", "superpoderes"),
+            Pair("Suspenso", "suspenso"),
+            Pair("Teacher", "teacher"),
+            Pair("Tentáculos", "tentaculos"),
+            Pair("Terror", "terror"),
+            Pair("Tetonas", "tetonas"),
+            Pair("Threesome", "threesome"),
+            Pair("Vampiros", "vampiros"),
+            Pair("Vanilla", "vanilla"),
+            Pair("Violación", "violacion"),
+            Pair("Vírgenes", "virgenes"),
+            Pair("Yaoi", "yaoi"),
+            Pair("Yuri", "yuri"),
         )
-
-        val LANGUAGE = arrayOf(
-            Pair("Todos", ""),
-            Pair("Japonés", "1"),
-            Pair("Latino", "2"),
-        )
-
-        val YEARS = arrayOf(Pair("Todos", "")) + (1967..Calendar.getInstance().get(Calendar.YEAR)).map { Pair("$it", "$it") }.reversed().toTypedArray()
     }
 }

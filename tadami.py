@@ -632,7 +632,11 @@ def cmd_build(args):
                 source_blocks = len(re.findall(r"\bsource\s*\{", bg_txt))
                 has_mirrors = "mirrors(" in bg_txt
                 if source_blocks <= 1 or has_mirrors:
-                    m_url = re.search(r'baseUrl\s*=\s*"([^"]+)"', bg_txt) or re.search(r'mirrors\s*\(\s*"([^"]+)"', bg_txt, re.S)
+                    m_url = (
+                        re.search(r'baseUrl\s*=\s*"([^"]+)"', bg_txt)
+                        or re.search(r'baseUrl\s*\{\s*(?:custom\s*\(\s*)?"([^"]+)"', bg_txt, re.S)
+                        or re.search(r'mirrors\s*\(\s*"([^"]+)"', bg_txt, re.S)
+                    )
                     if m_url:
                         primary_base_url = m_url.group(1)
 
@@ -947,15 +951,14 @@ ANIME_MULTISRC_MAP = {
     "animestream": {
         "path": "/anime/?page=1&order=popular",
         "selector": "bsx, article, uta",
-        "search": {"path": "/page/1/?s={q}", "selector": "bsx, article, listupd"},
+        "search": {"path": "/?s={q}", "selector": "bsx, article, listupd"},
         "filter": {"path": "/anime/?page=1&status=ongoing&order=popular", "selector": "bsx, article, listupd"},
         "has_filters": True,
     },
     "dooplay": {
         "path": "/movies/",
         "selector": "item, poster, data",
-        "search": {"path": "/page/1/?s={q}", "selector": "result-item, item, search-page"},
-        "filter": {"path": "/genre/action/", "selector": "item, poster, items"},
+        "search": {"path": "/?s={q}", "selector": "result-item, item, search-page"},
         "has_filters": True,
     },
     "zorotheme": {
@@ -1025,8 +1028,8 @@ def _resolve_kt_placeholders(raw, api_url="", is_search=False):
     raw = raw.replace('$searchUrl', api_url).replace('${searchUrl}', api_url)
     raw = raw.replace('$baseUrl', '').replace('${baseUrl}', '')
     if is_search:
-        raw = re.sub(r'\$\{(?:query|encodedQuery|searchQuery)[^}]*\}', '{q}', raw)
-        raw = re.sub(r'\$(?:query|encodedQuery|searchQuery)\b', '{q}', raw)
+        raw = re.sub(r'\$\{[^}]*\b(?:query|encodedQuery|searchQuery)\b[^}]*\}', '{q}', raw)
+        raw = re.sub(r'\$(?:query|encodedQuery|searchQuery|encoded|q)\b', '{q}', raw)
     raw = raw.replace('$page', '1').replace('${page}', '1').replace('$offset', '0').replace('${offset}', '0')
     if not is_search:
         raw = re.sub(r'\$\{[^}]+\}', '0', raw)
@@ -1043,21 +1046,36 @@ def _extract_kt_http_builder(body, api_url=""):
     m = re.search(r'(?:"([^"]*)"|(baseUrl|apiUrl|baseApiUrl|searchUrl))\.toHttpUrl(?:OrNull)?\(\)\.newBuilder\(\)', body)
     if not m:
         return None
-    base_part = _resolve_kt_placeholders(m.group(1) if m.group(1) is not None else f"${m.group(2)}", api_url, is_search=True)
-    tail = body[m.end():m.end() + 900]
+    raw_base_part = _resolve_kt_placeholders(m.group(1) if m.group(1) is not None else f"${m.group(2)}", api_url, is_search=True)
+    had_trailing_slash = raw_base_part.endswith("/")
+    base_part = raw_base_part
+    tail = body[m.end():m.end() + 1200]
+    tail = re.sub(r'if\s*\(\s*page\s*>\s*1\s*\)\s*\{[^}]*\}', '', tail)
+    tail = re.sub(r'if\s*\(\s*query\.(?:isEmpty|isBlank)\(\)\s*\)\s*\{[^{}]*\}\s*else\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}', r'\1', tail)
+    tail = re.sub(r'if\s*\(\s*query\.(?:isNotBlank|isNotEmpty)\(\)\s*\)\s*\{([^{}]*)\}\s*else\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', r'\1', tail)
     cut_m = re.search(r'\.build\(\)|\bfilters\.forEach|\bfilterList\b', tail)
     if cut_m:
         tail = tail[:cut_m.start()]
     segs = []
     qparams = []
-    for call_m in re.finditer(r'\.(addPathSegment|addEncodedPathSegments|addQueryParameter)\(\s*([^)]+)\)', tail):
+    trailing_empty_seg = False
+    for call_m in re.finditer(r'\.?(addPathSegment|addEncodedPathSegments|addQueryParameter)\(\s*([^)]+)\)', tail):
         kind_c, args_s = call_m.group(1), call_m.group(2).strip()
         if kind_c in ("addPathSegment", "addEncodedPathSegments"):
             lit = re.match(r'^"([^"]*)"$', args_s)
             if lit:
-                segs.append(lit.group(1).strip('/'))
+                val_seg = lit.group(1).strip('/')
+                if val_seg:
+                    segs.append(val_seg)
+                    trailing_empty_seg = False
+                elif args_s == '""' and segs:
+                    trailing_empty_seg = True
             elif re.search(r'\b(?:query|encodedQuery|searchQuery)\b', args_s):
                 segs.append('{q}')
+                trailing_empty_seg = False
+            elif re.search(r'\bpage\b', args_s):
+                segs.append('1')
+                trailing_empty_seg = False
         else:
             parts = [p.strip() for p in args_s.split(',', 1)]
             if len(parts) == 2 and parts[0].startswith('"') and parts[0].endswith('"'):
@@ -1073,13 +1091,22 @@ def _extract_kt_http_builder(body, api_url=""):
     clean_base = base_part.rstrip('/')
     path_str = "/".join([s for s in segs if s])
     if clean_base.startswith(("http://", "https://")):
-        url = f"{clean_base}/{path_str}" if path_str else clean_base
+        url = f"{clean_base}/{path_str}" if path_str else (f"{clean_base}/" if had_trailing_slash else clean_base)
     else:
         b = "/" + clean_base.lstrip('/') if clean_base else ""
-        url = f"{b}/{path_str}".replace('//', '/') if path_str else (b or "/")
+        if path_str:
+            url = f"{b}/{path_str}".replace('//', '/')
+        elif b:
+            url = f"{b}/" if had_trailing_slash else b
+        else:
+            url = "/"
+    if trailing_empty_seg and not url.endswith("/"):
+        url += "/"
     if qparams:
         sep = "&" if "?" in url else "?"
         url = f"{url}{sep}{'&'.join(qparams)}"
+    if '$' in url or ' ' in url:
+        return None
     if '{q}' not in url and url in ("", "/"):
         return None
     return {"method": "GET", "path": url}
@@ -1110,9 +1137,9 @@ def _extract_search_spec_from_body(body, api_url=""):
     if len(form_candidates) == 1 and "if (query" not in body and "if(query" not in body:
         return form_candidates[0][1]
 
-    # 2. Direct GET("...") string literal
-    get_literals = re.findall(r'GET\(\s*"([^"]+)"', body)
-    prioritized = [g for g in get_literals if any(k in g for k in ('query', 'encodedQuery', 'searchQuery'))]
+    # 2. Direct GET("...") string literal (supports nested "..." inside ${...} like URLEncoder.encode(query, "UTF-8"))
+    get_literals = re.findall(r'GET\(\s*"((?:\$\{[^}]*\}|[^"])+)"', body)
+    prioritized = [g for g in get_literals if any(k in g for k in ('query', 'encodedQuery', 'searchQuery', '$encoded', '$q'))]
     for raw_g in prioritized + [g for g in get_literals if g not in prioritized]:
         resolved = _resolve_kt_placeholders(raw_g, api_url, is_search=True)
         if '$' not in resolved and ' ' not in resolved and ('{q}' in resolved or len(resolved) > 1):
@@ -1124,7 +1151,7 @@ def _extract_search_spec_from_body(body, api_url=""):
 def _extract_kotlin_rules(code, is_anime=True, sibling_filter_code=""):
     """Extract catalog, search API, and filter metadata from an Aniyomi/Tachiyomi Kotlin source."""
     kind = "Anime" if is_anime else "Manga"
-    api_m = re.search(r'val\s+(?:baseApiUrl|apiUrl|searchUrl)\s*=\s*"([^"]+)"', code)
+    api_m = re.search(r'(?:override\s+)?val\s+(?:baseApiUrl|apiUrl|searchUrl)(?:\s*:\s*String)?\s*(?:get\(\)\s*)?=\s*"([^"]+)"', code)
     api_url = api_m.group(1) if api_m else ""
 
     # Popular / Catalog rule
@@ -1164,10 +1191,13 @@ def _extract_kotlin_rules(code, is_anime=True, sibling_filter_code=""):
     else:
         for cand_m in (priv_m, override_m, get_m):
             if cand_m:
-                spec = _extract_search_spec_from_body(cand_m.group(0), api_url)
+                cbody = cand_m.group(0)
+                spec = _extract_search_spec_from_body(cbody, api_url)
                 if spec:
                     if eff_search_sel:
                         spec["selector"] = eff_search_sel
+                    if "XMLHttpRequest" in cbody or "XMLHttpRequest" in code:
+                        spec["xhr"] = True
                     search_spec = spec
                     break
 
@@ -1237,7 +1267,8 @@ def extract_anime_rules():
 
             sibling_filter_code = ""
             main_kts = []
-            for r_sub, _, r_files in os.walk(root):
+            for r_sub, r_dirs, r_files in os.walk(root):
+                r_dirs[:] = [d for d in r_dirs if d not in SKIP_DIRS]
                 for rf in r_files:
                     if not rf.endswith(".kt"):
                         continue
@@ -1372,7 +1403,7 @@ MULTISRC_MAP = {
     "libgroup": {
         "path": "/api/manga",
         "selector": "manga",
-        "search": {"path": "/api/manga?q={q}", "selector": "data, name"},
+        "search": {"path": "https://api.cdnlibs.org/api/manga?q={q}", "selector": "data, name"},
         "has_filters": True,
     },
     "liliana": {"path": "/all-manga/1/?sort=last_update", "selector": "grid"},
@@ -1399,7 +1430,7 @@ MULTISRC_MAP = {
         "path": "/manga-list",
         "selector": "truyen-list, list-truyen-item-wrap, item",
         "search": {"path": "/search/story/{q_under}?page=1", "selector": "story_item, panel-search-story, list-truyen-item-wrap, item"},
-        "filter": {"path": "/manga-list?type=topview&page=1", "selector": "list-truyen-item-wrap, truyen-list, item"},
+        "filter": {"path": "/genre/all?type=topview&page=1", "selector": "list-truyen-item-wrap, truyen-list, item"},
         "has_filters": True,
     },
     "mangacatalog": {"path": "/", "selector": "flex-col, bg-bg-secondary", "search_supported": False},
@@ -1466,7 +1497,7 @@ MULTISRC_MAP = {
     "pizzareader": {
         "path": "/comics",
         "selector": "comic",
-        "search": {"path": "/api/v1/search/{q}", "selector": "comics, title, slug"},
+        "search": {"path": "/api/search/{q}", "selector": "comics, title, slug"},
     },
     "scanreader": {"path": "/bibliotheque/page/1/?sort=views", "selector": "manga-card"},
     "senkuro": {"path": "/", "selector": "manga"},
@@ -1548,7 +1579,8 @@ def extract_manga_rules(only_pkgs=None):
 
             sibling_filter_code = ""
             main_kts = []
-            for r_sub, _, r_files in os.walk(root):
+            for r_sub, r_dirs, r_files in os.walk(root):
+                r_dirs[:] = [d for d in r_dirs if d not in SKIP_DIRS]
                 for rf in r_files:
                     if not rf.endswith(".kt"):
                         continue
@@ -1578,13 +1610,36 @@ def extract_manga_rules(only_pkgs=None):
                     if filter_spec and "/manga" in filter_spec.get("path", ""):
                         filter_spec["path"] = filter_spec["path"].replace("/manga", sub, 1)
 
-                m_sp = re.search(r'override\s+val\s+(?:searchPath|searchPathSegment)\s*=\s*"([^"]+)"', combined_kt)
+                m_sp = re.search(r'override\s+val\s+(?:searchPath|searchPathSegment)\s*=\s*"([^"]*)"', combined_kt)
                 if m_sp and search_spec and "/search" in search_spec.get("path", ""):
-                    search_spec["path"] = search_spec["path"].replace("/search", "/" + m_sp.group(1).lstrip("/"), 1)
+                    sp_seg = m_sp.group(1).strip("/")
+                    search_spec["path"] = search_spec["path"].replace("/search", f"/{sp_seg}" if sp_seg else "", 1)
 
-                m_api = re.search(r'(?:override\s+)?val\s+apiUrl\s*=\s*"(https?://[^"]+)"', combined_kt)
-                if m_api and search_spec and search_spec.get("path", "").startswith("/api/"):
-                    search_spec["path"] = m_api.group(1).rstrip("/") + "/" + search_spec["path"][5:].lstrip("/")
+                m_um = re.search(r'override\s+val\s+urlModifier\s*=\s*"([^"]*)"', combined_kt)
+                if m_um:
+                    um = "/" + m_um.group(1).strip("/")
+                    if um != "/":
+                        if path and not path.startswith(um):
+                            path = f"{um}/{path.lstrip('/')}"
+                        if search_spec and not search_spec.get("path", "").startswith(("http://", "https://", um)):
+                            search_spec["path"] = f"{um}/{search_spec['path'].lstrip('/')}"
+
+                m_api = re.search(r'(?:override\s+)?val\s+apiUrl(?:\s*:\s*String\s*get\(\))?\s*=\s*"(https?://[^"]+)"', combined_kt)
+                if m_api:
+                    if search_spec and search_spec.get("path", "").startswith("/api/"):
+                        search_spec["path"] = m_api.group(1).rstrip("/") + "/" + search_spec["path"][5:].lstrip("/")
+                    if filter_spec and filter_spec.get("path", "").startswith("/api/"):
+                        filter_spec["path"] = m_api.group(1).rstrip("/") + "/" + filter_spec["path"][5:].lstrip("/")
+
+                if "override fun searchMangaRequest" in combined_kt:
+                    parsed_k = _extract_kotlin_rules(combined_kt, is_anime=False, sibling_filter_code=sibling_filter_code)
+                    if not parsed_k["search_supported"]:
+                        search_supported = False
+                        search_spec = None
+                        filter_spec = parsed_k["filter"]
+                    elif parsed_k["search"]:
+                        search_spec = parsed_k["search"]
+                        filter_spec = parsed_k["filter"]
 
                 local_f_cnt = _count_kotlin_filters(combined_kt + "\n" + sibling_filter_code)
                 f_cnt = max(local_f_cnt, theme_filter_counts.get(theme, 0))
@@ -1623,7 +1678,7 @@ NOVEL_TEMPLATE_MAP = {
         "has_filters": True,
     },
     "lightnovelwp": {
-        "search": {"path": "/page/1/?s={q}", "selector": "article, ts-post-image, entry-title, bsx"},
+        "search": {"path": "/?s={q}", "selector": "article, ts-post-image, entry-title, bsx"},
         "filter": {"path": "/series/?status=ongoing&order=popular", "selector": "article, ts-post-image, entry-title, bsx"},
         "has_filters": True,
     },
@@ -1632,7 +1687,7 @@ NOVEL_TEMPLATE_MAP = {
         "has_filters": True,
     },
     "mtlnovel": {
-        "search": {"path": "/wp-admin/admin-ajax.php?action=autosuggest&q={q}", "selector": "items, results, name"},
+        "search": {"path": "/search/?q={q}", "selector": "novel-box, novel-list"},
         "has_filters": True,
     },
     "ifreedom": {
@@ -1677,8 +1732,11 @@ def _extract_balanced_block(text, open_idx, open_ch="{", close_ch="}"):
                 return text[open_idx:idx + 1]
     return ""
 
-def _parse_js_concat_url(expr, q_var, p_var):
-    """Evaluate minified ES5 this.site + / .concat(...) search URL expressions."""
+def _parse_js_concat_url(expr, q_var, p_var, api_base=""):
+    """Evaluate minified ES5 this.site / this.apiBase + / .concat(...) search URL expressions."""
+    if p_var:
+        expr = re.sub(rf'\(\s*{re.escape(p_var)}\s*\|\|\s*(\d+)\s*\)', r'\1', expr)
+    expr = re.sub(r'\(\s*page\w*\s*\|\|\s*(\d+)\s*\)', r'\1', expr)
     tokens = []
     i = 0
     n = len(expr)
@@ -1700,6 +1758,9 @@ def _parse_js_concat_url(expr, q_var, p_var):
                     buf.append(c)
                     i += 1
             tokens.append(("str", "".join(buf)))
+        elif expr.startswith("this.apiBase", i):
+            tokens.append(("str", api_base))
+            i += 12
         elif expr.startswith("this.site", i) or expr.startswith("this.baseUrl", i):
             tokens.append(("str", ""))
             i += 9 if expr.startswith("this.site", i) else 12
@@ -1765,8 +1826,10 @@ def _extract_novel_search_and_filters(txt, fallback_sel):
 
         src_sels = re.findall(r'\(\s*["\']([^"\']+)["\']\s*\)\.each', scope)
         eff_sel = ", ".join(dict.fromkeys(src_sels)) if src_sels else fallback_sel
+        m_apib = re.search(r'this\.apiBase\s*=\s*["\']([^"\']+)["\']', txt)
+        api_base = m_apib.group(1) if m_apib else ""
 
-        # Case 1: FormData POST (e.g., dilartube)
+        # Case 1: FormData POST (e.g., dilartube legacy)
         if "FormData" in scope and 'method:"POST"' in scope.replace(" ", ""):
             m_post = re.search(r'fetchApi\)\(\s*([^,]+),\s*\{\s*method:\s*["\']POST["\']', scope)
             data = {}
@@ -1778,15 +1841,33 @@ def _extract_novel_search_and_filters(txt, fallback_sel):
                     data[k] = lit.group(1)
             if m_post and data:
                 raw_url = m_post.group(1).strip()
-                url_val = raw_url[1:-1] if len(raw_url) >= 2 and raw_url[0] in ('"', "'") else _parse_js_concat_url(raw_url, q_var, p_var)
+                url_val = raw_url[1:-1] if len(raw_url) >= 2 and raw_url[0] in ('"', "'") else _parse_js_concat_url(raw_url, q_var, p_var, api_base)
                 if url_val:
                     search_spec = {"method": "POST", "path": url_val, "data": data, "selector": eff_sel}
 
-        # Case 2: Standard GET URL concat / + chain referencing this.site or https://
+        # Case 1b: JSON.stringify POST (e.g., dilartube updated)
+        if not search_spec and "JSON.stringify" in scope and 'method:"POST"' in scope.replace(" ", ""):
+            m_post = re.search(r'fetchApi\)\(\s*([^,]+),\s*\{[\s\S]{0,160}?method:\s*["\']POST["\']', scope)
+            m_json_obj = re.search(r'JSON\.stringify\(\s*(\{[\s\S]{0,400}?\})\s*\)', scope)
+            if m_post and m_json_obj:
+                raw_url = m_post.group(1).strip()
+                url_val = raw_url[1:-1] if len(raw_url) >= 2 and raw_url[0] in ('"', "'") else _parse_js_concat_url(raw_url, q_var, p_var, api_base)
+                obj_txt = m_json_obj.group(1)
+                if q_var:
+                    obj_txt = re.sub(rf':\s*{re.escape(q_var)}\b', ':"{q}"', obj_txt)
+                obj_txt = re.sub(r'([{\[,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:', r'\1"\2":', obj_txt)
+                try:
+                    jdata = json.loads(obj_txt)
+                except Exception:
+                    jdata = None
+                if url_val and isinstance(jdata, dict):
+                    search_spec = {"method": "POST", "path": url_val, "data": jdata, "json_body": True, "selector": eff_sel}
+
+        # Case 2: Standard GET URL concat / + chain referencing this.site, this.apiBase or https://
         if not search_spec:
-            for u_m in re.finditer(r'(?:""\.concat\(\s*this\.site\b|this\.site\s*\+|["\']https?://[^"\']+["\']\.(?:concat)|\bthis\.site\b\s*\+)', scope):
+            for u_m in re.finditer(r'(?:""\.concat\(\s*this\.(?:site|apiBase)\b|this\.(?:site|apiBase)\s*\+|["\']https?://[^"\']+["\']\.(?:concat)|\bthis\.(?:site|apiBase)\b\s*\+)', scope):
                 start = u_m.start()
-                # Scan until top-level delimiter (, ; ) ])
+                # Scan until top-level delimiter (, ; : ) ])
                 depth = 0
                 in_q = None
                 esc = False
@@ -1804,11 +1885,11 @@ def _extract_novel_search_and_filters(txt, fallback_sel):
                             if depth == 0:
                                 break
                             depth -= 1
-                        elif depth == 0 and c in ",;":
+                        elif depth == 0 and c in ",;:":
                             break
                     end += 1
                 expr = scope[start:end].strip()
-                parsed_url = _parse_js_concat_url(expr, q_var, p_var)
+                parsed_url = _parse_js_concat_url(expr, q_var, p_var, api_base)
                 if parsed_url and '{q}' in parsed_url:
                     search_spec = {"method": "GET", "path": parsed_url, "selector": eff_sel}
                     break
@@ -1830,13 +1911,15 @@ def extract_novel_rules():
                         txt = fp.read()
                 except Exception:
                     continue
-                id_m = re.search(r'this\.id\s*=\s*"([^"]+)"', txt)
+                id_m = re.search(r'this\.id\s*=\s*"([^"]+)"', txt) or re.search(r'\bid\s*:\s*["\']([^"\']+)["\']', txt)
                 nid = id_m.group(1).lower() if id_m else f.split('[')[0].lower()
                 tpl_m = re.search(r'\[([^\]]+)\]', f)
                 tpl = tpl_m.group(1).lower() if tpl_m else ""
                 path = ""
                 sel = ""
-                if 'MadaraPlugin' in txt or tpl == 'madara':
+                if 'this.apiBase' in txt:
+                    tpl = "custom"
+                elif 'MadaraPlugin' in txt or tpl == 'madara':
                     tpl = "madara"
                     path = "/page/1/?s=&post_type=wp-manga"
                     sel = "post-title, page-item-detail, c-tabs-item"
@@ -1871,6 +1954,12 @@ def extract_novel_rules():
                     tinfo = NOVEL_TEMPLATE_MAP[tpl]
                     if not src_spec and tinfo.get("search"):
                         src_spec = dict(tinfo["search"])
+                        if tpl == "readnovelfull":
+                            m_sp = re.search(r'searchPage\s*:\s*["\']([^"\']+)["\']', txt)
+                            m_sk = re.search(r'searchKey\s*:\s*["\']([^"\']+)["\']', txt)
+                            sp = (m_sp.group(1).strip("/") if m_sp else "search")
+                            sk = (m_sk.group(1) if m_sk else "keyword")
+                            src_spec["path"] = f"/{sp}?{sk}={{q}}"
                     if tinfo.get("filter"):
                         flt_spec = dict(tinfo["filter"])
                     has_filters = has_filters or tinfo.get("has_filters", False)
@@ -1943,7 +2032,8 @@ SELECTOR_OVERRIDES = {
     "omicaso": ["is-grid", "premium-manga-card", "entry-portal", "trend-card"],
     "kumopoi": ["portal-card", "comic-types", "card"],
     "sektenovel": ["card"],
-    "mtlnovel": ["item", "ch-link"],
+    "mtlnovel": ["novel-box", "novel-list"],
+    "nartag": ["comic-card", "lib-grid"],
     "ichicomi": ["MainVisualArea_header_nav_item__z9reM", "item"],
     "magazinepocket": ["l-header__item01", "item"],
     "mangaup": ["item", "series"],
@@ -2010,6 +2100,7 @@ def _build_probe_url(base_clean, path, query="", is_search=False):
         q_under = urllib.parse.quote(query.replace(" ", "_"))
         p = p.replace("{q}", q_enc).replace("{q_dash}", q_dash).replace("{q_under}", q_under)
     url = p if p.startswith(("http://", "https://")) else (f"{base_clean}/{p.lstrip('/')}" if p else base_clean)
+    url = url.split("#", 1)[0]
     return urllib.parse.quote(url, safe=":/?&=%[]+!$()*,;@#~-._")
 
 def _count_json_items(obj):
@@ -2029,14 +2120,18 @@ def _count_json_items(obj):
             return len(feed["entry"])
     return None
 
-def _probe_endpoint(target_url, base_clean, req_headers, timeout, selectors, method="GET", post_data=None, is_sub_probe=False):
+def _probe_endpoint(target_url, base_clean, req_headers, timeout, selectors, method="GET", post_data=None, is_sub_probe=False, json_body=False):
     """Fetch a catalog, search, or filter endpoint and classify HTTP, anti-bot, JSON, and DOM health."""
     def fetch(url, hdrs=None, use_method="GET", data_dict=None):
         h = dict(hdrs or req_headers)
         body_bytes = None
         if use_method == "POST":
-            body_bytes = urllib.parse.urlencode(data_dict or {}).encode("utf-8")
-            h["Content-Type"] = "application/x-www-form-urlencoded"
+            if json_body:
+                body_bytes = json.dumps(data_dict or {}).encode("utf-8")
+                h["Content-Type"] = "application/json"
+            else:
+                body_bytes = urllib.parse.urlencode(data_dict or {}).encode("utf-8")
+                h["Content-Type"] = "application/x-www-form-urlencoded"
         req = urllib.request.Request(url, data=body_bytes, headers=h, method=use_method)
         try:
             with urllib.request.urlopen(req, timeout=timeout, context=CTX_UNVERIFIED) as resp:
@@ -2120,6 +2215,8 @@ def _probe_endpoint(target_url, base_clean, req_headers, timeout, selectors, met
                 try:
                     parsed = json.loads(stripped)
                 except Exception:
+                    if stripped.startswith(('{', '[')) and len(body) >= 240000:
+                        return {"status": "OK_JSON", "code": code, "detail": f"HTTP {code} JSON OK (truncated >256KB payload)", "url": target_url}
                     return {"status": "API_ERROR", "code": code, "detail": "Invalid JSON payload", "url": target_url}
                 count = _count_json_items(parsed)
                 if isinstance(parsed, dict) and (parsed.get("error") or parsed.get("errors")) and count is None:
@@ -2245,11 +2342,15 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8, test_search=Fa
         return res
 
     res["theme"] = rule.get("theme", "")
-    is_blocked = res["status"] in BLOCKED_STATUSES
+    is_blocked = (
+        res["status"] in BLOCKED_STATUSES
+        or (res["status"] == "HTTP_ERROR" and res.get("code") in (403, 503, 504))
+    )
 
     if test_search:
         if is_blocked:
-            res["search"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "detail": f"Skipped ({res['status']} on catalog)"}
+            reason = res["status"] if res["status"] in BLOCKED_STATUSES else f"HTTP {res.get('code')}"
+            res["search"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "detail": f"Skipped ({reason} on catalog)"}
         elif rule.get("search_supported") is False:
             res["search"] = {"status": "SEARCH_UNSUPPORTED", "code": 0, "url": "", "detail": "Extension does not implement search"}
         elif rule.get("search"):
@@ -2259,8 +2360,11 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8, test_search=Fa
             s_data = None
             if s_method == "POST" and sspec.get("data"):
                 s_data = {k: (query if v == "{q}" else v) for k, v in sspec["data"].items()}
+            s_hdrs = dict(req_headers)
+            if sspec.get("xhr"):
+                s_hdrs["X-Requested-With"] = "XMLHttpRequest"
             s_sels = extract_all_selectors(sspec.get("selector", "") or selector) or selectors
-            res["search"] = _probe_endpoint(s_url, base_clean, req_headers, timeout, s_sels, method=s_method, post_data=s_data, is_sub_probe=True)
+            res["search"] = _probe_endpoint(s_url, base_clean, s_hdrs, timeout, s_sels, method=s_method, post_data=s_data, is_sub_probe=True, json_body=bool(sspec.get("json_body")))
         else:
             res["search"] = {"status": "NO_SEARCH_RULE", "code": 0, "url": "", "detail": "Dynamic/unextracted search request"}
 
@@ -2268,12 +2372,16 @@ def probe_extension_scraper(item, ext_type, rules_map, timeout=8, test_search=Fa
         f_count = rule.get("filter_count", 0)
         has_filters = bool(rule.get("has_filters") or rule.get("filter") or f_count > 0)
         if is_blocked:
-            res["filters"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "filter_count": f_count, "detail": f"Skipped ({res['status']} on catalog)"}
+            reason = res["status"] if res["status"] in BLOCKED_STATUSES else f"HTTP {res.get('code')}"
+            res["filters"] = {"status": "SKIPPED_BLOCKED", "code": res.get("code", 0), "url": "", "filter_count": f_count, "detail": f"Skipped ({reason} on catalog)"}
         elif rule.get("filter"):
             fspec = rule["filter"]
             f_url = _build_probe_url(base_clean, fspec.get("path", ""))
             f_sels = extract_all_selectors(fspec.get("selector", "") or selector) or selectors
-            f_res = _probe_endpoint(f_url, base_clean, req_headers, timeout, f_sels, method=fspec.get("method", "GET"), post_data=fspec.get("data"), is_sub_probe=True)
+            f_hdrs = dict(req_headers)
+            if fspec.get("xhr"):
+                f_hdrs["X-Requested-With"] = "XMLHttpRequest"
+            f_res = _probe_endpoint(f_url, base_clean, f_hdrs, timeout, f_sels, method=fspec.get("method", "GET"), post_data=fspec.get("data"), is_sub_probe=True)
             f_res["filter_count"] = f_count
             res["filters"] = f_res
         elif has_filters:

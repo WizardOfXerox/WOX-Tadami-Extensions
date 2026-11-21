@@ -32,6 +32,7 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
+import java.net.URLEncoder
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.util.asJsoup
 import keiyoushi.lib.cryptoaes.CryptoAES
@@ -151,10 +152,9 @@ class TurkAnime :
             }.build(),
         )
     } else {
-        POST(
-            "$baseUrl/arama?sayfa=$page",
+        GET(
+            "$baseUrl/ara?q=${URLEncoder.encode(query, "UTF-8")}",
             headers,
-            FormBody.Builder().add("arama", query).build(),
         )
     }
 
@@ -174,7 +174,8 @@ class TurkAnime :
         val scriptElement = document.selectFirst("div.panel-body > script:containsData(window.location)")
         return if (scriptElement == null) {
             val animeList = document.select(searchAnimeSelector()).map(::searchAnimeFromElement)
-            AnimesPage(animeList, document.selectFirst(searchAnimeSelector()) != null)
+            val isAraSearch = response.request.url.encodedPath.startsWith("/ara")
+            AnimesPage(animeList, !isAraSearch && document.selectFirst(searchAnimeSelector()) != null)
         } else {
             val location = scriptElement.data()
                 .substringAfter("window.location")

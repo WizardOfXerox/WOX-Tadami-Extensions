@@ -2,19 +2,20 @@ package eu.kanade.tachiyomi.animeextension.en.donghuastream
 
 import android.content.SharedPreferences
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.dailymotionextractor.DailymotionExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.rumbleextractor.RumbleExtractor
-import aniyomi.lib.streamplayextractor.StreamPlayExtractor
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
+import eu.kanade.tachiyomi.lib.dailymotionextractor.DailymotionExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.rumbleextractor.RumbleExtractor
+import eu.kanade.tachiyomi.lib.streamplayextractor.StreamPlayExtractor
 import eu.kanade.tachiyomi.multisrc.animestream.AnimeStream
 import eu.kanade.tachiyomi.network.GET
 import keiyoushi.utils.UrlUtils
 import keiyoushi.utils.addSetPreference
 import keiyoushi.utils.addSwitchPreference
 import keiyoushi.utils.delegate
+import kotlinx.coroutines.runBlocking
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Request
 import okhttp3.Response
@@ -35,6 +36,7 @@ class DonghuaStream :
     override fun latestUpdatesNextPageSelector() = popularAnimeNextPageSelector()
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
+        if (query.isBlank()) return super.searchAnimeRequest(page, query, filters)
         val url = baseUrl.toHttpUrl().newBuilder().apply {
             addPathSegment("pagg")
             addPathSegment(page.toString())
@@ -80,7 +82,8 @@ class DonghuaStream :
         )
     }
 
-    override val prefQualityValues = listOf("2160p", "1440p", "1080p", "720p", "480p", "360p")
+    override val prefQualityValues = arrayOf("2160p", "1440p", "1080p", "720p", "480p", "360p")
+    override val prefQualityEntries = prefQualityValues
 
     override fun episodeListParse(response: Response): List<SEpisode> = super.episodeListParse(response)
         .filter { !it.name.contains("Preview", ignoreCase = true) || !preferences.ignorePreview }
@@ -93,13 +96,13 @@ class DonghuaStream :
 
     private val rumbleExtractor by lazy { RumbleExtractor(client, headers) }
 
-    override suspend fun getVideoList(url: String, name: String): List<Video> {
+    override fun getVideoList(url: String, name: String): List<Video> {
         val prefix = "$name - "
         return when {
             preferences.enabledHosters.contains("dailymotion") && url.contains("dailymotion") ->
                 dailymotionExtractor.videosFromUrl(url, prefix = prefix)
             preferences.enabledHosters.contains("streamplay") && url.contains("streamplay") ->
-                streamPlayExtractor.videosFromUrl(url, prefix = prefix)
+                runBlocking { streamPlayExtractor.videosFromUrl(url, prefix = prefix) }
             preferences.enabledHosters.contains("ok.ru") && url.contains("ok.ru") ->
                 UrlUtils.fixUrl(url)?.let { okruExtractor.videosFromUrl(url = it, prefix = prefix) }
                     ?: emptyList()
@@ -114,7 +117,7 @@ class DonghuaStream :
     private val qualityRegex by lazy { Regex("""(\d+)p""") }
 
     override fun List<Video>.sort(): List<Video> {
-        val quality = preferences.videoSortPref
+        val quality = preferences.getString(videoSortPrefKey, videoSortPrefDefault)!!
         return sortedWith(
             compareBy<Video>(
                 { it.quality.contains(quality, true) },

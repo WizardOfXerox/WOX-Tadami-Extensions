@@ -194,22 +194,22 @@
   {
     "name": "Aniyomi: JavGG",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
-    "apk": "aniyomi-all.javgg-v14.29.apk",
+    "apk": "aniyomi-all.javgg-v14.30.apk",
     "lang": "all",
-    "code": 29,
-    "version": "14.29",
+    "code": 30,
+    "version": "14.30",
     "nsfw": 1,
     "sources": [
       {
         "name": "JavGG",
         "lang": "all",
         "id": "3378993382379910095",
-        "baseUrl": "https://javgg.net"
+        "baseUrl": "https://javgg.me"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javgg.png",
-    "sha256": "7dda7a86ba885554b5232100f5deb1b12530c89bf5c6716f20df08722a644e88",
-    "size": 146711
+    "sha256": "c90926b8c83a9486a693dfc018a21c2b268410bdedee666c42e42634e93c6617",
+    "size": 154670
   },
   {
     "name": "Aniyomi: Jav Guru",
@@ -1094,22 +1094,22 @@
   {
     "name": "Aniyomi: WIT ANIME",
     "pkg": "eu.kanade.tachiyomi.animeextension.ar.witanime",
-    "apk": "aniyomi-ar.witanime-v14.69.apk",
+    "apk": "aniyomi-ar.witanime-v14.70.apk",
     "lang": "ar",
-    "code": 69,
-    "version": "14.69",
+    "code": 70,
+    "version": "14.70",
     "nsfw": 0,
     "sources": [
       {
         "name": "WIT ANIME",
         "lang": "ar",
         "id": "8940958730943730988",
-        "baseUrl": "https://www.witanime.net"
+        "baseUrl": "https://witanime.site"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.witanime.png",
-    "sha256": "c94be005e8677fad09aa61901002dcd27bd5792cb63b11168a062e59b7e43bee",
-    "size": 142261
+    "sha256": "b0b23143b637f296eaa22007e3f2120debd1ed6d8904ba9249e70ef2bf62153a",
+    "size": 143213
   },
   {
     "name": "Aniyomi: Anime-Base",
@@ -1614,10 +1614,10 @@
   {
     "name": "Aniyomi: DonghuaStream",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.donghuastream",
-    "apk": "aniyomi-en.donghuastream-v14.27.apk",
+    "apk": "aniyomi-en.donghuastream-v14.28.apk",
     "lang": "en",
-    "code": 27,
-    "version": "14.27",
+    "code": 28,
+    "version": "14.28",
     "nsfw": 0,
     "sources": [
       {
@@ -1628,8 +1628,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.donghuastream.png",
-    "sha256": "713ea67b446507a3773d0b76cc596d11ea3fae854ad790c159d02c2e973abaec",
-    "size": 274955
+    "sha256": "1a5ae484b32c861777d09209328d94a0b8f0072f691ed8c91d1853a587dc2bcf",
+    "size": 228528
   },
   {
     "name": "Aniyomi: ForcedCinema",
@@ -2414,10 +2414,10 @@
   {
     "name": "Aniyomi: AnimeFenix",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
-    "apk": "aniyomi-es.animefenix-v14.74.apk",
+    "apk": "aniyomi-es.animefenix-v14.82.apk",
     "lang": "es",
-    "code": 74,
-    "version": "14.74",
+    "code": 82,
+    "version": "14.82",
     "nsfw": 0,
     "sources": [
       {
@@ -2428,8 +2428,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animefenix.png",
-    "sha256": "ea46fd081aacc4fa2f113161c2320011d00c425a027a834a57d4d74e257c4bf5",
-    "size": 961039
+    "sha256": "98107844dba56bf2045cddbfab4598c51000fc6cd2ef70309ec25a92c6aa29d1",
+    "size": 922679
   },
   {
     "name": "Aniyomi: Animejl",
@@ -2834,10 +2834,10 @@
   {
     "name": "Aniyomi: Hentaijk",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaijk",
-    "apk": "aniyomi-es.hentaijk-v14.18.apk",
+    "apk": "aniyomi-es.hentaijk-v14.26.apk",
     "lang": "es",
-    "code": 18,
-    "version": "14.18",
+    "code": 26,
+    "version": "14.26",
     "nsfw": 1,
     "sources": [
       {
@@ -2848,8 +2848,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hentaijk.png",
-    "sha256": "a4c3a547a3abd8e0b535f0b95f7da8f9f9a00107e2cdcc6e7eed7b162534c91d",
-    "size": 212931
+    "sha256": "954fc9ac28bab1172a38aa62973bfd2e618deabae3596b317a7894160053075d",
+    "size": 166301
   },
   {
     "name": "Aniyomi: Hentaila",
@@ -4526,10 +4526,10 @@
   {
     "name": "Aniyomi: Türk Anime TV",
     "pkg": "eu.kanade.tachiyomi.animeextension.tr.turkanime",
-    "apk": "aniyomi-tr.turkanime-v14.50.apk",
+    "apk": "aniyomi-tr.turkanime-v14.51.apk",
     "lang": "tr",
-    "code": 50,
-    "version": "14.50",
+    "code": 51,
+    "version": "14.51",
     "nsfw": 0,
     "sources": [
       {
@@ -4540,8 +4540,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.turkanime.png",
-    "sha256": "55031b62f6fbf41917f37d7e1c45efff2344e05b99ebbbe6ea6bd7ac4c506dda",
-    "size": 351875
+    "sha256": "257e5677398ed3499ea618d637fecd4c26928015950f7b937037f740891a882f",
+    "size": 351942
   },
   {
     "name": "Aniyomi: UAKino",

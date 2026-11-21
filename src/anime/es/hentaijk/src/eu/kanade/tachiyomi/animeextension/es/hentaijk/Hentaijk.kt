@@ -2,7 +2,6 @@ package eu.kanade.tachiyomi.animeextension.es.hentaijk
 
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.okruextractor.OkruExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
@@ -11,9 +10,16 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.ParsedAnimeHttpSource
+import android.net.Uri
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import okhttp3.FormBody
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.catchingFlatMap
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import okhttp3.Request
@@ -37,18 +43,21 @@ class Hentaijk :
 
     private val preferences by getPreferencesLazy()
 
-    override fun popularAnimeSelector(): String = "div.col-lg-12 div.list"
+    override fun popularAnimeSelector(): String = "div.col.toplist div.card, div.col-lg-12 div.list"
 
-    override fun popularAnimeRequest(page: Int): Request = GET("https://hentaijk.com/top/")
+    override fun popularAnimeRequest(page: Int): Request = GET("$baseUrl/top/", headers)
 
     override fun popularAnimeFromElement(element: Element): SAnime {
         val anime = SAnime.create()
-        anime.setUrlWithoutDomain(
-            element.select("div#conb a").attr("href"),
-        )
-        anime.title = element.select("div#conb a").attr("title")
-        anime.thumbnail_url = element.select("div#conb a img").attr("src")
-        anime.description = element.select("div#conb div#animinfo p").text()
+        val link = element.selectFirst("a, div#conb a")
+        anime.setUrlWithoutDomain(link?.attr("href").orEmpty())
+        anime.title = element.selectFirst("h5.card-title")?.text()?.trim()?.ifEmpty { null }
+            ?: element.selectFirst("img")?.attr("alt")?.trim()?.ifEmpty { null }
+            ?: element.select("div#conb a").attr("title")
+        anime.thumbnail_url = element.selectFirst("img.card-img-top, div#conb a img")?.attr("abs:src")
+            ?.ifEmpty { element.select("div#conb a img").attr("src") }
+            ?: ""
+        anime.description = element.selectFirst("div.card-synopsis, div#conb div#animinfo p")?.text()
         return anime
     }
 
@@ -56,8 +65,46 @@ class Hentaijk :
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val episodes = mutableListOf<SEpisode>()
-        val episodeLink = response.request.url
+        val episodeLink = response.request.url.toString().trimEnd('/')
         val pageBody = response.asJsoup()
+
+        val csrfToken = pageBody.selectFirst("meta[name=csrf-token]")?.attr("content").orEmpty()
+        val ajaxScript = pageBody.select("script")
+            .firstOrNull { "/ajax/episodes/" in it.data() }
+            ?.data()
+        val animeIdMatch = ajaxScript?.let { Regex("""/ajax/episodes/(\d+)/""").find(it)?.groupValues?.get(1) }
+
+        if (animeIdMatch != null && csrfToken.isNotBlank()) {
+            var currentPage = 1
+            var lastPage = 1
+            do {
+                val formBody = FormBody.Builder().add("_token", csrfToken).build()
+                val reqHeaders = headers.newBuilder()
+                    .add("X-Requested-With", "XMLHttpRequest")
+                    .add("Referer", response.request.url.toString())
+                    .build()
+                val bodyStr = client.newCall(
+                    eu.kanade.tachiyomi.network.POST("$baseUrl/ajax/episodes/$animeIdMatch/$currentPage", reqHeaders, formBody),
+                ).execute().body.string()
+                val obj = Json.parseToJsonElement(bodyStr).jsonObject
+                lastPage = obj["last_page"]?.jsonPrimitive?.content?.toIntOrNull() ?: 1
+                obj["data"]?.jsonArray.orEmpty().forEach { itemEl ->
+                    val item = itemEl.jsonObject
+                    val numberStr = item["number"]?.jsonPrimitive?.content?.trim().orEmpty()
+                    if (numberStr.isNotEmpty()) {
+                        val ep = SEpisode.create().apply {
+                            episode_number = numberStr.toFloatOrNull() ?: 0F
+                            name = "Episodio $numberStr"
+                        }
+                        ep.setUrlWithoutDomain("$episodeLink/$numberStr")
+                        episodes.add(ep)
+                    }
+                }
+                currentPage++
+            } while (currentPage <= lastPage)
+            return episodes.reversed()
+        }
+
         val scriptText = pageBody.selectFirst("script:containsData(var invertir =)")!!.data()
         val animeId = scriptText.substringAfter("'/ajax/last_episode/", "")
             .substringBefore("/',", "")
@@ -73,7 +120,6 @@ class Hentaijk :
             var checkLast = 0
             for (i in 1 until lastPage?.toInt()!!) {
                 for (j in 1..12) {
-                    // Log.i("bruh", (j + checkLast).toString())
                     val episode = SEpisode.create().apply {
                         episode_number = (j + checkLast).toFloat()
                         name = "Episodio ${j + checkLast}"
@@ -123,7 +169,7 @@ class Hentaijk :
         return document.select("div.col-lg-12.rounded.bg-servers.text-white.p-3.mt-2 a").parallelCatchingFlatMapBlocking {
             val server = it.text()
             val serverId = it.attr("data-id")
-            document.select("script").catchingFlatMap { script ->
+            document.select("script").flatMap { script ->
                 val videos = mutableListOf<Video>()
                 if (script.data().contains("var video = [];")) {
                     val url = script.data()
@@ -217,62 +263,130 @@ class Hentaijk :
         val genreFilter = filterList.find { it is GenreFilter } as GenreFilter
 
         return when {
-            query.isNotBlank() -> GET("$baseUrl/buscar/$query/$page/?filtro=fecha&tipo=none&estado=none&orden=desc", headers)
-            genreFilter.state != 0 -> GET("$baseUrl/genero/${genreFilter.toUriPart()}/$page")
-            else -> GET("$baseUrl/directorio/$page/?filtro=fecha&tipo=none&estado=none&fecha=none&temporada=none&orden=desc")
+            query.isNotBlank() -> GET("$baseUrl/buscar/${Uri.encode(query)}/?page=$page", headers)
+            genreFilter.state != 0 -> GET("$baseUrl/directorio?genero=${genreFilter.toUriPart()}&p=$page", headers)
+            else -> latestUpdatesRequest(page)
         }
     }
 
     override fun searchAnimeFromElement(element: Element): SAnime {
         val anime = SAnime.create()
-        anime.setUrlWithoutDomain(
-            element.select("div.anime__item a").attr("href"),
-        )
-        anime.title = element.select("div.anime__item div#ainfo div.title").text()
-        anime.thumbnail_url = element.select("div.anime__item a div").attr("data-setbg")
-        anime.description = element.select("div.anime__item#ainfo p").text()
+        val link = element.selectFirst("h5 a, a")
+        anime.setUrlWithoutDomain(link?.attr("href").orEmpty())
+        anime.title = element.selectFirst("#ainfo div.title")?.text()?.trim()?.ifEmpty { null }
+            ?: element.selectFirst("div.anime__item__text h5 a")?.text()?.trim()?.ifEmpty { null }
+            ?: element.selectFirst("h5")?.text()?.trim().orEmpty()
+        anime.thumbnail_url = element.selectFirst("div.anime__item__pic")?.attr("data-setbg").orEmpty()
+            .ifEmpty { element.selectFirst("img")?.attr("src").orEmpty() }
+        anime.description = element.selectFirst("#ainfo p")?.text()
         return anime
     }
 
-    override fun searchAnimeNextPageSelector(): String = popularAnimeNextPageSelector()
+    override fun searchAnimeNextPageSelector(): String = "ul.pagination a[rel=next], div.navigation a.nav-next"
 
-    override fun searchAnimeSelector(): String = ".anime__page__content #botones ~ .row"
+    override fun searchAnimeSelector(): String = "div.anime__item"
 
-    override fun searchAnimeParse(response: Response): AnimesPage {
-        return parseSearchJson(response)
-        // return super.searchAnimeParse(response)
+    override fun searchAnimeParse(response: Response): AnimesPage = parseSearchJson(response)
+
+    override fun latestUpdatesParse(response: Response): AnimesPage = parseSearchJson(response)
+
+    private fun extractVarAnimesJson(scriptData: String): String? {
+        val markerIdx = scriptData.indexOf("var animes =")
+        if (markerIdx == -1) return null
+        val start = scriptData.indexOf('{', markerIdx)
+        if (start == -1) return null
+        var depth = 0
+        var inString = false
+        var escaped = false
+        for (i in start until scriptData.length) {
+            val ch = scriptData[i]
+            if (escaped) {
+                escaped = false
+                continue
+            }
+            if (inString) {
+                if (ch == '\\') escaped = true else if (ch == '"') inString = false
+                continue
+            }
+            when (ch) {
+                '"' -> inString = true
+                '{' -> depth++
+                '}' -> {
+                    depth--
+                    if (depth == 0) return scriptData.substring(start, i + 1)
+                }
+            }
+        }
+        return null
     }
 
     private fun parseSearchJson(jsonLine: Response): AnimesPage {
         val animeList = mutableListOf<SAnime>()
         val document = jsonLine.asJsoup()
-        val hasNextPage = document.select("section.contenido.spad div.container div.navigation a.nav-next").any()
-        val isSearchLayer = document.select(".col-lg-2.col-md-6.col-sm-6").any()
-        val isFilterLayer = document.select(".card.mb-3.custom_item2").any()
-        if (isSearchLayer) {
-            document.select(".col-lg-2.col-md-6.col-sm-6").forEach { animeData ->
+        val hasNextPage = document.select("ul.pagination a[rel=next], section.contenido.spad div.container div.navigation a.nav-next").any()
+
+        val searchCards = document.select("div.anime__item")
+        if (searchCards.isNotEmpty()) {
+            searchCards.forEach { animeData ->
                 val anime = SAnime.create()
-                anime.title = animeData.select("div.anime__item #ainfo div.title").html()
-                anime.thumbnail_url = animeData.select("div.anime__item a div.anime__item__pic").attr("data-setbg")
-                anime.setUrlWithoutDomain(animeData.select("div.anime__item a").attr("href"))
-                anime.status = parseStatus(animeData.select("div.anime__item div.anime__item__text ul li:nth-child(1)").html())
-                val tags = animeData.select("div.anime__item div.anime__item__text ul li").joinToString { it.text() }
-                anime.genre = tags
-                animeList.add(anime)
+                val href = animeData.selectFirst("h5 a, a")?.attr("href").orEmpty()
+                anime.setUrlWithoutDomain(href)
+                anime.title = animeData.selectFirst("#ainfo div.title")?.text()?.trim()?.ifEmpty { null }
+                    ?: animeData.selectFirst("div.anime__item__text h5 a")?.text()?.trim()?.ifEmpty { null }
+                    ?: animeData.selectFirst("h5")?.text()?.trim().orEmpty()
+                anime.thumbnail_url = animeData.selectFirst("div.anime__item__pic")?.attr("data-setbg").orEmpty()
+                    .ifEmpty { animeData.selectFirst("img")?.attr("src").orEmpty() }
+                val liList = animeData.select("div.anime__item__text ul li")
+                anime.status = parseStatus(liList.firstOrNull()?.text().orEmpty())
+                anime.genre = liList.joinToString { it.text() }
+                if (href.isNotBlank() && anime.title.isNotBlank()) animeList.add(anime)
             }
-        } else if (isFilterLayer) {
-            document.select(".card.mb-3.custom_item2").forEach { animeData ->
-                val anime = SAnime.create()
-                anime.title = animeData.select("div.row div.col-md-7 div.card-body h5.card-title a").html()
-                anime.thumbnail_url = animeData.select("div.row div.custom_thumb2 a img").attr("src")
-                anime.setUrlWithoutDomain(animeData.select("div.row div.col-md-7 div.card-body h5.card-title a").attr("href"))
-                anime.status = parseStatus(animeData.select("div.row div.col-md-7 div.card-body div.card-info p.card-status").text())
-                val tags = animeData.select("div.row div.col-md-7 div.card-body div.card-info p").joinToString { it.text() }
-                anime.genre = tags
-                anime.description = animeData.select("div.row div.col-md-7 div.card-body p.synopsis").text()
-                animeList.add(anime)
-            }
+            return AnimesPage(animeList, hasNextPage)
         }
+
+        val directorioCards = document.select("div.page_directorio div.card, .card.mb-3.custom_item2")
+        if (directorioCards.isNotEmpty()) {
+            directorioCards.forEach { animeData ->
+                val anime = SAnime.create()
+                val titleLink = animeData.selectFirst("h5.card-title a, a")
+                anime.setUrlWithoutDomain(titleLink?.attr("href").orEmpty())
+                anime.title = animeData.selectFirst("h5.card-title, h5")?.text()?.trim()
+                    ?: animeData.selectFirst("img")?.attr("alt")?.trim().orEmpty()
+                anime.thumbnail_url = animeData.selectFirst("img")?.attr("src").orEmpty()
+                anime.status = parseStatus(animeData.selectFirst("p.card-status, span.badge.finished, span.badge")?.text().orEmpty())
+                anime.description = animeData.selectFirst("p.synopsis, div.card-synopsis")?.text()
+                if (anime.url.isNotBlank() && anime.title.isNotBlank()) animeList.add(anime)
+            }
+            return AnimesPage(animeList, hasNextPage)
+        }
+
+        val rawJson = document.select("script")
+            .firstNotNullOfOrNull { extractVarAnimesJson(it.data()) }
+        if (rawJson != null) {
+            val rootObj = Json.parseToJsonElement(rawJson).jsonObject
+            rootObj["data"]?.jsonArray.orEmpty().forEach { el ->
+                val item = el.jsonObject
+                val title = item["title"]?.jsonPrimitive?.content.orEmpty()
+                val itemUrl = item["url"]?.jsonPrimitive?.content
+                    ?: item["slug"]?.jsonPrimitive?.content?.let { "$baseUrl/$it/" }
+                    ?: ""
+                if (title.isNotBlank() && itemUrl.isNotBlank()) {
+                    val anime = SAnime.create()
+                    anime.title = title
+                    anime.setUrlWithoutDomain(itemUrl)
+                    anime.thumbnail_url = item["image"]?.jsonPrimitive?.content.orEmpty()
+                    anime.description = item["synopsis"]?.jsonPrimitive?.content
+                    anime.author = item["studios"]?.jsonPrimitive?.content
+                    anime.status = parseStatus(item["estado"]?.jsonPrimitive?.content.orEmpty())
+                    animeList.add(anime)
+                }
+            }
+            val nextUrl = rootObj["next_page_url"]?.let {
+                if (it is JsonNull) null else it.jsonPrimitive.content
+            }
+            return AnimesPage(animeList, !nextUrl.isNullOrBlank())
+        }
+
         return AnimesPage(animeList, hasNextPage)
     }
 
@@ -317,7 +431,7 @@ class Hentaijk :
         return anime
     }
 
-    override fun latestUpdatesRequest(page: Int): Request = GET("https://hentaijk.com/directorio/$page/?filtro=fecha&tipo=none&estado=none&fecha=none&temporada=none&orden=desc")
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/directorio?filtro=fecha&tipo=none&estado=none&fecha=none&temporada=none&orden=desc&p=$page", headers)
 
     override fun latestUpdatesSelector(): String = "div.card.mb-3.custom_item2"
 

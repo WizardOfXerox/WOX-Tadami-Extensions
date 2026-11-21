@@ -2,22 +2,6 @@ package eu.kanade.tachiyomi.animeextension.es.animefenix
 
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import aniyomi.lib.amazonextractor.AmazonExtractor
-import aniyomi.lib.burstcloudextractor.BurstCloudExtractor
-import aniyomi.lib.doodextractor.DoodExtractor
-import aniyomi.lib.filemoonextractor.FilemoonExtractor
-import aniyomi.lib.mp4uploadextractor.Mp4uploadExtractor
-import aniyomi.lib.okruextractor.OkruExtractor
-import aniyomi.lib.streamlareextractor.StreamlareExtractor
-import aniyomi.lib.streamtapeextractor.StreamTapeExtractor
-import aniyomi.lib.streamwishextractor.StreamWishExtractor
-import aniyomi.lib.universalextractor.UniversalExtractor
-import aniyomi.lib.upstreamextractor.UpstreamExtractor
-import aniyomi.lib.uqloadextractor.UqloadExtractor
-import aniyomi.lib.vidguardextractor.VidGuardExtractor
-import aniyomi.lib.vidhideextractor.VidHideExtractor
-import aniyomi.lib.voeextractor.VoeExtractor
-import aniyomi.lib.youruploadextractor.YourUploadExtractor
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -25,10 +9,25 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.lib.amazonextractor.AmazonExtractor
+import eu.kanade.tachiyomi.lib.burstcloudextractor.BurstCloudExtractor
+import eu.kanade.tachiyomi.lib.doodextractor.DoodExtractor
+import eu.kanade.tachiyomi.lib.filemoonextractor.FilemoonExtractor
+import eu.kanade.tachiyomi.lib.mp4uploadextractor.Mp4uploadExtractor
+import eu.kanade.tachiyomi.lib.okruextractor.OkruExtractor
+import eu.kanade.tachiyomi.lib.streamlareextractor.StreamlareExtractor
+import eu.kanade.tachiyomi.lib.streamtapeextractor.StreamTapeExtractor
+import eu.kanade.tachiyomi.lib.streamwishextractor.StreamWishExtractor
+import eu.kanade.tachiyomi.lib.universalextractor.UniversalExtractor
+import eu.kanade.tachiyomi.lib.upstreamextractor.UpstreamExtractor
+import eu.kanade.tachiyomi.lib.uqloadextractor.UqloadExtractor
+import eu.kanade.tachiyomi.lib.vidguardextractor.VidGuardExtractor
+import eu.kanade.tachiyomi.lib.vidhideextractor.VidHideExtractor
+import eu.kanade.tachiyomi.lib.voeextractor.VoeExtractor
+import eu.kanade.tachiyomi.lib.youruploadextractor.YourUploadExtractor
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.util.asJsoup
-import keiyoushi.utils.catchingFlatMapBlocking
 import keiyoushi.utils.getPreferencesLazy
 import keiyoushi.utils.parallelCatchingFlatMapBlocking
 import okhttp3.Request
@@ -42,7 +41,7 @@ class Animefenix :
 
     override val name = "AnimeFenix"
 
-    override val baseUrl = "https://animefenix2.tv"
+    override val baseUrl = "https://tvanime.tv"
 
     override val lang = "es"
 
@@ -68,19 +67,38 @@ class Animefenix :
     override fun animeDetailsParse(response: Response): SAnime {
         val document = response.asJsoup()
         val animeDetails = SAnime.create().apply {
-            title = document.selectFirst("h1.text-4xl")?.ownText() ?: ""
-            status = document.select(".relative .rounded").getStatus()
-            description = document.selectFirst(".mb-6 p.text-gray-300")?.text()
-            genre = document.select(".flex-wrap a").joinToString { it.text().trim() }
-            thumbnail_url = document.selectFirst("#anime_image")?.getImageUrl()
+            title = document.selectFirst("h1.anime-title, h1.text-4xl")?.ownText()?.trim()?.ifEmpty { null }
+                ?: document.selectFirst("h1.anime-title")?.text()?.trim()
+                ?: ""
+            status = document.select(".anime-status, .relative .rounded").getStatus()
+            description = document.selectFirst(".anime-synopsis, .mb-6 p.text-gray-300")?.text()?.trim()
+            genre = document.select(".anime-genres a, .flex-wrap a").joinToString { it.text().trim() }
+            thumbnail_url = document.selectFirst(".anime-poster img, #anime_image")?.getImageUrl()
         }
         return animeDetails
     }
 
-    override fun popularAnimeRequest(page: Int) = GET("$baseUrl/directorio/anime?p=$page&estado=2", headers)
+    override fun popularAnimeRequest(page: Int) = GET("$baseUrl/directorio?status=airing&page=$page", headers)
 
     override fun popularAnimeParse(response: Response): AnimesPage {
         val document = response.asJsoup()
+        val modernCards = document.select("article.anime-card")
+        if (modernCards.isNotEmpty()) {
+            val nextPage = document.select(".catalog-pagination a").any { it.text().contains("›") }
+            val animeList = modernCards.map { element ->
+                SAnime.create().apply {
+                    setUrlWithoutDomain(
+                        element.selectFirst("a.anime-card-image, .anime-card-title a, a")?.attr("abs:href").orEmpty(),
+                    )
+                    title = element.selectFirst(".anime-card-title a, .anime-card-title")?.text()?.trim()?.ifEmpty { null }
+                        ?: element.selectFirst("img")?.attr("alt")?.trim()
+                        ?: ""
+                    thumbnail_url = element.selectFirst("img")?.getImageUrl()
+                }
+            }
+            return AnimesPage(animeList, nextPage)
+        }
+
         val elements = document.select(".grid-animes li article a")
         val nextPage = document.select(".right:not(.disabledd)").any()
         val animeList = elements.map { element ->
@@ -101,8 +119,8 @@ class Animefenix :
         val params = AnimeFenixFilters.getSearchParameters(filters)
 
         return when {
-            query.isNotBlank() -> GET("$baseUrl/directorio/anime?q=$query&p=$page", headers)
-            params.filter.isNotBlank() -> GET("$baseUrl/directorio/anime${params.getQuery()}&page=$page", headers)
+            query.isNotBlank() -> GET("$baseUrl/directorio?q=${android.net.Uri.encode(query)}&page=$page", headers)
+            params.filter.isNotBlank() -> GET("$baseUrl/directorio${params.getQuery()}&page=$page", headers)
             else -> popularAnimeRequest(page)
         }
     }
@@ -111,6 +129,24 @@ class Animefenix :
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         val document = response.asJsoup()
+        val modernEpisodes = document.select("div.episode-grid a.episode-card")
+        if (modernEpisodes.isNotEmpty()) {
+            return modernEpisodes.map { element ->
+                val epLabel = element.selectFirst(".episode-number")?.text()?.trim().orEmpty()
+                val epTitle = element.selectFirst("img")?.attr("alt")?.substringAfterLast(" - ")?.trim()
+                    ?.ifEmpty { null }
+                    ?: "Episodio ${epLabel.removePrefix("E").ifEmpty { "0" }}"
+                val epNum = epLabel.removePrefix("E").toFloatOrNull()
+                    ?: epTitle.substringAfter("Episodio").trim().toFloatOrNull()
+                    ?: 0F
+                SEpisode.create().apply {
+                    name = epTitle
+                    episode_number = epNum
+                    setUrlWithoutDomain(element.attr("abs:href"))
+                }
+            }.reversed()
+        }
+
         return document.select(".divide-y li > a").map {
             val title = it.select(".font-semibold").text()
             SEpisode.create().apply {
@@ -123,15 +159,25 @@ class Animefenix :
 
     override fun videoListParse(response: Response): List<Video> {
         val document = response.asJsoup()
-        val script = document.selectFirst("script:containsData(var tabsArray)") ?: return emptyList()
-        return script.data().substringAfter("<iframe").split("src='")
-            .map { it.substringBefore("'").substringAfter("redirect.php?id=").trim() }
+        val serverUrls = document.select("[data-server-url]")
+            .eachAttr("data-server-url")
+            .map { it.substringAfter("redirect.php?id=").trim() }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .ifEmpty {
+                val script = document.selectFirst("script:containsData(var tabsArray)") ?: return emptyList()
+                script.data().substringAfter("<iframe").split("src='")
+                    .map { it.substringBefore("'").substringAfter("redirect.php?id=").trim() }
+                    .filter { it.isNotBlank() }
+            }
+
+        return serverUrls
             .partition { url -> conventions.any { (_, names) -> names.any { it.lowercase() in url.lowercase() } } }
             .let { (matched, unmatched) ->
                 val extractors = matched.parallelCatchingFlatMapBlocking { url ->
                     serverVideoResolver(url)
                 }
-                val universal = unmatched.catchingFlatMapBlocking { url ->
+                val universal = unmatched.parallelCatchingFlatMapBlocking { url ->
                     universalExtractor.videosFromUrl(url, headers)
                 }
                 extractors + universal
@@ -140,7 +186,7 @@ class Animefenix :
 
     /*-------------------------------- Video extractors ------------------------------------*/
     private val universalExtractor by lazy { UniversalExtractor(client) }
-    private val voeExtractor by lazy { VoeExtractor(client, headers) }
+    private val voeExtractor by lazy { VoeExtractor(client) }
     private val okruExtractor by lazy { OkruExtractor(client) }
     private val filemoonExtractor by lazy { FilemoonExtractor(client) }
     private val uqloadExtractor by lazy { UqloadExtractor(client) }
@@ -239,7 +285,7 @@ class Animefenix :
 
     private fun Elements.getStatus(): Int = when {
         text().contains("finalizado", true) -> SAnime.COMPLETED
-        text().contains("emision", true) -> SAnime.ONGOING
+        text().contains("emision", true) || text().contains("emisión", true) -> SAnime.ONGOING
         else -> SAnime.UNKNOWN
     }
 
