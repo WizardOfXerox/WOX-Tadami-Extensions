@@ -3,14 +3,28 @@ package eu.kanade.tachiyomi.animeextension.en.hentaigasm
 import eu.kanade.tachiyomi.animesource.model.AnimeFilter
 
 object HentaigasmFilters {
-    class GenreFilter(name: String, private val genres: Array<Pair<String, String>>) :
-        AnimeFilter.Select<String>(name, genres.map { it.first }.toTypedArray()) {
+    open class UriPartFilter(
+        displayName: String,
+        private val vals: Array<Pair<String, String>>,
+    ) : AnimeFilter.Select<String>(displayName, vals.map { it.first }.toTypedArray()) {
         val selected: String
-            get() = genres[state].second
+            get() = vals[state].second
     }
+
+    class SortFilter : UriPartFilter("Sort By", SORT_OPTIONS)
+
+    class GenreFilter(name: String, genres: Array<Pair<String, String>>) : UriPartFilter(name, genres)
+
+    val SORT_OPTIONS = arrayOf(
+        Pair("Latest (Date)", "date"),
+        Pair("Popular (Most Viewed)", "views"),
+        Pair("Random", "rand"),
+    )
 
     val GENRES = arrayOf(
         Pair("All Genres", ""),
+        Pair("New Release", "hentai/new-hentai-release"),
+        Pair("Preview", "preview"),
         Pair("3D", "3d"),
         Pair("Anal", "anal"),
         Pair("Blowjob", "blowjob"),
