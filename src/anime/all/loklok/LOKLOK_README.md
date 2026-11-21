@@ -1,6 +1,6 @@
 # Loklok Extension (Aniyomi / Tadami)
 
-Extension for **Loklok** (`loklok.fun`) supporting movies, TV series, anime, and dramas via Loklok's signed web API (`https://api.loklok.fun`).
+Extension for **Loklok** supporting movies, TV series, anime, and dramas via Loklok's active mobile API (`https://ga-mobile-api.loklok.tv/cms/app`).
 
 ---
 
@@ -8,29 +8,22 @@ Extension for **Loklok** (`loklok.fun`) supporting movies, TV series, anime, and
 
 - **Source Code**: [src/anime/all/loklok/](file:///H:/Ideas/Tadami-Extensions/src/anime/all/loklok)
 - **Aniyomi Mirror**: [aniyomi-extensions/src/all/loklok/](file:///H:/Ideas/Tadami-Extensions/aniyomi-extensions/src/all/loklok)
-- **Distribution APK**: [apks/anime/apk/aniyomi-all.loklok-v14.12.apk](file:///H:/Ideas/Tadami-Extensions/apks/anime/apk/aniyomi-all.loklok-v14.12.apk)
+- **Distribution APK**: [apks/anime/apk/aniyomi-all.loklok-v14.13.apk](file:///H:/Ideas/Tadami-Extensions/apks/anime/apk/aniyomi-all.loklok-v14.13.apk)
 
 ---
 
 ## Technical Details & Rate-Limit Protection
 
-- **Web Base URL**: `https://www.loklok.fun`
-- **API Endpoint**: `https://api.loklok.fun` (`clientType = web-loklok`, `versionCode = 32`)
-- **Per-Request Signing & Response Decryption**:
-  - Implements the exact Nuxt 1.0.1 client crypto:
-    - `aesKey`: 16-hex-char random AES key, RSA-1024 encrypted with Loklok's public key -> `aesKey` header.
-    - `sign`: AES-128-ECB encryption of `${payload}${currentTime}` with `aesKey`, then MD5 lower-case -> `sign` header.
-    - `usertype`: AES-128-ECB encryption of `deviceId` with the public key prefix, then HMAC-SHA256 with `aesKey` -> `usertype` header.
-    - Automatic AES-128-ECB payload decryption when `ecy: 1` is returned.
-- **Background Thread Safety**:
-  - Completely removed off-thread `CookieManager.getInstance()` calls that caused `AndroidRuntimeException` on background OkHttp dispatcher threads.
-  - Device IDs are generated and cached in memory and `SharedPreferences`. Auth tokens are read safely via `network.client.cookieJar`.
-- **Reliable Episode Extraction**:
-  - `episodeListRequest` routes directly to `/cms/pc/movieDrama/queryEpisodeList`, which returns live episode arrays with `code: 00000` without returning decoy payloads.
-- **Graceful Error Handling**:
-  - Catalog parsers (`popularAnimeParse`, `latestUpdatesParse`, `searchAnimeParse`, `animeDetailsParse`) handle non-fatal edge responses gracefully rather than throwing unhandled exceptions that produce `"Couldn't connect to the source"`.
-- **Geo-Protection & Akamai Bypass**:
-  - Attaches Southeast Asian client IP headers (`X-Forwarded-For: 120.28.0.1`, `clientip: 120.28.0.1`, `X-Real-IP: 120.28.0.1`) strictly to API requests to prevent HTTP 403 blocks from Akamai Edgesuite outside SE Asia.
-  - Media stream headers (`Video(...)`) remain clean without IP headers.
-- **Playback Authentication (`A0230`)**:
-  - `/media/pc/getPlayInfo` requires a signed-in Loklok session. Open **Loklok in WebView** inside Tadami/Aniyomi to sign in (`loklok_token` cookie is picked up automatically), or configure Email/Password or Session Token in Extension Settings.
+- **Base URL**: `https://www.loklok.com`
+- **Mobile API Endpoint**: `https://ga-mobile-api.loklok.tv/cms/app`
+- **Active Version Header**: `clienttype: android_tem3`, `versioncode: 36` (bypasses `A0001` version termination).
+- **Video Rate-Limiting Resolution**:
+  - `getVideoList` prioritizes the user's preferred quality (1 request) instead of making 4 immediate burst requests for all definitions.
+  - Subsequent qualities are fetched with a 600ms pacing delay to avoid HTTP 429 ("Too Many Requests").
+  - Automatic backoff retry on HTTP 429 in OkHttpClient interceptor.
+- **In-Memory Subtitle Caching**:
+  - Subtitle tracks are parsed during `episodeListParse` and cached per episode, avoiding unnecessary HTTP calls inside `getVideoList`.
+- **Clean Video Stream Headers**:
+  - Stream chunks (`.m3u8` and `.ts`) are fetched with clean Dalvik UA headers without `Referer` or `Origin`, avoiding HTTP 403 Forbidden on Akamai CDN edges (`akm-cdn-play.subplayts.com`).
+- **Geo-Protection & Spoofing**:
+  - Attaches Southeast Asian client IP headers (`X-Forwarded-For: 120.28.0.1`, `clientip: 120.28.0.1`, `X-Real-IP: 120.28.0.1`) strictly to API requests to prevent CDN blocks.

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceScreen
-import androidx.preference.SwitchPreferenceCompat
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
@@ -21,25 +20,18 @@ import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.put
+import kotlinx.serialization.json.jsonPrimitive
 import okhttp3.Headers
-import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import okhttp3.ResponseBody.Companion.toResponseBody
-import okio.Buffer
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import java.net.URLDecoder
-import java.net.URLEncoder
 import java.util.concurrent.ConcurrentHashMap
 
 class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
@@ -48,41 +40,14 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
         Injekt.get<Application>().getSharedPreferences("source_$id", 0x0000)
     }
 
-    override val name = "Loklok"
-
-    override val baseUrl = "https://www.loklok.fun"
-
-    override val lang = "all"
-
-    override val supportsLatest = true
-
-    override val id: Long = 527189562810L
-
-    private val apiBaseUrl = "https://api.loklok.fun"
-    private val apiHost = "api.loklok.fun"
-
-    private val json = Json { ignoreUnknownKeys = true }
-
-    private val cursorCache = ConcurrentHashMap<String, String>()
-    private val rateLimitLock = Any()
-    private val authLock = Any()
-
-    @Volatile
-    private var cachedDeviceId: String? = null
-
-    @Volatile
-    private var lastApiCallAtMs = 0L
-
-    @Volatile
-    private var homeNavId = DEFAULT_HOME_NAV_ID
-
-    @Volatile
-    private var rankNavId = DEFAULT_RANK_NAV_ID
-
-    private data class PageTag(
-        val page: Int,
-        val cacheKey: String,
-    )
+    private fun showToast(message: String) {
+        try {
+            val context = Injekt.get<Application>()
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            }
+        } catch (_: Exception) {}
+    }
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
         ListPreference(screen.context).apply {
@@ -94,278 +59,136 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
             summary = "%s"
         }.also(screen::addPreference)
 
-        SwitchPreferenceCompat(screen.context).apply {
-            key = PREF_FETCH_ALL_QUALITIES_KEY
-            title = "Fetch all video qualities"
-            summary = "Off (Recommended): Fetches only your preferred quality (1 request) to avoid 'Too Many Requests' errors. Turn on to fetch every quality (slower)."
-            setDefaultValue(false)
-        }.also(screen::addPreference)
-
-        EditTextPreference(screen.context).apply {
-            key = PREF_EMAIL_KEY
-            title = "Loklok Account Email (Optional)"
-            summary = "Used for automatic sign-in when loading videos. Alternatively, tap 'Open in WebView' and sign in on loklok.fun."
-            dialogTitle = "Account Email"
-        }.also(screen::addPreference)
-
-        EditTextPreference(screen.context).apply {
-            key = PREF_PASSWORD_KEY
-            title = "Loklok Account Password (Optional)"
-            summary = "Used together with Account Email for automatic sign-in."
-            dialogTitle = "Account Password"
+        ListPreference(screen.context).apply {
+            key = PREF_COUNTRY_KEY
+            title = "Spoofed IP Country"
+            entries = arrayOf("Philippines", "Indonesia", "Malaysia", "Thailand", "Vietnam", "Disable Spoofing")
+            entryValues = arrayOf("ph", "id", "my", "th", "vn", "none")
+            setDefaultValue("ph")
+            summary = "%s"
         }.also(screen::addPreference)
 
         EditTextPreference(screen.context).apply {
             key = PREF_TOKEN_KEY
             title = "Session Token (Optional)"
-            summary = "Manual loklok_token override. Leave blank to auto-detect from WebView sign-in or Account Email/Password."
+            summary = "Paste your Loklok account token here to unlock VIP/authenticated streams."
             dialogTitle = "Session Token"
         }.also(screen::addPreference)
     }
+
+    override val name = "Loklok"
+
+    override val baseUrl = "https://www.loklok.com"
+
+    override val lang = "all"
+
+    override val supportsLatest = true
+
+    override val id: Long = 527189562810L
 
     override val client: OkHttpClient = network.client.newBuilder()
         .retryOnConnectionFailure(true)
         .addInterceptor { chain ->
             val request = chain.request()
-            if (request.url.host != apiHost) {
-                return@addInterceptor chain.proceed(request)
+            var response: Response? = null
+            var lastException: Exception? = null
+            var tryCount = 0
+            val maxLimit = 3
+
+            while (tryCount < maxLimit) {
+                try {
+                    response?.close()
+                    response = chain.proceed(request)
+                    if (response.isSuccessful) {
+                        return@addInterceptor response
+                    }
+                    if (response.code in 400..499 && response.code != 429) {
+                        return@addInterceptor response
+                    }
+                } catch (e: Exception) {
+                    lastException = e
+                }
+
+                tryCount++
+                if (tryCount < maxLimit) {
+                    try {
+                        Thread.sleep(1000L * tryCount)
+                    } catch (_: Exception) {}
+                }
             }
 
-            acquireApiSlot(request.url.encodedPath)
-            val (signedRequest, aesKeyRaw) = signApiRequest(request)
-            val response = chain.proceed(signedRequest)
-
-            if (!response.isSuccessful) {
-                return@addInterceptor response
-            }
-
-            val rawBody = response.body.string()
-            val decryptedBody = LoklokCrypto.decryptResponseIfNeeded(
-                rawBody,
-                response.header("ecy"),
-                aesKeyRaw,
-                json,
-            )
-
-            val mediaType = response.body.contentType() ?: JSON_MEDIA_TYPE
-            response.newBuilder()
-                .body(decryptedBody.toResponseBody(mediaType))
-                .removeHeader("ecy")
-                .build()
+            response ?: throw lastException ?: java.io.IOException("Request failed after $maxLimit retries")
         }
         .build()
 
-    private fun acquireApiSlot(path: String) {
-        val minIntervalMs = if (path.startsWith("/media/pc/getPlayInfo")) {
-            MIN_PLAY_INTERVAL_MS
-        } else {
-            MIN_API_INTERVAL_MS
-        }
-        synchronized(rateLimitLock) {
-            val elapsed = System.currentTimeMillis() - lastApiCallAtMs
-            val waitMs = minIntervalMs - elapsed
-            if (waitMs > 0) {
-                try {
-                    Thread.sleep(waitMs)
-                } catch (_: InterruptedException) {
-                    Thread.currentThread().interrupt()
-                }
-            }
-            lastApiCallAtMs = System.currentTimeMillis()
-        }
-    }
+    private val apiBaseUrl = "https://ga-mobile-api.loklok.tv/cms/app"
 
-    private fun signApiRequest(original: Request): Pair<Request, String> {
-        val url = original.url
-        val path = url.encodedPath
-        val bodyBytes: ByteArray?
-        val bodyText: String
-        val existingBody = original.body
-        if (existingBody != null) {
-            val buffer = Buffer()
-            existingBody.writeTo(buffer)
-            bodyBytes = buffer.readByteArray()
-            bodyText = bodyBytes.toString(Charsets.UTF_8)
-        } else {
-            bodyBytes = null
-            bodyText = ""
-        }
+    private val json = Json { ignoreUnknownKeys = true }
 
-        val aesKeyRaw = LoklokCrypto.generateAesKey()
-        val currentTime = System.currentTimeMillis().toString()
-        val deviceId = getOrCreateDeviceId()
-        val querySignStr = LoklokCrypto.serializeQueryForSign(url)
-        val payloadSignStr = querySignStr.ifEmpty {
-            LoklokCrypto.serializeJsonBodyForSign(bodyText, json)
-        }
+    // Cache for cursor pagination: page -> sort key
+    private val filterCursorCache = mutableMapOf<Int, String>()
 
-        val rsaKey = LoklokCrypto.rsaEncryptBase64(aesKeyRaw)
-        val sign = LoklokCrypto.computeSign(payloadSignStr, currentTime, aesKeyRaw)
-        val usertype = LoklokCrypto.computeUserType(deviceId, aesKeyRaw)
+    // In-memory cache for subtitle tracks parsed during episodeListParse
+    private val subtitleCache = ConcurrentHashMap<String, List<Track>>()
 
-        val builder = original.newBuilder()
-            .header("Content-Type", "application/json")
-            .header("Accept", "application/json")
-            .header("aesKey", rsaKey)
-            .header("clientType", CLIENT_TYPE)
-            .header("currentTime", currentTime)
-            .header("deviceId", deviceId)
-            .header("keke", "false")
-            .header("lang", "en")
-            .header("sign", sign)
-            .header("timezone", LoklokCrypto.currentTimezoneHeader())
-            .header("usertype", usertype)
-            .header("versionCode", VERSION_CODE)
-            .header("Origin", baseUrl)
-            .header("Referer", "$baseUrl/")
-            .header("User-Agent", WEB_USER_AGENT)
-            .header("X-Forwarded-For", "120.28.0.1")
-            .header("clientip", "120.28.0.1")
-            .header("X-Real-IP", "120.28.0.1")
+    // Unified mobile headers with validated active versioncode to avoid A0001 termination
+    private val mobileHeaders: Headers
+        get() = headersBuilder().apply {
+            add("Accept", "application/json")
+            add("lang", "en")
+            add("versioncode", "36")
+            add("clienttype", "android_tem3")
+            add("deviceid", "60A3305FDAAC489AAF4C7DD33B1483B4")
 
-        if (path != LOGIN_PATH) {
-            val token = resolveAuthToken()
-            if (!token.isNullOrBlank()) {
-                builder.header("token", token)
-            } else {
-                builder.removeHeader("token")
-            }
-        } else {
-            builder.removeHeader("token")
-        }
-
-        if (bodyBytes != null) {
-            val contentType = existingBody?.contentType() ?: JSON_MEDIA_TYPE
-            builder.method(original.method, bodyBytes.toRequestBody(contentType))
-        }
-
-        return builder.build() to aesKeyRaw
-    }
-
-    private fun getOrCreateDeviceId(): String {
-        cachedDeviceId?.let { if (it.isNotBlank()) return it }
-        val stored = readPreference(PREF_DEVICE_ID_KEY)
-        if (stored.isNotBlank()) {
-            cachedDeviceId = stored
-            return stored
-        }
-        val generated = LoklokCrypto.generateDeviceId()
-        savePreference(PREF_DEVICE_ID_KEY, generated)
-        cachedDeviceId = generated
-        return generated
-    }
-
-    private fun resolveAuthToken(): String? {
-        val manual = readPreference(PREF_TOKEN_KEY).trim()
-        if (manual.isNotEmpty()) return manual
-
-        val cached = readPreference(PREF_CACHED_TOKEN_KEY).trim()
-        if (cached.isNotEmpty()) return cached
-
-        try {
-            val cookies = network.client.cookieJar.loadForRequest(baseUrl.toHttpUrl())
-            val jarMatch = cookies.firstOrNull { it.name == "loklok_token" && it.value.isNotBlank() }?.value
-            if (!jarMatch.isNullOrBlank()) {
-                return decodeCookieValue(jarMatch)
-            }
-        } catch (_: Throwable) {
-        }
-
-        return null
-    }
-
-    private fun decodeCookieValue(raw: String): String {
-        return try {
-            URLDecoder.decode(raw, "UTF-8")
-        } catch (_: Exception) {
-            raw
-        }
-    }
-
-    private fun loginWithCredentialsIfConfigured(forceRefresh: Boolean): String? {
-        val email = readPreference(PREF_EMAIL_KEY).trim()
-        val password = readPreference(PREF_PASSWORD_KEY)
-        if (email.isEmpty() || password.isEmpty()) return null
-
-        synchronized(authLock) {
-            if (!forceRefresh) {
-                val existing = resolveAuthToken()
-                if (!existing.isNullOrBlank()) return existing
-            } else {
-                savePreference(PREF_CACHED_TOKEN_KEY, "")
-            }
-
-            val bodyJson = buildJsonObject {
-                put("param", email)
-                put("pwd", password)
-                put("loginType", "email")
-            }.toString()
-
-            val request = POST(
-                "$apiBaseUrl$LOGIN_PATH",
-                body = bodyJson.toRequestBody(JSON_MEDIA_TYPE),
-            )
-
-            return try {
-                client.newCall(request).execute().use { resp ->
-                    if (!resp.isSuccessful) return@use null
-                    val raw = resp.body.string()
-                    if (raw.isBlank() || raw.trimStart().startsWith("<")) return@use null
-                    val root = json.parseToJsonElement(raw).jsonObject
-                    if (root.optString("code") != "00000") return@use null
-                    val data = root["data"] as? JsonObject ?: return@use null
-                    val token = data.optString("token") ?: data.optString("jwtToken") ?: return@use null
-                    savePreference(PREF_CACHED_TOKEN_KEY, token)
-                    token
-                }
+            val token = try {
+                preferences.getString(PREF_TOKEN_KEY, "") ?: ""
             } catch (_: Exception) {
-                null
+                ""
             }
-        }
-    }
-
-    private fun readPreference(key: String): String {
-        return try {
-            preferences.getString(key, "") ?: ""
-        } catch (_: Exception) {
-            ""
-        }
-    }
-
-    private fun savePreference(key: String, value: String) {
-        try {
-            preferences.edit().putString(key, value).apply()
-        } catch (_: Exception) {
-        }
-    }
-
-    private fun showToast(message: String) {
-        try {
-            val context = Injekt.get<Application>()
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            if (token.isNotBlank()) {
+                add("token", token)
             }
-        } catch (_: Exception) {
-        }
-    }
 
-    private fun JsonObject.optString(key: String): String? {
-        val el = this[key] ?: return null
-        if (el is JsonNull) return null
-        val primitive = el as? JsonPrimitive ?: return null
-        val content = primitive.content
-        return content.takeIf { it.isNotBlank() && it != "null" }
-    }
+            val country = try {
+                preferences.getString(PREF_COUNTRY_KEY, "ph")
+            } catch (_: Exception) {
+                "ph"
+            }
+            val ip = when (country) {
+                "ph" -> "120.28.0.1"
+                "id" -> "103.10.66.1"
+                "my" -> "175.139.192.1"
+                "th" -> "171.96.0.1"
+                "vn" -> "113.160.0.1"
+                else -> ""
+            }
+            if (ip.isNotEmpty()) {
+                add("X-Forwarded-For", ip)
+                add("X-Real-IP", ip)
+                add("clientip", ip)
+                add("True-Client-IP", ip)
+                add("CF-Connecting-IP", ip)
+                add("X-Client-IP", ip)
+                add("X-Originating-IP", ip)
+                add("X-Remote-IP", ip)
+                add("X-Remote-Addr", ip)
+                add("Fastly-Client-IP", ip)
+                add("Forwarded", "for=$ip;proto=https")
+            }
+            add("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 12)")
+        }.build()
+
+    // Clean headers for video stream and segment playback without referer
+    private val videoHeaders: Headers = Headers.Builder()
+        .add("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 12)")
+        .build()
 
     private fun encodeUrl(url: String): String {
-        return try {
+        try {
             val schemeAndHost = url.substringBefore("://") + "://" + url.substringAfter("://").substringBefore("/")
-            val remainder = url.substringAfter("://").substringAfter("/", "")
-            if (remainder.isEmpty()) return url
-            val pathPart = remainder.substringBefore("?")
-            val queryPart = remainder.substringAfter("?", "")
-            val encodedPath = pathPart.split("/").joinToString("/") { segment ->
-                URLEncoder.encode(segment, "UTF-8")
+            val path = url.substringAfter("://").substringAfter("/")
+            val encodedPath = path.split("/").joinToString("/") { segment ->
+                java.net.URLEncoder.encode(segment, "UTF-8")
                     .replace("+", "%20")
                     .replace("%21", "!")
                     .replace("%27", "'")
@@ -373,29 +196,19 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
                     .replace("%29", ")")
                     .replace("%7E", "~")
             }
-            if (queryPart.isNotEmpty()) {
-                "$schemeAndHost/$encodedPath?$queryPart"
-            } else {
-                "$schemeAndHost/$encodedPath"
-            }
+            return "$schemeAndHost/$encodedPath"
         } catch (_: Exception) {
-            url
+            return url
         }
     }
 
     private fun extractDramaId(mediaObj: JsonObject): String? {
-        val jumpAddress = mediaObj.optString("jumpAddress")
+        val jumpAddress = mediaObj["jumpAddress"]?.jsonPrimitive?.content
         if (!jumpAddress.isNullOrBlank()) {
             val idParam = jumpAddress.substringAfter("id=", "").substringBefore("&", "")
             if (idParam.isNotBlank()) return idParam
         }
-        return mediaObj.optString("id") ?: mediaObj.optString("contentId")
-    }
-
-    private fun extractCategoryFromJump(jumpAddress: String?): String? {
-        if (jumpAddress.isNullOrBlank()) return null
-        val typeParam = jumpAddress.substringAfter("type=", "").substringBefore("&", "")
-        return typeParam.takeIf { it.isNotBlank() }
+        return mediaObj["id"]?.jsonPrimitive?.content
     }
 
     private fun ensureAbsoluteCoverUrl(url: String?): String {
@@ -404,279 +217,176 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
             url
         } else {
             val path = if (url.startsWith("/")) url else "/$url"
-            "https://img.netpop.app$path"
+            "https://img.chhhn.com$path"
         }
-        return encodeUrl(absoluteUrl)
+        return encodeUrl(absoluteUrl.replace("img.loklok.tv", "img.chhhn.com"))
     }
 
+    // Parse URL scheme: /outer/drama/{category}/{id}
     private fun parseAnimeUrl(url: String): Pair<String, String> {
         val parts = url.trimStart('/').split("/")
         if (parts.size >= 4 && parts[0] == "outer" && parts[1] == "drama") {
-            return parts[3] to parts[2]
+            return parts[3] to parts[2] // id to category
         }
         throw IllegalArgumentException("Invalid anime url: $url")
     }
 
+    // Episode URL format: contentId|episodeId|category|code1:desc1,code2:desc2...
     private fun parseEpisodeUrl(url: String): Triple<String, String, String> {
         val parts = url.split("|")
         require(parts.size >= 3) { "Invalid episode url: $url" }
         return Triple(parts[0], parts[1], parts[2])
     }
 
+    // Extract definition list (code:desc pairs) from episode URL
     private fun parseEpisodeDefinitions(url: String): List<Pair<String, String>> {
         val parts = url.split("|")
-        if (parts.size < 4 || parts[3].isBlank()) return emptyList()
-        return parts[3].split(",").mapNotNull { entry ->
-            val subParts = entry.split(":")
-            if (subParts.size == 2 && subParts[0].isNotBlank()) subParts[0] to subParts[1] else null
+        if (parts.size < 4) return emptyList()
+        return parts[3].split(",").mapNotNull {
+            val subParts = it.split(":")
+            if (subParts.size == 2) subParts[0] to subParts[1] else null
         }
+    }
+
+    private fun searchPayload(keyword: String, page: Int): String {
+        val escaped = keyword.replace("\\", "\\\\").replace("\"", "\\\"")
+        return """{"searchKeyWord":"$escaped","size":20,"sort":"","searchType":"","page":$page}"""
     }
 
     // ============================== Popular / Latest ==============================
 
     override fun popularAnimeRequest(page: Int): Request {
         val pageIndex = (page - 1).coerceAtLeast(0)
-        return GET("$apiBaseUrl/home/pc/getHomeRank?navigationId=$rankNavId&page=$pageIndex&size=$PAGE_SIZE")
+        return GET("$apiBaseUrl/homePage/getHome?page=$pageIndex", mobileHeaders)
     }
 
     override fun popularAnimeParse(response: Response): AnimesPage {
-        checkResponse(response)
-        val body = ensureJsonBody(response.body.string(), "popular")
-        if (body.isBlank()) return AnimesPage(emptyList(), false)
-
-        val root = try {
-            json.parseToJsonElement(body).jsonObject
-        } catch (_: Exception) {
-            return AnimesPage(emptyList(), false)
-        }
-        val code = root.optString("code")
-        if (code != "00000") {
-            return AnimesPage(emptyList(), false)
-        }
-
-        val groups = root["data"] as? JsonArray ?: return AnimesPage(emptyList(), false)
-        val animeList = mutableListOf<SAnime>()
-        val seenKeys = mutableSetOf<String>()
-        var hasMoreFromGroups = false
-
-        for (group in groups) {
-            val groupObj = group as? JsonObject ?: continue
-            val rankingContents = groupObj["rankingContents"] as? JsonArray ?: continue
-            if (rankingContents.isEmpty()) continue
-
-            val endFlag = (groupObj["endFlag"] as? JsonPrimitive)?.content?.toBooleanStrictOrNull() ?: false
-            if (!endFlag) {
-                hasMoreFromGroups = true
-            }
-
-            for (item in rankingContents) {
-                val obj = item as? JsonObject ?: continue
-                val id = extractDramaId(obj) ?: continue
-                val category = obj.optString("category")
-                    ?: obj.optString("domainType")
-                    ?: extractCategoryFromJump(obj.optString("jumpAddress"))
-                    ?: "1"
-                val title = obj.optString("title") ?: obj.optString("name") ?: continue
-                val cover = obj.optString("verticalImage")
-                    ?: obj.optString("coverVerticalUrl")
-                    ?: obj.optString("imageUrl")
-                    ?: ""
-
-                if (!seenKeys.add("$category/$id")) continue
-
-                animeList.add(
-                    SAnime.create().apply {
-                        setUrlWithoutDomain("/outer/drama/$category/$id")
-                        this.title = title
-                        thumbnail_url = ensureAbsoluteCoverUrl(cover)
-                        initialized = false
-                    },
-                )
-            }
-        }
-
-        return AnimesPage(animeList, animeList.isNotEmpty() && hasMoreFromGroups)
+        return parseHomeResponse(response, sectionFilter = { type, name ->
+            type == "RANKING_ASSEMBLY" || name.contains("Top", true) || name.contains("Popular", true) || name.contains("Ranking", true) || name.contains("Trending", true)
+        })
     }
 
     override fun latestUpdatesRequest(page: Int): Request {
         val pageIndex = (page - 1).coerceAtLeast(0)
-        return GET("$apiBaseUrl/home/pc/getHome?navigationId=$homeNavId&page=$pageIndex")
+        return GET("$apiBaseUrl/homePage/getHome?page=$pageIndex", mobileHeaders)
     }
 
     override fun latestUpdatesParse(response: Response): AnimesPage {
+        return parseHomeResponse(response, sectionFilter = { type, name ->
+            type == "SINGLE_ALBUM" || name.contains("New", true) || name.contains("Latest", true) || name.contains("Recent", true) || name.contains("Release", true)
+        })
+    }
+
+    private fun parseHomeResponse(response: Response, sectionFilter: ((String, String) -> Boolean)? = null): AnimesPage {
         checkResponse(response)
-        val body = ensureJsonBody(response.body.string(), "latest")
+        val body = ensureJsonBody(response.body?.string(), "browse")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
 
-        val root = try {
-            json.parseToJsonElement(body).jsonObject
-        } catch (_: Exception) {
-            return AnimesPage(emptyList(), false)
-        }
-        val code = root.optString("code")
-        if (code != "00000") {
-            return AnimesPage(emptyList(), false)
-        }
-
-        val data = root["data"] as? JsonObject ?: return AnimesPage(emptyList(), false)
+        val root = json.parseToJsonElement(body).jsonObject
+        val data = root["data"]?.jsonObject ?: return AnimesPage(emptyList(), false)
         val recommendItems = data["recommendItems"] as? JsonArray ?: return AnimesPage(emptyList(), false)
 
-        val animeList = mutableListOf<SAnime>()
-        val seenKeys = mutableSetOf<String>()
-
+        val allAnime = mutableListOf<SAnime>()
+        val filteredAnime = mutableListOf<SAnime>()
         for (section in recommendItems) {
             val sectionObj = section as? JsonObject ?: continue
-            val sectionType = sectionObj.optString("homeSectionType") ?: ""
+            val sectionType = sectionObj["homeSectionType"]?.jsonPrimitive?.content ?: ""
+            val sectionName = sectionObj["homeSectionName"]?.jsonPrimitive?.content ?: ""
             if (sectionType == "BANNER" || sectionType == "BLOCK_GROUP") continue
+            val matchesFilter = sectionFilter == null || sectionFilter(sectionType, sectionName)
 
-            val mediaList = sectionObj["recommendContentVOList"] as? JsonArray
-                ?: sectionObj["media"] as? JsonArray
+            val mediaList = sectionObj["media"] as? JsonArray
+                ?: sectionObj["recommendContentVOList"] as? JsonArray
                 ?: continue
 
             for (media in mediaList) {
                 val mediaObj = media as? JsonObject ?: continue
                 val id = extractDramaId(mediaObj) ?: continue
-                val category = mediaObj.optString("category")
-                    ?: mediaObj.optString("domainType")
-                    ?: extractCategoryFromJump(mediaObj.optString("jumpAddress"))
-                    ?: "1"
-                val title = mediaObj.optString("name") ?: mediaObj.optString("title") ?: continue
-                val cover = mediaObj.optString("coverVerticalUrl")
-                    ?: mediaObj.optString("imageUrl")
-                    ?: mediaObj.optString("cover")
-                    ?: ""
+                val category = mediaObj["category"]?.jsonPrimitive?.content
+                    ?: mediaObj["domainType"]?.jsonPrimitive?.content ?: "1"
+                val title = mediaObj["name"]?.jsonPrimitive?.content
+                    ?: mediaObj["title"]?.jsonPrimitive?.content ?: ""
+                val cover = mediaObj["coverVerticalUrl"]?.jsonPrimitive?.content
+                    ?: mediaObj["imageUrl"]?.jsonPrimitive?.content
+                    ?: mediaObj["cover"]?.jsonPrimitive?.content ?: ""
 
-                if (!seenKeys.add("$category/$id")) continue
-
-                animeList.add(
-                    SAnime.create().apply {
-                        setUrlWithoutDomain("/outer/drama/$category/$id")
-                        this.title = title
-                        thumbnail_url = ensureAbsoluteCoverUrl(cover)
-                        initialized = false
-                    },
-                )
+                val anime = SAnime.create().apply {
+                    setUrlWithoutDomain("/outer/drama/$category/$id")
+                    this.title = title
+                    thumbnail_url = ensureAbsoluteCoverUrl(cover)
+                    initialized = false
+                }
+                allAnime.add(anime)
+                if (matchesFilter) {
+                    filteredAnime.add(anime)
+                }
             }
         }
 
-        return AnimesPage(animeList, animeList.isNotEmpty())
+        val result = if (filteredAnime.isNotEmpty()) filteredAnime else allAnime
+        return AnimesPage(result, result.isNotEmpty())
     }
 
     // ============================== Search ==============================
 
     override fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request {
+        val pageIndex = (page - 1).coerceAtLeast(0)
+
         if (query.isNotBlank()) {
             val keyword = query.trim()
-            val cacheKey = "q:$keyword"
+            val body = searchPayload(keyword, pageIndex).toRequestBody("application/json; charset=utf-8".toMediaType())
+            return POST("$apiBaseUrl/search/v1/searchWithKeyWord", body = body, headers = mobileHeaders)
+        } else {
+            val typeFilter = filters.filterIsInstance<LoklokFilters.TypeFilter>().firstOrNull()
+            val regionFilter = filters.filterIsInstance<LoklokFilters.RegionFilter>().firstOrNull()
+            val categoryFilter = filters.filterIsInstance<LoklokFilters.CategoryFilter>().firstOrNull()
+            val yearFilter = filters.filterIsInstance<LoklokFilters.YearFilter>().firstOrNull()
+            val sortFilter = filters.filterIsInstance<LoklokFilters.SortFilter>().firstOrNull()
+
+            val typeVal = typeFilter?.getValue() ?: "MOVIE,TV,VARIETY,COMIC,DOCUMENTARY,TVSPECIAL,MINISERIES,SETI,TALK"
+            val regionVal = regionFilter?.getValue() ?: ""
+            val categoryVal = categoryFilter?.getValue() ?: ""
+            val yearVal = yearFilter?.getValue() ?: ""
+            val sortVal = sortFilter?.getValue() ?: "count"
+
             if (page == 1) {
-                clearCursorPrefix(cacheKey)
+                filterCursorCache.clear()
             }
-            val lastSort = cursorCache["$cacheKey:$page"]
-            val payload = buildJsonObject {
-                put("size", PAGE_SIZE)
-                put("searchKeyWord", keyword)
-                if (page > 1) {
-                    put("from", ((page - 1) * PAGE_SIZE).toString())
-                    if (!lastSort.isNullOrBlank()) {
-                        put("sort", lastSort)
-                    }
-                }
-            }.toString()
+            val lastSort = filterCursorCache[page] ?: ""
 
-            return POST(
-                "$apiBaseUrl/cms/pc/search/searchWithKeyWord",
-                body = payload.toRequestBody(JSON_MEDIA_TYPE),
-            ).newBuilder()
-                .tag(PageTag::class.java, PageTag(page, cacheKey))
-                .build()
+            val body = """{"size":20,"params":"$typeVal","area":"$regionVal","category":"$categoryVal","year":"$yearVal","order":"$sortVal","sort":"$lastSort"}"""
+                .toRequestBody("application/json; charset=utf-8".toMediaType())
+            return POST("$apiBaseUrl/search/v1/search?page=$page", body = body, headers = mobileHeaders)
         }
-
-        val typeFilter = filters.filterIsInstance<LoklokFilters.TypeFilter>().firstOrNull()
-        val regionFilter = filters.filterIsInstance<LoklokFilters.RegionFilter>().firstOrNull()
-        val categoryFilter = filters.filterIsInstance<LoklokFilters.CategoryFilter>().firstOrNull()
-        val yearFilter = filters.filterIsInstance<LoklokFilters.YearFilter>().firstOrNull()
-        val sortFilter = filters.filterIsInstance<LoklokFilters.SortFilter>().firstOrNull()
-
-        val typeVal = typeFilter?.getValue() ?: DEFAULT_TYPE_PARAMS
-        val typeLabel = typeFilter?.getLabel() ?: "ALL"
-        val regionVal = regionFilter?.getValue() ?: ""
-        val categoryVal = categoryFilter?.getValue() ?: ""
-        val yearVal = yearFilter?.getValue() ?: ""
-        val sortVal = sortFilter?.getValue() ?: "count"
-
-        val cacheKey = "f:$typeVal|$regionVal|$categoryVal|$yearVal|$sortVal"
-        if (page == 1) {
-            clearCursorPrefix(cacheKey)
-        }
-        val lastSort = cursorCache["$cacheKey:$page"]
-
-        val payload = buildJsonObject {
-            put("size", PAGE_SIZE)
-            put("params", typeVal)
-            put("searchScreeningName", typeLabel)
-            put("order", sortVal)
-            if (regionVal.isNotBlank()) put("area", regionVal)
-            if (categoryVal.isNotBlank()) put("category", categoryVal)
-            if (yearVal.isNotBlank()) put("year", yearVal)
-            if (page > 1) {
-                put("from", ((page - 1) * PAGE_SIZE).toString())
-                if (!lastSort.isNullOrBlank()) {
-                    put("sort", lastSort)
-                }
-            }
-        }.toString()
-
-        return POST(
-            "$apiBaseUrl/cms/pc/search/screen/list",
-            body = payload.toRequestBody(JSON_MEDIA_TYPE),
-        ).newBuilder()
-            .tag(PageTag::class.java, PageTag(page, cacheKey))
-            .build()
-    }
-
-    private fun clearCursorPrefix(prefix: String) {
-        val matchPrefix = "$prefix:"
-        cursorCache.keys.removeIf { it.startsWith(matchPrefix) }
     }
 
     override fun searchAnimeParse(response: Response): AnimesPage {
         checkResponse(response)
-        val body = ensureJsonBody(response.body.string(), "search")
+        val body = ensureJsonBody(response.body?.string(), "search")
         if (body.isBlank()) return AnimesPage(emptyList(), false)
 
-        val root = try {
-            json.parseToJsonElement(body).jsonObject
-        } catch (_: Exception) {
-            return AnimesPage(emptyList(), false)
-        }
-        val code = root.optString("code")
-        if (code != "00000") {
-            return AnimesPage(emptyList(), false)
-        }
+        val root = json.parseToJsonElement(body).jsonObject
+        val data = root["data"]?.jsonObject ?: return AnimesPage(emptyList(), false)
+        val searchResults = data["searchResults"] as? JsonArray ?: return AnimesPage(emptyList(), false)
 
-        val searchResults = root["data"] as? JsonArray
-            ?: (root["data"] as? JsonObject)?.get("searchResults") as? JsonArray
-            ?: return AnimesPage(emptyList(), false)
-
-        val tag = response.request.tag(PageTag::class.java)
-        val lastSort = (searchResults.lastOrNull() as? JsonObject)?.optString("sort")
-        if (tag != null && !lastSort.isNullOrBlank()) {
-            cursorCache["${tag.cacheKey}:${tag.page + 1}"] = lastSort
+        val page = response.request.url.queryParameter("page")?.toIntOrNull() ?: 1
+        val lastItem = searchResults.lastOrNull() as? JsonObject
+        val lastSort = lastItem?.get("sort")?.jsonPrimitive?.content ?: ""
+        if (lastSort.isNotBlank()) {
+            filterCursorCache[page + 1] = lastSort
         }
 
         val animeList = mutableListOf<SAnime>()
         for (item in searchResults) {
             val obj = item as? JsonObject ?: continue
-            val id = obj.optString("id") ?: continue
-            val category = obj.optString("domainType")
-                ?: obj.optString("category")
-                ?: "1"
-            val title = obj.optString("name") ?: obj.optString("title") ?: continue
-            val cover = obj.optString("coverVerticalUrl")
-                ?: obj.optString("coverHorizontalUrl")
-                ?: obj.optString("imageUrl")
-                ?: obj.optString("cover")
-                ?: ""
+            val id = obj["id"]?.jsonPrimitive?.content ?: continue
+            val category = obj["category"]?.jsonPrimitive?.content
+                ?: obj["domainType"]?.jsonPrimitive?.content ?: "1"
+            val title = obj["name"]?.jsonPrimitive?.content
+                ?: obj["title"]?.jsonPrimitive?.content ?: ""
+            val cover = obj["coverVerticalUrl"]?.jsonPrimitive?.content
+                ?: obj["imageUrl"]?.jsonPrimitive?.content
+                ?: obj["cover"]?.jsonPrimitive?.content ?: ""
 
             animeList.add(
                 SAnime.create().apply {
@@ -688,143 +398,158 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
             )
         }
 
-        return AnimesPage(animeList, searchResults.size >= PAGE_SIZE)
+        return AnimesPage(animeList, animeList.isNotEmpty())
     }
 
     // ============================== Anime Details ==============================
 
     override fun animeDetailsRequest(anime: SAnime): Request {
         val (id, category) = parseAnimeUrl(anime.url)
-        return GET("$apiBaseUrl/cms/pc/movieDrama/get?id=$id&category=$category&reliableDef=0")
+        return GET("$apiBaseUrl/movieDrama/get?id=$id&category=$category", mobileHeaders)
     }
 
     override fun animeDetailsParse(response: Response): SAnime {
-        val reqUrl = response.request.url
-        val id = reqUrl.queryParameter("id") ?: ""
-        val category = reqUrl.queryParameter("category") ?: "1"
+        checkResponse(response)
+        val body = ensureJsonBody(response.body?.string(), "details")
+        var root = json.parseToJsonElement(body).jsonObject
+        var data = root["data"]?.jsonObject
 
-        val fallbackAnime = SAnime.create().apply {
-            setUrlWithoutDomain("/outer/drama/$category/$id")
-            status = SAnime.UNKNOWN
-            initialized = true
+        val u = response.request.url.toString()
+        val id = u.substringAfter("id=").substringBefore("&")
+        var category = u.substringAfter("category=").substringBefore("&")
+
+        // If category was wrong or resource returned B0300, try alternate category
+        if (data == null || root["code"]?.jsonPrimitive?.content == "B0300") {
+            val altCategory = if (category == "0") "1" else "0"
+            try {
+                val altUrl = "$apiBaseUrl/movieDrama/get?id=$id&category=$altCategory"
+                val altResponse = client.newCall(GET(altUrl, mobileHeaders)).execute()
+                if (altResponse.isSuccessful) {
+                    val altBody = altResponse.body.string()
+                    val altRoot = json.parseToJsonElement(altBody).jsonObject
+                    val altData = altRoot["data"]?.jsonObject
+                    if (altData != null && altRoot["code"]?.jsonPrimitive?.content == "00000") {
+                        root = altRoot
+                        data = altData
+                        category = altCategory
+                    }
+                }
+            } catch (_: Exception) {}
         }
 
-        return try {
-            if (!response.isSuccessful) return fallbackAnime
-            val body = response.body.string()
-            if (body.isBlank() || body.trimStart().startsWith("<")) return fallbackAnime
-            val root = json.parseToJsonElement(body) as? JsonObject ?: return fallbackAnime
-            if (root.optString("code") != "00000") return fallbackAnime
-            val data = root["data"] as? JsonObject ?: return fallbackAnime
-            if (data.optString("code")?.startsWith("FDLS") == true) return fallbackAnime
+        val validData = data ?: throw Exception("No details available for this title")
 
-            val name = data.optString("name") ?: data.optString("title") ?: ""
-            val cover = data.optString("coverVerticalUrl")
-                ?: data.optString("coverHorizontalUrl")
-                ?: ""
-            val intro = data.optString("introduction") ?: ""
+        val name = validData["name"]?.jsonPrimitive?.content ?: ""
+        val cover = validData["coverVerticalUrl"]?.jsonPrimitive?.content
+            ?: validData["coverHorizontalUrl"]?.jsonPrimitive?.content ?: ""
+        val intro = validData["introduction"]?.jsonPrimitive?.content ?: ""
 
-            val genres = (data["tagNameList"] as? JsonArray)
-                ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
-                ?: emptyList()
-            val areas = (data["areaNameList"] as? JsonArray)
-                ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p !is JsonNull }?.content }
-                ?: emptyList()
-            val score = data.optString("score") ?: ""
-            val year = data.optString("year") ?: ""
-            val updateStatus = (data["updateInfo"] as? JsonObject)?.optString("updateStatus")?.toIntOrNull()
+        val genres = validData["tagNameList"]?.jsonArray?.mapNotNull { it.jsonPrimitive.content } ?: emptyList()
+        val areas = validData["areaNameList"]?.jsonArray?.mapNotNull { it.jsonPrimitive.content } ?: emptyList()
+        val score = validData["score"]?.jsonPrimitive?.content ?: ""
+        val year = validData["year"]?.jsonPrimitive?.content ?: ""
 
-            val descBuilder = StringBuilder(intro)
-            if (year.isNotBlank() || score.isNotBlank()) {
-                if (descBuilder.isNotEmpty()) descBuilder.append("\n\n")
-                if (year.isNotBlank()) descBuilder.append("Year: $year\n")
-                if (score.isNotBlank()) descBuilder.append("Rating: $score★\n")
-            }
+        val descBuilder = StringBuilder(intro)
+        if (year.isNotBlank() || score.isNotBlank()) {
+            descBuilder.append("\n\n")
+            if (year.isNotBlank()) descBuilder.append("Year: $year\n")
+            if (score.isNotBlank()) descBuilder.append("Rating: $score★\n")
+        }
 
-            SAnime.create().apply {
-                setUrlWithoutDomain("/outer/drama/$category/$id")
-                title = name
-                thumbnail_url = ensureAbsoluteCoverUrl(cover)
-                description = descBuilder.toString().trimEnd()
-                genre = (genres + areas).distinct().joinToString(", ")
-                status = when (updateStatus) {
-                    4 -> SAnime.COMPLETED
-                    2, 3 -> SAnime.ONGOING
-                    else -> SAnime.UNKNOWN
-                }
-                initialized = true
-            }
-        } catch (_: Exception) {
-            fallbackAnime
+        return SAnime.create().apply {
+            setUrlWithoutDomain("/outer/drama/$category/$id")
+            title = name
+            thumbnail_url = ensureAbsoluteCoverUrl(cover)
+            description = descBuilder.toString()
+            genre = (genres + areas).joinToString(", ")
+            status = SAnime.UNKNOWN
+            initialized = true
         }
     }
 
     // ============================== Episodes ==============================
 
-    override fun episodeListRequest(anime: SAnime): Request {
-        val (contentId, category) = parseAnimeUrl(anime.url)
-        return GET("$apiBaseUrl/cms/pc/movieDrama/queryEpisodeList?id=$contentId&category=$category")
-    }
+    override fun episodeListRequest(anime: SAnime): Request = animeDetailsRequest(anime)
 
     override fun episodeListParse(response: Response): List<SEpisode> {
         checkResponse(response)
-        val body = ensureJsonBody(response.body.string(), "episodes")
+        val body = ensureJsonBody(response.body?.string(), "episodes")
         if (body.isBlank()) return emptyList()
 
-        val root = try {
-            json.parseToJsonElement(body).jsonObject
-        } catch (_: Exception) {
-            return emptyList()
+        var root = json.parseToJsonElement(body).jsonObject
+        var data = root["data"]?.jsonObject
+
+        val (contentId, originalCategory) = response.request.url.toString().let { u ->
+            val idParam = u.substringAfter("id=").substringBefore("&")
+            val catParam = u.substringAfter("category=").substringBefore("&")
+            idParam to catParam
         }
+        var category = originalCategory
 
-        val apiCode = root.optString("code")
-        if (apiCode != "00000") {
-            return emptyList()
-        }
-
-        val reqUrl = response.request.url
-        val contentId = reqUrl.queryParameter("id") ?: ""
-        val category = reqUrl.queryParameter("category") ?: "1"
-
-        val episodesArray = root["data"] as? JsonArray ?: return emptyList()
-        val totalCount = episodesArray.size
-
-        return episodesArray.mapIndexed { index, item ->
-            val obj = item as? JsonObject ?: JsonObject(emptyMap())
-            val episodeId = obj.optString("id") ?: ""
-            val rawSeriesNo = obj.optString("seriesNo")?.toFloatOrNull()
-            val seriesNo = when {
-                rawSeriesNo != null && rawSeriesNo > 0f -> rawSeriesNo
-                totalCount == 1 -> 1f
-                else -> (index + 1).toFloat()
-            }
-
-            var epName = obj.optString("name") ?: ""
-            if (epName.isBlank()) {
-                epName = if (totalCount == 1 && (rawSeriesNo == null || rawSeriesNo <= 0f) && category == "0") {
-                    "Movie"
-                } else {
-                    val seriesNoInt = seriesNo.toInt()
-                    if (seriesNo == seriesNoInt.toFloat()) {
-                        "Episode $seriesNoInt"
-                    } else {
-                        "Episode $seriesNo"
+        // If category was wrong or resource returned B0300, try alternate category
+        if (data == null || root["code"]?.jsonPrimitive?.content == "B0300") {
+            val altCategory = if (category == "0") "1" else "0"
+            try {
+                val altUrl = "$apiBaseUrl/movieDrama/get?id=$contentId&category=$altCategory"
+                val altResponse = client.newCall(GET(altUrl, mobileHeaders)).execute()
+                if (altResponse.isSuccessful) {
+                    val altBody = altResponse.body.string()
+                    val altRoot = json.parseToJsonElement(altBody).jsonObject
+                    val altData = altRoot["data"]?.jsonObject
+                    if (altData != null && altRoot["code"]?.jsonPrimitive?.content == "00000") {
+                        root = altRoot
+                        data = altData
+                        category = altCategory
                     }
+                }
+            } catch (_: Exception) {}
+        }
+
+        val validData = data ?: return emptyList()
+
+        val episodeVoElement = validData["episodeVo"]
+        val episodeVo = when (episodeVoElement) {
+            is JsonArray -> episodeVoElement
+            is JsonObject -> JsonArray(listOf(episodeVoElement))
+            else -> return emptyList()
+        }
+
+        return episodeVo.mapIndexed { index, item ->
+            val obj = item as? JsonObject ?: return@mapIndexed SEpisode.create()
+            val episodeId = obj["id"]?.jsonPrimitive?.content ?: ""
+            val seriesNo = obj["seriesNo"]?.jsonPrimitive?.content?.toFloatOrNull() ?: (index + 1).toFloat()
+            var name = obj["name"]?.jsonPrimitive?.content ?: ""
+            if (name.isBlank()) {
+                val seriesNoInt = seriesNo.toInt()
+                name = if (seriesNo == seriesNoInt.toFloat()) {
+                    "Episode $seriesNoInt"
+                } else {
+                    "Episode $seriesNo"
                 }
             }
 
-            val defs = (obj["definitionList"] as? JsonArray)?.mapNotNull { defItem ->
+            // Extract definition code:desc pairs
+            val defs = obj["definitionList"]?.jsonArray?.mapNotNull { defItem ->
                 val defObj = defItem as? JsonObject ?: return@mapNotNull null
-                val code = defObj.optString("code") ?: return@mapNotNull null
-                val desc = defObj.optString("description")
-                    ?: defObj.optString("fullDescription")
-                    ?: code
+                val code = defObj["code"]?.jsonPrimitive?.content ?: return@mapNotNull null
+                val desc = defObj["description"]?.jsonPrimitive?.content ?: "Default"
                 "$code:$desc"
             }?.joinToString(",") ?: ""
 
+            // Cache subtitle tracks for this episode
+            val subtitles = obj["subtitlingList"]?.jsonArray?.mapNotNull { subItem ->
+                val subObj = subItem as? JsonObject ?: return@mapNotNull null
+                val lang = subObj["language"]?.jsonPrimitive?.content ?: "Unknown"
+                val subUrl = subObj["subtitlingUrl"]?.jsonPrimitive?.content ?: ""
+                if (subUrl.isNotBlank()) Track(subUrl, lang) else null
+            } ?: emptyList()
+            if (episodeId.isNotBlank() && subtitles.isNotEmpty()) {
+                subtitleCache[episodeId] = subtitles
+            }
+
             SEpisode.create().apply {
                 setUrlWithoutDomain("$contentId|$episodeId|$category|$defs")
-                name = epName
+                this.name = name
                 episode_number = seriesNo
                 date_upload = 0L
             }
@@ -835,209 +560,115 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
 
     override suspend fun getVideoList(episode: SEpisode): List<Video> {
         val (contentId, episodeId, category) = parseEpisodeUrl(episode.url)
-        val rawDefs = parseEpisodeDefinitions(episode.url).ifEmpty { DEFAULT_DEFINITIONS }
+        val definitions = parseEpisodeDefinitions(episode.url)
 
-        val preferredQuality = readPreference(PREF_QUALITY_KEY).ifBlank { "1080P" }
-        val fetchAllQualities = try {
-            preferences.getBoolean(PREF_FETCH_ALL_QUALITIES_KEY, false)
-        } catch (_: Exception) {
-            false
-        }
-
-        val orderedDefs = rawDefs.sortedWith(
-            compareBy<Pair<String, String>>(
-                { !it.second.equals(preferredQuality, ignoreCase = true) },
-                { qualityRank(it.first, it.second) },
-            ),
-        )
-
-        if (resolveAuthToken().isNullOrBlank()) {
-            loginWithCredentialsIfConfigured(forceRefresh = false)
-        }
-
-        val videoHeaders = Headers.Builder()
-            .add("User-Agent", WEB_USER_AGENT)
-            .build()
-
-        val videoList = mutableListOf<Video>()
-        val seenUrls = mutableSetOf<String>()
-        var cachedFallbackSubtitles: List<Track>? = null
-        var authRetried = false
-        var lastError: String? = null
-        var playRequestsCount = 0
-
-        for (def in orderedDefs) {
-            val playUrl = "$apiBaseUrl/media/pc/getPlayInfo?contentId=$contentId&category=$category&episodeId=$episodeId&definition=${def.first}"
-            var shouldRetryCurrentDef: Boolean
-
-            do {
-                shouldRetryCurrentDef = false
-                try {
-                    playRequestsCount++
-                    client.newCall(GET(playUrl)).execute().use { response ->
-                        if (response.code == 429) {
-                            lastError = "Loklok rate limit (429 Too Many Requests). Please wait a few seconds and try again."
-                            if (videoList.isNotEmpty()) {
-                                return videoList
-                            }
-                            throw RateLimitException(lastError!!)
-                        }
-
-                        if (!response.isSuccessful) {
-                            lastError = "Play API HTTP ${response.code}"
-                            return@use
-                        }
-
-                        val respBody = response.body.string()
-                        if (respBody.isBlank() || respBody.trimStart().startsWith("<")) {
-                            lastError = "Blocked or invalid response from Loklok media server."
-                            return@use
-                        }
-
-                        val root = json.parseToJsonElement(respBody).jsonObject
-                        val apiCode = root.optString("code")
-
-                        if (apiCode == AUTH_REQUIRED_CODE) {
-                            if (!authRetried) {
-                                authRetried = true
-                                val refreshedToken = loginWithCredentialsIfConfigured(forceRefresh = true)
-                                if (!refreshedToken.isNullOrBlank()) {
-                                    shouldRetryCurrentDef = true
-                                    return@use
-                                }
-                            }
-                            val msg = "Loklok requires sign-in to load video streams (A0230). " +
-                                "Tap 'Open in WebView' to sign in on loklok.fun, or enter your Email/Password or Session Token in Extension Settings."
-                            showToast("Loklok: Sign-in required (Open in WebView -> loklok.fun)")
-                            throw AuthRequiredException(msg)
-                        }
-
-                        if (apiCode != "00000") {
-                            lastError = root.optString("msg") ?: "API error ($apiCode)"
-                            return@use
-                        }
-
-                        val data = root["data"] as? JsonObject ?: run {
-                            lastError = "Empty media payload."
-                            return@use
-                        }
-
-                        if (data.optString("code") == DECOY_CODE) {
-                            lastError = data.optString("msg") ?: DECOY_CODE
-                            return@use
-                        }
-
-                        val mediaUrl = data.optString("mediaUrl") ?: run {
-                            lastError = "No mediaUrl returned for ${def.second}."
-                            return@use
-                        }
-
-                        if (!seenUrls.add(mediaUrl)) return@use
-
-                        var tracks = extractSubtitleTracks(data)
-                        if (tracks.isEmpty()) {
-                            if (cachedFallbackSubtitles == null) {
-                                cachedFallbackSubtitles = fetchSubtitlesFallback(contentId, episodeId, category)
-                            }
-                            tracks = cachedFallbackSubtitles!!
-                        }
-
-                        val freeDuration = data.optString("freeDuration")?.toLongOrNull() ?: 0L
-                        val totalDuration = data.optString("totalDuration")?.toLongOrNull() ?: 0L
-                        val isPreview = freeDuration > 0L && totalDuration > 0L && freeDuration < totalDuration
-
-                        val resolvedCode = data.optString("currentDefinition")
-                        val baseLabel = rawDefs.firstOrNull { it.first == resolvedCode }?.second ?: def.second
-                        val qualityLabel = if (isPreview) "$baseLabel (Preview)" else baseLabel
-
-                        videoList.add(Video(mediaUrl, qualityLabel, mediaUrl, videoHeaders, tracks))
-
-                        if (!fetchAllQualities && (!isPreview || playRequestsCount >= 2)) {
-                            return videoList
-                        }
-                    }
-                } catch (e: RateLimitException) {
-                    if (videoList.isNotEmpty()) return videoList
-                    throw Exception(e.message)
-                } catch (e: AuthRequiredException) {
-                    throw Exception(e.message)
-                } catch (e: Exception) {
-                    if (lastError == null) {
-                        lastError = e.message ?: "Failed to resolve ${def.second}"
-                    }
-                }
-            } while (shouldRetryCurrentDef)
-        }
-
-        if (videoList.isEmpty()) {
-            throw Exception(lastError ?: "No playable video links found for this episode.")
-        }
-
-        return videoList
-    }
-
-    private class RateLimitException(message: String) : Exception(message)
-    private class AuthRequiredException(message: String) : Exception(message)
-
-    private fun qualityRank(code: String, desc: String): Int {
-        return when {
-            code == "GROOT_HD" || desc.contains("1080") -> 0
-            code == "GROOT_SD" || desc.contains("720") -> 1
-            code == "GROOT_LD" || desc.contains("540") || desc.contains("480") -> 2
-            code == "GROOT_FD" || desc.contains("360") -> 3
-            else -> 4
-        }
-    }
-
-    private fun extractSubtitleTracks(container: JsonObject?): List<Track> {
-        val list = container?.get("subtitlingList") as? JsonArray ?: return emptyList()
-        return list.mapNotNull { subItem ->
-            val subObj = subItem as? JsonObject ?: return@mapNotNull null
-            val subUrl = subObj.optString("subtitlingUrl") ?: return@mapNotNull null
-            val langLabel = subObj.optString("language")
-                ?: subObj.optString("languageAbbr")
-                ?: "Unknown"
-            Track(subUrl, langLabel)
-        }
-    }
-
-    private fun fetchSubtitlesFallback(contentId: String, episodeId: String, category: String): List<Track> {
-        return try {
-            val detailUrl = "$apiBaseUrl/cms/pc/movieDrama/get?id=$contentId&category=$category&reliableDef=0"
-            client.newCall(GET(detailUrl)).execute().use { detailResponse ->
-                if (!detailResponse.isSuccessful) return@use emptyList()
+        // Subtitles: use cached subtitles from episodeListParse, or fallback to movieDrama/get
+        val subtitleTracks = subtitleCache[episodeId] ?: try {
+            val detailUrl = "$apiBaseUrl/movieDrama/get?id=$contentId&category=$category"
+            val detailResponse = client.newCall(GET(detailUrl, mobileHeaders)).execute()
+            if (detailResponse.isSuccessful) {
                 val detailBody = detailResponse.body.string()
-                if (detailBody.isBlank() || detailBody.trimStart().startsWith("<")) return@use emptyList()
                 val detailRoot = json.parseToJsonElement(detailBody).jsonObject
-                if (detailRoot.optString("code") != "00000") return@use emptyList()
-                val detailData = detailRoot["data"] as? JsonObject ?: return@use emptyList()
-                val episodeObj = when (val epEl = detailData["episodeVo"]) {
-                    is JsonArray -> epEl.firstOrNull { ep ->
-                        (ep as? JsonObject)?.optString("id") == episodeId
+                val detailData = detailRoot["data"]?.jsonObject
+                val episodeVo = detailData?.get("episodeVo")
+
+                val episodeObj = when {
+                    episodeVo is JsonArray -> episodeVo.firstOrNull { ep ->
+                        (ep as? JsonObject)?.get("id")?.jsonPrimitive?.content == episodeId
                     } as? JsonObject
-                    is JsonObject -> epEl
+                    episodeVo is JsonObject -> episodeVo
                     else -> null
                 }
-                extractSubtitleTracks(episodeObj)
+
+                episodeObj?.get("subtitlingList")?.jsonArray?.mapNotNull { subItem ->
+                    val subObj = subItem as? JsonObject ?: return@mapNotNull null
+                    val lang = subObj["language"]?.jsonPrimitive?.content ?: "Unknown"
+                    val subUrl = subObj["subtitlingUrl"]?.jsonPrimitive?.content ?: ""
+                    if (subUrl.isNotBlank()) Track(subUrl, lang) else null
+                } ?: emptyList()
+            } else {
+                emptyList()
             }
         } catch (_: Exception) {
             emptyList()
         }
+
+        val videoList = mutableListOf<Video>()
+
+        val defs = definitions.ifEmpty {
+            listOf("GROOT_HD" to "1080P", "GROOT_SD" to "720P", "GROOT_LD" to "540P", "GROOT_FD" to "360P")
+        }
+
+        val preferredQuality = try {
+            preferences.getString(PREF_QUALITY_KEY, "1080P") ?: "1080P"
+        } catch (_: Exception) {
+            "1080P"
+        }
+
+        // Map preferred quality label to Loklok definition code
+        val preferredCode = when (preferredQuality) {
+            "1080P" -> "GROOT_HD"
+            "720P" -> "GROOT_SD"
+            "540P", "480P" -> "GROOT_LD"
+            "360P" -> "GROOT_FD"
+            else -> "GROOT_HD"
+        }
+
+        // Order definitions so preferred quality is queried FIRST
+        val orderedDefs = defs.sortedWith(
+            compareBy { it.first != preferredCode && !it.second.contains(preferredQuality, true) },
+        )
+
+        for ((index, def) in orderedDefs.withIndex()) {
+            try {
+                // Add a polite spacing delay after the first request to prevent Loklok 429 rate limiting
+                if (index > 0) {
+                    try {
+                        Thread.sleep(600L)
+                    } catch (_: Exception) {}
+                }
+
+                val url = "$apiBaseUrl/media/previewInfo?category=$category&contentId=$contentId&episodeId=$episodeId&definition=${def.first}"
+                val request = GET(url, mobileHeaders)
+                val response = client.newCall(request).execute()
+                if (!response.isSuccessful) {
+                    // If rate limited or error, stop further quality calls if we already have a stream
+                    if (videoList.isNotEmpty()) break
+                    continue
+                }
+
+                val respBody = response.body.string()
+                if (respBody.isBlank() || respBody.trimStart().startsWith("<")) continue
+
+                val root = json.parseToJsonElement(respBody).jsonObject
+                val data = root["data"]?.jsonObject ?: continue
+                val mediaUrl = data["mediaUrl"]?.jsonPrimitive?.content ?: continue
+
+                if (mediaUrl.isNotBlank()) {
+                    // Use clean videoHeaders (no referer) so Akamai CDN does not block video chunk requests with 403
+                    videoList.add(Video(mediaUrl, def.second, mediaUrl, videoHeaders, subtitleTracks))
+                }
+            } catch (_: Exception) {
+                if (videoList.isNotEmpty()) break
+            }
+        }
+
+        if (videoList.isEmpty()) {
+            throw Exception("No playable video links found for this episode.")
+        }
+
+        return videoList.sortedWith(
+            compareBy { it.quality != preferredQuality },
+        )
     }
 
     // ============================== Helper Functions ==============================
 
     private fun checkResponse(response: Response) {
         if (!response.isSuccessful) {
-            val msg = response.body.string().take(200).ifBlank { response.message }
-            when (response.code) {
-                429 -> {
-                    showToast("Loklok: Too many requests (429). Please wait a few seconds and retry.")
-                    throw Exception("Rate limited by Loklok (HTTP 429): $msg")
-                }
-                403 -> {
-                    showToast("Loklok: Access denied (403). Your region or IP may be restricted.")
-                }
+            val msg = response.body?.string()?.take(200) ?: response.message
+            if (response.code == 403) {
+                showToast("Loklok: Geo-blocked (403). Please connect to a Southeast Asian VPN (Philippines/Indonesia).")
             }
             throw Exception("API error ${response.code}: $msg")
         }
@@ -1046,7 +677,7 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
     private fun ensureJsonBody(body: String?, context: String): String {
         val b = body ?: throw Exception("Empty response")
         if (b.trimStart().startsWith("<")) {
-            showToast("Loklok: Connection blocked by CDN. Please open loklok.fun in WebView or retry later.")
+            showToast("Loklok: Connection blocked by CDN. Please connect to a Southeast Asian VPN (Philippines/Indonesia).")
             throw Exception("API returned HTML instead of JSON ($context). Server may be blocking; try again later.")
         }
         return b
@@ -1056,40 +687,7 @@ class Loklok : ConfigurableAnimeSource, AnimeHttpSource() {
 
     companion object {
         private const val PREF_QUALITY_KEY = "preferred_quality"
-        private const val PREF_FETCH_ALL_QUALITIES_KEY = "fetch_all_qualities"
-        private const val PREF_EMAIL_KEY = "account_email"
-        private const val PREF_PASSWORD_KEY = "account_password"
+        private const val PREF_COUNTRY_KEY = "spoofed_country"
         private const val PREF_TOKEN_KEY = "session_token"
-        private const val PREF_CACHED_TOKEN_KEY = "cached_auth_token"
-        private const val PREF_DEVICE_ID_KEY = "persistent_device_id"
-
-        private const val DEFAULT_HOME_NAV_ID = "1000004"
-        private const val DEFAULT_RANK_NAV_ID = "1000080"
-        private const val PAGE_SIZE = 20
-
-        private const val CLIENT_TYPE = "web-loklok"
-        private const val VERSION_CODE = "32"
-        private const val LOGIN_PATH = "/user/auth/pc/login"
-        private const val AUTH_REQUIRED_CODE = "A0230"
-        private const val DECOY_CODE = "FDLSxl1000129"
-
-        private const val MIN_API_INTERVAL_MS = 300L
-        private const val MIN_PLAY_INTERVAL_MS = 500L
-        private const val BACKOFF_BASE_MS = 1500L
-
-        private const val DEFAULT_TYPE_PARAMS =
-            "MOVIE,TV,VARIETY,COMIC,DOCUMENTARY,TVSPECIAL,MINISERIES,SETI,TALK"
-
-        private const val WEB_USER_AGENT =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-
-        private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
-
-        private val DEFAULT_DEFINITIONS = listOf(
-            "GROOT_HD" to "1080P",
-            "GROOT_SD" to "720P",
-            "GROOT_LD" to "540P",
-            "GROOT_FD" to "360P",
-        )
     }
 }
