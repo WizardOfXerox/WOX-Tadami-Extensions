@@ -1,7 +1,7 @@
 ext {
     extName = 'Loklok'
     extClass = '.Loklok'
-    extVersionCode = 3
+    extVersionCode = 11
     isNsfw = false
 }
 

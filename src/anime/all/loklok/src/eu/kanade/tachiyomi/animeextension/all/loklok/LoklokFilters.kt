@@ -9,24 +9,32 @@ object LoklokFilters {
         "Type",
         arrayOf(
             "All",
-            "Movie",
             "TV Series",
-            "Shorts",
+            "Movie",
             "Anime",
             "Variety Show",
             "Talk Show",
-            "Documentary"
-        )
+            "Documentary",
+        ),
     ) {
         fun getValue() = when (state) {
-            1 -> "MOVIE,TVSPECIAL"
-            2 -> "TV,SETI,VARIETY,TALK,COMIC,DOCUMENTARY"
-            3 -> "MINISERIES"
-            4 -> "COMIC"
-            5 -> "VARIETY,TALK"
-            6 -> "TALK"
-            7 -> "DOCUMENTARY"
+            1 -> "TV,SETI,VARIETY,TALK,COMIC,DOCUMENTARY"
+            2 -> "MOVIE,TVSPECIAL"
+            3 -> "COMIC"
+            4 -> "VARIETY,TALK"
+            5 -> "TALK"
+            6 -> "DOCUMENTARY"
             else -> "MOVIE,TV,VARIETY,COMIC,DOCUMENTARY,TVSPECIAL,MINISERIES,SETI,TALK"
+        }
+
+        fun getLabel() = when (state) {
+            1 -> "TV Series"
+            2 -> "Movie"
+            3 -> "Anime"
+            4 -> "Variety Show"
+            5 -> "Talk Show"
+            6 -> "Documentary"
+            else -> "ALL"
         }
     }
 
@@ -44,8 +52,8 @@ object LoklokFilters {
             "China",
             "India",
             "Australia",
-            "Other"
-        )
+            "Other",
+        ),
     ) {
         fun getValue() = when (state) {
             1 -> "61"
@@ -54,8 +62,8 @@ object LoklokFilters {
             4 -> "60"
             5 -> "44"
             6 -> "57"
-            7 -> "37,60,58,50,54,55,48,46,45,34,35,38,39,43,62"
-            8 -> "32,56"
+            7 -> "34,35,37,38,39,43,45,46,48,50,54,55,58,60,62"
+            8 -> "32"
             9 -> "40"
             10 -> "27"
             11 -> "26,28,29,30,31,33,36,42,47,49,59"
@@ -67,77 +75,51 @@ object LoklokFilters {
         "Category",
         arrayOf(
             "All",
-            "Drama",
+            "Romance",
+            "Action",
+            "Fantasy",
+            "Animation",
             "Suspense",
             "Sci-Fi",
-            "Action",
-            "Romance",
-            "Fantasy",
             "Horror",
             "Comedy",
             "Crime",
             "Adventure",
-            "Animation",
             "Thriller",
+            "LGBTQ",
+            "Drama",
+            "Variety Show",
             "Family",
             "Musical",
             "War",
-            "LGBTQ",
             "Catastrophe",
-            "Other"
-        )
+            "Documentary",
+            "Other",
+        ),
     ) {
         fun getValue() = when (state) {
-            1 -> "8"
-            2 -> "16"
-            3 -> "19"
-            4 -> "1"
-            5 -> "18"
-            6 -> "10"
+            1 -> "18"
+            2 -> "1"
+            3 -> "10"
+            4 -> "3"
+            5 -> "16"
+            6 -> "19"
             7 -> "13"
             8 -> "5"
             9 -> "6"
             10 -> "2"
-            11 -> "3"
-            12 -> "23"
-            13 -> "9"
-            14 -> "63,14,15"
-            15 -> "24"
-            16 -> "65"
-            17 -> "64"
-            18 -> "7,4,11,12,17,22,21,20,25"
+            11 -> "23"
+            12 -> "65"
+            13 -> "8"
+            14 -> "17"
+            15 -> "9"
+            16 -> "14,15,63"
+            17 -> "24"
+            18 -> "64"
+            19 -> "7"
+            20 -> "4,7,11,12,17,20,21,22,25"
             else -> ""
         }
-    }
-
-    class GenreTagFilter : AnimeFilter.Select<String>(
-        "Genre Tag",
-        arrayOf(
-            "All",
-            "Anime",
-            "Action",
-            "Romance",
-            "Comedy",
-            "Fantasy",
-            "Drama",
-            "Horror",
-            "Sci-Fi",
-            "Thriller",
-            "Suspense",
-            "Crime",
-            "Adventure",
-            "Animation",
-            "Mystery",
-            "Supernatural",
-            "School",
-            "Slice of Life",
-            "Mecha",
-            "Isekai",
-            "Martial Arts",
-            "Historical"
-        )
-    ) {
-        fun getValue() = if (state > 0) values[state] else ""
     }
 
     class YearFilter : AnimeFilter.Select<String>(
@@ -145,6 +127,10 @@ object LoklokFilters {
         arrayOf(
             "All",
             "2026",
+            "2025",
+            "2024",
+            "2023",
+            "2022",
             "2021",
             "2020",
             "2019",
@@ -153,20 +139,24 @@ object LoklokFilters {
             "2016",
             "2015-2011",
             "2010-2000",
-            "Before 2000"
-        )
+            "Before 2000",
+        ),
     ) {
         fun getValue() = when (state) {
             1 -> "2026,2026"
-            2 -> "2021,2021"
-            3 -> "2020,2020"
-            4 -> "2019,2019"
-            5 -> "2018,2018"
-            6 -> "2017,2017"
-            7 -> "2016,2016"
-            8 -> "2011,2015"
-            9 -> "2000,2010"
-            10 -> "1900,2009"
+            2 -> "2025,2025"
+            3 -> "2024,2024"
+            4 -> "2023,2023"
+            5 -> "2022,2022"
+            6 -> "2021,2021"
+            7 -> "2020,2020"
+            8 -> "2019,2019"
+            9 -> "2018,2018"
+            10 -> "2017,2017"
+            11 -> "2016,2016"
+            12 -> "2011,2015"
+            13 -> "2000,2010"
+            14 -> "1900,1999"
             else -> ""
         }
     }
@@ -176,8 +166,8 @@ object LoklokFilters {
         arrayOf(
             "Popularity",
             "Recent",
-            "High Rating"
-        )
+            "High Rating",
+        ),
     ) {
         fun getValue() = when (state) {
             1 -> "up"
@@ -190,8 +180,7 @@ object LoklokFilters {
         TypeFilter(),
         RegionFilter(),
         CategoryFilter(),
-        GenreTagFilter(),
         YearFilter(),
-        SortFilter()
+        SortFilter(),
     )
 }

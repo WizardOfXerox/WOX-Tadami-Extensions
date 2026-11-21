@@ -194,22 +194,22 @@
   {
     "name": "Aniyomi: JavGG",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.javgg",
-    "apk": "aniyomi-all.javgg-v14.29.apk",
+    "apk": "aniyomi-all.javgg-v14.30.apk",
     "lang": "all",
-    "code": 29,
-    "version": "14.29",
+    "code": 30,
+    "version": "14.30",
     "nsfw": 1,
     "sources": [
       {
         "name": "JavGG",
         "lang": "all",
         "id": "3378993382379910095",
-        "baseUrl": "https://javgg.net"
+        "baseUrl": "https://javgg.me"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.javgg.png",
-    "sha256": "7dda7a86ba885554b5232100f5deb1b12530c89bf5c6716f20df08722a644e88",
-    "size": 146711
+    "sha256": "c90926b8c83a9486a693dfc018a21c2b268410bdedee666c42e42634e93c6617",
+    "size": 154670
   },
   {
     "name": "Aniyomi: Jav Guru",
@@ -254,22 +254,22 @@
   {
     "name": "Aniyomi: Loklok",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.loklok",
-    "code": 10,
-    "apk": "aniyomi-all.loklok-v14.10.apk",
+    "code": 11,
+    "apk": "aniyomi-all.loklok-v14.11.apk",
     "lang": "all",
     "sources": [
       {
         "name": "Loklok",
         "lang": "all",
         "id": "4658193856291048203",
-        "baseUrl": "https://loklok.com"
+        "baseUrl": "https://www.loklok.fun"
       }
     ],
     "nsfw": 0,
-    "version": "14.10",
+    "version": "14.11",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.loklok.png",
-    "sha256": "18cd8f2540bb87fa0723e5e01a92d82977e9e7d80e48daf13422743f840ed8bf",
-    "size": 151188
+    "sha256": "da2e000494df46d8c2337450a992ca992ca044e9a3292fd9b9741667de1b184d",
+    "size": 218749
   },
   {
     "name": "Aniyomi: MissAV",
@@ -1094,22 +1094,22 @@
   {
     "name": "Aniyomi: WIT ANIME",
     "pkg": "eu.kanade.tachiyomi.animeextension.ar.witanime",
-    "apk": "aniyomi-ar.witanime-v14.69.apk",
+    "apk": "aniyomi-ar.witanime-v14.70.apk",
     "lang": "ar",
-    "code": 69,
-    "version": "14.69",
+    "code": 70,
+    "version": "14.70",
     "nsfw": 0,
     "sources": [
       {
         "name": "WIT ANIME",
         "lang": "ar",
         "id": "8940958730943730988",
-        "baseUrl": "https://www.witanime.net"
+        "baseUrl": "https://witanime.site"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.ar.witanime.png",
-    "sha256": "c94be005e8677fad09aa61901002dcd27bd5792cb63b11168a062e59b7e43bee",
-    "size": 142261
+    "sha256": "b0b23143b637f296eaa22007e3f2120debd1ed6d8904ba9249e70ef2bf62153a",
+    "size": 143213
   },
   {
     "name": "Aniyomi: Anime-Base",
@@ -1614,10 +1614,10 @@
   {
     "name": "Aniyomi: DonghuaStream",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.donghuastream",
-    "apk": "aniyomi-en.donghuastream-v14.27.apk",
+    "apk": "aniyomi-en.donghuastream-v14.28.apk",
     "lang": "en",
-    "code": 27,
-    "version": "14.27",
+    "code": 28,
+    "version": "14.28",
     "nsfw": 0,
     "sources": [
       {
@@ -1628,8 +1628,28 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.donghuastream.png",
-    "sha256": "713ea67b446507a3773d0b76cc596d11ea3fae854ad790c159d02c2e973abaec",
-    "size": 274955
+    "sha256": "1a5ae484b32c861777d09209328d94a0b8f0072f691ed8c91d1853a587dc2bcf",
+    "size": 228528
+  },
+  {
+    "name": "Aniyomi: ForcedCinema",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.forcedcinema",
+    "apk": "aniyomi-en.forcedcinema-v14.2.apk",
+    "lang": "en",
+    "code": 2,
+    "version": "14.2",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "ForcedCinema",
+        "lang": "en",
+        "id": "8402137284989668139",
+        "baseUrl": "https://forcedcinema.net"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.forcedcinema.png",
+    "sha256": "6ea8bc425018cc537a7d2349e6aa490a55526b486497760affe7cf5ae5b7e34b",
+    "size": 94607
   },
   {
     "name": "Aniyomi: haho.moe",
@@ -1654,10 +1674,10 @@
   {
     "name": "Aniyomi: hanime.tv",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hanime",
-    "apk": "aniyomi-en.hanime-v14.29.apk",
+    "apk": "aniyomi-en.hanime-v14.30.apk",
     "lang": "en",
-    "code": 29,
-    "version": "14.29",
+    "code": 30,
+    "version": "14.30",
     "nsfw": 1,
     "sources": [
       {
@@ -1668,8 +1688,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hanime.png",
-    "sha256": "913657d5508b65f4aea1b43377c2221e1423ba473c679aeb98587ed533f25516",
-    "size": 400057
+    "sha256": "01033e526e864ce10c7c2facc005aa5ae8b5e6705ace08d734addb36532e7898",
+    "size": 414041
   },
   {
     "name": "Aniyomi: HentaiCity",
@@ -1714,10 +1734,10 @@
   {
     "name": "Aniyomi: Hentai Haven",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaihaven",
-    "apk": "aniyomi-en.hentaihaven-v14.1.apk",
+    "apk": "aniyomi-en.hentaihaven-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1728,16 +1748,16 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaihaven.png",
-    "sha256": "d9ae1079aa48ebe2378a151dd5af34d64973d55e56d4ddd821a74499b787fc7d",
-    "size": 156280
+    "sha256": "294d2835067fa2bd7b6fd7aa8862aedc3d0927c73281e99bde45998582ce136c",
+    "size": 163304
   },
   {
     "name": "Aniyomi: Hentai.ht",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.hentaiht",
-    "apk": "aniyomi-en.hentaiht-v14.1.apk",
+    "apk": "aniyomi-en.hentaiht-v14.4.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 4,
+    "version": "14.4",
     "nsfw": 1,
     "sources": [
       {
@@ -1748,8 +1768,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.hentaiht.png",
-    "sha256": "f54b534fd3de4b0df3ee77827d422cb11d89e023e340ad2962a325cb9b24b1c1",
-    "size": 113807
+    "sha256": "01badba3d523f09129f7e279ea2c873616f5172b11ef74b9a75d1dbd8dcfe7a3",
+    "size": 124168
   },
   {
     "name": "Aniyomi: HentaiMama",
@@ -1814,10 +1834,10 @@
   {
     "name": "Aniyomi: Iwara",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.iwara",
-    "apk": "aniyomi-en.iwara-v14.1.apk",
+    "apk": "aniyomi-en.iwara-v14.2.apk",
     "lang": "en",
-    "code": 1,
-    "version": "14.1",
+    "code": 2,
+    "version": "14.2",
     "nsfw": 1,
     "sources": [
       {
@@ -1828,8 +1848,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.iwara.png",
-    "sha256": "1c5a9177fa75fb0f52c61063c0835f938c7210d095e57717b9dbe48ef03dba95",
-    "size": 176258
+    "sha256": "29afdfb2429882aa429e379a22d1423c1e833adb4939db63c198f54f03292e2f",
+    "size": 184178
   },
   {
     "name": "Aniyomi: JPFilms",
@@ -1850,6 +1870,26 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.jpfilms.png",
     "sha256": "f97bb6659156ac94623f99bbea47e90368ac09cd5614c6003ae7aa404e1bac39",
     "size": 185560
+  },
+  {
+    "name": "Aniyomi: Kayoanime",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.kayoanime",
+    "apk": "aniyomi-en.kayoanime-v14.21.apk",
+    "lang": "en",
+    "code": 21,
+    "version": "14.21",
+    "nsfw": 0,
+    "sources": [
+      {
+        "name": "Kayoanime",
+        "lang": "en",
+        "id": "203922289858257167",
+        "baseUrl": "https://kayoanime.com"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kayoanime.png",
+    "sha256": "a91c5ebb5288a83cbbd4418679ae3159ae55a892455f12e783402ebcf280480a",
+    "size": 115049
   },
   {
     "name": "Aniyomi: KickAssAnime",
@@ -2112,6 +2152,26 @@
     "size": 4955954
   },
   {
+    "name": "Aniyomi: RoughPorn",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.roughpornme",
+    "apk": "aniyomi-en.roughpornme-v14.2.apk",
+    "lang": "en",
+    "code": 2,
+    "version": "14.2",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "RoughPorn",
+        "lang": "en",
+        "id": "7731164529501323206",
+        "baseUrl": "https://roughporn.me"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.roughpornme.png",
+    "sha256": "5e9ae714246f61d3ca358123934a3d05fdfc7e9fc3013bd76d017a8a32bed98c",
+    "size": 89211
+  },
+  {
     "name": "Aniyomi: Rule34Video",
     "pkg": "eu.kanade.tachiyomi.animeextension.en.rule34video",
     "apk": "aniyomi-en.rule34video-v14.10.apk",
@@ -2130,6 +2190,26 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.rule34video.png",
     "sha256": "a1f854d3d4ee306cf19513ebe71d95e979ee998f281760911d842a2baba3efbe",
     "size": 125819
+  },
+  {
+    "name": "Aniyomi: SickR",
+    "pkg": "eu.kanade.tachiyomi.animeextension.en.sickr",
+    "apk": "aniyomi-en.sickr-v14.2.apk",
+    "lang": "en",
+    "code": 2,
+    "version": "14.2",
+    "nsfw": 1,
+    "sources": [
+      {
+        "name": "SickR",
+        "lang": "en",
+        "id": "5627819450366603340",
+        "baseUrl": "https://sick-r.com"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.sickr.png",
+    "sha256": "19ab450e8abd2ddc90839edad049b3141f87b2a31a2d09f6889cd1759b9686ce",
+    "size": 90843
   },
   {
     "name": "Aniyomi: SuperStream",
@@ -2334,10 +2414,10 @@
   {
     "name": "Aniyomi: AnimeFenix",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.animefenix",
-    "apk": "aniyomi-es.animefenix-v14.74.apk",
+    "apk": "aniyomi-es.animefenix-v14.82.apk",
     "lang": "es",
-    "code": 74,
-    "version": "14.74",
+    "code": 82,
+    "version": "14.82",
     "nsfw": 0,
     "sources": [
       {
@@ -2348,8 +2428,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.animefenix.png",
-    "sha256": "ea46fd081aacc4fa2f113161c2320011d00c425a027a834a57d4d74e257c4bf5",
-    "size": 961039
+    "sha256": "98107844dba56bf2045cddbfab4598c51000fc6cd2ef70309ec25a92c6aa29d1",
+    "size": 922679
   },
   {
     "name": "Aniyomi: Animejl",
@@ -2754,10 +2834,10 @@
   {
     "name": "Aniyomi: Hentaijk",
     "pkg": "eu.kanade.tachiyomi.animeextension.es.hentaijk",
-    "apk": "aniyomi-es.hentaijk-v14.18.apk",
+    "apk": "aniyomi-es.hentaijk-v14.26.apk",
     "lang": "es",
-    "code": 18,
-    "version": "14.18",
+    "code": 26,
+    "version": "14.26",
     "nsfw": 1,
     "sources": [
       {
@@ -2768,8 +2848,8 @@
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.es.hentaijk.png",
-    "sha256": "a4c3a547a3abd8e0b535f0b95f7da8f9f9a00107e2cdcc6e7eed7b162534c91d",
-    "size": 212931
+    "sha256": "954fc9ac28bab1172a38aa62973bfd2e618deabae3596b317a7894160053075d",
+    "size": 166301
   },
   {
     "name": "Aniyomi: Hentaila",
@@ -3620,22 +3700,22 @@
   {
     "name": "Aniyomi: AnimeUnity",
     "pkg": "eu.kanade.tachiyomi.animeextension.it.animeunity",
-    "apk": "aniyomi-it.animeunity-v14.17.apk",
+    "apk": "aniyomi-it.animeunity-v14.18.apk",
     "lang": "it",
-    "code": 17,
-    "version": "14.17",
+    "code": 18,
+    "version": "14.18",
     "nsfw": 0,
     "sources": [
       {
         "name": "AnimeUnity",
         "lang": "it",
         "id": "7762808921754601430",
-        "baseUrl": "https://www.animeunity.so"
+        "baseUrl": "https://animeunity.cx"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.it.animeunity.png",
-    "sha256": "259eb6101bb8103e015a87a8a239cf47da8ef0158fc6193af496780ce9800ece",
-    "size": 119707
+    "sha256": "a3fdfbc4091490f11a88665945d72027112bd7e33575fb926a742fcb3d1941fd",
+    "size": 120249
   },
   {
     "name": "Aniyomi: ANIMEWORLD.tv",
@@ -4446,22 +4526,22 @@
   {
     "name": "Aniyomi: Türk Anime TV",
     "pkg": "eu.kanade.tachiyomi.animeextension.tr.turkanime",
-    "apk": "aniyomi-tr.turkanime-v14.49.apk",
+    "apk": "aniyomi-tr.turkanime-v14.51.apk",
     "lang": "tr",
-    "code": 49,
-    "version": "14.49",
+    "code": 51,
+    "version": "14.51",
     "nsfw": 0,
     "sources": [
       {
         "name": "Türk Anime TV",
         "lang": "tr",
         "id": "1539162878022626585",
-        "baseUrl": "https://www.turkanime.tv"
+        "baseUrl": "https://turkanime.to"
       }
     ],
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.tr.turkanime.png",
-    "sha256": "a796c55371005d3aa921f9c8c0fb33b54f45bcc4fa8965b215c0de8ee07590ac",
-    "size": 390903
+    "sha256": "257e5677398ed3499ea618d637fecd4c26928015950f7b937037f740891a882f",
+    "size": 351942
   },
   {
     "name": "Aniyomi: UAKino",
@@ -4642,26 +4722,6 @@
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.zh.xiaoxintv.png",
     "sha256": "bf1a92f9616477882c802796df06204ba0f4da55e875cb154d70614db0b72368",
     "size": 151905
-  },
-  {
-    "name": "Aniyomi: Kayoanime",
-    "pkg": "eu.kanade.tachiyomi.animeextension.en.kayoanime",
-    "apk": "aniyomi-en.kayoanime-v14.21.apk",
-    "lang": "en",
-    "code": 21,
-    "version": "14.21",
-    "nsfw": 0,
-    "sources": [
-      {
-        "name": "Kayoanime",
-        "lang": "en",
-        "id": "203922289858257167",
-        "baseUrl": "https://kayoanime.com"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.en.kayoanime.png",
-    "sha256": "a91c5ebb5288a83cbbd4418679ae3159ae55a892455f12e783402ebcf280480a",
-    "size": 115049
   },
   {
     "name": "Tachiyomi: 11toon",
@@ -6528,21 +6588,21 @@
   {
     "name": "Tachiyomi: Baozi Manhua",
     "pkg": "eu.kanade.tachiyomi.extension.zh.baozimanhua",
-    "apk": "tachiyomi-zh.baozimanhua-v1.4.28.apk",
+    "apk": "tachiyomi-zh.baozimanhua-v1.4.29.apk",
     "lang": "zh",
-    "code": 28,
-    "version": "1.4.28",
+    "code": 29,
+    "version": "1.4.29",
     "nsfw": 0,
     "sources": [
       {
         "name": "包子漫画",
         "lang": "zh",
         "id": "5724751873601868259",
-        "baseUrl": "https://cn.baozimh.com"
+        "baseUrl": "https://cn.webmota.com"
       }
     ],
-    "sha256": "50a486f31cfac47a01d051e6c25cefdf89b25cd86e381bd85c79db5e0bcfdb2a",
-    "size": 235835,
+    "sha256": "92c7b34178276d772bd239f2955b5bb8b9fd36c403d4d68067e0f38bcae1c778",
+    "size": 235839,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.zh.baozimanhua.png"
   },
   {
@@ -8576,21 +8636,21 @@
   {
     "name": "Tachiyomi: DamCoNuong",
     "pkg": "eu.kanade.tachiyomi.extension.vi.damconuong",
-    "apk": "tachiyomi-vi.damconuong-v1.4.7.apk",
+    "apk": "tachiyomi-vi.damconuong-v1.4.8.apk",
     "lang": "vi",
-    "code": 7,
-    "version": "1.4.7",
+    "code": 8,
+    "version": "1.4.8",
     "nsfw": 1,
     "sources": [
       {
         "name": "DamCoNuong",
         "lang": "vi",
         "id": "2680345917627448572",
-        "baseUrl": "https://damconuong.pet"
+        "baseUrl": "https://damconuong.tech"
       }
     ],
-    "sha256": "36a66a610517f8ac0a4b1fa8ded9687f6c5c8e18ba7a8e661c701e88269460e6",
-    "size": 267369,
+    "sha256": "57509acb602f78bc29e193b8508a32f5f168377856cec16ff5909414f9fcbc5b",
+    "size": 267361,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.damconuong.png"
   },
   {
@@ -10512,20 +10572,20 @@
   {
     "name": "Tachiyomi: Fleur Blanche",
     "pkg": "eu.kanade.tachiyomi.extension.pt.fleurblanche",
-    "apk": "tachiyomi-pt.fleurblanche-v1.4.57.apk",
+    "apk": "tachiyomi-pt.fleurblanche-v1.4.58.apk",
     "lang": "pt-BR",
-    "code": 57,
-    "version": "1.4.57",
+    "code": 58,
+    "version": "1.4.58",
     "nsfw": 1,
     "sources": [
       {
         "name": "Fleur Blanche",
         "lang": "pt-BR",
         "id": "2748000026130339026",
-        "baseUrl": "https://fbsquadx.com"
+        "baseUrl": "https://squadxfbs.com"
       }
     ],
-    "sha256": "00d2362e64af111b9655822b300bedb5a7c22060ccbf600efcc661a62286e27f",
+    "sha256": "7ace9e48b46f1f682796be069beb7e4ff8e7770108ff1f81b93f6edc89a83fe9",
     "size": 257600,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.pt.fleurblanche.png"
   },
@@ -14056,21 +14116,21 @@
   {
     "name": "Tachiyomi: Jmanga",
     "pkg": "eu.kanade.tachiyomi.extension.ja.jmanga",
-    "apk": "tachiyomi-ja.jmanga-v1.4.4.apk",
+    "apk": "tachiyomi-ja.jmanga-v1.4.5.apk",
     "lang": "ja",
-    "code": 4,
-    "version": "1.4.4",
+    "code": 5,
+    "version": "1.4.5",
     "nsfw": 0,
     "sources": [
       {
         "name": "Jmanga",
         "lang": "ja",
         "id": "6141590427749684419",
-        "baseUrl": "https://jmanga.media"
+        "baseUrl": "https://jmanga.coach"
       }
     ],
-    "sha256": "6171c4a068d3770604b886eb427efd0b30942457ec2e09f54987d5f5d7f2f88b",
-    "size": 208879,
+    "sha256": "857fcb40797e6a0a9170c519e9e751dc87e72088285860e41d5dceb6fdf86949",
+    "size": 208891,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.ja.jmanga.png"
   },
   {
@@ -14196,123 +14256,123 @@
   {
     "name": "Tachiyomi: Kagane",
     "pkg": "eu.kanade.tachiyomi.extension.all.kagane",
-    "apk": "tachiyomi-all.kagane-v1.4.28.apk",
+    "apk": "tachiyomi-all.kagane-v1.4.29.apk",
     "lang": "all",
-    "code": 28,
-    "version": "1.4.28",
+    "code": 29,
+    "version": "1.4.29",
     "nsfw": 0,
     "sources": [
       {
         "name": "Kagane",
         "lang": "en",
         "id": "4024736764982024684",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ja",
         "id": "1157710231944574609",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ko",
         "id": "1720654391539317254",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "zh",
         "id": "538178062602483073",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "es",
         "id": "6291099060619088371",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "es-419",
         "id": "3249170492103400191",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "fr",
         "id": "6053574930456302165",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "de",
         "id": "253007717341293260",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pt",
         "id": "3281832279225761326",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pt-BR",
         "id": "8929946374100381402",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ru",
         "id": "8751507648303673848",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "it",
         "id": "1471532184931679941",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "id",
         "id": "7702420917357144001",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "vi",
         "id": "8791972639916297003",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "th",
         "id": "2006734767320263070",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "pl",
         "id": "1008382500205235233",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "hi",
         "id": "9016992318016575502",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       },
       {
         "name": "Kagane",
         "lang": "ar",
         "id": "7861921616625741963",
-        "baseUrl": "https://kagane.to"
+        "baseUrl": "https://kagane.moe"
       }
     ],
-    "sha256": "6532ad9258c07d7e5fdfa2e0bd5994a29c560907c60d42ceac8cc2fab466186d",
-    "size": 258933,
+    "sha256": "500f1626e722f23d92bc25eba460125b56ec92c9ffd374881f3c04834f4f8384",
+    "size": 258953,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.all.kagane.png"
   },
   {
@@ -14978,20 +15038,20 @@
   {
     "name": "Tachiyomi: KomikNesia",
     "pkg": "eu.kanade.tachiyomi.extension.id.komiknesia",
-    "apk": "tachiyomi-id.komiknesia-v1.4.1.apk",
+    "apk": "tachiyomi-id.komiknesia-v1.4.2.apk",
     "lang": "id",
-    "code": 1,
-    "version": "1.4.1",
+    "code": 2,
+    "version": "1.4.2",
     "nsfw": 1,
     "sources": [
       {
         "name": "KomikNesia",
         "lang": "id",
         "id": "8916278596443930510",
-        "baseUrl": "https://v1.komiknesiaku.com"
+        "baseUrl": "https://02.komiknesia.asia"
       }
     ],
-    "sha256": "37305763d779a38842d43373ff7c2e8867180d610a1d904a54565d51c3c626b5",
+    "sha256": "0b60c1dc992434a0ca0bb75a35324307f6f30354d24b829d552d42471ffede28",
     "size": 211387,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.komiknesia.png"
   },
@@ -15944,21 +16004,21 @@
   {
     "name": "Tachiyomi: LoppyToon",
     "pkg": "eu.kanade.tachiyomi.extension.vi.loppytoon",
-    "apk": "tachiyomi-vi.loppytoon-v1.4.5.apk",
+    "apk": "tachiyomi-vi.loppytoon-v1.4.6.apk",
     "lang": "vi",
-    "code": 5,
-    "version": "1.4.5",
+    "code": 6,
+    "version": "1.4.6",
     "nsfw": 0,
     "sources": [
       {
         "name": "LoppyToon",
         "lang": "vi",
         "id": "6580420139533147522",
-        "baseUrl": "https://loppytoon.com"
+        "baseUrl": "https://loppytoonn.com"
       }
     ],
-    "sha256": "ea25995244f9aacc6b3be354676df39937e5deda38e34aa48b5da919140a734c",
-    "size": 227285,
+    "sha256": "1c6142f099ed225e1c291acfed670d477d6cec583bd85fee2e76298127eee3f3",
+    "size": 227837,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.loppytoon.png"
   },
   {
@@ -26238,20 +26298,20 @@
   {
     "name": "Tachiyomi: Roseveil",
     "pkg": "eu.kanade.tachiyomi.extension.id.roseveil",
-    "apk": "tachiyomi-id.roseveil-v1.4.47.apk",
+    "apk": "tachiyomi-id.roseveil-v1.4.48.apk",
     "lang": "id",
-    "code": 47,
-    "version": "1.4.47",
+    "code": 48,
+    "version": "1.4.48",
     "nsfw": 0,
     "sources": [
       {
         "name": "Roseveil",
         "lang": "id",
         "id": "5328028029485519937",
-        "baseUrl": "https://roseveil.org"
+        "baseUrl": "https://roseveil.my.id"
       }
     ],
-    "sha256": "51311d84416fe3daa4ad97fab79bafa0c9e26b1fce3f2131943b90b1cc76cbbc",
+    "sha256": "1afbe92d49797cc851f2e244e4f99ff178989223dfc7ff00d006d6da1948cc8c",
     "size": 204793,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.roseveil.png"
   },
@@ -27642,21 +27702,21 @@
   {
     "name": "Tachiyomi: SummerToon",
     "pkg": "eu.kanade.tachiyomi.extension.tr.summertoon",
-    "apk": "tachiyomi-tr.summertoon-v1.4.54.apk",
+    "apk": "tachiyomi-tr.summertoon-v1.4.55.apk",
     "lang": "tr",
-    "code": 54,
-    "version": "1.4.54",
+    "code": 55,
+    "version": "1.4.55",
     "nsfw": 0,
     "sources": [
       {
         "name": "SummerToon",
         "lang": "tr",
         "id": "1346985078461508977",
-        "baseUrl": "https://summertoons.net"
+        "baseUrl": "https://summertoons.org"
       }
     ],
-    "sha256": "29c38e29342c7b4d7b5d819056722d494271a34c8c96e54f3b4aaa32a01b86b9",
-    "size": 255120,
+    "sha256": "fb0feba8e8e7c3673d3ee5d5b5c6044b02837de1920db8ff14fa1e1f788a7edc",
+    "size": 245605,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.tr.summertoon.png"
   },
   {
@@ -29372,21 +29432,21 @@
   {
     "name": "Tachiyomi: UmeTruyen",
     "pkg": "eu.kanade.tachiyomi.extension.vi.umetruyen",
-    "apk": "tachiyomi-vi.umetruyen-v1.4.9.apk",
+    "apk": "tachiyomi-vi.umetruyen-v1.4.10.apk",
     "lang": "vi",
-    "code": 9,
-    "version": "1.4.9",
+    "code": 10,
+    "version": "1.4.10",
     "nsfw": 1,
     "sources": [
       {
         "name": "UmeTruyen",
         "lang": "vi",
         "id": "2473081822885310816",
-        "baseUrl": "https://umetruyenz.org"
+        "baseUrl": "https://umetruyen.com"
       }
     ],
-    "sha256": "b098518c7492009bccae4cdc89ec3ac2140284377f68642813d8632f826be5d8",
-    "size": 175451,
+    "sha256": "9d1746dcae1b8c664d56d5e68c5aad38218b63dd9fab5de6933899505abe8881",
+    "size": 176275,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.vi.umetruyen.png"
   },
   {
@@ -29910,21 +29970,21 @@
   {
     "name": "Tachiyomi: WebtoonScan",
     "pkg": "eu.kanade.tachiyomi.extension.en.webtoonscan",
-    "apk": "tachiyomi-en.webtoonscan-v1.4.52.apk",
+    "apk": "tachiyomi-en.webtoonscan-v1.4.53.apk",
     "lang": "en",
-    "code": 52,
-    "version": "1.4.52",
+    "code": 53,
+    "version": "1.4.53",
     "nsfw": 0,
     "sources": [
       {
         "name": "WebtoonScan",
         "lang": "en",
         "id": "3062846066388633553",
-        "baseUrl": "https://webtoonscan.com"
+        "baseUrl": "https://webtoonscan.org"
       }
     ],
-    "sha256": "316032876e3d70c7e0866ac92c4051c4ebf82c0cc7f198ee60aef3fd340a9793",
-    "size": 214908,
+    "sha256": "45f0da6d99c9744d2e10b97456144e1f9355f2e7d5b8caabbe085889efc76abb",
+    "size": 215200,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.en.webtoonscan.png"
   },
   {
@@ -30052,20 +30112,20 @@
   {
     "name": "Tachiyomi: West Manga",
     "pkg": "eu.kanade.tachiyomi.extension.id.westmanga",
-    "apk": "tachiyomi-id.westmanga-v1.4.43.apk",
+    "apk": "tachiyomi-id.westmanga-v1.4.44.apk",
     "lang": "id",
-    "code": 43,
-    "version": "1.4.43",
+    "code": 44,
+    "version": "1.4.44",
     "nsfw": 0,
     "sources": [
       {
         "name": "West Manga",
         "lang": "id",
         "id": "8883916630998758688",
-        "baseUrl": "https://v1.westmanga.cc"
+        "baseUrl": "https://v1.westmanga.my"
       }
     ],
-    "sha256": "23f0ecbd788e7fc8feee8d0f13514dffde1da59e7b7deacd12604b1928b87e85",
+    "sha256": "55c85401ec7e99b88aa373151c7118ce88995a3570875f879621bc4b9831acbc",
     "size": 233579,
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/manga/icon/eu.kanade.tachiyomi.extension.id.westmanga.png"
   },
@@ -31746,7 +31806,7 @@
     "name": "Araz Novel",
     "site": "https://araznovel.com/",
     "lang": "Türkçe",
-    "version": 2002000,
+    "version": 2002001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/turkish/ArazNovel[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azraznovel/icon.png",
     "versionCode": 1000100
@@ -31776,7 +31836,7 @@
     "name": "Azora",
     "site": "https://azorafly.com",
     "lang": "‎العربية",
-    "version": 2002000,
+    "version": 2002001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/Azora[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/azora/icon.png",
     "versionCode": 1000100
@@ -32287,7 +32347,7 @@
     "name": "KDT Novels",
     "site": "https://kdtnovels.net/",
     "lang": "English",
-    "version": 1001010,
+    "version": 1001011,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/KDTNovels[lightnovelwp].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/kdtnovels/icon.png",
     "versionCode": 1000100
@@ -32297,7 +32357,7 @@
     "name": "Keopi Translations",
     "site": "https://www.keopitranslations.com",
     "lang": "English",
-    "version": 1001010,
+    "version": 1001011,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/KeopiTranslations[lightnovelwp].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/lightnovelwp/keopi/icon.png",
     "versionCode": 1000100
@@ -32397,7 +32457,7 @@
     "name": "Light Novel Updates",
     "site": "https://lightnovelupdates.com",
     "lang": "English",
-    "version": 2002000,
+    "version": 2002001,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/LightNovelUpdates[madara].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/madara/lightnovelupdates/icon.png",
     "versionCode": 1000100
@@ -32467,7 +32527,7 @@
     "name": "MTL Novel",
     "site": "https://mtlnovel.me",
     "lang": "English",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/english/MTLNovel[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32477,7 +32537,7 @@
     "name": "MTL Novel (ES)",
     "site": "https://mtlnovel.me",
     "lang": "Español",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/spanish/MTLNovel(ES)[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32487,7 +32547,7 @@
     "name": "MTL Novel (FR)",
     "site": "https://mtlnovel.me",
     "lang": "Français",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/french/MTLNovel(FR)[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32497,7 +32557,7 @@
     "name": "MTL Novel (ID)",
     "site": "https://mtlnovel.me",
     "lang": "Bahasa Indonesia",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/indonesian/MTLNovel(ID)[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32507,7 +32567,7 @@
     "name": "MTL Novel (PT)",
     "site": "https://mtlnovel.me",
     "lang": "Português",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/portuguese/MTLNovel(PT)[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32517,7 +32577,7 @@
     "name": "MTL Novel (RU)",
     "site": "https://mtlnovel.me",
     "lang": "Русский",
-    "version": 1001003,
+    "version": 1001004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/MTLNovel(RU)[mtlnovel].js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/multisrc/mtlnovel/mtlnovel/icon.png",
     "versionCode": 1000100
@@ -32938,7 +32998,7 @@
     "name": "Quanben",
     "site": "https://www.quanben.io/",
     "lang": "中文, 汉语, 漢語",
-    "version": 1001001,
+    "version": 1001002,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/chinese/Quanben.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/cn/quanben/icon.png",
     "versionCode": 1000100
@@ -32958,7 +33018,7 @@
     "name": "RanobeHub",
     "site": "https://ranobehub.org",
     "lang": "Русский",
-    "version": 1000003,
+    "version": 1000004,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/russian/ranobehub.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ru/ranobehub/icon.png",
     "versionCode": 1000100
@@ -33508,7 +33568,7 @@
     "name": "dilar tube",
     "site": "https://golden.rest/",
     "lang": "‎العربية",
-    "version": 1000002,
+    "version": 1000003,
     "url": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/.js/src/plugins/arabic/dilartube.js",
     "iconUrl": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/novel/public/static/src/ar/dilartube/icon.png",
     "versionCode": 1000100

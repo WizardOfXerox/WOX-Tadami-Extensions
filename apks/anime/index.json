@@ -254,22 +254,22 @@
   {
     "name": "Aniyomi: Loklok",
     "pkg": "eu.kanade.tachiyomi.animeextension.all.loklok",
-    "code": 10,
-    "apk": "aniyomi-all.loklok-v14.10.apk",
+    "code": 11,
+    "apk": "aniyomi-all.loklok-v14.11.apk",
     "lang": "all",
     "sources": [
       {
         "name": "Loklok",
         "lang": "all",
         "id": "4658193856291048203",
-        "baseUrl": "https://loklok.com"
+        "baseUrl": "https://www.loklok.fun"
       }
     ],
     "nsfw": 0,
-    "version": "14.10",
+    "version": "14.11",
     "icon": "https://raw.githubusercontent.com/WizardOfXerox/WOX-Tadami-Extensions/main/apks/anime/icon/eu.kanade.tachiyomi.animeextension.all.loklok.png",
-    "sha256": "18cd8f2540bb87fa0723e5e01a92d82977e9e7d80e48daf13422743f840ed8bf",
-    "size": 151188
+    "sha256": "da2e000494df46d8c2337450a992ca992ca044e9a3292fd9b9741667de1b184d",
+    "size": 218749
   },
   {
     "name": "Aniyomi: MissAV",
